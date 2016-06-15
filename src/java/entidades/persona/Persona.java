@@ -54,11 +54,90 @@ public class Persona implements Serializable {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public DocumentoIdentidad getDocumentoIdentidad() {
+        return documentoIdentidad;
+    }
+
+    public void setDocumentoIdentidad(DocumentoIdentidad documentoIdentidad) {
+        this.documentoIdentidad = documentoIdentidad;
+    }
+
+    public String getCuil() {
+        return cuil;
+    }
+
+    public void setCuil(String cuil) {
+        this.cuil = cuil;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Domicilio getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(Domicilio domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public List<Telefono> getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(List<Telefono> telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    public List<CorreoElectronico> getCorreosElectronicos() {
+        return correosElectronicos;
+    }
+
+    public void setCorreosElectronicos(List<CorreoElectronico> correosElectronicos) {
+        this.correosElectronicos = correosElectronicos;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -81,7 +160,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Persona[ id=" + id + " ]";
+        return apellido+", "+nombre;
     }
     
 }
