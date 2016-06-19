@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EspecialidadCreateDlg" widgetVar="EspecialidadCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEspecialidadTitle}">
+            <h:form id="EspecialidadCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{especialidadController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{especialidadController.selected.id}" title="#{bundle.CreateEspecialidadTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_tipoEspecialidad}" for="tipoEspecialidad" />
+                        <p:selectOneMenu id="tipoEspecialidad" value="#{especialidadController.selected.tipoEspecialidad}" >
+                            <f:selectItems value="#{tipoEspecialidadController.itemsAvailableSelectOne}"
+                                           var="tipoEspecialidadItem"
+                                           itemValue="#{tipoEspecialidadItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_nombreEspecialidad}" for="nombreEspecialidad" />
+                        <p:inputText id="nombreEspecialidad" value="#{especialidadController.selected.nombreEspecialidad}" title="#{bundle.CreateEspecialidadTitle_nombreEspecialidad}" />
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
+                        <p:inputText id="matriculaEspecialidad" value="#{especialidadController.selected.matriculaEspecialidad}" title="#{bundle.CreateEspecialidadTitle_matriculaEspecialidad}" />
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_fechaMatriculacion}" for="fechaMatriculacion" />
+                        <p:calendar id="fechaMatriculacion" pattern="MM/dd/yyyy" value="#{especialidadController.selected.fechaMatriculacion}" title="#{bundle.EditEspecialidadTitle_fechaMatriculacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_fechaVencimiento}" for="fechaVencimiento" />
+                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{especialidadController.selected.fechaVencimiento}" title="#{bundle.EditEspecialidadTitle_fechaVencimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_libro}" for="libro" />
+                        <p:inputText id="libro" value="#{especialidadController.selected.libro}" title="#{bundle.CreateEspecialidadTitle_libro}" />
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_folio}" for="folio" />
+                        <p:inputText id="folio" value="#{especialidadController.selected.folio}" title="#{bundle.CreateEspecialidadTitle_folio}" />
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_unidadFormadora}" for="unidadFormadora" />
+                        <p:selectOneMenu id="unidadFormadora" value="#{especialidadController.selected.unidadFormadora}" >
+                            <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
+                                           var="unidadFormadoraItem"
+                                           itemValue="#{unidadFormadoraItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_fechaRevision}" for="fechaRevision" />
+                        <p:calendar id="fechaRevision" pattern="MM/dd/yyyy" value="#{especialidadController.selected.fechaRevision}" title="#{bundle.EditEspecialidadTitle_fechaRevision}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEspecialidadLabel_fechaVencimientoRevision}" for="fechaVencimientoRevision" />
+                        <p:calendar id="fechaVencimientoRevision" pattern="MM/dd/yyyy" value="#{especialidadController.selected.fechaVencimientoRevision}" title="#{bundle.EditEspecialidadTitle_fechaVencimientoRevision}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{especialidadController.create}" value="#{bundle.Save}" update="display,:EspecialidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecialidadCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EspecialidadCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

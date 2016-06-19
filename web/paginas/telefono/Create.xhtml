@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TelefonoCreateDlg" widgetVar="TelefonoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTelefonoTitle}">
+            <h:form id="TelefonoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{telefonoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTelefonoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{telefonoController.selected.id}" title="#{bundle.CreateTelefonoTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateTelefonoLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{telefonoController.selected.numero}" title="#{bundle.CreateTelefonoTitle_numero}" />
+                        <p:outputLabel value="#{bundle.CreateTelefonoLabel_tipoTelefono}" for="tipoTelefono" />
+                        <p:selectOneMenu id="tipoTelefono" value="#{telefonoController.selected.tipoTelefono}" >
+                            <f:selectItems value="#{tipoTelefonoController.itemsAvailableSelectOne}"
+                                           var="tipoTelefonoItem"
+                                           itemValue="#{tipoTelefonoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{telefonoController.create}" value="#{bundle.Save}" update="display,:TelefonoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TelefonoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TelefonoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

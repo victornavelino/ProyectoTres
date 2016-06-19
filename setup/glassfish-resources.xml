@@ -6,9 +6,9 @@
         <property name="portNumber" value="5432"/>
         <property name="databaseName" value="colegio"/>
         <property name="User" value="postgres"/>
-        <property name="Password" value="123654"/>
+        <property name="Password" value=""/>
         <property name="URL" value="jdbc:postgresql://localhost:5432/colegio"/>
         <property name="driverClass" value="org.postgresql.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="jdbc/colegio" object-type="user" pool-name="post-gre-sql_colegio_postgresPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/colegiomedico" object-type="user" pool-name="post-gre-sql_colegio_postgresPool"/>
 </resources>

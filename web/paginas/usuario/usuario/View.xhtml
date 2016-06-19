@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioViewDlg" widgetVar="UsuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleusuario.ViewUsuarioTitle}">
+            <h:form id="UsuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <h:outputText value="#{bundleusuario.ViewUsuarioLabel_id}"/>
+                        <h:outputText value="#{usuarioController.selected.id}" title="#{bundleusuario.ViewUsuarioTitle_id}"/>
+                        <h:outputText value="#{bundleusuario.ViewUsuarioLabel_apellido}"/>
+                        <h:outputText value="#{usuarioController.selected.apellido}" title="#{bundleusuario.ViewUsuarioTitle_apellido}"/>
+                        <h:outputText value="#{bundleusuario.ViewUsuarioLabel_nombre}"/>
+                        <h:outputText value="#{usuarioController.selected.nombre}" title="#{bundleusuario.ViewUsuarioTitle_nombre}"/>
+                        <h:outputText value="#{bundleusuario.ViewUsuarioLabel_usuario}"/>
+                        <h:outputText value="#{usuarioController.selected.usuario}" title="#{bundleusuario.ViewUsuarioTitle_usuario}"/>
+                        <h:outputText value="#{bundleusuario.ViewUsuarioLabel_password}"/>
+                        <h:outputText value="#{usuarioController.selected.password}" title="#{bundleusuario.ViewUsuarioTitle_password}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleusuario.Close}" onclick="UsuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

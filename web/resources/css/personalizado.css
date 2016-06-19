@@ -1,0 +1,10 @@
+.headerTabla{font-weight: bold;
+}
+
+.contenidoTabla{border:1px solid #000; padding: 3px}
+
+.anulado {background-color: #fcf8e3; color: #c09853}
+
+.borrado {background-color: #f2dede; color: #b94a48}
+
+h3,h1 {margin-top:4px}
