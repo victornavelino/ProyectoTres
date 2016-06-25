@@ -149,7 +149,7 @@ public class LoginBean {
                 //PARA MOSTRAR USUARIO LOGUEADO 
                 usuarioLogerBean.setUsuario(usuario);//Se guarda el usuario para poder ser mostrado como usuario logueado
 
-                return "template.xhtml?faces-redirect=true";
+                return "index.xhtml?faces-redirect=true";
                 // }//fin if
             } else {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor introduzca un nombre de usuario y una contraseña correctos. Tenga en cuenta que ambos campos son sensibles a mayúsculas/minúsculas.", null);

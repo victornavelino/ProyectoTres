@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/personalizado.css" rel="stylesheet" type="text/css" />
+
+        <title>Colegio Medico de Catamarca</title>
+    </h:head>
+
+    <script type="text/javascript">
+        var startFrom = #{sessionControlerBean.getiTimeSession()}; // Total session time out setting eg 10 sec, Real implementation assign values from jsf controller
+        var loopTill = 20;//#{systemController.getSessionTimeoutAlertDuration()}; //Count down degins from 6 sec and starts after 4 sec ie 10-6
+        var reduce = 1;
+        var handleDialog = null;
+        var redirectPage = "#{request.contextPath}/login.xhtml";
+        var countDownDiv = "dialog-countdown";
+
+
+        function resetPageTimer() {
+            PF('timeoutDialog').hide();
+            startPageTimer(startFrom, loopTill);
+            clearInterval(handleDialog);
+        }
+
+        function startDialogTimer(wCounter, timeOutPage) {
+            var e = null;
+            if (!e)
+                e = document.getElementById(countDownDiv);
+            e.innerHTML = wCounter;
+            handleDialog = setInterval(function () {
+                if (wCounter == 0) {
+                    clearInterval(handleDialog);
+                    PF('dlgFinSession').show()
+                    //window.location.href = timeOutPage;
+                }
+                else {
+                    wCounter -= reduce;
+                    e.innerHTML = wCounter;
+                }
+            }, reduce * 1000);
+        }
+
+        function startPageTimer(wFrom, wReach) {
+            var handle = null;
+            handle = setInterval(function () {
+                if (wFrom == wReach) {
+                    clearInterval(handle);
+                    PF('timeoutDialog').show();
+                    startDialogTimer(loopTill, redirectPage);
+                }
+                else {
+                    wFrom -= reduce;
+                }
+            }, reduce * 1000);
+        }
+
+        function redirectLogin() {
+            window.location.href = redirectPage;
+        }
+
+        startPageTimer(startFrom, loopTill);
+
+
+        function start() {
+
+            window['progress'] = setInterval(function () {
+                var oldValue = pbClient.getValue(),
+                        newValue = oldValue + 10;
+
+                pbClient.setValue(pbClient.getValue() + 10);
+
+                if (newValue == 100) {
+                    clearInterval(window['progress']);
+                }
+
+
+            }, 1000);
+        }
+
+        function cancel() {
+            clearInterval(window['progress']);
+            pbClient.setValue(0);
+        }
+
+
+
+        function enterToAutoComplete(objName, minChars, evtKeyPress) {
+            var input = document.getElementById(objName);
+            var autocomplete = input.rf.component;
+            var nTecla = evtKeyPress.keyCode;
+            if (nTecla == 13) {
+                autocomplete.options.minChars = minChars;
+                autocomplete.isFirstAjax = true;
+                autocomplete.__updateState(evtKeyPress);
+                autocomplete.options.minChars = 100;
+                return false;
+            }
+            else
+                return true;
+        }
+        function calcularTotal() {
+
+            var new_value = (document.getElementById('frmPri:monto').value -
+                    document.getElementById('frmPri:retencion').value -
+                    document.getElementById('frmPri:iva').value -
+                    document.getElementById('frmPri:impGanancias').value -
+                    document.getElementById('frmPri:suss').value);
+
+            if (isNaN(new_value))
+                alert("Debe ingresar solo valores numéricos");
+            else
+                document.getElementById('frmPri:total').value = new_value;
+
+        }
+        function ocultarCheque() {
+            if (document.getElementById('frmPri:formaPago_input').value === 'EFECTIVO') {
+                document.getElementById("frmPri:numeroCheque").value = '';
+                document.getElementById("frmPri:numeroCheque").readOnly = true;
+            }
+            else {
+                document.getElementById("frmPri:numeroCheque").readOnly = false;
+            }
+        }
+    </script>
+    <h:outputScript library="js" name="calendar_es.js" />
+
+    <h:body>
+        <f:view contentType="text/html">
+            <f:event type="preRenderView" listener="#{usuarioLogerBean.navigationStatus()}" />
+
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+            <p:dialog modal="true" widgetVar="statusDialog" header="Estado"   
+                      draggable="false" closable="true" position="top">  
+                <p:graphicImage value="./Imagenes/load.gif" />  
+            </p:dialog>  
+
+            <h:form id="frmPri" enctype="multipart/form-data">
+
+                <p:dialog header="La session esta por finalizar!"
+                          widgetVar="timeoutDialog" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          modal="true"
+                          width="400"
+                          height="200"
+                          closable="false"
+                          draggable="false"
+                          resizable="false" 
+                          position="top"
+                          > 
+                    <br/>
+                    <p>
+                        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+                        <div>Se cerrara la sesion en  <span id="dialog-countdown" style="font-weight:bold"></span> segundos.</div>
+                    </p>
+                    <br/><br/>
+                    <h:outputText value="¿Deseas continuar con la session?"/>
+
+                    <center>
+                        <p:commandButton value="SI"  oncomplete="resetPageTimer()"/>
+                        <p:commandButton value="No"  action="#{sessionControlerBean.cerrarSession()}" oncomplete="redirectLogin()"/>
+                    </center>
+
+                </p:dialog>
+
+                <p:dialog header="La session ha expirado!"
+                          widgetVar="dlgFinSession" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          modal="true"
+                          width="400"
+                          height="200"
+                          closable="false"
+                          draggable="false"
+                          resizable="false" 
+                          position="top"
+                          > 
+                    <br/>
+                    <p>
+                        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+                        <div> <h:outputText value="La session termino. "/></div><br/>
+                        <a href="index.xhtml">
+                            Presione aca para ingresar nuevamente
+                        </a>
+                    </p>
+                    <br/>
+
+
+                </p:dialog>
+
+
+
+
+                <b:navBar brandAlign="left" brand="Colegio Medico de Catamarca" brandHref="index.xhtml" inverse="true">
+                    <b:navbarLinks>
+                        <b:dropMenu value="Gestiones" >
+                            <b:navLink value="Usuarios" href="#{navegarBean.frmUsuario()}"></b:navLink>
+                            <b:navLink value="Docentes" href="#{navegarBean.frmDocente()}"></b:navLink>
+                            <b:navLink value="Alumnos" href="#{navegarBean.frmAlumno()}"></b:navLink>
+                            <b:navLink value="Carreras/Materias" href="#{navegarBean.frmCarrera()}"></b:navLink>
+                            <b:navLink value="Proveedores" href="#{navegarBean.frmProveedor()}"></b:navLink>
+                            <b:navLink value="Cohortes" href="#{navegarBean.frmCohorte()}"></b:navLink>
+                            <b:navLink value="Inscripcion Alumnos" href="#{navegarBean.frmInscripcionAlumnos()}"></b:navLink>
+                        </b:dropMenu>
+                        <b:navLink value="Egresos" href="#{navegarBean.frmPagosDocentes()}"></b:navLink>                             
+
+                        <!-- <b:dropMenu value="Egresos">
+                             <b:navLink value="Docentes" href="#{navegarBean.frmPagosDocentes()}"></b:navLink>
+                             <b:navLink value="Generales" href="#{navegarBean.frmGastosGenerales()}"></b:navLink>                             
+                         </b:dropMenu>  -->
+                        <b:navLink value="Ingresos" href="#{navegarBean.frmIngresos()}"></b:navLink>                             
+                        <b:dropMenu value="Consultas">
+                            <b:navLink value="Egresos por Pagos Docentes" href="#{navegarBean.frmConsultaPagosDocentes()}"></b:navLink>
+                            <b:navLink value="Egresos Generales" href="#{navegarBean.frmConsultaPagosGenerales()}"></b:navLink>
+                            <b:navLink value="Ingresos por Cuotas Alumnos" href="#{navegarBean.frmConsultaCobrosAlumnos()}"></b:navLink>
+                            <b:navLink value="Ingresos Generales" href="#{navegarBean.frmConsultaCobrosGenerales()}"></b:navLink>
+                            <b:navLink value="Ingresos por Alumno" href="#{navegarBean.frmConsultaIngresoAlumnos()}"></b:navLink>                               
+                            <b:navLink value="Alumnos por Cohorte" href="#{navegarBean.frmConsultaAlumnosPorCohorte()}"></b:navLink>                               
+                            <b:navLink value="Última Cuota Alumnos" href="ConsultaUltimaCuota.xhtml"></b:navLink>                               
+
+                        </b:dropMenu>                   
+
+                    </b:navbarLinks>
+                    <b:navbarLinks pull="right"> <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}">  
+                            <b:navLink  value="Cerrar Sesión" href="logout.xhtml"></b:navLink>                               
+                        </b:dropMenu> 
+                    </b:navbarLinks>
+
+                </b:navBar> 
+
+                <b:panel>
+                    <p:growl id="growl" showDetail="false" sticky="true" />
+                    <ui:insert name="content">Content</ui:insert>
+                </b:panel>
+                <b:navBar>
+                    <b:navbarLinks pull="left"><img src="./Imagenes/logocolegio.png" alt="" height="70px" align="left" />
+                    </b:navbarLinks>   <b:navbarLinks pull="right"><p> Colegio Medico de Catamarca <br/>Hipolito Irigoyen 1233 
+                            <br/> San Fernando del Valle de Catamarca</p></b:navbarLinks> 
+                </b:navBar>
+            </h:form>
+        </f:view>
+    </h:body>
+
+</html>
