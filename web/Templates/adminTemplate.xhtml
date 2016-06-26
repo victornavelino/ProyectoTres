@@ -105,29 +105,8 @@
             else
                 return true;
         }
-        function calcularTotal() {
 
-            var new_value = (document.getElementById('frmPri:monto').value -
-                    document.getElementById('frmPri:retencion').value -
-                    document.getElementById('frmPri:iva').value -
-                    document.getElementById('frmPri:impGanancias').value -
-                    document.getElementById('frmPri:suss').value);
 
-            if (isNaN(new_value))
-                alert("Debe ingresar solo valores numéricos");
-            else
-                document.getElementById('frmPri:total').value = new_value;
-
-        }
-        function ocultarCheque() {
-            if (document.getElementById('frmPri:formaPago_input').value === 'EFECTIVO') {
-                document.getElementById("frmPri:numeroCheque").value = '';
-                document.getElementById("frmPri:numeroCheque").readOnly = true;
-            }
-            else {
-                document.getElementById("frmPri:numeroCheque").readOnly = false;
-            }
-        }
     </script>
     <h:outputScript library="js" name="calendar_es.js" />
 
@@ -203,30 +182,11 @@
                     <b:navbarLinks>
                         <b:dropMenu value="Gestiones" >
                             <b:navLink value="Usuarios" href="#{navegarBean.frmUsuario()}"></b:navLink>
-                            <b:navLink value="Docentes" href="#{navegarBean.frmDocente()}"></b:navLink>
-                            <b:navLink value="Alumnos" href="#{navegarBean.frmAlumno()}"></b:navLink>
-                            <b:navLink value="Carreras/Materias" href="#{navegarBean.frmCarrera()}"></b:navLink>
-                            <b:navLink value="Proveedores" href="#{navegarBean.frmProveedor()}"></b:navLink>
-                            <b:navLink value="Cohortes" href="#{navegarBean.frmCohorte()}"></b:navLink>
-                            <b:navLink value="Inscripcion Alumnos" href="#{navegarBean.frmInscripcionAlumnos()}"></b:navLink>
+                            
                         </b:dropMenu>
-                        <b:navLink value="Egresos" href="#{navegarBean.frmPagosDocentes()}"></b:navLink>                             
-
-                        <!-- <b:dropMenu value="Egresos">
-                             <b:navLink value="Docentes" href="#{navegarBean.frmPagosDocentes()}"></b:navLink>
-                             <b:navLink value="Generales" href="#{navegarBean.frmGastosGenerales()}"></b:navLink>                             
-                         </b:dropMenu>  -->
-                        <b:navLink value="Ingresos" href="#{navegarBean.frmIngresos()}"></b:navLink>                             
-                        <b:dropMenu value="Consultas">
-                            <b:navLink value="Egresos por Pagos Docentes" href="#{navegarBean.frmConsultaPagosDocentes()}"></b:navLink>
-                            <b:navLink value="Egresos Generales" href="#{navegarBean.frmConsultaPagosGenerales()}"></b:navLink>
-                            <b:navLink value="Ingresos por Cuotas Alumnos" href="#{navegarBean.frmConsultaCobrosAlumnos()}"></b:navLink>
-                            <b:navLink value="Ingresos Generales" href="#{navegarBean.frmConsultaCobrosGenerales()}"></b:navLink>
-                            <b:navLink value="Ingresos por Alumno" href="#{navegarBean.frmConsultaIngresoAlumnos()}"></b:navLink>                               
-                            <b:navLink value="Alumnos por Cohorte" href="#{navegarBean.frmConsultaAlumnosPorCohorte()}"></b:navLink>                               
-                            <b:navLink value="Última Cuota Alumnos" href="ConsultaUltimaCuota.xhtml"></b:navLink>                               
-
-                        </b:dropMenu>                   
+                            
+                          
+                 
 
                     </b:navbarLinks>
                     <b:navbarLinks pull="right"> <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}">  

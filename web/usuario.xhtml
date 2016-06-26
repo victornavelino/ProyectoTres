@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 template="./Templates/adminTemplate.xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:b="http://bootsfaces.net/ui"
+                 >
+
+
+
+    <ui:define name="content">
+
+        <!--Inicio Dialogo Usuario ABM -->
+
+        <p:dialog id="dUsuario"
+                  widgetVar="dlgUsuario"
+                  closable="false" >
+
+            <h3><h:outputText value="Crear/Modificar/Eliminar"/></h3>
+            <h:inputHidden value="#{usuarioBean.usuario.id}" />
+            <h:inputHidden value="#{usuarioBean.iActionBtnSelect}"/>
+            <h:inputHidden value="#{usuarioBean.bCamposSoloLectura}"/>
+
+            <p:panel id="pPri">
+
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel value="Nombre:" for="itNombre" />
+                    <p:inputText id="itNombre" 
+                                 value="#{usuarioBean.usuario.nombre}"
+                                 title="Nombre"
+                                 size="50"
+                                 maxlength="100"/>
+
+                    <p:outputLabel value="Apellido:" for="itApellido" />
+                    <p:inputText id="itApellido" 
+                                 value="#{usuarioBean.usuario.apellido}" 
+                                 title="Apellido" 
+                                 size="50"
+                                 maxlength="100"/>
+
+
+                    <p:outputLabel value="Usuario" for="itUsuario" />
+                    <p:inputText id="itUsuario" 
+                                 value="#{usuarioBean.usuario.usuario}" 
+                                 title="Usuario" />
+
+
+
+                    <h:outputText value="*Contraseña:"/>
+                    <p:password promptLabel="Por favor ingrese la contraseña"
+                                weakLabel="Mala"
+                                goodLabel="Buena"
+                                strongLabel="Muy buena"
+                                feedback="true"
+                                id="pContrasena"
+                                label="Contraseña"
+                                value="#{usuarioBean.usuario.password}"
+                                size="30"
+                                maxlength="30"/>
+
+                    <h:outputText value="*Confirmar contraseña:"/>
+                    <p:password promptLabel="Por favor ingrese la contraseña"
+                                feedback="false"
+                                id="pContrasenaConf"
+                                label="Confirmación de contraseña"
+                                value="#{usuarioBean.sConfirmarContrasena}"
+                                size="30"
+                                maxlength="30"/>
+
+                </h:panelGrid>
+
+
+                <div style=" float: left;">
+                    <p:messages autoUpdate="true"/>
+                </div>
+
+                <div style="clear: both;"/>
+
+                <div class="divboton">
+
+                    <p:commandButton id="btnAction"
+                                     value=" " 
+                                     actionListener="#{usuarioBean.actionBtn}" 
+                                     update=":frmPri:pPri, :frmPri:dtUsuario, @this"
+                                     binding="#{usuarioBean.cbAction}"
+                                     styleClass="boton"/>
+
+
+                    <p:commandButton id="btnSalir"
+                                     value="Salir"  
+                                     actionListener="#{usuarioBean.limpiar()}"
+                                     oncomplete="PF('dlgUsuario').hide()"
+                                     icon="ui-icon-cancel"
+                                     update=":frmPri:dUsuario, :frmPri:dtUsuario"
+                                     styleClass="boton"/>
+
+                </div>
+            </p:panel>
+
+        </p:dialog>
+
+        <!--Fin  Dialogo Usuario ABM -->
+
+        <!--TABLA NIVEL -->
+
+        <h2> Usuarios</h2>
+
+
+        <p>
+
+            <p:commandButton id="cbCreate"
+                             value="Nuevo" 
+                             icon="ui-icon-circle-plus" 
+                             oncomplete="PF('dlgUsuario').show()"
+                             actionListener="#{usuarioBean.setBtnSelect}"
+                             update=":frmPri:dtUsuario, dUsuario"
+                             />
+        </p> 
+
+        <p:dataTable id="dtUsuario"
+                     value="#{usuarioLstBean.lstUsuario}"
+                     var="item"
+                     style="overflow-x: auto;"
+                     paginator="true"
+                     rows="20">
+
+            <p:column width="100">
+                <p:commandButton id="cbEdit"
+                                 title="Editar"
+                                 icon="ui-icon-pencil" 
+                                 update=":frmPri:dUsuario"
+                                 oncomplete="PF('dlgUsuario').show();"
+                                 actionListener="#{usuarioBean.setBtnSelect}"
+                                 process="@form">                    
+
+                    <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}"/> 
+
+                </p:commandButton>
+
+                <p:commandButton id="cbDelete"
+                                 title="Eliminar"
+                                 icon="ui-icon-circle-close" 
+                                 update=":frmPri:dUsuario"
+                                 oncomplete="PF('dlgUsuario').show();"
+                                 actionListener="#{usuarioBean.setBtnSelect}">
+                    <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}"/> 
+
+                </p:commandButton>
+
+            </p:column>
+            <p:column 
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Nombre"/>
+                </f:facet>
+                <h:outputText value="#{item.nombre}"/>
+            </p:column>
+
+            <p:column 
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Apellido"/>
+                </f:facet>
+                <h:outputText value="#{item.apellido}"/>
+            </p:column>
+
+            <p:column 
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Usuario"/>
+                </f:facet>
+                <h:outputText value="#{item.usuario}"/>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
