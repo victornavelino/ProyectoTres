@@ -177,23 +177,33 @@
 
 
 
-
-                <b:navBar brandAlign="left" brand="Colegio Medico de Catamarca" brandHref="index.xhtml" inverse="true">
+                
+                
+                <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="index.xhtml"  brandImg="./Imagenes/logochico.png" >
+<br/><br/>
                     <b:navbarLinks>
-                        <b:dropMenu value="Gestiones" >
-                            <b:navLink value="Usuarios" href="#{navegarBean.frmUsuario()}"></b:navLink>
-                            
+                        
+                        <b:dropMenu value="Gestiones"> 
+
+                            <b:navLink value="Usuarios" iconAwesome="user" href="#{navegarBean.frmUsuario()}"></b:navLink>
+
+                            <b:navLink value="Configuracion" href="#{navegarBean.frmUsuario()}" iconAwesome="cog" >
+
+
+                            </b:navLink>
                         </b:dropMenu>
-                            
-                          
-                 
+
+
+
 
                     </b:navbarLinks>
-                    <b:navbarLinks pull="right"> <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}">  
-                            <b:navLink  value="Cerrar Sesión" href="logout.xhtml"></b:navLink>                               
+                    <b:navbarLinks pull="right"> 
+                        <b:iconAwesome name="user" size="3x"></b:iconAwesome>
+                        <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}" >  
+                            <b:navLink  value="Cerrar Sesión" href="logout.xhtml" iconAwesome="user" ></b:navLink>                               
                         </b:dropMenu> 
                     </b:navbarLinks>
-
+                
                 </b:navBar> 
 
                 <b:panel>

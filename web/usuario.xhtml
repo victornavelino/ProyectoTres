@@ -126,7 +126,8 @@
                      var="item"
                      style="overflow-x: auto;"
                      paginator="true"
-                     rows="20">
+                     rows="20"
+                     >
 
             <p:column width="100">
                 <p:commandButton id="cbEdit"
@@ -153,6 +154,7 @@
 
             </p:column>
             <p:column 
+                filterBy="#{item.nombre}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
                     <h:outputText value="Nombre"/>
