@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 template="./Templates/adminTemplate.xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:b="http://bootsfaces.net/ui"
+                 >
+
+
+
+    <ui:define name="content">
+        <h3> <h:outputText value="Consultas" styleClass="titulo"/></h3>
+
+        <b:tabView id="tvConsulta">  
+
+            <b:tab id="tab1" title="Medicos">
+                <b:panel id="panelMedico" look="primary">
+                    <b:label text="Matricula:" class=""/>
+                    <b:inputText id="inputMatricula" ></b:inputText>
+                </b:panel>
+            </b:tab>
+            <b:tab id="tab2" title="Medicos por Especialidad"> </b:tab>
+        
+        </b:tabView>
+
+
+
+
+
+
+    </ui:define>
+</ui:composition>
