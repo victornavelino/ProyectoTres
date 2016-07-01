@@ -17,13 +17,41 @@
         <b:tabView id="tvConsulta">  
 
             <b:tab id="tab1" title="Medicos">
-                <b:panel id="panelMedico" look="primary">
-                    <b:label text="Matricula:" class=""/>
-                    <b:inputText id="inputMatricula" ></b:inputText>
-                </b:panel>
+
+                <b:container fluid="true">
+                    <b:row >
+                        <b:column col-sm="1">
+                            <h:outputLabel value="Matricula: " /> 
+                        </b:column>
+                        <b:column col-sm="4">
+                            <b:inputText span="8" id="inputMatricula" ></b:inputText>
+                        </b:column>
+                        <b:column col-sm="4">
+                            <p:commandButton id="cbBuscarMatriculado"
+                                             icon="ui-icon-search"
+                                             actionListener="#{listadoIniciadorBean.buscarIniciado()}"
+                                             update="comboMatriculados"/><br/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column col-lg="4">
+                            <p:selectOneMenu id="comboMatriculados"
+                                             value="#{consultaBean.medico}"
+                                             converter="ConversorGenerico"
+                                             >
+                                <f:selectItems value="#{listadoIniciadorBean.lstSIIniciador}"/>
+                            </p:selectOneMenu>
+                        </b:column>
+                    </b:row>
+
+
+
+
+
+                </b:container>
             </b:tab>
             <b:tab id="tab2" title="Medicos por Especialidad"> </b:tab>
-        
+
         </b:tabView>
 
 
