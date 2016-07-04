@@ -7,11 +7,13 @@ package ManagedBeans;
 
 import Entidades.Medico.Especialidad;
 import Facades.EspecialidadFacade;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -27,6 +29,16 @@ public class ListaEspecialidadBean {
     @EJB
     private EspecialidadFacade especialidadFacade;
     private List<Especialidad> especialidades;
+    private List <SelectItem> lstSIEspecialidad;
+
+    public List<SelectItem> getLstSIEspecialidad() {
+        return lstSIEspecialidad;
+    }
+
+    public void setLstSIEspecialidad(List<SelectItem> lstSIEspecialidad) {
+        this.lstSIEspecialidad = lstSIEspecialidad;
+    }
+    
 
     public EspecialidadFacade getEspecialidadFacade() {
         return especialidadFacade;
@@ -50,6 +62,7 @@ public class ListaEspecialidadBean {
     }
     @PostConstruct
     private void inicializar(){
+        this.especialidades= new ArrayList<>();
         this.cargarEspecialidades();
     }
 
@@ -57,6 +70,6 @@ public class ListaEspecialidadBean {
         this.setEspecialidades(especialidadFacade.findAll());
     }
     public void buscarEspecialidades(String especialidad){
-        this.setEspecialidades(especialidadFacade.findAll());
+        this.setEspecialidades(especialidadFacade.buscarEspecialidad(especialidad));
     }
 }

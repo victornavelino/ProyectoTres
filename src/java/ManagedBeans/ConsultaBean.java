@@ -5,8 +5,8 @@
  */
 package ManagedBeans;
 
-import Entidades.Medico.Especialidad;
 import Entidades.Medico.Medico;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
@@ -16,7 +16,7 @@ import javax.inject.Named;
  *
  * @author hugo
  */
-@Named(value = "consultaBean")
+@ManagedBean(name = "consultaBean")
 @RequestScoped
 public class ConsultaBean {
 
@@ -56,7 +56,8 @@ public class ConsultaBean {
     public ConsultaBean() {
     }
 
-    public void buscarEspecialidades() {
+    public void buscarEspecialidad() {
+        this.listaEspecialidadBean.buscarEspecialidades(this.getEspecialidad());
      
     }
 

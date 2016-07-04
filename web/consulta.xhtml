@@ -21,7 +21,7 @@
                 <b:container fluid="true">
                     <b:row >
                         <b:column col-sm="1">
-                            <h:outputLabel value="Matricula: " /> 
+                            <h:outputLabel value="Especialidad " /> 
                         </b:column>
                         <b:column col-sm="4">
                             <b:inputText span="8" id="inputEspecialidad" value="#{consultaBean.especialidad}"></b:inputText>
@@ -29,7 +29,7 @@
                         <b:column col-sm="4">
                             <p:commandButton id="cbBuscarEspecialidades"
                                              icon="ui-icon-search"
-                                             actionListener="#{consultaBean.buscarMedicoXEspecialidad()}"
+                                             actionListener="#{consultaBean.buscarEspecialidad}"
                                              update="comboEspecialidades"/><br/>
                         </b:column>
                     </b:row>
@@ -39,7 +39,7 @@
                                              value="#{consultaBean.especialidad}"
                                              converter="ConversorGenerico"
                                              >
-                                <f:selectItems value="#{listadoIniciadorBean.lstSIIniciador}"/>
+                                <f:selectItems value="#{listaEspecialidadBean.lstSIEspecialidad}"/>
                             </p:selectOneMenu>
                         </b:column>
                     </b:row>
