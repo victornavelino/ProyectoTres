@@ -17,14 +17,14 @@ import javax.persistence.Table;
  * @author nago
  */
 @Entity
-@Table(name="medico_tipoespecialidad")
+@Table(name ="medico_tipoespecialidad")
 public class TipoEspecialidad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcion;
-
+    
     public Long getId() {
         return id;
     }
@@ -40,7 +40,7 @@ public class TipoEspecialidad implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+  
     @Override
     public int hashCode() {
         int hash = 0;
@@ -63,7 +63,7 @@ public class TipoEspecialidad implements Serializable {
 
     @Override
     public String toString() {
-        return descripcion;
+        return "Entidades.Medico.TipoEspecialidad[ id=" + id + " ]";
     }
     
 }

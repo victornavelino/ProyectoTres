@@ -6,14 +6,12 @@
 package Entidades.Medico;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -26,24 +24,10 @@ public class Especialidad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nombreEspecialidad;
+    private String descripcion;
     @OneToOne
     private TipoEspecialidad tipoEspecialidad;
-    private String nombreEspecialidad;
-    private String matriculaEspecialidad;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaMatriculacion;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaVencimiento;
-    private String libro;
-    private String Folio;
-    @OneToOne
-    private UnidadFormadora unidadFormadora;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaRevision;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechaVencimientoRevision;
-    
-    
     public Long getId() {
         return id;
     }
@@ -52,12 +36,12 @@ public class Especialidad implements Serializable {
         this.id = id;
     }
 
-    public TipoEspecialidad getTipoEspecialidad() {
-        return tipoEspecialidad;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setTipoEspecialidad(TipoEspecialidad tipoEspecialidad) {
-        this.tipoEspecialidad = tipoEspecialidad;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getNombreEspecialidad() {
@@ -68,70 +52,14 @@ public class Especialidad implements Serializable {
         this.nombreEspecialidad = nombreEspecialidad;
     }
 
-    public String getMatriculaEspecialidad() {
-        return matriculaEspecialidad;
+    public TipoEspecialidad getTipoEspecialidad() {
+        return tipoEspecialidad;
     }
 
-    public void setMatriculaEspecialidad(String matriculaEspecialidad) {
-        this.matriculaEspecialidad = matriculaEspecialidad;
+    public void setTipoEspecialidad(TipoEspecialidad tipoEspecialidad) {
+        this.tipoEspecialidad = tipoEspecialidad;
     }
-
-    public Date getFechaMatriculacion() {
-        return fechaMatriculacion;
-    }
-
-    public void setFechaMatriculacion(Date fechaMatriculacion) {
-        this.fechaMatriculacion = fechaMatriculacion;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public String getLibro() {
-        return libro;
-    }
-
-    public void setLibro(String libro) {
-        this.libro = libro;
-    }
-
-    public String getFolio() {
-        return Folio;
-    }
-
-    public void setFolio(String Folio) {
-        this.Folio = Folio;
-    }
-
-    public UnidadFormadora getUnidadFormadora() {
-        return unidadFormadora;
-    }
-
-    public void setUnidadFormadora(UnidadFormadora unidadFormadora) {
-        this.unidadFormadora = unidadFormadora;
-    }
-
-    public Date getFechaRevision() {
-        return fechaRevision;
-    }
-
-    public void setFechaRevision(Date fechaRevision) {
-        this.fechaRevision = fechaRevision;
-    }
-
-    public Date getFechaVencimientoRevision() {
-        return fechaVencimientoRevision;
-    }
-
-    public void setFechaVencimientoRevision(Date fechaVencimientoRevision) {
-        this.fechaVencimientoRevision = fechaVencimientoRevision;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -154,7 +82,7 @@ public class Especialidad implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.medico.Especialidad[ id=" + id + " ]";
+        return descripcion;
     }
     
 }

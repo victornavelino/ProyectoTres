@@ -162,7 +162,8 @@
                 <h:outputText value="#{item.nombre}"/>
             </p:column>
 
-            <p:column 
+            <p:column
+                filterBy="#{item.apellido}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
                     <h:outputText value="Apellido"/>
@@ -170,7 +171,8 @@
                 <h:outputText value="#{item.apellido}"/>
             </p:column>
 
-            <p:column 
+            <p:column
+                filterBy="#{item.usuario}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
                     <h:outputText value="Usuario"/>

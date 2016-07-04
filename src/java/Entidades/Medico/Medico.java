@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +23,7 @@ import javax.persistence.Temporal;
  *
  * @author nago
  */
+@NamedQuery(name = "Medico.buscarMedicosEspecialidad", query = "SELECT m FROM Medico m ,m.especialidades esp WHERE esp=:especialidad")
 @Entity
 @Table(name="medico")
 public class Medico implements Serializable {
@@ -39,7 +41,7 @@ public class Medico implements Serializable {
     private Date fechaInscripcion;
     private String titulo;
     @OneToMany
-    private List<Especialidad> especialidades;
+    private List<Especializacion> especializaciones;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaRecibido;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -102,12 +104,12 @@ public class Medico implements Serializable {
         this.titulo = titulo;
     }
 
-    public List<Especialidad> getEspecialidades() {
-        return especialidades;
+    public List<Especializacion> getEspecializaciones() {
+        return especializaciones;
     }
 
-    public void setEspecialidades(List<Especialidad> especialidades) {
-        this.especialidades = especialidades;
+    public void setEspecializaciones(List<Especializacion> especializaciones) {
+        this.especializaciones = especializaciones;
     }
 
     public Date getFechaRecibido() {

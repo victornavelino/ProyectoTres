@@ -5,9 +5,7 @@
  */
 package Facades;
 
-import Entidades.Medico.Especialidad;
-import Entidades.Medico.Medico;
-import java.util.List;
+import Entidades.Medico.Especializacion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author nago
  */
 @Stateless
-public class MedicoFacade extends AbstractFacade<Medico> {
+public class EspecializacionFacade extends AbstractFacade<Especializacion> {
     @PersistenceContext(unitName = "ProyectoColegioPU")
     private EntityManager em;
 
@@ -26,12 +24,8 @@ public class MedicoFacade extends AbstractFacade<Medico> {
         return em;
     }
 
-    public MedicoFacade() {
-        super(Medico.class);
-    }
-
-    public List<Medico> buscarMedicosEspecialidad(Especialidad especialidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EspecializacionFacade() {
+        super(Especializacion.class);
     }
     
 }

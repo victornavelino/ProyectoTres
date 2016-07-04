@@ -24,19 +24,19 @@
                             <h:outputLabel value="Matricula: " /> 
                         </b:column>
                         <b:column col-sm="4">
-                            <b:inputText span="8" id="inputMatricula" ></b:inputText>
+                            <b:inputText span="8" id="inputEspecialidad" value="#{consultaBean.especialidad}"></b:inputText>
                         </b:column>
                         <b:column col-sm="4">
-                            <p:commandButton id="cbBuscarMatriculado"
+                            <p:commandButton id="cbBuscarEspecialidades"
                                              icon="ui-icon-search"
-                                             actionListener="#{listadoIniciadorBean.buscarIniciado()}"
-                                             update="comboMatriculados"/><br/>
+                                             actionListener="#{consultaBean.buscarMedicoXEspecialidad()}"
+                                             update="comboEspecialidades"/><br/>
                         </b:column>
                     </b:row>
                     <b:row>
                         <b:column col-lg="4">
-                            <p:selectOneMenu id="comboMatriculados"
-                                             value="#{consultaBean.medico}"
+                            <p:selectOneMenu id="comboEspecialidades"
+                                             value="#{consultaBean.especialidad}"
                                              converter="ConversorGenerico"
                                              >
                                 <f:selectItems value="#{listadoIniciadorBean.lstSIIniciador}"/>

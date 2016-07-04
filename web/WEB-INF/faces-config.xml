@@ -13,4 +13,56 @@
             <var>bundleusuario</var>
         </resource-bundle>
     </application>
+    <application>
+        <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
+    </application>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>welcome</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>especialidad</managed-bean-name>
+        <managed-bean-class>ManagedBeans.EspecialidadController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>especialidadJpa</managed-bean-name>
+        <managed-bean-class>Facades.EspecialidadFacade</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <converter>
+        <converter-for-class>Entidades.Medico.Especialidad</converter-for-class>
+        <converter-class>ManagedBeans.EspecialidadConverter</converter-class>
+    </converter>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>especialidad_create</from-outcome>
+            <to-view-id>/paginas/especialidad/New.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>especialidad_list</from-outcome>
+            <to-view-id>/paginas/especialidad/List.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>especialidad_edit</from-outcome>
+            <to-view-id>/paginas/especialidad/Edit.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>especialidad_detail</from-outcome>
+            <to-view-id>/paginas/especialidad/Detail.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
