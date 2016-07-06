@@ -29,6 +29,8 @@ public class Especializacion implements Serializable {
     @OneToOne
     private Especialidad especialidad;
     private String matriculaEspecialidad;
+    @OneToOne
+    private Medico medico;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaMatriculacion;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -116,6 +118,22 @@ public class Especializacion implements Serializable {
         this.fechaVencimientoRevision = fechaVencimientoRevision;
     }
 
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

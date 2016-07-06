@@ -82,7 +82,7 @@ public class Especialidad implements Serializable {
 
     @Override
     public String toString() {
-        return descripcion;
+        return nombreEspecialidad;
     }
     
 }

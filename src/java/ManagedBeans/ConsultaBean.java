@@ -5,6 +5,7 @@
  */
 package ManagedBeans;
 
+import Entidades.Medico.Especialidad;
 import Entidades.Medico.Medico;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -25,10 +26,37 @@ public class ConsultaBean {
      */
     private Medico medico;
 //    private Especialidad especialidad;
-    private String especialidad;
+    private String StringEspecialidad;
+    private Especialidad especialidad;
     @ManagedProperty("#{listaEspecialidadBean}")
     private ListaEspecialidadBean listaEspecialidadBean;
+    @ManagedProperty("#{listaEspecializacionBean}")
+    private ListaEspecializacionBean listaEspecializacionBean;
 
+    public String getStringEspecialidad() {
+        return StringEspecialidad;
+    }
+
+    public void setStringEspecialidad(String StringEspecialidad) {
+        this.StringEspecialidad = StringEspecialidad;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+    
+    public ListaEspecializacionBean getListaEspecializacionBean() {
+        return listaEspecializacionBean;
+    }
+
+    public void setListaEspecializacionBean(ListaEspecializacionBean listaEspecializacionBean) {
+        this.listaEspecializacionBean = listaEspecializacionBean;
+    }
+    
     public ListaEspecialidadBean getListaEspecialidadBean() {
         return listaEspecialidadBean;
     }
@@ -36,7 +64,7 @@ public class ConsultaBean {
     public void setListaEspecialidadBean(ListaEspecialidadBean listaEspecialidadBean) {
         this.listaEspecialidadBean = listaEspecialidadBean;
     }
-    
+
     public Medico getMedico() {
         return medico;
     }
@@ -45,20 +73,17 @@ public class ConsultaBean {
         this.medico = medico;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
 
     public ConsultaBean() {
     }
 
     public void buscarEspecialidad() {
-        this.listaEspecialidadBean.buscarEspecialidades(this.getEspecialidad());
-     
+        this.listaEspecialidadBean.buscarEspecialidades(StringEspecialidad);
+
+    }
+
+    public void buscarEspecializaciones() {
+        this.listaEspecializacionBean.buscarEspecializaciones(especialidad);
     }
 
 }

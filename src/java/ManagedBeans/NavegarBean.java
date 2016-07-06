@@ -45,5 +45,7 @@ public class NavegarBean {
     public String frmPagosMedicos() {
         return "pagoMedico.xhtml?faces-redirect=true";
     }
-
+    public String frmConsultas(){
+        return "consulta.xhtml?faces-redirect=true";
+    }
 }
