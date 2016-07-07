@@ -7,7 +7,7 @@ package ManagedBeans;
 
 import Entidades.Medico.Especialidad;
 import Entidades.Medico.Medico;
-import Facades.MedicoFacade;
+import RN.MedicoRNLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.RequestScoped;
@@ -28,7 +28,7 @@ public class ListaMedicoBean {
     private List<Medico> medicos;
     private Especialidad especialidad;
     @EJB
-    private MedicoFacade medicoFacade;
+    private MedicoRNLocal medicoFacade;
 
     public List<Medico> getMedicos() {
         return medicos;
@@ -46,14 +46,7 @@ public class ListaMedicoBean {
         this.especialidad = especialidad;
     }
 
-    public MedicoFacade getMedicoFacade() {
-        return medicoFacade;
-    }
-
-    public void setMedicoFacade(MedicoFacade medicoFacade) {
-        this.medicoFacade = medicoFacade;
-    }
-
+    
     public ListaMedicoBean() {
     }
 

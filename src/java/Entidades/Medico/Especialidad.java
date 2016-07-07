@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,6 +21,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="medico_especialidad")
+@NamedQueries({
+    @NamedQuery(name = "Especialidad.buscar",
+            query = "SELECT e FROM Especialidad e WHERE e.nombreEspecialidad LIKE :especialidad "
+            + " ORDER BY e.id DESC")
+})
 public class Especialidad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

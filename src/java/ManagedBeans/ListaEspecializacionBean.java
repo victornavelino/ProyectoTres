@@ -9,6 +9,7 @@ import Entidades.Medico.Especialidad;
 import Entidades.Medico.Especializacion;
 import Facades.EspecialidadFacade;
 import Facades.EspecializacionFacade;
+import RN.EspecializacionRNLocal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -29,17 +30,9 @@ public class ListaEspecializacionBean {
      * Creates a new instance of ListaEspecialidadBean
      */
     @EJB
-    private EspecializacionFacade especializacionFacade;
+    private EspecializacionRNLocal especializacionFacade;
     private List<Especializacion> especializaciones;
-    private List <SelectItem> lstSIEspecializacion;
-
-    public EspecializacionFacade getEspecializacionFacade() {
-        return especializacionFacade;
-    }
-
-    public void setEspecializacionFacade(EspecializacionFacade especializacionFacade) {
-        this.especializacionFacade = especializacionFacade;
-    }
+    private List<SelectItem> lstSIEspecializacion;
 
     public List<Especializacion> getEspecializaciones() {
         return especializaciones;
@@ -57,21 +50,20 @@ public class ListaEspecializacionBean {
         this.lstSIEspecializacion = lstSIEspecializacion;
     }
 
-    
-    
-    
     public ListaEspecializacionBean() {
     }
+
     @PostConstruct
-    private void inicializar(){
-        this.especializaciones= new ArrayList<>();
+    private void inicializar() {
+        this.especializaciones = new ArrayList<>();
         this.cargarEspecializaciones();
     }
 
     public void cargarEspecializaciones() {
         this.setEspecializaciones(especializacionFacade.findAll());
     }
-    public void buscarEspecializaciones(Especialidad especialidad){
+
+    public void buscarEspecializaciones(Especialidad especialidad) {
         this.setEspecializaciones(especializacionFacade.buscarPorEspecialidad(especialidad));
     }
 }

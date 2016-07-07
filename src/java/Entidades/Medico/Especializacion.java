@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,8 +22,14 @@ import javax.persistence.Temporal;
  * @author nago
  */
 @Entity
-@Table(name="medico_especializacion")
+@Table(name = "medico_especializacion")
+@NamedQueries({
+    @NamedQuery(name = "Especializacion.buscarEspecialidad",
+            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad "
+            + " ORDER BY e.id DESC")
+})
 public class Especializacion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +51,7 @@ public class Especializacion implements Serializable {
     private Date fechaRevision;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaVencimientoRevision;
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -52,7 +59,6 @@ public class Especializacion implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getMatriculaEspecialidad() {
         return matriculaEspecialidad;
@@ -133,7 +139,7 @@ public class Especializacion implements Serializable {
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -156,7 +162,7 @@ public class Especializacion implements Serializable {
 
     @Override
     public String toString() {
-        return especialidad +" , "+ matriculaEspecialidad;
+        return especialidad + " , " + matriculaEspecialidad;
     }
-    
+
 }

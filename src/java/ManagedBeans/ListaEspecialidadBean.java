@@ -7,6 +7,7 @@ package ManagedBeans;
 
 import Entidades.Medico.Especialidad;
 import Facades.EspecialidadFacade;
+import RN.EspecialidadRNLocal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -27,7 +28,7 @@ public class ListaEspecialidadBean {
      * Creates a new instance of ListaEspecialidadBean
      */
     @EJB
-    private EspecialidadFacade especialidadFacade;
+    private EspecialidadRNLocal especialidadFacade;
     private List<Especialidad> especialidades;
     private List <SelectItem> lstSIEspecialidad;
 
@@ -39,14 +40,6 @@ public class ListaEspecialidadBean {
         this.lstSIEspecialidad = lstSIEspecialidad;
     }
     
-
-    public EspecialidadFacade getEspecialidadFacade() {
-        return especialidadFacade;
-    }
-
-    public void setEspecialidadFacade(EspecialidadFacade especialidadFacade) {
-        this.especialidadFacade = especialidadFacade;
-    }
 
     public List<Especialidad> getEspecialidades() {
         return especialidades;
