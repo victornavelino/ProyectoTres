@@ -6,15 +6,13 @@
 package Facades;
 
 import Entidades.Medico.Especialidad;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
- * @author nago
+ * @author franco
  */
 @Stateless
 public class EspecialidadFacade extends AbstractFacade<Especialidad> {
@@ -29,9 +27,5 @@ public class EspecialidadFacade extends AbstractFacade<Especialidad> {
     public EspecialidadFacade() {
         super(Especialidad.class);
     }
-    public List<Especialidad> buscarEspecialidad(String especialidad){
-        Query q =em.createQuery("SELECT e FROM Especialidad e WHERE e.nombreEspecialidad LIKE :especialidad");
-        q.setParameter("especialidad","%"+especialidad+"%");
-        return q.getResultList();
-    }
+    
 }

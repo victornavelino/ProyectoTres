@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EspecializacionViewDlg" widgetVar="EspecializacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEspecializacionTitle}">
+            <h:form id="EspecializacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_id}"/>
+                        <h:outputText value="#{especializacionController.selected.id}" title="#{bundle.ViewEspecializacionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_matriculaEspecialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.ViewEspecializacionTitle_matriculaEspecialidad}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaMatriculacion}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.ViewEspecializacionTitle_fechaMatriculacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaVencimiento}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.ViewEspecializacionTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_libro}"/>
+                        <h:outputText value="#{especializacionController.selected.libro}" title="#{bundle.ViewEspecializacionTitle_libro}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_folio}"/>
+                        <h:outputText value="#{especializacionController.selected.folio}" title="#{bundle.ViewEspecializacionTitle_folio}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_unidadFormadora}"/>
+                        <h:outputText value="#{especializacionController.selected.unidadFormadora}" title="#{bundle.ViewEspecializacionTitle_unidadFormadora}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaRevision}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaRevision}" title="#{bundle.ViewEspecializacionTitle_fechaRevision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaVencimientoRevision}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.ViewEspecializacionTitle_fechaVencimientoRevision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_medico}"/>
+                        <h:outputText value="#{especializacionController.selected.medico}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.especialidad}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EspecializacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
