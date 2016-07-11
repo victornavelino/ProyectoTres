@@ -140,6 +140,7 @@ public class MedicoBean {
         String sMensaje = "";
         FacesMessage fm;
         FacesMessage.Severity severity = null;
+        System.out.println("ENTRO CREAR ALTA MEDICO");
         try {
             //this.getUsuario().setPassword(Encrypter.encriptar(this.getUsuario().getPassword()));
 
