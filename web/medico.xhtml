@@ -21,8 +21,8 @@
 
             <h3><h:outputText value="Datos de Profesional Medico"/></h3>
             <h:inputHidden value="#{medicoBean.medico.id}" />
-            <h:inputHidden value="#{medicoBean.getiActionBtnSelect}"/>
-            <h:inputHidden value="#{medicoBean.getbCamposSoloLectura}"/>
+            <h:inputHidden value="#{medicoBean.tipoOperacion}"/>
+            <h:inputHidden value="#{medicoBean.bCamposSoloLectura}"/>
 
             <p:panel id="pPri">
 
@@ -77,9 +77,9 @@
                     <p:commandButton id="btnSalir"
                                      value="Salir"  
                                      actionListener="#{usuarioBean.limpiar()}"
-                                     oncomplete="PF('dlgUsuario').hide()"
+                                     oncomplete="PF('dlgMedico').hide()"
                                      icon="ui-icon-cancel"
-                                     update=":frmPri:dUsuario, :frmPri:dtUsuario"
+                                     update=":frmPri:dMedico, :frmPri:dtMedico"
                                      styleClass="boton"/>
 
                 </div>
@@ -91,7 +91,7 @@
 
         <!--TABLA NIVEL -->
 
-        <h2> Usuarios</h2>
+        <h2> Profesionales Medicos</h2>
 
 
         <p>
@@ -99,9 +99,9 @@
             <p:commandButton id="cbCreate"
                              value="Nuevo" 
                              icon="ui-icon-circle-plus" 
-                             oncomplete="PF('dlgUsuario').show()"
+                             oncomplete="PF('dlgMedico').show()"
                              actionListener="#{usuarioBean.setBtnSelect}"
-                             update=":frmPri:dtUsuario, dUsuario"
+                             update=":frmPri:dtMedico, dMedico"
                              />
         </p> 
 
@@ -117,51 +117,51 @@
                 <p:commandButton id="cbEdit"
                                  title="Editar"
                                  icon="ui-icon-pencil" 
-                                 update=":frmPri:dUsuario"
-                                 oncomplete="PF('dlgUsuario').show();"
-                                 actionListener="#{usuarioBean.setBtnSelect}"
+                                 update=":frmPri:dMedico"
+                                 oncomplete="PF('dlgMedico').show();"
+                                 actionListener="#{medicoBean.setBtnSelect}"
                                  process="@form">                    
 
-                    <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}"/> 
+                    <f:setPropertyActionListener value="#{item}" target="#{medicoBean.medico}"/> 
 
                 </p:commandButton>
 
                 <p:commandButton id="cbDelete"
                                  title="Eliminar"
                                  icon="ui-icon-circle-close" 
-                                 update=":frmPri:dUsuario"
-                                 oncomplete="PF('dlgUsuario').show();"
-                                 actionListener="#{usuarioBean.setBtnSelect}">
-                    <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}"/> 
+                                 update=":frmPri:dMedico"
+                                 oncomplete="PF('dlgMedico').show();"
+                                 actionListener="#{medicoBean.setBtnSelect}">
+                    <f:setPropertyActionListener value="#{item}" target="#{medicoBean.medico}"/> 
 
                 </p:commandButton>
 
             </p:column>
             <p:column 
-                filterBy="#{item.nombre}"
+                filterBy="#{item.persona.nombre}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
                     <h:outputText value="Nombre"/>
                 </f:facet>
-                <h:outputText value="#{item.nombre}"/>
+                <h:outputText value="#{item.persona.nombre}"/>
             </p:column>
 
             <p:column
-                filterBy="#{item.apellido}"
+                filterBy="#{item.persona.apellido}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
                     <h:outputText value="Apellido"/>
                 </f:facet>
-                <h:outputText value="#{item.apellido}"/>
+                <h:outputText value="#{item.persona.apellido}"/>
             </p:column>
 
             <p:column
-                filterBy="#{item.usuario}"
+                filterBy="#{item.matriculaProfesional}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
-                    <h:outputText value="Usuario"/>
+                    <h:outputText value="Matricula"/>
                 </f:facet>
-                <h:outputText value="#{item.usuario}"/>
+                <h:outputText value="#{item.matriculaProfesional}"/>
             </p:column>
 
         </p:dataTable>
