@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 template="./Templates/adminTemplate.xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:b="http://bootsfaces.net/ui"
+                 >
+
+
+
+    <ui:define name="content">
+
+        <!--Inicio Dialogo Usuario ABM -->
+
+        <p:dialog id="dMedico"
+                  widgetVar="dlgMedico"
+                  closable="true" >
+
+            <h3><h:outputText value="Datos de Profesional Medico"/></h3>
+            <h:inputHidden value="#{medicoBean.medico.id}" />
+            <h:inputHidden value="#{medicoBean.getiActionBtnSelect}"/>
+            <h:inputHidden value="#{medicoBean.getbCamposSoloLectura}"/>
+
+            <p:panel id="pPri">
+
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel value="Nombre:" for="itNombre" />
+                    <p:inputText id="itNombre" 
+                                 value="#{medicoBean.medico.persona.nombre}"
+                                 title="Nombre"
+                                 size="50"
+                                 maxlength="100"/>
+
+                    <p:outputLabel value="Apellido:" for="itApellido" />
+                    <p:inputText id="itApellido" 
+                                 value="#{medicoBean.medico.persona.apellido}" 
+                                 title="Apellido" 
+                                 size="50"
+                                 maxlength="100"/>
+
+
+                    <p:outputLabel value="Cuil" for="itCuil" />
+                    <p:inputMask id="itCuil"
+                                 mask="99-99999999-9"
+                                 value="#{medicoBean.medico.persona.cuil}" 
+                                 title="Cuil" />
+
+                    <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
+                    <p:calendar id="caFechaNacimiento" 
+                                value="#{medicoBean.medico.persona.fechaNacimiento}" 
+                                title="FechaNacimiento:" 
+                                />
+
+                </h:panelGrid>
+
+
+                <div style=" float: left;">
+                    <p:messages autoUpdate="true"/>
+                </div>
+
+                <div style="clear: both;"/>
+
+                <div class="divboton">
+
+                    <p:commandButton id="btnAction"
+                                     value=" " 
+                                     actionListener="#{medicoBean.actionBtn}" 
+                                     update=":frmPri:pPri, :frmPri:dtMedico, @this"
+                                     binding="#{usuarioBean.cbAction}"
+                                     styleClass="boton"/>
+
+
+                    <p:commandButton id="btnSalir"
+                                     value="Salir"  
+                                     actionListener="#{usuarioBean.limpiar()}"
+                                     oncomplete="PF('dlgUsuario').hide()"
+                                     icon="ui-icon-cancel"
+                                     update=":frmPri:dUsuario, :frmPri:dtUsuario"
+                                     styleClass="boton"/>
+
+                </div>
+            </p:panel>
+
+        </p:dialog>
+
+        <!--Fin  Dialogo Usuario ABM -->
+
+        <!--TABLA NIVEL -->
+
+        <h2> Usuarios</h2>
+
+
+        <p>
+
+            <p:commandButton id="cbCreate"
+                             value="Nuevo" 
+                             icon="ui-icon-circle-plus" 
+                             oncomplete="PF('dlgUsuario').show()"
+                             actionListener="#{usuarioBean.setBtnSelect}"
+                             update=":frmPri:dtUsuario, dUsuario"
+                             />
+        </p> 
+
+        <p:dataTable id="dtMedico"
+                     value="#{listaMedicoBean.medicos}"
+                     var="item"
+                     style="overflow-x: auto;"
+                     paginator="true"
+                     rows="20"
+                     >
+
+            <p:column width="100">
+                <p:commandButton id="cbEdit"
+                                 title="Editar"
+                                 icon="ui-icon-pencil" 
+                                 update=":frmPri:dUsuario"
+                                 oncomplete="PF('dlgUsuario').show();"
+                                 actionListener="#{usuarioBean.setBtnSelect}"
+                                 process="@form">                    
+
+                    <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}"/> 
+
+                </p:commandButton>
+
+                <p:commandButton id="cbDelete"
+                                 title="Eliminar"
+                                 icon="ui-icon-circle-close" 
+                                 update=":frmPri:dUsuario"
+                                 oncomplete="PF('dlgUsuario').show();"
+                                 actionListener="#{usuarioBean.setBtnSelect}">
+                    <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}"/> 
+
+                </p:commandButton>
+
+            </p:column>
+            <p:column 
+                filterBy="#{item.nombre}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Nombre"/>
+                </f:facet>
+                <h:outputText value="#{item.nombre}"/>
+            </p:column>
+
+            <p:column
+                filterBy="#{item.apellido}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Apellido"/>
+                </f:facet>
+                <h:outputText value="#{item.apellido}"/>
+            </p:column>
+
+            <p:column
+                filterBy="#{item.usuario}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Usuario"/>
+                </f:facet>
+                <h:outputText value="#{item.usuario}"/>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
