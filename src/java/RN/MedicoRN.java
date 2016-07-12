@@ -36,4 +36,9 @@ public class MedicoRN implements MedicoRNLocal {
         return q.getResultList();
     }
 
+    @Override
+    public List<Medico> buscarTodos() {
+        return facade.findAll();
+    }
+
 }

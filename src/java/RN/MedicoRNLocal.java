@@ -18,5 +18,6 @@ import javax.ejb.Local;
 public interface MedicoRNLocal {
 
     public List<Medico> buscarMedicosEspecialidad(Especialidad especialidad);
+    public List<Medico> buscarTodos();
     
 }

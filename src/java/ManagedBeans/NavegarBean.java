@@ -18,8 +18,8 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class NavegarBean {
 
-   @ManagedProperty(value = "#{usuarioLstBean}")
-   private UsuarioLstBean usuarioLstBean;
+    @ManagedProperty(value = "#{usuarioLstBean}")
+    private UsuarioLstBean usuarioLstBean;
 //    @EJB
 //    private UsuarioFacade usuarioFacade;
 
@@ -35,7 +35,7 @@ public class NavegarBean {
      * Creates a new instance of NavegarBean
      */
     public NavegarBean() {
-    usuarioLstBean = new UsuarioLstBean();
+        usuarioLstBean = new UsuarioLstBean();
     }
 
     public String frmUsuario() {
@@ -45,7 +45,12 @@ public class NavegarBean {
     public String frmPagosMedicos() {
         return "pagoMedico.xhtml?faces-redirect=true";
     }
-    public String frmConsultas(){
+
+    public String frmConsultas() {
         return "consulta.xhtml?faces-redirect=true";
+    }
+
+    public String frmMedicos() {
+        return "medico.xhtml?faces-redirect=true";
     }
 }

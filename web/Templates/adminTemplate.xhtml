@@ -177,12 +177,12 @@
 
 
 
-                
-                
+
+
                 <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="index.xhtml"  brandImg="./Imagenes/logochico.png" >
-<br/><br/>
+                    <br/><br/>
                     <b:navbarLinks>
-                        
+
                         <b:dropMenu value="Gestiones"> 
 
                             <b:navLink value="Usuarios" iconAwesome="user" href="#{navegarBean.frmUsuario()}"></b:navLink>
@@ -192,9 +192,12 @@
 
                             </b:navLink>
                         </b:dropMenu>
-                        
+                        <b:dropMenu value="Profesionales">
+                            <b:navLink value="Medicos" iconAwesome="heartbeat" href="#{navegarBean.frmMedicos()}"></b:navLink>
+                            <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="#{navegarBean.frmMedicos()}"></b:navLink>
+                        </b:dropMenu> 
                         <b:dropMenu value="Consultas">
-                            <b:navLink value="Consultas" iconAwesome="user" href="#{navegarBean.frmConsultas()}"></b:navLink>
+                            <b:navLink value="Consultas" iconAwesome="search" href="#{navegarBean.frmConsultas()}"></b:navLink>
                         </b:dropMenu>
 
 
@@ -204,10 +207,10 @@
                     <b:navbarLinks pull="right"> 
                         <b:iconAwesome name="user" size="3x"></b:iconAwesome>
                         <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}" >  
-                            <b:navLink  value="Cerrar Sesión" href="logout.xhtml" iconAwesome="user" ></b:navLink>                               
+                            <b:navLink  value="Cerrar Sesión" href="logout.xhtml" iconAwesome="sign-out" ></b:navLink>                               
                         </b:dropMenu> 
                     </b:navbarLinks>
-                
+
                 </b:navBar> 
 
                 <b:panel>

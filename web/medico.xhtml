@@ -24,7 +24,7 @@
             <h:inputHidden value="#{medicoBean.tipoOperacion}"/>
             <h:inputHidden value="#{medicoBean.bCamposSoloLectura}"/>
 
-            <p:panel id="pPri">
+            <p:panel id="pPri" header="Datos Personales" >
 
                 <h:panelGrid columns="2">
 
@@ -54,36 +54,42 @@
                                 value="#{medicoBean.medico.persona.fechaNacimiento}" 
                                 title="FechaNacimiento:" 
                                 />
+                    <p:outputLabel value="Matricula" for="imMatricula" />
+                    <p:inputMask id="imMatricula" 
+                                 value="#{medicoBean.medico.matriculaProfesional}" 
+                                 title="Matricula"
+                                 mask="9999"
+                                 size="4"
+                                 maxlength="4"/>
 
                 </h:panelGrid>
 
-
-                <div style=" float: left;">
-                    <p:messages autoUpdate="true"/>
-                </div>
-
-                <div style="clear: both;"/>
-
-                <div class="divboton">
-
-                    <p:commandButton id="btnAction"
-                                     value=" " 
-                                     actionListener="#{medicoBean.actionBtn}" 
-                                     update=":frmPri:pPri, :frmPri:dtMedico, @this"
-                                     binding="#{usuarioBean.cbAction}"
-                                     styleClass="boton"/>
-
-
-                    <p:commandButton id="btnSalir"
-                                     value="Salir"  
-                                     actionListener="#{usuarioBean.limpiar()}"
-                                     oncomplete="PF('dlgMedico').hide()"
-                                     icon="ui-icon-cancel"
-                                     update=":frmPri:dMedico, :frmPri:dtMedico"
-                                     styleClass="boton"/>
-
-                </div>
             </p:panel>
+            <div style=" float: left;">
+                <p:messages autoUpdate="true"/>
+            </div>
+            <div style="clear: both;"/>
+
+            <div class="divboton">
+
+                <p:commandButton id="btnAction"
+                                 value=" " 
+                                 actionListener="#{medicoBean.actionBtn}" 
+                                 update=":frmPri:pPri, :frmPri:dtMedico, @this"
+                                 binding="#{medicoBean.cbAction}"
+                                 styleClass="boton"/>
+
+
+                <p:commandButton id="btnSalir"
+                                 value="Salir"  
+                                 actionListener="#{medicoBean.limpiar()}"
+                                 oncomplete="PF('dlgMedico').hide()"
+                                 icon="ui-icon-cancel"
+                                 update=":frmPri:dMedico, :frmPri:dtMedico"
+                                 styleClass="boton"/>
+
+            </div>
+
 
         </p:dialog>
 
@@ -100,7 +106,7 @@
                              value="Nuevo" 
                              icon="ui-icon-circle-plus" 
                              oncomplete="PF('dlgMedico').show()"
-                             actionListener="#{usuarioBean.setBtnSelect}"
+                             actionListener="#{medicoBean.setBtnSelect}"
                              update=":frmPri:dtMedico, dMedico"
                              />
         </p> 
