@@ -62,8 +62,8 @@ public class ListaMedicoBean {
 
     }
     public void cargarMedicos(){
-        System.out.println("entroo cargar medicoos");
+
     this.setMedicos(medicoFacade.buscarTodos());
-        System.out.println("MEDICOS: "+this.getMedicos());
+
 }
 }

@@ -5,7 +5,7 @@
  */
 package Facades;
 
-import Entidades.Localidad.Localidad;
+import Entidades.Localidad.Pais;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author nago
  */
 @Stateless
-public class LocalidadFacade extends AbstractFacade<Localidad> {
+public class PaisFacade extends AbstractFacade<Pais> {
     @PersistenceContext(unitName = "ProyectoColegioPU")
     private EntityManager em;
 
@@ -24,10 +24,8 @@ public class LocalidadFacade extends AbstractFacade<Localidad> {
         return em;
     }
 
-    public LocalidadFacade() {
-        super(Localidad.class);
+    public PaisFacade() {
+        super(Pais.class);
     }
-
-
     
 }

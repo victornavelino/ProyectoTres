@@ -12,6 +12,11 @@
 
 
     <ui:define name="content">
+        
+        
+
+        <ui:include src="DomicilioDlg.xhtml"/>
+
 
         <!--Inicio Dialogo Usuario ABM -->
 
@@ -30,14 +35,14 @@
 
                     <p:outputLabel value="Nombre:" for="itNombre" />
                     <p:inputText id="itNombre" 
-                                 value="#{medicoBean.medico.persona.nombre}"
+                                 value="#{personaBean.persona.nombre}"
                                  title="Nombre"
                                  size="50"
                                  maxlength="100"/>
 
                     <p:outputLabel value="Apellido:" for="itApellido" />
                     <p:inputText id="itApellido" 
-                                 value="#{medicoBean.medico.persona.apellido}" 
+                                 value="#{personaBean.persona.apellido}" 
                                  title="Apellido" 
                                  size="50"
                                  maxlength="100"/>
@@ -46,12 +51,12 @@
                     <p:outputLabel value="Cuil" for="itCuil" />
                     <p:inputMask id="itCuil"
                                  mask="99-99999999-9"
-                                 value="#{medicoBean.medico.persona.cuil}" 
+                                 value="#{personaBean.persona.cuil}" 
                                  title="Cuil" />
 
                     <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
                     <p:calendar id="caFechaNacimiento" 
-                                value="#{medicoBean.medico.persona.fechaNacimiento}" 
+                                value="#{personaBean.persona.fechaNacimiento}" 
                                 title="FechaNacimiento:" 
                                 />
                     <p:outputLabel value="Matricula" for="imMatricula" />
@@ -63,6 +68,42 @@
                                  maxlength="4"/>
 
                 </h:panelGrid>
+                 <br></br>
+                    <h:panelGrid columns="1" 
+                                 width="720"
+                                 >
+
+                        <p:panel header="Domicilio"
+                                 style="height: 180px;width: 600px">
+                            <h:panelGrid columns="2" width="550">
+                                <p:commandButton id="btnDomicilioMedico" 
+                                                 value="Cargar Datos"
+                                                 oncomplete="PF('dgDomicilio').show();"
+                                                 actionListener="#{domicilioBean.definirActionBoton}"
+                                                 icon="ui-icon-disk"
+                                                 >
+                                    <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+
+                                </p:commandButton> 
+
+                                <p:panel id="pnDomicilio" >
+                                    <h:outputText  value="Localidad:  "/>
+                                    <h:outputText  value="#{domicilioBean.domicilio.localidad}"/> <br></br>
+                                    <h:outputText  value="Barrio:  "/>
+                                    <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
+                                    <h:outputText  value="Calle:  "/>
+                                    <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
+                                    <h:outputText  value="Numero:  "/>
+                                    <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                </p:panel>
+                            </h:panelGrid>
+                        </p:panel>
+
+                    </h:panelGrid>
+                    <br></br> 
+                        
+
+                    
 
             </p:panel>
             <div style=" float: left;">
