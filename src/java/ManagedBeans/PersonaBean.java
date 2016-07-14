@@ -10,15 +10,13 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author nago
  */
-@ManagedBean(name = "personaBean")
-@SessionScoped
+@Named(value = "personaBean")
+@RequestScoped
 public class PersonaBean implements Serializable{
 
     /**

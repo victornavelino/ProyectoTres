@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -29,6 +30,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseEvent;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.context.RequestContext;
 
@@ -36,9 +38,9 @@ import org.primefaces.context.RequestContext;
  *
  * @author hugo
  */
-@ManagedBean
-@SessionScoped
-public class DomicilioBean implements Serializable {
+@Named(value = "domicilioBean")
+@RequestScoped
+public class DomicilioBean  {
 
     @EJB
     private DomicilioRNLocal domicilioRNLocal;

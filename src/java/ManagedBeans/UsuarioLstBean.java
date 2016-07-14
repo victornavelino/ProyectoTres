@@ -6,24 +6,23 @@ package ManagedBeans;
 
 import Entidades.Usuario.Usuario;
 import Facades.UsuarioFacade;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
 
 /**
  *
  * @author vouilloz
  */
-@ManagedBean
+@Named(value = "usuarioLstBean")
 @SessionScoped
-public class UsuarioLstBean {
+public class UsuarioLstBean implements Serializable {
 
     @EJB
     private UsuarioFacade usuarioFacade;//hacemos la referencia para poder utilizar el metodo findall

@@ -12,11 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author vouilloz
  */
-@ManagedBean
+@Named(value = "loginBean")
 @RequestScoped
 public class LoginBean {
 
@@ -35,9 +35,9 @@ public class LoginBean {
     private String password;
     private String contrasena;
 
-    @ManagedProperty(value = "#{usuarioLogerBean}")
+    @Inject
     private UsuarioLogerBean usuarioLogerBean;
-    @ManagedProperty(value = "#{sessionControlerBean}")
+    @Inject
     private SessionControlerBean sessionControlerBean;
     @EJB
     private UsuarioFacade usuarioFacade;

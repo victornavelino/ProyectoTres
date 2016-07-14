@@ -9,26 +9,25 @@ import Entidades.Medico.Medico;
 import Entidades.Persona.Domicilio;
 import Entidades.Persona.Persona;
 import Facades.MedicoFacade;
-import Recursos.Encrypter;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import org.primefaces.component.commandbutton.CommandButton;
 
 /**
  *
  * @author nago
  */
-@ManagedBean(name = "medicoBean")
-@RequestScoped
-public class MedicoBean implements Serializable {
+@Named(value = "medicoBean")
+@SessionScoped
+public class MedicoBean implements Serializable{
 
     /**
      * Creates a new instance of MedicoBean
@@ -39,11 +38,11 @@ public class MedicoBean implements Serializable {
     private CommandButton cbAction;
     @EJB
     private MedicoFacade medicoFacade;
-    @ManagedProperty("#{listaMedicoBean}")
+    @Inject
     private ListaMedicoBean listaMedicoBean;
-    @ManagedProperty("#{domicilioBean}")
+    @Inject
     private DomicilioBean domicilioBean;
-    @ManagedProperty("#{personaBean}")
+    @Inject
     private PersonaBean personaBean;
 
     public MedicoBean() {
@@ -161,6 +160,8 @@ public class MedicoBean implements Serializable {
             this.getCbAction().setValue("Eliminar");
 
         } else if (btnSelect.getId().equals("cbEdit")) {
+//            System.out.println("PERSONAAA : "+this.getMedico().getPersona());
+//            System.out.println("MEDICOID : "+this.getMedico().getId());
             this.getPersonaBean().setPersona(this.getMedico().getPersona());
             this.setTipoOperacion("Modificación");
             this.getCbAction().setValue("Modificar");
@@ -175,15 +176,11 @@ public class MedicoBean implements Serializable {
         FacesMessage.Severity severity = null;
         System.out.println("ENTRO CREAR ALTA MEDICO");
         try {
-            //this.getUsuario().setPassword(Encrypter.encriptar(this.getUsuario().getPassword()));
             this.getMedico().setPersona(personaBean.getPersona());
             this.getMedico().getPersona().setDomicilio(domicilioBean.getDomicilio());
             medicoFacade.create(this.getMedico());
             sMensaje = "Insertado correctamente";
             severity = FacesMessage.SEVERITY_INFO;
-            //agregar a la lista
-            // this.getUsuarioLstBean().getLstUsuario().add(this.getUsuario());
-            //limíar campos
             this.limpiar();
 
         } catch (Exception ex) {

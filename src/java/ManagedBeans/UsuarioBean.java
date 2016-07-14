@@ -10,25 +10,25 @@ import Facades.UsuarioFacade;
 import Recursos.Encrypter;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.primefaces.component.commandbutton.CommandButton;
 
 /**
  *
  * @author AFerSor
  */
-@ManagedBean
+@Named(value = "usuarioBean")
 @RequestScoped
 public class UsuarioBean implements Serializable {
 
     @EJB
     private UsuarioFacade usuarioFacade;
-    @ManagedProperty("#{usuarioLstBean}")
+    @Inject
     private UsuarioLstBean usuarioLstBean;
     private Usuario usuario;
     private String sConfirmarContrasena;
