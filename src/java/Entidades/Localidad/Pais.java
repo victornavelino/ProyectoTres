@@ -9,44 +9,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  *
- * @author carlos
+ * @author hugo
  */
 @Entity
-@Table(name = "localidad_provincia")
-
-public class Provincia implements Serializable {
+@Table(name = "localidad_pais")
+public class Pais implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcion;
-    @OneToOne
-    private Pais pais;
-
-    public Provincia() {
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
-    
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public Long getId() {
         return id;
@@ -54,6 +31,14 @@ public class Provincia implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @Override
@@ -66,10 +51,10 @@ public class Provincia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Provincia)) {
+        if (!(object instanceof Pais)) {
             return false;
         }
-        Provincia other = (Provincia) object;
+        Pais other = (Pais) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -78,7 +63,7 @@ public class Provincia implements Serializable {
 
     @Override
     public String toString() {
-        return descripcion;
+        return this.descripcion;
     }
 
 }

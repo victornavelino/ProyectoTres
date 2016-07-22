@@ -6,16 +6,19 @@
 package ManagedBeans;
 
 import Entidades.Medico.Medico;
+import Entidades.Persona.Domicilio;
 import Entidades.Persona.Persona;
 import Facades.MedicoFacade;
-import Recursos.Encrypter;
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import org.primefaces.component.commandbutton.CommandButton;
 
 /**
@@ -23,8 +26,8 @@ import org.primefaces.component.commandbutton.CommandButton;
  * @author nago
  */
 @Named(value = "medicoBean")
-@RequestScoped
-public class MedicoBean {
+@SessionScoped
+public class MedicoBean implements Serializable{
 
     /**
      * Creates a new instance of MedicoBean
@@ -35,12 +38,31 @@ public class MedicoBean {
     private CommandButton cbAction;
     @EJB
     private MedicoFacade medicoFacade;
-    @ManagedProperty("#{listaMedicoBean}")
+    @Inject
     private ListaMedicoBean listaMedicoBean;
+    @Inject
+    private DomicilioBean domicilioBean;
+    @Inject
+    private PersonaBean personaBean;
 
     public MedicoBean() {
-           medico = new Medico();
-           medico.setPersona(new Persona());
+
+    }
+
+    public PersonaBean getPersonaBean() {
+        return personaBean;
+    }
+
+    public void setPersonaBean(PersonaBean personaBean) {
+        this.personaBean = personaBean;
+    }
+
+    public DomicilioBean getDomicilioBean() {
+        return domicilioBean;
+    }
+
+    public void setDomicilioBean(DomicilioBean domicilioBean) {
+        this.domicilioBean = domicilioBean;
     }
 
     public MedicoFacade getMedicoFacade() {
@@ -58,11 +80,11 @@ public class MedicoBean {
     public void setListaMedicoBean(ListaMedicoBean listaMedicoBean) {
         this.listaMedicoBean = listaMedicoBean;
     }
-    
+
     public Medico getMedico() {
         return medico;
     }
-   
+
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
@@ -89,6 +111,13 @@ public class MedicoBean {
 
     public void setCbAction(CommandButton cbAction) {
         this.cbAction = cbAction;
+    }
+
+    @PostConstruct
+    private void inicializar() {
+        medico = new Medico();
+        //medico.setPersona(new Persona());
+        //medico.getPersona().setDomicilio(new Domicilio());
     }
 
     public void actionBtn() {
@@ -120,6 +149,9 @@ public class MedicoBean {
         if (btnSelect.getId().equals("cbCreate")) {
             this.setTipoOperacion("Alta");
             this.getCbAction().setValue("Guardar");
+            this.setMedico(new Medico());
+            this.getMedico().setPersona(new Persona());
+            this.getMedico().getPersona().setDomicilio(new Domicilio());
 
         } else if (btnSelect.getId().equals("cbDelete")) {
             this.setTipoOperacion("Borrado");
@@ -128,7 +160,9 @@ public class MedicoBean {
             this.getCbAction().setValue("Eliminar");
 
         } else if (btnSelect.getId().equals("cbEdit")) {
-
+//            System.out.println("PERSONAAA : "+this.getMedico().getPersona());
+//            System.out.println("MEDICOID : "+this.getMedico().getId());
+            this.getPersonaBean().setPersona(this.getMedico().getPersona());
             this.setTipoOperacion("Modificación");
             this.getCbAction().setValue("Modificar");
 
@@ -142,14 +176,11 @@ public class MedicoBean {
         FacesMessage.Severity severity = null;
         System.out.println("ENTRO CREAR ALTA MEDICO");
         try {
-            //this.getUsuario().setPassword(Encrypter.encriptar(this.getUsuario().getPassword()));
-
+            this.getMedico().setPersona(personaBean.getPersona());
+            this.getMedico().getPersona().setDomicilio(domicilioBean.getDomicilio());
             medicoFacade.create(this.getMedico());
             sMensaje = "Insertado correctamente";
             severity = FacesMessage.SEVERITY_INFO;
-            //agregar a la lista
-            // this.getUsuarioLstBean().getLstUsuario().add(this.getUsuario());
-            //limíar campos
             this.limpiar();
 
         } catch (Exception ex) {
@@ -170,27 +201,25 @@ public class MedicoBean {
         FacesMessage fm;
         FacesMessage.Severity severity = null;
         try {
+            this.getMedico().setPersona(personaBean.getPersona());
+            this.getMedico().getPersona().setDomicilio(domicilioBean.getDomicilio());
             medicoFacade.edit(this.getMedico());
 
             sMensaje = "El dato fue modificado";
             severity = FacesMessage.SEVERITY_INFO;
 
             //elimino y agrego  a la lista
-            int iPos = this.getListaMedicoBean().getMedicos().indexOf(this.getMedico());
-
-            this.getListaMedicoBean().getMedicos().remove(iPos);
-            this.getListaMedicoBean().getMedicos().add(iPos, this.getMedico());
+//            int iPos = this.getListaMedicoBean().getMedicos().indexOf(this.getMedico());
+//
+//            this.getListaMedicoBean().getMedicos().remove(iPos);
+//            this.getListaMedicoBean().getMedicos().add(iPos, this.getMedico());
+            this.getListaMedicoBean().cargarMedicos();
 
             this.getCbAction().setValue("Editar");
             this.getCbAction().setDisabled(true);
 
         } catch (Exception ex) {
-
-            if (ex.getMessage().trim().toLowerCase().equals("Error al modificar")) {
-                sMensaje = "Error: No se puede eliminar";
-            } else {
-                sMensaje = "Error: " + ex.getMessage();
-            }
+            sMensaje = "Error: No se puede modificar";
 
             severity = FacesMessage.SEVERITY_ERROR;
 

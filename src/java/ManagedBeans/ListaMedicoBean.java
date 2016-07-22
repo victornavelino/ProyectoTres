@@ -11,16 +11,14 @@ import RN.MedicoRNLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-//import javax.enterprise.context.RequestScoped;
+
 
 /**
  *
  * @author hugo
  */
-@ManagedBean
 @Named(value = "listaMedicoBean")
 @RequestScoped
 public class ListaMedicoBean {
@@ -62,8 +60,8 @@ public class ListaMedicoBean {
 
     }
     public void cargarMedicos(){
-        System.out.println("entroo cargar medicoos");
+
     this.setMedicos(medicoFacade.buscarTodos());
-        System.out.println("MEDICOS: "+this.getMedicos());
+
 }
 }

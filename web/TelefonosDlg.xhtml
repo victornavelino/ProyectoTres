@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--Inicio Dialogo Cargar telefonos-->
+
+    <p:dialog id="dTelefonos" 
+              widgetVar="dlgTel" 
+              modal="false" position="top">
+
+
+        <f:facet name="header">  
+            <h:outputText value="Telefonos"/>
+        </f:facet>  
+        <p:panel id="pTelefonos">
+            <table cellpadding="5" cellspacing="5">   
+                <tr>
+                    <td>
+                        <h:outputText value="Tipo"/>                         
+                    </td>
+                    <td>
+                        <p:selectOneMenu id="tipoTelefono" 
+                                         value="#{listadoTelefonosBean.tipotelefono}">
+                            <f:selectItems value="#{listadoTelefonosBean.listaTipoTelefonos}"/>
+                        </p:selectOneMenu>                      
+                    </td>
+                    <td>
+                        <h:outputText value="Numero"/>
+                    </td>
+                    <td>
+                        <p:inputMask id="iNumero"
+                                     label="Numero" 
+                                     value="#{listadoTelefonosBean.telefono.numero}"
+                                     size="70"
+                                     maxlength="100"
+                                     mask="999-9999999"/>
+                    </td>
+                </tr>
+            </table>
+        </p:panel>
+
+
+        <center>
+            <table cellpadding="5" cellspacing="5">
+                <tr>
+                    <td align="center">
+                        <p:commandButton id="btnAction"
+                                         value="Agregar Telefono" 
+                                         action="#{listadoTelefonosBean.actionButton()}"
+                                         binding="#{listadoTelefonosBean.cbActionTelefonos}"
+                                         icon="ui-icon-disk"
+                                         process="dTelefonos"
+                                         />
+                    </td>
+                    <td align="center">
+                        <p:commandButton value="Salir" 
+                                         oncomplete="PF('dlgTel').hide();"/>
+                    </td>
+                </tr>
+            </table>
+        </center> 
+    </p:dialog>
+    <!--Fin Dialogo Cargar telefonos--> 
+
+    <!--Inicio Dialogo Confirmar Borrar telefono-->  
+    <p:confirmDialog id="confirmDialogTel" message="Seguro Desea Eliminar El Telefono Seleccionado?"  
+                     header="Proceso de Eliminacion" severity="alert" widgetVar="confirmationTel">  
+
+        <table cellpadding="5" cellspacing="5" width="350">
+            <tr>
+                <td align="right">
+                    <p:commandButton id="confirmTel" value="Aceptar" oncomplete="PF('confirmationTel').hide()" actionListener="#{docenteBean.quitarTablaTelefonos()}" /> 
+                </td>  
+                <td align="left">
+                    <p:commandButton id="declineTel" value="Cancelar" onclick="PF('confirmationTel').hide()" type="button" />   
+                </td>
+            </tr>
+        </table>
+    </p:confirmDialog> 
+    <!--Fin Dialogo Confirmar Borrar Telefono-->
+</html>

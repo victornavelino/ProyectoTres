@@ -7,6 +7,7 @@ package Entidades.Persona;
 
 import Entidades.Localidad.Localidad;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ public class Domicilio implements Serializable {
     private String dpto;
     private String entreCalles;
     private String referencia;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Localidad localidad;
     private String barrio;
     private String codigoPostal;

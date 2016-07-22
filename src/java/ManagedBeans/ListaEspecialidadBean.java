@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
 
 /**
  *
  * @author nago
  */
-@ManagedBean(name = "listaEspecialidadBean")
+@Named(value = "listaEspecialidadBean")
 @RequestScoped
 public class ListaEspecialidadBean {
 

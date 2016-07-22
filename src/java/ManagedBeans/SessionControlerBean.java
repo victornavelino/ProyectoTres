@@ -4,16 +4,16 @@
  */
 package ManagedBeans;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author vouilloz
  */
-@ManagedBean
+@Named(value = "sessionControlerBean")
 @RequestScoped
 public class SessionControlerBean {
 
