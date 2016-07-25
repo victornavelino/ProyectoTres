@@ -23,7 +23,7 @@
                         <p:outputLabel value="#{bundleusuario.EditUsuarioLabel_password}" for="password" />
                         <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundleusuario.EditUsuarioTitle_password}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundleusuario.Save}" update="display,:frmPri:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundleusuario.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
                     <p:commandButton value="#{bundleusuario.Cancel}" onclick="UsuarioEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

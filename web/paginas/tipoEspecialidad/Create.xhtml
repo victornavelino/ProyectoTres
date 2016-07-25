@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateTipoEspecialidadLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{tipoEspecialidadController.selected.descripcion}" title="#{bundle.CreateTipoEspecialidadTitle_descripcion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{tipoEspecialidadController.create}" value="#{bundle.Save}" update="display,:frmPri:TipoEspecialidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoEspecialidadCreateDialog');"/>
+                    <p:commandButton actionListener="#{tipoEspecialidadController.create}" value="#{bundle.Save}" update="display,:TipoEspecialidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoEspecialidadCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoEspecialidadCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

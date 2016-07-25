@@ -2,7 +2,7 @@
      <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
      <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
                      xmlns:ui="http://java.sun.com/jsf/facelets"
-                      template="../../Templates/adminTemplate.xhtml"
+                      template="../../Templates/paginasTemplate.xhtml"
                       xmlns:p="http://primefaces.org/ui"
                       xmlns:h="http://java.sun.com/jsf/html"
                       xmlns:f="http://java.sun.com/jsf/core"
@@ -54,9 +54,9 @@
                             <h:outputText value="#{item.localidad}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{unidadFormadoraController.prepareCreate}" update=":frmPri:UnidadFormadoraCreateForm" oncomplete="PF('UnidadFormadoraCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:UnidadFormadoraViewForm" oncomplete="PF('UnidadFormadoraViewDialog').show()" disabled="#{empty unidadFormadoraController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:UnidadFormadoraEditForm" oncomplete="PF('UnidadFormadoraEditDialog').show()" disabled="#{empty unidadFormadoraController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{unidadFormadoraController.prepareCreate}" update=":UnidadFormadoraCreateForm" oncomplete="PF('UnidadFormadoraCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UnidadFormadoraViewForm" oncomplete="PF('UnidadFormadoraViewDialog').show()" disabled="#{empty unidadFormadoraController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UnidadFormadoraEditForm" oncomplete="PF('UnidadFormadoraEditDialog').show()" disabled="#{empty unidadFormadoraController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{unidadFormadoraController.destroy}" update=":growl,datalist" disabled="#{empty unidadFormadoraController.selected}"/>
                         </f:facet>
                     </p:dataTable>

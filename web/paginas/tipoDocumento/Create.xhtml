@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateTipoDocumentoLabel_id}" for="id" />
                         <p:inputText id="id" value="#{tipoDocumentoController.selected.id}" title="#{bundle.CreateTipoDocumentoTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{tipoDocumentoController.create}" value="#{bundle.Save}" update="display,:frmPri:TipoDocumentoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoDocumentoCreateDialog');"/>
+                    <p:commandButton actionListener="#{tipoDocumentoController.create}" value="#{bundle.Save}" update="display,:TipoDocumentoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoDocumentoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoDocumentoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

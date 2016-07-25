@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog header="La session esta por finalizar!"
+                  widgetVar="timeoutDialog" 
+                  showEffect="fade" 
+                  hideEffect="fade" 
+                  modal="true"
+                  width="400"
+                  height="200"
+                  closable="false"
+                  draggable="false"
+                  resizable="false" 
+                  position="top"
+                  > 
+            <br/>
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+                <div>Se cerrara la sesion en  <span id="dialog-countdown" style="font-weight:bold"></span> segundos.</div>
+            </p>
+            <br/><br/>
+            <h:outputText value="¿Deseas continuar con la session?"/>
+
+            <center>
+                <p:commandButton value="SI"  oncomplete="resetPageTimer()"/>
+                <p:commandButton value="No"  action="#{sessionControlerBean.cerrarSession()}" oncomplete="redirectLogin()"/>
+            </center>
+
+        </p:dialog>
+
+        <p:dialog header="La session ha expirado!"
+                  widgetVar="dlgFinSession" 
+                  showEffect="fade" 
+                  hideEffect="fade" 
+                  modal="true"
+                  width="400"
+                  height="200"
+                  closable="false"
+                  draggable="false"
+                  resizable="false" 
+                  position="top"
+                  > 
+            <br/>
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+                <div> <h:outputText value="La session termino. "/></div><br/>
+                <a href="index.xhtml">
+                    Presione aca para ingresar nuevamente
+                </a>
+            </p>
+            <br/>
+
+
+        </p:dialog>
+    </ui:composition></html>

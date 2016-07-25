@@ -57,7 +57,7 @@
                         <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
                         <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{medicoController.create}" value="#{bundle.Save}" update="display,:frmPri:MedicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MedicoCreateDialog');"/>
+                    <p:commandButton actionListener="#{medicoController.create}" value="#{bundle.Save}" update="display,:MedicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MedicoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MedicoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -24,7 +24,7 @@
                         <p:outputLabel value="#{bundle.EditDocumentoIdentidadLabel_id}" for="id" />
                         <p:inputText id="id" value="#{documentoIdentidadController.selected.id}" title="#{bundle.EditDocumentoIdentidadTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{documentoIdentidadController.update}" value="#{bundle.Save}" update="display,:frmPri:DocumentoIdentidadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DocumentoIdentidadEditDialog');"/>
+                    <p:commandButton actionListener="#{documentoIdentidadController.update}" value="#{bundle.Save}" update="display,:DocumentoIdentidadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DocumentoIdentidadEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DocumentoIdentidadEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

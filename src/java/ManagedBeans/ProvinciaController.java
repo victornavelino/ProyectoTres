@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -22,50 +23,51 @@ import javax.faces.convert.FacesConverter;
 @ManagedBean(name = "provinciaController")
 @SessionScoped
 public class ProvinciaController implements Serializable {
-    
+
     @EJB
     private Facades.ProvinciaFacade ejbFacade;
     private List<Provincia> items = null;
     private Provincia selected;
-    
+
     public ProvinciaController() {
     }
-    
+
     public Provincia getSelected() {
         return selected;
     }
-    
+
     public void setSelected(Provincia selected) {
         this.selected = selected;
     }
-    
+
     protected void setEmbeddableKeys() {
     }
-    
+
     protected void initializeEmbeddableKey() {
     }
-    
+
     private ProvinciaFacade getFacade() {
         return ejbFacade;
     }
-    
+
     public Provincia prepareCreate() {
         selected = new Provincia();
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public void create() {
+        System.out.println("Prueba");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProvinciaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ProvinciaUpdated"));
     }
-    
+
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ProvinciaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -73,14 +75,14 @@ public class ProvinciaController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public List<Provincia> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -108,18 +110,18 @@ public class ProvinciaController implements Serializable {
             }
         }
     }
-    
+
     public List<Provincia> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-    
+
     public List<Provincia> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     @FacesConverter(forClass = Provincia.class)
     public static class ProvinciaControllerConverter implements Converter {
-        
+
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -129,19 +131,19 @@ public class ProvinciaController implements Serializable {
                     getValue(facesContext.getELContext(), null, "provinciaController");
             return controller.getFacade().find(getKey(value));
         }
-        
+
         java.lang.Long getKey(String value) {
             java.lang.Long key;
             key = Long.valueOf(value);
             return key;
         }
-        
+
         String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-        
+
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -155,7 +157,7 @@ public class ProvinciaController implements Serializable {
                 return null;
             }
         }
-        
+
     }
-    
+
 }

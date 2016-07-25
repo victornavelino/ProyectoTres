@@ -2,7 +2,7 @@
      <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
      <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
                      xmlns:ui="http://java.sun.com/jsf/facelets"
-                      template="../../Templates/adminTemplate.xhtml"
+                      template="../../Templates/paginasTemplate.xhtml"
                       xmlns:p="http://primefaces.org/ui"
                       xmlns:h="http://java.sun.com/jsf/html"
                       xmlns:f="http://java.sun.com/jsf/core"
@@ -42,9 +42,9 @@
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoSocioController.prepareCreate}" update=":frmPri:TipoSocioCreateForm" oncomplete="PF('TipoSocioCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:TipoSocioViewForm" oncomplete="PF('TipoSocioViewDialog').show()" disabled="#{empty tipoSocioController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:TipoSocioEditForm" oncomplete="PF('TipoSocioEditDialog').show()" disabled="#{empty tipoSocioController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoSocioController.prepareCreate}" update=":TipoSocioCreateForm" oncomplete="PF('TipoSocioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoSocioViewForm" oncomplete="PF('TipoSocioViewDialog').show()" disabled="#{empty tipoSocioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoSocioEditForm" oncomplete="PF('TipoSocioEditDialog').show()" disabled="#{empty tipoSocioController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoSocioController.destroy}" update=":growl,datalist" disabled="#{empty tipoSocioController.selected}"/>
                         </f:facet>
                     </p:dataTable>

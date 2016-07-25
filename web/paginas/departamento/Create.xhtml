@@ -23,7 +23,7 @@
                                            itemValue="#{provinciaItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{departamentoController.create}" value="#{bundle.Save}" update="display,:frmPri:DepartamentoListForm:datalist,:growl" oncomplete="handleSubmit(args,'DepartamentoCreateDialog');"/>
+                    <p:commandButton actionListener="#{departamentoController.create}" value="#{bundle.Save}" update="display,:DepartamentoListForm:datalist,:growl" oncomplete="handleSubmit(args,'DepartamentoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DepartamentoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

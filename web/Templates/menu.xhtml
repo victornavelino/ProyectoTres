@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
+            <br/><br/>
+            <b:navbarLinks>
+
+                <b:dropMenu value="Gestiones"> 
+
+                    <b:navLink value="Usuarios" iconAwesome="user" href="/usuario.xhtml?faces-redirect=true"></b:navLink>
+                    <b:navLink  />
+                    <b:navLink value="Departamento" href="/paginas/departamento/List.xhtml" />
+                    <b:navLink value="Localidad" href="/paginas/localidad/List.xhtml" />
+                    <b:navLink value="Provincia" href="/paginas/provincia/List.xhtml" />
+                    <b:navLink value="Especialidad" href="/paginas/especialidad/List.xhtml" />
+                    <b:navLink value="Facultad" href="/paginas/facultad/List.xhtml" />
+                    <b:navLink value="Medico" href="/paginas/medico/List.xhtml" />
+                    <b:navLink value="Organismo" href="/paginas/organismo/List.xhtml" />
+                    <b:navLink value="Tipo de Especialidad" href="/paginas/tipoEspecialidad/List.xhtml" />
+                    <b:navLink value="Tipo de Socio" href="/paginas/tipoSocio/List.xhtml" />
+                    <b:navLink value="Unidad Formadora" href="/paginas/unidadFormadora/List.xhtml" />
+                    <b:navLink value="Correo Electronico" href="/paginas/correoElectronico/List.xhtml" />
+                    <b:navLink value="Documento de Identidad" href="/paginas/documentoIdentidad/List.xhtml" />
+                    <b:navLink value="Domicilio" href="/paginas/domicilio/List.xhtml" />
+                    <b:navLink value="Persona" href="/paginas/persona/List.xhtml" />
+                    <b:navLink value="Sexo" href="/paginas/sexo/List.xhtml" />
+                    <b:navLink value="Telefono" href="/paginas/telefono/List.xhtml" />
+                    <b:navLink value="Tipo de Documento" href="/paginas/tipoDocumento/List.xhtml" />
+                    <b:navLink value="Tipo de Telefono" href="/paginas/tipoTelefono/List.xhtml" />
+
+                </b:dropMenu>
+                <b:dropMenu value="Profesionales">
+                    <b:navLink value="Medicos" iconAwesome="heartbeat" href="/medico.xhtml?faces-redirect=true"></b:navLink>
+                    <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/medico.xhtml?faces-redirect=true"></b:navLink>
+                </b:dropMenu> 
+                <b:dropMenu value="Consultas">
+                    <b:navLink value="Consultas" iconAwesome="search" href="/consulta.xhtml?faces-redirect=true"></b:navLink>
+                </b:dropMenu>
+
+
+
+
+            </b:navbarLinks>
+            <b:navbarLinks pull="right"> 
+                <b:iconAwesome name="user" size="3x"></b:iconAwesome>
+                <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}" >  
+                    <b:navLink  value="Cerrar Sesión" href="logout.xhtml" iconAwesome="sign-out" ></b:navLink>                               
+                </b:dropMenu> 
+            </b:navbarLinks>
+
+        </b:navBar> 
+    </ui:composition></html>

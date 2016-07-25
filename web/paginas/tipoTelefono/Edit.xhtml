@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditTipoTelefonoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{tipoTelefonoController.selected.descripcion}" title="#{bundle.EditTipoTelefonoTitle_descripcion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{tipoTelefonoController.update}" value="#{bundle.Save}" update="display,:frmPri:TipoTelefonoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoTelefonoEditDialog');"/>
+                    <p:commandButton actionListener="#{tipoTelefonoController.update}" value="#{bundle.Save}" update="display,:TipoTelefonoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoTelefonoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoTelefonoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

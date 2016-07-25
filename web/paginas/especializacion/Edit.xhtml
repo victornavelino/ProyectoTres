@@ -50,7 +50,7 @@
                                            itemValue="#{especialidadItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{especializacionController.update}" value="#{bundle.Save}" update="display,:frmPri:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EspecializacionEditDialog');"/>
+                    <p:commandButton actionListener="#{especializacionController.update}" value="#{bundle.Save}" update="display,:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EspecializacionEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EspecializacionEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

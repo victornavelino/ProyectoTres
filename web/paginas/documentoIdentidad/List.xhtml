@@ -2,7 +2,7 @@
      <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
      <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
                      xmlns:ui="http://java.sun.com/jsf/facelets"
-                      template="../../Templates/adminTemplate.xhtml"
+                      template="../../Templates/paginasTemplate.xhtml"
                       xmlns:p="http://primefaces.org/ui"
                       xmlns:h="http://java.sun.com/jsf/html"
                       xmlns:f="http://java.sun.com/jsf/core"
@@ -47,9 +47,9 @@
                             <h:outputText value="#{item.id}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{documentoIdentidadController.prepareCreate}" update=":frmPri:DocumentoIdentidadCreateForm" oncomplete="PF('DocumentoIdentidadCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:DocumentoIdentidadViewForm" oncomplete="PF('DocumentoIdentidadViewDialog').show()" disabled="#{empty documentoIdentidadController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:DocumentoIdentidadEditForm" oncomplete="PF('DocumentoIdentidadEditDialog').show()" disabled="#{empty documentoIdentidadController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{documentoIdentidadController.prepareCreate}" update=":DocumentoIdentidadCreateForm" oncomplete="PF('DocumentoIdentidadCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DocumentoIdentidadViewForm" oncomplete="PF('DocumentoIdentidadViewDialog').show()" disabled="#{empty documentoIdentidadController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DocumentoIdentidadEditForm" oncomplete="PF('DocumentoIdentidadEditDialog').show()" disabled="#{empty documentoIdentidadController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{documentoIdentidadController.destroy}" update=":growl,datalist" disabled="#{empty documentoIdentidadController.selected}"/>
                         </f:facet>
                     </p:dataTable>

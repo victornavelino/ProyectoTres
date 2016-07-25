@@ -29,7 +29,7 @@
                                            itemValue="#{localidadItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{unidadFormadoraController.create}" value="#{bundle.Save}" update="display,:frmPri:UnidadFormadoraListForm:datalist,:growl" oncomplete="handleSubmit(args,'UnidadFormadoraCreateDialog');"/>
+                    <p:commandButton actionListener="#{unidadFormadoraController.create}" value="#{bundle.Save}" update="display,:UnidadFormadoraListForm:datalist,:growl" oncomplete="handleSubmit(args,'UnidadFormadoraCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UnidadFormadoraCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

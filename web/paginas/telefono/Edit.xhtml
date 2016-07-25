@@ -24,7 +24,7 @@
                                            itemValue="#{tipoTelefonoItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{telefonoController.update}" value="#{bundle.Save}" update="display,:frmPri:TelefonoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TelefonoEditDialog');"/>
+                    <p:commandButton actionListener="#{telefonoController.update}" value="#{bundle.Save}" update="display,:TelefonoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TelefonoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TelefonoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

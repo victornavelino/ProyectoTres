@@ -117,6 +117,7 @@
     <h:body>
 
         <f:view contentType="text/html">
+
             <f:event type="preRenderView" listener="#{usuarioLogerBean.navigationStatus()}" />
 
             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
@@ -125,24 +126,25 @@
                       draggable="false" closable="true" position="top">  
                 <p:graphicImage value="/Imagenes/load.gif" />  
             </p:dialog>  
+
             <p:growl id="growl" life="3000" />
 
             <h:form id="frmPri" enctype="multipart/form-data">
 
                 <ui:include src="dialogosSesion.xhtml"/>
 
-
-                <ui:include src="menu.xhtml"/>
-
-                <b:panel>
-                    <ui:insert name="content">Content</ui:insert>
-                </b:panel>
-                <b:navBar>
-                    <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logocolegio.png" alt="" height="70px" align="left" />
-                    </b:navbarLinks>   <b:navbarLinks pull="right"><p> Colegio Medico de Catamarca <br/>Hipolito Irigoyen 1233 
-                            <br/> San Fernando del Valle de Catamarca</p></b:navbarLinks> 
-                </b:navBar>
             </h:form>
+            <ui:include src="menu.xhtml"/>
+
+
+            <b:panel>
+                <ui:insert name="content">Content</ui:insert>
+            </b:panel>
+            <b:navBar>
+                <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logocolegio.png" alt="" height="70px" align="left" />
+                </b:navbarLinks>   <b:navbarLinks pull="right"><p> Colegio Medico de Catamarca <br/>Hipolito Irigoyen 1233 
+                        <br/> San Fernando del Valle de Catamarca</p></b:navbarLinks> 
+            </b:navBar>
         </f:view>
     </h:body>
 

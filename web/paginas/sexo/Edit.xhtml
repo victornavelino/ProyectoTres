@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditSexoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{sexoController.selected.descripcion}" title="#{bundle.EditSexoTitle_descripcion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{sexoController.update}" value="#{bundle.Save}" update="display,:frmPri:SexoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SexoEditDialog');"/>
+                    <p:commandButton actionListener="#{sexoController.update}" value="#{bundle.Save}" update="display,:SexoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SexoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SexoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

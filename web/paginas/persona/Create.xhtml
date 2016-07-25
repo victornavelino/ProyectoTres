@@ -43,7 +43,7 @@
                                            itemValue="#{sexoItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:frmPri:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
+                    <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PersonaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -2,7 +2,7 @@
      <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
      <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
                      xmlns:ui="http://java.sun.com/jsf/facelets"
-                      template="../../Templates/adminTemplate.xhtml"
+                      template="../../Templates/paginasTemplate.xhtml"
                       xmlns:p="http://primefaces.org/ui"
                       xmlns:h="http://java.sun.com/jsf/html"
                       xmlns:f="http://java.sun.com/jsf/core"
@@ -42,9 +42,9 @@
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoTelefonoController.prepareCreate}" update=":frmPri:TipoTelefonoCreateForm" oncomplete="PF('TipoTelefonoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:TipoTelefonoViewForm" oncomplete="PF('TipoTelefonoViewDialog').show()" disabled="#{empty tipoTelefonoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:TipoTelefonoEditForm" oncomplete="PF('TipoTelefonoEditDialog').show()" disabled="#{empty tipoTelefonoController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoTelefonoController.prepareCreate}" update=":TipoTelefonoCreateForm" oncomplete="PF('TipoTelefonoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoTelefonoViewForm" oncomplete="PF('TipoTelefonoViewDialog').show()" disabled="#{empty tipoTelefonoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoTelefonoEditForm" oncomplete="PF('TipoTelefonoEditDialog').show()" disabled="#{empty tipoTelefonoController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoTelefonoController.destroy}" update=":growl,datalist" disabled="#{empty tipoTelefonoController.selected}"/>
                         </f:facet>
                     </p:dataTable>

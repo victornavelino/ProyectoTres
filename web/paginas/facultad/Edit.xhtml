@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditFacultadLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{facultadController.selected.descripcion}" title="#{bundle.EditFacultadTitle_descripcion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{facultadController.update}" value="#{bundle.Save}" update="display,:frmPri:FacultadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacultadEditDialog');"/>
+                    <p:commandButton actionListener="#{facultadController.update}" value="#{bundle.Save}" update="display,:FacultadListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FacultadEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="FacultadEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

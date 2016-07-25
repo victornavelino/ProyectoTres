@@ -31,7 +31,7 @@
                                            itemValue="#{localidadItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{unidadFormadoraController.update}" value="#{bundle.Save}" update="display,:frmPri:UnidadFormadoraListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UnidadFormadoraEditDialog');"/>
+                    <p:commandButton actionListener="#{unidadFormadoraController.update}" value="#{bundle.Save}" update="display,:UnidadFormadoraListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UnidadFormadoraEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UnidadFormadoraEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
