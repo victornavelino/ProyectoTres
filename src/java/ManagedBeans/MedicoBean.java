@@ -26,7 +26,7 @@ import org.primefaces.component.commandbutton.CommandButton;
  * @author nago
  */
 @Named(value = "medicoBean")
-@SessionScoped
+@RequestScoped
 public class MedicoBean implements Serializable{
 
     /**
@@ -149,9 +149,9 @@ public class MedicoBean implements Serializable{
         if (btnSelect.getId().equals("cbCreate")) {
             this.setTipoOperacion("Alta");
             this.getCbAction().setValue("Guardar");
-            this.setMedico(new Medico());
-            this.getMedico().setPersona(new Persona());
-            this.getMedico().getPersona().setDomicilio(new Domicilio());
+//            this.setMedico(new Medico());
+//            this.getMedico().setPersona(new Persona());
+//            this.getMedico().getPersona().setDomicilio(new Domicilio());
 
         } else if (btnSelect.getId().equals("cbDelete")) {
             this.setTipoOperacion("Borrado");
@@ -262,6 +262,7 @@ public class MedicoBean implements Serializable{
 
     public void limpiar() {
         this.setMedico(new Medico());
+        this.personaBean.setPersona(new Persona());
         this.setbCamposSoloLectura(false);
     }//fin limpiar
 

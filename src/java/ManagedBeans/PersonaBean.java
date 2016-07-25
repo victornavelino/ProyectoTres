@@ -35,8 +35,8 @@ public class PersonaBean implements Serializable{
     public PersonaBean() {
         persona=new Persona();
     }
-    @PostConstruct
-    private void inicializar(){
-        persona=new Persona();
-    }
+//    @PostConstruct
+//    private void inicializar(){
+//        persona=new Persona();
+//    }
 }
