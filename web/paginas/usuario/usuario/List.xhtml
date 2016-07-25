@@ -1,21 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<?xml version='1.0' encoding='UTF-8' ?>
+     <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+     <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                     xmlns:ui="http://java.sun.com/jsf/facelets"
+                      template="../../Templates/adminTemplate.xhtml"
+                      xmlns:p="http://primefaces.org/ui"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:b="http://bootsfaces.net/ui"
+                      >
+     <ui:define name="content">
 
-    <ui:composition template="/template.xhtml">
 
+        <h3>
+            <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
+        </h3>
 
-        <ui:define name="title">
-            <h:outputText value="#{bundleusuario.ListUsuarioTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
+        
             <h:form id="UsuarioListForm">
-                <p:panel header="#{bundleusuario.ListUsuarioTitle}">
+                <p:panel header="#{bundle.ListUsuarioTitle}">
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}"
                                  paginator="true"
@@ -29,39 +31,39 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleusuario.ListUsuarioTitle_id}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleusuario.ListUsuarioTitle_apellido}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_apellido}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleusuario.ListUsuarioTitle_nombre}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleusuario.ListUsuarioTitle_usuario}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_usuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.usuario}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleusuario.ListUsuarioTitle_password}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_password}"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleusuario.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleusuario.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleusuario.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleusuario.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":frmPri:UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -72,5 +74,3 @@
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
-
-</html>

@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<?xml version='1.0' encoding='UTF-8' ?>
+     <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+     <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                     xmlns:ui="http://java.sun.com/jsf/facelets"
+                      template="../../Templates/adminTemplate.xhtml"
+                      xmlns:p="http://primefaces.org/ui"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:b="http://bootsfaces.net/ui"
+                      >
+     <ui:define name="content">
 
-    <ui:composition template="/template.xhtml">
 
-
-        <ui:define name="title">
+        <h3>
             <h:outputText value="#{bundle.ListDomicilioTitle}"></h:outputText>
-        </ui:define>
+        </h3>
 
-        <ui:define name="body">
+        
             <h:form id="DomicilioListForm">
                 <p:panel header="#{bundle.ListDomicilioTitle}">
                     <p:dataTable id="datalist" value="#{domicilioController.items}" var="item"
@@ -88,9 +90,9 @@
                             <h:outputText value="#{item.barrio}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{domicilioController.prepareCreate}" update=":DomicilioCreateForm" oncomplete="PF('DomicilioCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DomicilioViewForm" oncomplete="PF('DomicilioViewDialog').show()" disabled="#{empty domicilioController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DomicilioEditForm" oncomplete="PF('DomicilioEditDialog').show()" disabled="#{empty domicilioController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{domicilioController.prepareCreate}" update=":frmPri:DomicilioCreateForm" oncomplete="PF('DomicilioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:DomicilioViewForm" oncomplete="PF('DomicilioViewDialog').show()" disabled="#{empty domicilioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:DomicilioEditForm" oncomplete="PF('DomicilioEditDialog').show()" disabled="#{empty domicilioController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{domicilioController.destroy}" update=":growl,datalist" disabled="#{empty domicilioController.selected}"/>
                         </f:facet>
                     </p:dataTable>
@@ -102,5 +104,3 @@
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
-
-</html>

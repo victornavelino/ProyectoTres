@@ -9,9 +9,13 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./resources/css/personalizado.css" rel="stylesheet" type="text/css" />
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="personalizado.css"/>
 
+        <h:outputScript library="js" name="jsfcrud.js"/>
         <title>Colegio Medico de Catamarca</title>
+        <base href="#{request.requestURL.substring(0, request.requestURL.length() - request.requestURI.length())}#{request.contextPath}/" />
+
     </h:head>
 
     <script type="text/javascript">
@@ -111,6 +115,7 @@
     <h:outputScript library="js" name="calendar_es.js" />
 
     <h:body>
+
         <f:view contentType="text/html">
             <f:event type="preRenderView" listener="#{usuarioLogerBean.navigationStatus()}" />
 
@@ -118,8 +123,9 @@
 
             <p:dialog modal="true" widgetVar="statusDialog" header="Estado"   
                       draggable="false" closable="true" position="top">  
-                <p:graphicImage value="./Imagenes/load.gif" />  
+                <p:graphicImage value="/Imagenes/load.gif" />  
             </p:dialog>  
+            <p:growl id="growl" life="3000" />
 
             <h:form id="frmPri" enctype="multipart/form-data">
 
@@ -179,25 +185,40 @@
 
 
 
-                <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="index.xhtml"  brandImg="./Imagenes/logochico.png" >
+                <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
                     <br/><br/>
                     <b:navbarLinks>
 
                         <b:dropMenu value="Gestiones"> 
 
-                            <b:navLink value="Usuarios" iconAwesome="user" href="#{navegarBean.frmUsuario()}"></b:navLink>
+                            <b:navLink value="Usuarios" iconAwesome="user" href="/usuario.xhtml?faces-redirect=true"></b:navLink>
+                            <b:navLink  />
+                            <b:navLink value="Departamento" href="/paginas/departamento/List.xhtml" />
+                            <b:navLink value="Localidad" href="/paginas/localidad/List.xhtml" />
+                            <b:navLink value="Provincia" href="/paginas/provincia/List.xhtml" />
+                            <b:navLink value="Especialidad" href="/paginas/especialidad/List.xhtml" />
+                            <b:navLink value="Facultad" href="/paginas/facultad/List.xhtml" />
+                            <b:navLink value="Medico" href="/paginas/medico/List.xhtml" />
+                            <b:navLink value="Organismo" href="/paginas/organismo/List.xhtml" />
+                            <b:navLink value="Tipo de Especialidad" href="/paginas/tipoEspecialidad/List.xhtml" />
+                            <b:navLink value="Tipo de Socio" href="/paginas/tipoSocio/List.xhtml" />
+                            <b:navLink value="Unidad Formadora" href="/paginas/unidadFormadora/List.xhtml" />
+                            <b:navLink value="Correo Electronico" href="/paginas/correoElectronico/List.xhtml" />
+                            <b:navLink value="Documento de Identidad" href="/paginas/documentoIdentidad/List.xhtml" />
+                            <b:navLink value="Domicilio" href="/paginas/domicilio/List.xhtml" />
+                            <b:navLink value="Persona" href="/paginas/persona/List.xhtml" />
+                            <b:navLink value="Sexo" href="/paginas/sexo/List.xhtml" />
+                            <b:navLink value="Telefono" href="/paginas/telefono/List.xhtml" />
+                            <b:navLink value="Tipo de Documento" href="/paginas/tipoDocumento/List.xhtml" />
+                            <b:navLink value="Tipo de Telefono" href="/paginas/tipoTelefono/List.xhtml" />
 
-                            <b:navLink value="Configuracion" href="http://localhost:8080/ProyectoTres/faces/paginas/medico/List.xhtml"  iconAwesome="cog" >
-
-
-                            </b:navLink>
                         </b:dropMenu>
                         <b:dropMenu value="Profesionales">
-                            <b:navLink value="Medicos" iconAwesome="heartbeat" href="#{navegarBean.frmMedicos()}"></b:navLink>
-                            <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="#{navegarBean.frmMedicos()}"></b:navLink>
+                            <b:navLink value="Medicos" iconAwesome="heartbeat" href="/medico.xhtml?faces-redirect=true"></b:navLink>
+                            <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/medico.xhtml?faces-redirect=true"></b:navLink>
                         </b:dropMenu> 
                         <b:dropMenu value="Consultas">
-                            <b:navLink value="Consultas" iconAwesome="search" href="#{navegarBean.frmConsultas()}"></b:navLink>
+                            <b:navLink value="Consultas" iconAwesome="search" href="/consulta.xhtml?faces-redirect=true"></b:navLink>
                         </b:dropMenu>
 
 
@@ -218,7 +239,7 @@
                     <ui:insert name="content">Content</ui:insert>
                 </b:panel>
                 <b:navBar>
-                    <b:navbarLinks pull="left"><img src="./Imagenes/logocolegio.png" alt="" height="70px" align="left" />
+                    <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logocolegio.png" alt="" height="70px" align="left" />
                     </b:navbarLinks>   <b:navbarLinks pull="right"><p> Colegio Medico de Catamarca <br/>Hipolito Irigoyen 1233 
                             <br/> San Fernando del Valle de Catamarca</p></b:navbarLinks> 
                 </b:navBar>

@@ -37,7 +37,7 @@
                         <p:outputLabel value="#{bundle.CreateDomicilioLabel_barrio}" for="barrio" />
                         <p:inputText id="barrio" value="#{domicilioController.selected.barrio}" title="#{bundle.CreateDomicilioTitle_barrio}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{domicilioController.create}" value="#{bundle.Save}" update="display,:DomicilioListForm:datalist,:growl" oncomplete="handleSubmit(args,'DomicilioCreateDialog');"/>
+                    <p:commandButton actionListener="#{domicilioController.create}" value="#{bundle.Save}" update="display,:frmPri:DomicilioListForm:datalist,:growl" oncomplete="handleSubmit(args,'DomicilioCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DomicilioCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

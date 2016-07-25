@@ -7,6 +7,7 @@ package ManagedBeans;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -43,7 +44,11 @@ public class SessionControlerBean {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         if (session != null) {
             session.invalidate();
-            return "./login.xhtml?faces-redirect=true";
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String url = request.getRequestURL().toString();
+            String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+            String loginURL = baseURL + "login.xhtml?faces-redirect=true";
+            return loginURL;
         }//fin if
 
         return "";
@@ -61,7 +66,11 @@ public class SessionControlerBean {
          session.invalidate();
          }//fin */
 
-        return "./login.xhtml?faces-redirect=true";
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String url = request.getRequestURL().toString();
+        String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+        String loginURL = baseURL + "login.xhtml?faces-redirect=true";
+        return loginURL;
     }//fin abrirSession
 
 }

@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<?xml version='1.0' encoding='UTF-8' ?>
+     <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+     <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                     xmlns:ui="http://java.sun.com/jsf/facelets"
+                      template="../../Templates/adminTemplate.xhtml"
+                      xmlns:p="http://primefaces.org/ui"
+                      xmlns:h="http://java.sun.com/jsf/html"
+                      xmlns:f="http://java.sun.com/jsf/core"
+                      xmlns:b="http://bootsfaces.net/ui"
+                      >
+     <ui:define name="content">
 
-    <ui:composition template="/template.xhtml">
 
-
-        <ui:define name="title">
+        <h3>
             <h:outputText value="#{bundle.ListEspecializacionTitle}"></h:outputText>
-        </ui:define>
+        </h3>
 
-        <ui:define name="body">
+        
             <h:form id="EspecializacionListForm">
                 <p:panel header="#{bundle.ListEspecializacionTitle}">
                     <p:dataTable id="datalist" value="#{especializacionController.items}" var="item"
@@ -102,9 +104,9 @@
                             <h:outputText value="#{item.especialidad}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{especializacionController.prepareCreate}" update=":EspecializacionCreateForm" oncomplete="PF('EspecializacionCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EspecializacionViewForm" oncomplete="PF('EspecializacionViewDialog').show()" disabled="#{empty especializacionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EspecializacionEditForm" oncomplete="PF('EspecializacionEditDialog').show()" disabled="#{empty especializacionController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{especializacionController.prepareCreate}" update=":frmPri:EspecializacionCreateForm" oncomplete="PF('EspecializacionCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":frmPri:EspecializacionViewForm" oncomplete="PF('EspecializacionViewDialog').show()" disabled="#{empty especializacionController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":frmPri:EspecializacionEditForm" oncomplete="PF('EspecializacionEditDialog').show()" disabled="#{empty especializacionController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{especializacionController.destroy}" update=":growl,datalist" disabled="#{empty especializacionController.selected}"/>
                         </f:facet>
                     </p:dataTable>
@@ -116,5 +118,3 @@
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
-
-</html>

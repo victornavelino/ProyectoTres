@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditProvinciaLabel_id}" for="id" />
                         <p:inputText id="id" value="#{provinciaController.selected.id}" title="#{bundle.EditProvinciaTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{provinciaController.update}" value="#{bundle.Save}" update="display,:ProvinciaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProvinciaEditDialog');"/>
+                    <p:commandButton actionListener="#{provinciaController.update}" value="#{bundle.Save}" update="display,:frmPri:ProvinciaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProvinciaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ProvinciaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

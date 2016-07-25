@@ -25,7 +25,7 @@
                                            itemValue="#{tipoEspecialidadItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{especialidadController.create}" value="#{bundle.Save}" update="display,:EspecialidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecialidadCreateDialog');"/>
+                    <p:commandButton actionListener="#{especialidadController.create}" value="#{bundle.Save}" update="display,:frmPri:EspecialidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecialidadCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EspecialidadCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditCorreoElectronicoLabel_direccion}" for="direccion" />
                         <p:inputText id="direccion" value="#{correoElectronicoController.selected.direccion}" title="#{bundle.EditCorreoElectronicoTitle_direccion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{correoElectronicoController.update}" value="#{bundle.Save}" update="display,:CorreoElectronicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CorreoElectronicoEditDialog');"/>
+                    <p:commandButton actionListener="#{correoElectronicoController.update}" value="#{bundle.Save}" update="display,:frmPri:CorreoElectronicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CorreoElectronicoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CorreoElectronicoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

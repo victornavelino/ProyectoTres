@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditTipoSocioLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{tipoSocioController.selected.descripcion}" title="#{bundle.EditTipoSocioTitle_descripcion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{tipoSocioController.update}" value="#{bundle.Save}" update="display,:TipoSocioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoSocioEditDialog');"/>
+                    <p:commandButton actionListener="#{tipoSocioController.update}" value="#{bundle.Save}" update="display,:frmPri:TipoSocioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoSocioEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TipoSocioEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

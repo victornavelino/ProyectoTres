@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateOrganismoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{organismoController.selected.descripcion}" title="#{bundle.CreateOrganismoTitle_descripcion}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{organismoController.create}" value="#{bundle.Save}" update="display,:OrganismoListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrganismoCreateDialog');"/>
+                    <p:commandButton actionListener="#{organismoController.create}" value="#{bundle.Save}" update="display,:frmPri:OrganismoListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrganismoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="OrganismoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

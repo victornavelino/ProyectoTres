@@ -137,33 +137,31 @@ public class LoginBean {
             usuario = usuarioFacade.findUserByNombreContrasena(user, Encrypter.encriptar(password));
 
         } catch (Exception ex) {
-             System.out.println("incorreto");
+            System.out.println("incorreto");
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-            //Encrypter.encriptar(contrasena)
-            if (usuario != null) {
+        //Encrypter.encriptar(contrasena)
+        if (usuario != null) {
 
-                HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-                session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-                session.setAttribute("userLogged", 1);
-                //PARA MOSTRAR USUARIO LOGUEADO 
-                usuarioLogerBean.setUsuario(usuario);//Se guarda el usuario para poder ser mostrado como usuario logueado
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute("userLogged", 1);
+            //PARA MOSTRAR USUARIO LOGUEADO 
+            usuarioLogerBean.setUsuario(usuario);//Se guarda el usuario para poder ser mostrado como usuario logueado
 
-                return "index.xhtml?faces-redirect=true";
-                // }//fin if
-            } else {
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor introduzca un nombre de usuario y una contraseña correctos. Tenga en cuenta que ambos campos son sensibles a mayúsculas/minúsculas.", null);
-                FacesContext fc = FacesContext.getCurrentInstance();
-                fc.addMessage(null, fm);
-            }//fin else
-
+            return "index.xhtml?faces-redirect=true";
+            // }//fin if
+        } else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor introduzca un nombre de usuario y una contraseña correctos. Tenga en cuenta que ambos campos son sensibles a mayúsculas/minúsculas.", null);
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, fm);
+        }//fin else
 
 //        } catch (Exception e) {
 //            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Por favor introduzca un nombre de usuario y una contraseña correctos. Tenga en cuenta que ambos campos son sensibles a mayúsculas/minúsculas.", null);
 //            FacesContext fc = FacesContext.getCurrentInstance();
 //            fc.addMessage(null, fm);
 //        }
-
         return "";
 
     }//fin login
@@ -175,7 +173,11 @@ public class LoginBean {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         request.getSession().invalidate();
         //request.logout(); comentado
-        FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        String url = request.getRequestURL().toString();
+        String baseURL = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+        String loginURL = baseURL + "login.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect(loginURL);
+
     } //fin logout
 
     /**
