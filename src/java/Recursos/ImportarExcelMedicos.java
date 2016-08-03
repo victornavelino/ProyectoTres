@@ -29,14 +29,8 @@ public class ImportarExcelMedicos {
                 String data;
                 System.out.println("Nombre de la Hoja\t"
                         + archivoExcel.getSheet(sheetNo).getName());
-                for (int fila = 0; fila < numFilas; fila++) { // Recorre cada 
-// fila de la 
-// hoja 
-                    for (int columna = 0; columna < numColumnas; columna++) { // Recorre                                                                                
-// cada                                                                                
-// columna                                                                            
-// de                                                                                
-// la                                                                                
+                for (int fila = 0; fila < numFilas; fila++) { // Recorre cada fila de la  hoja 
+                    for (int columna = 0; columna < numColumnas; columna++) { // Recorre  cada                                     
 // fila 
                         data = hoja.getCell(columna, fila).getContents();
                         System.out.print(data + " ");
@@ -53,6 +47,6 @@ public class ImportarExcelMedicos {
 
     public static void main(String arg[]) {
         ImportarExcelMedicos excel = new ImportarExcelMedicos();
-        excel.leerArchivoExcel("archivoPrueba.xls");
+        excel.leerArchivoExcel("/home/hugo/LEGAJOMEDICO.xls");
     }
 }
