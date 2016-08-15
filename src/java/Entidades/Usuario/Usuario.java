@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = "Usuario.findUserByNombreContrasena", query = "SELECT u FROM Usuario u WHERE u.usuario =:usuario AND "
        + "u.password = :contrasena ")
 @Entity
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -19,10 +19,11 @@
 
 
         <!--Inicio Dialogo Usuario ABM -->
-
+            
         <p:dialog id="dMedico"
                   widgetVar="dlgMedico"
-                  closable="true" >
+                  closable="false"
+                  >
 
             <h3><h:outputText value="Datos de Profesional Medico"/></h3>
             <h:inputHidden value="#{medicoBean.medico.id}" />
@@ -148,8 +149,8 @@
                              value="Nuevo" 
                              icon="ui-icon-circle-plus" 
                              oncomplete="PF('dlgMedico').show()"
-                             actionListener="#{medicoBean.setBtnSelect}"
                              update=":frmPri:dtMedico, dMedico"
+                             actionListener="#{medicoBean.setBtnSelect}"
                              />
         </p> 
 

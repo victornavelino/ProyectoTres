@@ -3,47 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Entidades.Caja;
 
-import Entidades.Usuario.Usuario;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 /**
  *
- * @author hugo
+ * @author root
  */
 @Entity
-@Table(name = "caja")
-public class Caja implements Serializable {
+@Table(name = "caja_movimientocaja_tipodeegreso")
+public class TipoDeEgreso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-        @OneToOne
-    private Usuario usuario;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fechaInicio;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fechaFin;
-    @Column(scale = 3, precision = 12)
-    private BigDecimal cajaInicial;
-    @Column(scale = 3, precision = 12)
-    private BigDecimal cajaFinal;
-    @OneToMany
-    private List<MovimientoCaja> movimientosCaja;
-    
+    private String descripcion;
 
     public Long getId() {
         return id;
@@ -52,6 +33,15 @@ public class Caja implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -63,10 +53,10 @@ public class Caja implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Caja)) {
+        if (!(object instanceof TipoDeEgreso)) {
             return false;
         }
-        Caja other = (Caja) object;
+        TipoDeEgreso other = (TipoDeEgreso) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -75,7 +65,7 @@ public class Caja implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Caja.Caja[ id=" + id + " ]";
+        return descripcion;
     }
     
 }
