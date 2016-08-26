@@ -50,6 +50,8 @@ public class Persona implements Serializable {
     private String cuit;
     @OneToOne
     private Sexo sexo;
+    @OneToOne
+    private EstadoCivil estadoCivil;
     public Long getId() {
         return id;
     }
@@ -135,6 +137,14 @@ public class Persona implements Serializable {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    public EstadoCivil getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(EstadoCivil estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
     
     @Override
