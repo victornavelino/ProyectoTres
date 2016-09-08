@@ -1,9 +1,12 @@
 package ManagedBeans;
 
 import Entidades.Medico.Especializacion;
+import Entidades.Medico.Medico;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EspecializacionFacade;
+import RN.EspecializacionRNLocal;
+import RN.MedicoRNLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,8 +28,19 @@ public class EspecializacionController implements Serializable {
 
     @EJB
     private Facades.EspecializacionFacade ejbFacade;
+    private EspecializacionRNLocal especializacionRNLocal;
+    private MedicoRNLocal medicoRNLocal;
     private List<Especializacion> items = null;
     private Especializacion selected;
+    private Medico medico;
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
 
     public EspecializacionController() {
     }
@@ -160,6 +174,11 @@ public class EspecializacionController implements Serializable {
             }
         }
 
+    }
+
+    public List<Medico> completeText(String apellido) {
+        
+        return medicoRNLocal.buscarXApellido(apellido);
     }
 
 }

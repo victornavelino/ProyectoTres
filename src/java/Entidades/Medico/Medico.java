@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,9 +25,13 @@ import javax.persistence.Temporal;
  *
  * @author nago
  */
-@NamedQuery(name = "Medico.buscarMedicosEspecialidad", query = "SELECT m FROM Medico m ,m.especialidades esp WHERE esp=:especialidad")
+@NamedQueries({
+    @NamedQuery(name = "Medico.buscarMedicosEspecialidad", query = "SELECT m FROM Medico m ,m.especialidades esp WHERE esp=:especialidad"),
+    @NamedQuery(name = "Medico.buscarXApellido", query = "SELECT m FROM Medico m WHERE m.persona.apellido LIKE :apellido")
+})
+
 @Entity
-@Table(name="medico")
+@Table(name = "medico")
 public class Medico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -177,10 +182,9 @@ public class Medico implements Serializable {
         this.folio = folio;
     }
 
-
     @Override
     public String toString() {
-        return persona.toString() ;
+        return persona.toString();
     }
 
 }
