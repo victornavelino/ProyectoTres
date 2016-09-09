@@ -17,6 +17,14 @@
 
 
         <h:form id="EspecializacionListForm">
+            <b:panelGrid size="xs" colSpans="2,10" >
+                <p:outputLabel value="Seleccionar Profesional: "/>
+                <p:autoComplete id="ac" size="40" value="#{especializacionController.medico}" 
+                                completeMethod="#{especializacionController.completeMedico}"
+                                minQueryLength="3"
+                                /> 
+            </b:panelGrid>
+            <br/>
 
             <p:panel header="#{bundle.ListEspecializacionTitle}">
 

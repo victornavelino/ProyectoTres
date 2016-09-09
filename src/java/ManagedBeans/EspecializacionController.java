@@ -9,6 +9,7 @@ import RN.EspecializacionRNLocal;
 import RN.MedicoRNLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,10 +30,20 @@ public class EspecializacionController implements Serializable {
     @EJB
     private Facades.EspecializacionFacade ejbFacade;
     private EspecializacionRNLocal especializacionRNLocal;
+    @EJB
     private MedicoRNLocal medicoRNLocal;
     private List<Especializacion> items = null;
     private Especializacion selected;
     private Medico medico;
+    private String apellido;
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     public Medico getMedico() {
         return medico;
@@ -177,8 +188,17 @@ public class EspecializacionController implements Serializable {
     }
 
     public List<Medico> completeText(String apellido) {
-        
+
         return medicoRNLocal.buscarXApellido(apellido);
     }
 
+    public List<Medico> completeMedico(String apellido) {
+        List<Medico> medicosFiltrados = new ArrayList<>();
+        for (Medico med:medicoRNLocal.buscarTodos()) {
+            if(med.getPersona().getApellido().startsWith(apellido.toUpperCase())){
+                medicosFiltrados.add(med);
+            }
+        }
+        return medicosFiltrados;
+    }
 }

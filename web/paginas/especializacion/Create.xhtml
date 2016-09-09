@@ -12,7 +12,7 @@
             <h:form id="EspecializacionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_id}" for="id" />
+                        <p:outputLabel value="#{bundle.c}" for="id" />
                         <p:inputText id="id" value="#{especializacionController.selected.id}" title="#{bundle.CreateEspecializacionTitle_id}" />
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
                         <p:inputText id="matriculaEspecialidad" value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.CreateEspecializacionTitle_matriculaEspecialidad}" />
