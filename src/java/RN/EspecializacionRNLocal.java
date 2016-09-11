@@ -28,4 +28,6 @@ public interface EspecializacionRNLocal {
 //    }
 
     public List<Especializacion> buscarPorEspecialidad(Especialidad especialidad);
+    public List<Especializacion> buscarPorProfesional(String medico);
+    
 }

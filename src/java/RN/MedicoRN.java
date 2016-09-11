@@ -8,6 +8,7 @@ package RN;
 import Entidades.Medico.Especialidad;
 import Facades.*;
 import Entidades.Medico.Medico;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -39,6 +40,20 @@ public class MedicoRN implements MedicoRNLocal {
     @Override
     public List<Medico> buscarTodos() {
         return facade.findAll();
+    }
+
+    @Override
+    public List<Medico> buscarXApellido(String apellido) {
+        Query q = null;
+        q = em.createNamedQuery("Medico.buscarXApellido");
+        q.setParameter("apellido","%"+ apellido+"%");
+        if (q.getResultList()!=null) {
+            System.out.println("medicosss: "+q.getResultList());
+            return q.getResultList();
+        } else {
+            return new ArrayList<>();
+        }
+        
     }
 
 }

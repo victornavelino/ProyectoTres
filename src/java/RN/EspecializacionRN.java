@@ -41,4 +41,12 @@ public class EspecializacionRN implements EspecializacionRNLocal {
         return q.getResultList();
     }
 
+    @Override
+    public List<Especializacion> buscarPorProfesional(String medico) {
+        Query q = null;
+        q = em.createNamedQuery("Especializacion.buscarPorProfesional");
+        q.setParameter("medico", medico);
+        return q.getResultList();
+    }
+
 }

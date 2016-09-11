@@ -26,7 +26,11 @@ import javax.persistence.Temporal;
 @NamedQueries({
     @NamedQuery(name = "Especializacion.buscarEspecialidad",
             query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad "
+            + " ORDER BY e.id DESC"),
+    @NamedQuery(name = "Especializacion.buscarPorProfesional",
+            query = "SELECT e FROM Especializacion e WHERE e.medico.persona.apellido=:medico "
             + " ORDER BY e.id DESC")
+
 })
 public class Especializacion implements Serializable {
 
