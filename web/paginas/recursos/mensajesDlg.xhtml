@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <p:dialog id="dMensaje"
+              widgetVar="dlgMensaje"
+              modal="true"
+              position="top">
+        <f:facet name="header">
+            <h:outputText value="Información" styleClass="subTitulo"/>
+        </f:facet>
+
+        <div style="padding: 5px 5px 5px 5px;">
+
+            <p:panel style="padding: 10px 5px 10px 5px;">
+                <h:graphicImage id="image"
+                                alt="jsf-sun"
+                                url="#{mensajeBean.icono()}">
+                </h:graphicImage>
+                <h:outputText value="#{mensajeBean.mensaje}"/>
+            </p:panel>
+
+        </div>
+
+        <div style="clear: both;"/>
+
+        <div style="text-align: center;
+             padding: 5px 5px 5px 5px;">
+            <p:commandButton value="Cerrar"
+                             actionListener ="#{mensajeBean.cerrar()}"
+                             process="dMensaje"/>
+        </div>
+    </p:dialog>
+</html>

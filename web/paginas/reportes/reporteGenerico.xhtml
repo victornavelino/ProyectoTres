@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 template="../../Templates/paginasTemplate.xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
+
+    <ui:define name="content">
+        
+        <h:form id="ReporteGenericoViewForm">
+
+        <ui:include src="../recursos/mensajesDlg.xhtml"/>
+        
+        <ui:include src="reporteGenericoEditDlg.xhtml"/>
+        
+        <!--TABLA NIVEL -->
+
+        <div style="margin-bottom: 20px;">
+    
+            <h:outputText value="Reportes Genericos"
+                          styleClass="titulo"/>
+       
+        </div>
+        
+        
+        <div style="position: relative;">
+            
+            <h:outputText value="(Ingresar parte del nombre y presione el botón buscar.)"
+                              styleClass="aclaracion"/><br/>
+            
+            <p:inputText id="itReporteGenerico"
+                         value="#{reporteGenericoPagBean.cadena}"
+                         size="50" 
+                         maxlength="100"
+                         />
+                
+            <p:commandButton id="cbBuscarTP"
+                             actionListener="#{reporteGenericoPagBean.buscarByReporteGenerico()}"
+                             title="Buscar"
+                             label="Buscar"
+                             value="Buscar"
+                             styleClass="botonBuscar"
+                             update="dtReporteGenerico"
+                             />
+            
+        </div>
+        
+        <div style="clear: both;"/>
+        
+        <div style="float:left; margin-bottom: 10px;">
+            <p:commandButton id="cbReporteGenericoCreate"
+                             value="Nuevo" 
+                             actionListener="#{reporteGenericoEditDlgBean.setBtnSelect}"
+                             update="ReporteGenericoViewForm:dReporteGenericoEditDlg"
+                             
+                             styleClass="botonAgregar"
+                             process="@this">
+                <f:setPropertyActionListener value="botonNuevo" target="#{reporteGenericoEditDlgBean.icono}"/> 
+            </p:commandButton>
+        </div>
+
+        
+
+        
+
+        <div style="clear: both;"/>
+
+        <div class="tabla">
+            <p:dataTable id="dtReporteGenerico"
+                         value="#{reporteGenericoLstBean.lstReporteGenerico}" 
+                         var="item"
+                        style="overflow-x: auto; position: relative;"
+                         paginator="true"
+                         rows="20">
+
+                <p:column width="100">
+                    
+                    <f:facet name="header">
+                        <h:outputText value="Operaciones"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                    
+                    <p:commandButton id="cbReporteGenericoEdit"
+                                     title="Editar"
+                                     value=" "
+                                     oncomplete="PF('dlgReporteGenericoEditDlg').show();"
+                                     actionListener="#{reporteGenericoEditDlgBean.setBtnSelect}"
+                                     update=":ReporteGenericoViewForm:dReporteGenericoEditDlg"
+                                     
+                                     styleClass="botonEditSinTexto"
+                                     process="@this, dtReporteGenerico">                    
+
+                        <f:setPropertyActionListener value="#{item}" 
+                                                     target="#{reporteGenericoBean.reporteGenerico}"/> 
+                        <f:setPropertyActionListener value="#{item.lstParametros}" 
+                                                     target="#{reporteGenericoParametroLstBean.lstParametros}"/> 
+                        <f:setPropertyActionListener value="botonEdit" target="#{reporteGenericoEditDlgBean.icono}"/> 
+
+                    </p:commandButton>
+
+                    <p:commandButton id="cbReporteGenericoDelete"
+                                     title="Eliminar"
+                                     value=" "
+                                     oncomplete="PF('dlgReporteGenericoEditDlg').show();"
+                                     actionListener="#{reporteGenericoEditDlgBean.setBtnSelect}"
+                                     update=":ReporteGenericoViewForm:dReporteGenericoEditDlg"
+                                     
+                                     styleClass="botonDeleteSinTexto"
+                                     process="@this, dtReporteGenerico">
+                        <f:setPropertyActionListener value="#{item}" target="#{reporteGenericoBean.reporteGenerico}"/> 
+                        <f:setPropertyActionListener value="#{item.lstParametros}" 
+                                                     target="#{reporteGenericoParametroLstBean.lstParametros}"/> 
+                        <f:setPropertyActionListener value="#{true}" target="#{reporteGenericoEditDlgBean.campoEditable}"/>                       
+                        <f:setPropertyActionListener value="botonDelete" target="#{reporteGenericoEditDlgBean.icono}"/> 
+
+                    </p:commandButton>
+
+                </p:column>
+                
+                <p:column width="200"
+                          filterBy="#{item.nombre}"
+                          style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"
+                                  styleClass="texto"/>
+                    <f:facet name="footer">
+                        <h:outputText value="Nombre"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                </p:column>
+                
+                <p:column width="400"
+                          style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Columnas"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                    <h:outputText value="#{item.columnas}"
+                                  styleClass="texto"/>
+                    <f:facet name="footer">
+                        <h:outputText value="Columnas"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                </p:column>
+                
+                <p:column width="400"
+                          style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Consulta"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                    <h:outputText value="#{item.consulta}"
+                                  styleClass="texto"/>
+                    <f:facet name="footer">
+                        <h:outputText value="Consulta"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                </p:column>
+                
+                
+                <p:column width="400"
+                          style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Descripción"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcion}"
+                                  styleClass="texto"/>
+                    <f:facet name="footer">
+                        <h:outputText value="Descripción"
+                                      styleClass="textoTitulo"/>
+                    </f:facet>
+                </p:column>
+
+            </p:dataTable>
+        </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

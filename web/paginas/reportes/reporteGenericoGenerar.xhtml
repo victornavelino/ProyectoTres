@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 template="../../Templates/paginasTemplate.xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
+
+    <ui:define name="content">
+
+        <h:form id="ReporteGenericoGenerarViewForm">
+        
+        <ui:include src="../recursos/mensajesDlg.xhtml"/>
+        
+        
+            
+        <ui:include src="reporteGenericoEditDlg.xhtml"/>
+        <ui:include src="reporteGenericoFindDlg.xhtml"/>
+        
+        
+        
+        <!--TABLA NIVEL -->
+
+        <div style="margin-bottom: 20px;">
+    
+            <h:outputText value="Reportes Genericos Generar"
+                          styleClass="titulo"/>
+       
+        </div>
+        
+        <div style="position: relative;">
+            
+            <div class="divMargen">
+            <h:panelGrid id="pgFindReporte" columns="2" style="border-style:none !important;" cellpadding="5px">
+            <h:outputLabel value="Reportes: " />
+
+                <h:panelGroup id="pgReporteRGG">
+                    
+                    
+                    <p:commandButton 
+                        styleClass="botonBuscarSinTexto"
+                        value=" "
+                        title="Buscar"
+                        actionListener="#{reporteGenericoFindDlgBean.entrar(1)}"
+                        
+                        process="@this"/>
+
+                    <p:commandButton id="cbReporteGenericoCreate"
+                             value=" " 
+                             title="Nuevo"
+                             actionListener="#{reporteGenericoEditDlgBean.setBtnSelect}"
+                             update="ReporteGenericoGenerarViewForm:dReporteGenericoEditDlg"
+                             
+                             styleClass="botonAgregarSinTexto"
+                             process="@this">
+                <f:setPropertyActionListener value="botonNuevo" target="#{reporteGenericoEditDlgBean.icono}"/> 
+            </p:commandButton>
+
+
+
+                    <h:inputHidden value="#{reporteGenericoGenerarPagBean.reporteGenerico.id}"/>
+                    <h:inputHidden value="#{reporteGenericoGenerarPagBean.reporteGenerico.columnas}"/>
+
+                    <h:outputLabel value="Seleccione el reporte presionando el botón buscar" 
+                                   rendered="#{reporteGenericoGenerarPagBean.reporteGenerico.id == null}"
+                                   styleClass="aclaracion"/>
+                    <h:outputText value="#{reporteGenericoGenerarPagBean.reporteGenerico.nombre}"
+                                  styleClass="texto"
+                                  rendered="#{reporteGenericoGenerarPagBean.reporteGenerico.id != null}">
+                    </h:outputText>
+                          
+                </h:panelGroup>
+                
+            </h:panelGrid>
+            </div>
+            
+            <div style="clear: both;"/>
+            
+            <div class="subTituloBordeado">
+                <h:outputText value="Parámetros" styleClass="subTitulo"/>
+            </div>
+
+            <div class="divMargen">
+            
+            <h:panelGrid id="pgParametrosRGG" columns="2" style="border-style:none !important;" cellpadding="5px"
+                         >
+                
+                <ui:repeat value="#{reporteGenericoGenerarPagBean.reporteGenerico.lstParametros}" var='par'
+                           varStatus="loop"
+                           rendered="#{reporteGenericoGenerarPagBean.reporteGenerico.lstParametros.size() > 0}">
+                    <h:outputText value='#{par.nombre}:' style="margin: 10px;"/>
+                    <h:inputText size="50"
+                                 id="itParametro"/>
+                    <h:outputText value=' (#{par.tipoParametro.name}) '/><br/>
+                </ui:repeat>
+                
+            </h:panelGrid>
+            </div>
+            
+            
+            
+            <center>
+                <p:commandButton id="cbGenerarRGG"
+                                 actionListener="#{reporteGenericoGenerarPagBean.generarReporte()}"
+                                 title="Generar"
+                                 label="Generar"
+                                 value="Generar"
+                                 styleClass="botonGenerar"
+                                 update="dtReporteGenericoGenerar"
+                                 
+                                 />
+            </center>
+            
+        </div>
+        
+        <div style="clear: both;"/>
+
+        <div class="tabla">
+            
+            <div style="margin-bottom: 20px;">
+             <h3>Exportar datos</h3>
+             <h:commandLink>
+
+                 <p:graphicImage alt="xls"
+                                 value="./Imagenes/excel-icon.png"
+                                 width="50"/>
+                 
+                <p:dataExporter type="xls" 
+                                target="dtReporteGenericoGenerar" 
+                                fileName="listado" 
+                                pageOnly="true"
+                                encoding="ISO-8859-1"/>
+
+            </h:commandLink>
+
+            <p:spacer width="20"/> 
+            
+            <h:commandLink>
+                <p:graphicImage alt="pdf"
+                                value="./Imagenes/pdf-icon.png" 
+                                width="50"/>
+                <p:dataExporter type="pdf" target="dtReporteGenericoGenerar" 
+                                fileName="listado" 
+                                preProcessor="#{reporteGenericoGenerarLstBean.preProcessPDF}"
+                                
+                                encoding="ISO-8859-1" />
+            </h:commandLink>
+            
+            <p:spacer width="20"/>
+            
+            <h:commandLink>
+                <p:graphicImage alt="xml"
+                                value="./Imagenes/xml-icon.png"
+                                width="50"/>
+                <p:dataExporter type="xml" 
+                                target="dtReporteGenericoGenerar" 
+                                fileName="listado" 
+                                encoding="ISO-8859-1"/>
+            </h:commandLink>
+            </div>
+
+            <!--<h:commandLink>
+                <p:graphicImage name="/demo/images/csv.png" />
+                <p:dataExporter type="csv" target="dtReporteGenericoGenerar" fileName="listado" pageOnly="true" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/xml.png" />
+                <p:dataExporter type="xml" target="dtReporteGenericoGenerar" fileName="listado" pageOnly="true" />
+            </h:commandLink>-->
+
+            <p:dataTable id="dtReporteGenericoGenerar"
+                         value="#{reporteGenericoGenerarLstBean.lstRs}" 
+                         var="item"
+                        style="overflow-x: auto; position: relative;"
+                         paginator="true"
+                         rows="20"
+                         scrollable="true"
+                         >
+                
+                <p:columns value="#{reporteGenericoGenerarLstBean.columns}" var="column"
+                           style="width:250px;">  
+                    <f:facet name="header">  
+                        <h:outputText value="#{column.header}"/>  
+                    </f:facet>  
+
+                    <h:outputText value="#{item[column.posicion]}"
+                                  style="width:20px;"/>  
+                      
+                </p:columns> 
+                                
+
+            </p:dataTable>
+            
+            
+        </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and ogn the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <p:dialog id="dFindReporteGenerico" 
+              widgetVar="dlgFindReporteGenerico"
+              modal="true"
+              width="800"
+              height="400"
+              position="top"
+              style="margin-top: 30px;">
+
+        <f:facet name="header">
+            <h:outputText value=" Buscar reportes Genericos" styleClass="titulo"/>
+            <h:inputHidden value="#{reporteGenericoFindDlgBean.pantalla}"/>
+        </f:facet>
+
+        <div style="float:left; width: 100%;  text-align: center;">
+            
+            <h:outputText value="(Ingresar parte del nombre y presione el botón buscar.)"
+                              styleClass="aclaracion"/><br/>
+            
+            <p:inputText id="itReporteGenerico"
+                         value="#{reporteGenericoPagBean.cadena}"
+                         size="50" 
+                         maxlength="100"
+                         />
+                
+            <p:commandButton id="cbBuscarTPF"
+                             actionListener="#{reporteGenericoPagBean.buscarByReporteGenerico()}"
+                             title="Buscar"
+                             label="Buscar"
+                             value=" "
+                             styleClass="botonBuscarSinTexto"
+                             update="dtReporteGenerico"
+                             process="dFindReporteGenerico"/>
+            
+        </div>
+        
+        <div style="clear: both;"/>
+
+            <div style="float:inside; text-align: center;">
+                <p:dataTable id="dtReporteGenerico"
+                             value="#{reporteGenericoLstBean.lstReporteGenerico}"
+                             var="td"
+                             paginator="true"
+                             rows="20"
+                             rowKey="#{td.id}"
+                             selection="#{reporteGenericoBean.reporteGenerico}"
+                             style="overflow-x: auto; position: relative;"
+                             selectionMode="single">     
+                    
+                    <p:column width="200" style="word-wrap:break-word;">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"
+                                          styleClass="textoTitulo"/>
+                        </f:facet>
+
+                        <h:outputText value="#{td.nombre}"
+                                      styleClass="texto"/>
+  
+                    </p:column>
+                    
+                    <p:column width="400" style="word-wrap:break-word;">
+                        <f:facet name="header">
+                            <h:outputText value="Columna"
+                                          styleClass="textoTitulo"/>
+                        </f:facet>
+
+                        <h:outputText value="#{td.columnas}"
+                                      styleClass="texto"/>
+  
+                    </p:column>
+                    
+                    <p:column width="400" style="word-wrap:break-word;">
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"
+                                          styleClass="textoTitulo"/>
+                        </f:facet>
+
+                        <h:outputText value="#{td.descripcion}"
+                                      styleClass="texto"/>
+  
+                    </p:column>
+
+                    <f:facet name="footer">  
+                        <p:commandButton value="Seleccionar" 
+                                         actionListener="#{reporteGenericoFindDlgBean.aceptar()}"
+                                         styleClass="botonAgregar"
+                                         process="@form"/>  
+                        
+                    </f:facet>
+
+
+                </p:dataTable>
+            </div>
+
+
+    </p:dialog>
+</html>

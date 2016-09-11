@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <p:dialog id="dReporteGenericoEditDlg" 
+              widgetVar="dlgReporteGenericoEditDlg"
+              modal="true"
+              width="600"
+              height="400"
+              position="top"
+              style="margin-top: 30px;"
+              resizable="false">
+        <f:facet name="header">
+            <h:outputText value="Reportes Genericos" styleClass="titulo"/>
+            <h:inputHidden id="ihReporteGenericoAccionBtn" value="#{reporteGenericoEditDlgBean.accionBtn}"/>
+            <h:inputHidden id="ihReporteGenericoId" value="#{reporteGenericoBean.reporteGenerico.id}"/>
+        </f:facet>
+        
+        <p:panel id="pDlgReporteGenericoEdit"
+                 style="margin-bottom: 15px;">
+                     
+
+            <p:focus context="pDlgReporteGenericoEdit"/> 
+            
+            <div class="divMargen">
+                
+            
+            <h:panelGrid columns="2" style="border-style:none !important;"
+                        >
+                
+                <h:outputText value="Nombre* : "
+                              styleClass="texto"/>
+                
+                <p:inputText id="itNombreRGED"
+                             value="#{reporteGenericoBean.reporteGenerico.nombre}"                       
+                             disabled="#{reporteGenericoEditDlgBean.isCampoEditable()}"
+                             size="40"/>
+                
+                <h:outputText value="Consulta* : "
+                              styleClass="texto"/>
+                
+                <p:inputTextarea id="itConsultaRGED"
+                             value="#{reporteGenericoBean.reporteGenerico.consulta}"                       
+                             disabled="#{reporteGenericoEditDlgBean.isCampoEditable()}"
+                             rows="5"
+                             cols="40"/>
+                
+                <h:outputText value="Columnas* : "
+                              styleClass="texto"/>
+                
+                <p:inputTextarea id="itColumnaRGED"
+                                 value="#{reporteGenericoBean.reporteGenerico.columnas}"                       
+                             disabled="#{reporteGenericoEditDlgBean.isCampoEditable()}"
+                             rows="5"
+                             cols="40"/>
+                
+                <h:outputText value="Descripción* : "
+                              styleClass="texto"/>
+                
+                <p:inputTextarea id="itDescripcionRGED"
+                                 value="#{reporteGenericoBean.reporteGenerico.descripcion}"                       
+                             disabled="#{reporteGenericoEditDlgBean.isCampoEditable()}"
+                             rows="5"
+                             cols="40"/>
+            </h:panelGrid>
+                
+                </div>
+            
+            <div style="clear: both;"/>
+            
+            <div class="subTituloBordeado">
+                <h:outputText value="Parámetros" styleClass="subTitulo"/>
+            </div>
+
+            <div class="divMargen">
+                
+
+            <h:panelGrid id="pgParametroRGD" 
+                         columns="2" 
+                         style="border-style:none !important;">
+                
+               <h:outputText value="Nombre* : "
+                              styleClass="texto"/>
+                
+                <p:inputText id="itNombreRGD"
+                             value="#{reporteGenericoParametroBean.parametro.nombre}"                       
+                             size="20"
+                             />
+                
+                
+                <h:outputText value="Tipo* : "
+                              styleClass="texto"/>
+                <p:selectOneRadio id="sorTipoRGE" 
+                                  value="#{reporteGenericoParametroBean.parametro.tipoParametro}"
+                                  converter="ConversorGenerico">
+                    <f:selectItems value="#{reporteGenericoTipoParametroLstBean.lstSiTipo}"/>
+                </p:selectOneRadio>
+
+                
+                <h:outputText value="Descripción* : "
+                              styleClass="texto"/>
+                
+                <p:inputTextarea id="itaDescripcionRGD"
+                                 value="#{reporteGenericoParametroBean.parametro.descripcion}"                       
+                             rows="5"
+                             cols="40"/>
+            </h:panelGrid>
+                
+            </div>
+            
+            <div style="clear: both;"/>
+
+            <div class="divMargen">
+                
+                <p:commandButton 
+                             styleClass="botonAgregar"
+                             value="Agregar"
+                             title="Agregar"
+                             actionListener="#{reporteGenericoEditDlgBean.agregarParametro()}"
+                             disabled="#{reporteGenericoEditDlgBean.isCampoEditable()}"
+                             process="@this, pgParametroRGD"/>
+            </div>
+            
+            <div style="clear: both;"/>
+
+            <div class="divMargen">
+
+                <p:dataTable id="dtParametrosRGD"
+                             value="#{reporteGenericoParametroLstBean.lstParametros}"
+                             var="par">
+
+                    <p:column style="word-wrap:break-word;">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"
+                                          styleClass="texto"/>
+                        </f:facet>
+                        <h:outputText value="#{par.nombre}"/>
+                    </p:column>
+
+                    <p:column style="word-wrap:break-word;">
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"
+                                          styleClass="texto"/>
+                        </f:facet>
+                        <h:outputText value="#{par.tipoParametro}"/>
+                    </p:column>
+                    
+                    <p:column style="word-wrap:break-word;">
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"
+                                          styleClass="texto"/>
+                        </f:facet>
+                        <h:outputText value="#{par.descripcion}"/>
+                    </p:column>
+
+                    <p:column>
+                        <p:commandButton value=" "
+                                         actionListener="#{reporteGenericoEditDlgBean.quitarParametro(par)}"
+                                         process="@this, dtParametrosRGD"
+                                         disabled="#{reporteGenericoEditDlgBean.isCampoEditable()}"
+                                         styleClass="botonDeleteSinTexto">
+
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+            
+        </p:panel>
+            
+                    <div style="text-align: center;">
+                        <p:commandButton id="cbReporteGenericoRGED"
+                                         value="#{reporteGenericoEditDlgBean.textBoton}"
+                                         styleClass="#{reporteGenericoEditDlgBean.icono}"
+                                         actionListener="#{reporteGenericoEditDlgBean.actionBtn()}"
+                                         style="margin-right: 10px;"
+                                         process="dReporteGenericoEditDlg"/>
+                        
+                        
+                        <p:commandButton id="cbSalirRGED"
+                                         value="Salir"
+                                         styleClass="botonSalir"
+                                         oncomplete="PF('dlgReporteGenericoEditDlg').hide();"
+                                         process="@this"/>
+                    </div>
+            
+            
+
+        
+
+    </p:dialog>
+</html>
