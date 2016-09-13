@@ -7,6 +7,7 @@ package RN;
 
 import Entidades.Medico.Especialidad;
 import Entidades.Medico.Especializacion;
+import Entidades.Medico.Medico;
 import Facades.*;
 import java.util.List;
 import javax.ejb.EJB;
@@ -45,6 +46,14 @@ public class EspecializacionRN implements EspecializacionRNLocal {
     public List<Especializacion> buscarPorProfesional(String medico) {
         Query q = null;
         q = em.createNamedQuery("Especializacion.buscarPorProfesional");
+        q.setParameter("medico", medico);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Especializacion> buscarPorMedico(Medico medico) {
+        Query q = null;
+        q = em.createNamedQuery("Especializacion.buscarPorMedico");
         q.setParameter("medico", medico);
         return q.getResultList();
     }

@@ -29,6 +29,9 @@ import javax.persistence.Temporal;
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarPorProfesional",
             query = "SELECT e FROM Especializacion e WHERE e.medico.persona.apellido=:medico "
+            + " ORDER BY e.id DESC"),
+    @NamedQuery(name = "Especializacion.buscarPorMedico",
+            query = "SELECT e FROM Especializacion e WHERE e.medico=:medico "
             + " ORDER BY e.id DESC")
 
 })

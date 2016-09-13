@@ -7,6 +7,7 @@ package RN;
 
 import Entidades.Medico.Especialidad;
 import Entidades.Medico.Especializacion;
+import Entidades.Medico.Medico;
 import java.util.List;
 import javax.ejb.Local;
 import javax.persistence.Query;
@@ -29,5 +30,6 @@ public interface EspecializacionRNLocal {
 
     public List<Especializacion> buscarPorEspecialidad(Especialidad especialidad);
     public List<Especializacion> buscarPorProfesional(String medico);
+    public List<Especializacion> buscarPorMedico(Medico medico);
     
 }

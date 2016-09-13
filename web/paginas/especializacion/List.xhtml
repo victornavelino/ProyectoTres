@@ -17,12 +17,15 @@
 
 
         <h:form id="EspecializacionListForm">
-            <b:panelGrid size="xs" colSpans="2,10" >
-                <p:outputLabel value="Seleccionar Profesional: "/>
-                <p:autoComplete id="ac" size="40" value="#{especializacionController.medico}" 
+            <b:panelGrid size="xs" colSpans="2,3,7" >
+                <p:outputLabel value="Seleccionar Profesional: " />
+                <p:autoComplete id="ac" size="45" value="#{especializacionController.medico}" 
                                 completeMethod="#{especializacionController.completeMedico}"
                                 minQueryLength="3"
                                 /> 
+                <p:commandButton id="btnSeleccionar" value="Seleccionar"
+                                 actionListener="#{especializacionController.cargarEspecializaciones}"
+                                 update=":EspecializacionListForm:datalist"/>
             </b:panelGrid>
             <br/>
 

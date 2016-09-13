@@ -1,49 +1,34 @@
 package ManagedBeans;
 
-import Entidades.Medico.Especializacion;
 import Entidades.Medico.Medico;
+import Entidades.Pago.Pago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
-import Facades.EspecializacionFacade;
-import RN.EspecializacionRNLocal;
-import RN.MedicoRNLocal;
+import Facades.PagoFacade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("especializacionController")
+@ManagedBean(name = "pagoController")
 @SessionScoped
-public class EspecializacionController implements Serializable {
+public class PagoController implements Serializable {
 
     @EJB
-    private Facades.EspecializacionFacade ejbFacade;
-    private EspecializacionRNLocal especializacionRNLocal;
-    @EJB
-    private MedicoRNLocal medicoRNLocal;
-    private List<Especializacion> items = null;
-    private Especializacion selected;
+    private Facades.PagoFacade ejbFacade;
+    private List<Pago> items = null;
+    private Pago selected;
     private Medico medico;
-    private String apellido;
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
 
     public Medico getMedico() {
         return medico;
@@ -52,15 +37,16 @@ public class EspecializacionController implements Serializable {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
+    
 
-    public EspecializacionController() {
+    public PagoController() {
     }
 
-    public Especializacion getSelected() {
+    public Pago getSelected() {
         return selected;
     }
 
-    public void setSelected(Especializacion selected) {
+    public void setSelected(Pago selected) {
         this.selected = selected;
     }
 
@@ -70,36 +56,37 @@ public class EspecializacionController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private EspecializacionFacade getFacade() {
+    private PagoFacade getFacade() {
         return ejbFacade;
     }
 
-    public Especializacion prepareCreate() {
-        selected = new Especializacion();
+    public Pago prepareCreate() {
+        selected = new Pago();
+        selected.setMedico(new Medico());
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PagoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PagoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PagoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Especializacion> getItems() {
+    public List<Pago> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -134,29 +121,25 @@ public class EspecializacionController implements Serializable {
         }
     }
 
-    public Especializacion getEspecializacion(java.lang.Long id) {
-        return getFacade().find(id);
-    }
-
-    public List<Especializacion> getItemsAvailableSelectMany() {
+    public List<Pago> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Especializacion> getItemsAvailableSelectOne() {
+    public List<Pago> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Especializacion.class)
-    public static class EspecializacionControllerConverter implements Converter {
+    @FacesConverter(forClass = Pago.class)
+    public static class PagoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            EspecializacionController controller = (EspecializacionController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "especializacionController");
-            return controller.getEspecializacion(getKey(value));
+            PagoController controller = (PagoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "pagoController");
+            return controller.getFacade().find(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -176,33 +159,15 @@ public class EspecializacionController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Especializacion) {
-                Especializacion o = (Especializacion) object;
+            if (object instanceof Pago) {
+                Pago o = (Pago) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Especializacion.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Pago.class.getName()});
                 return null;
             }
         }
 
     }
 
-    public List<Medico> completeText(String apellido) {
-
-        return medicoRNLocal.buscarXApellido(apellido);
-    }
-
-    public List<Medico> completeMedico(String apellido) {
-        List<Medico> medicosFiltrados = new ArrayList<>();
-        for (Medico med:medicoRNLocal.buscarTodos()) {
-            if(med.getPersona().getApellido().startsWith(apellido.toUpperCase())){
-                medicosFiltrados.add(med);
-            }
-        }
-        return medicosFiltrados;
-    }
-    public void cargarEspecializaciones(){
-        System.out.println(" medicoooo seleccionado: "+medico);
-        items=especializacionRNLocal.buscarPorMedico(medico);
-    }
 }
