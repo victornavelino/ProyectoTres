@@ -8,16 +8,34 @@
 
     <ui:composition>
 
-        <p:dialog id="PagoViewDlg" widgetVar="PagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPagoTitle}">
+        <p:dialog id="PagoViewDlg" widgetVar="PagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePago.ViewPagoTitle}">
             <h:form id="PagoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPagoLabel_id}"/>
-                        <h:outputText value="#{pagoController.selected.id}" title="#{bundle.ViewPagoTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewPagoLabel_observaciones}"/>
-                        <h:outputText value="#{pagoController.selected.observaciones}" title="#{bundle.ViewPagoTitle_observaciones}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_id}"/>
+                        <h:outputText value="#{pagoController.selected.id}" title="#{bundlePago.ViewPagoTitle_id}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_medico}"/>
+                        <h:outputText value="#{pagoController.selected.medico}" title="#{bundlePago.ViewPagoTitle_medico}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_mes}"/>
+                        <h:outputText value="#{pagoController.selected.mes}" title="#{bundlePago.ViewPagoTitle_mes}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_anio}"/>
+                        <h:outputText value="#{pagoController.selected.anio}" title="#{bundlePago.ViewPagoTitle_anio}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_nroRecibo}"/>
+                        <h:outputText value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.ViewPagoTitle_nroRecibo}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_fechaPago}"/>
+                        <h:outputText value="#{pagoController.selected.fechaPago}" title="#{bundlePago.ViewPagoTitle_fechaPago}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_importe}"/>
+                        <h:outputText value="#{pagoController.selected.importe}" title="#{bundlePago.ViewPagoTitle_importe}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_concepto}"/>
+                        <h:outputText value="#{pagoController.selected.concepto}" title="#{bundlePago.ViewPagoTitle_concepto}"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_anulado}"/>
+                        <p:selectBooleanCheckbox value="#{pagoController.selected.anulado}" disabled="true"/>
+                        <h:outputText value="#{bundlePago.ViewPagoLabel_observaciones}"/>
+                        <h:outputText value="#{pagoController.selected.observaciones}" title="#{bundlePago.ViewPagoTitle_observaciones}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PagoViewDialog.hide()"/>
+                    <p:commandButton value="#{bundlePago.Close}" onclick="PagoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

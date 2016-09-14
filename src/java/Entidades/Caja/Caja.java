@@ -53,6 +53,54 @@ public class Caja implements Serializable {
         this.id = id;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public BigDecimal getCajaInicial() {
+        return cajaInicial;
+    }
+
+    public void setCajaInicial(BigDecimal cajaInicial) {
+        this.cajaInicial = cajaInicial;
+    }
+
+    public BigDecimal getCajaFinal() {
+        return cajaFinal;
+    }
+
+    public void setCajaFinal(BigDecimal cajaFinal) {
+        this.cajaFinal = cajaFinal;
+    }
+
+    public List<MovimientoCaja> getMovimientosCaja() {
+        return movimientosCaja;
+    }
+
+    public void setMovimientosCaja(List<MovimientoCaja> movimientosCaja) {
+        this.movimientosCaja = movimientosCaja;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

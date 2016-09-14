@@ -8,6 +8,22 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCaja</base-name>
+            <var>bundleCaja</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePago</base-name>
+            <var>bundlePago</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCuenta</base-name>
+            <var>bundleCuenta</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleConcepto</base-name>
+            <var>bundleConcepto</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>

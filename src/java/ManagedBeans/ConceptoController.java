@@ -1,9 +1,9 @@
 package ManagedBeans;
 
-import Entidades.Pago.Pago;
+import Entidades.Pago.Concepto;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
-import Facades.PagoFacade;
+import Facades.ConceptoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("pagoController")
+@Named("conceptoController")
 @SessionScoped
-public class PagoController implements Serializable {
+public class ConceptoController implements Serializable {
 
     @EJB
-    private Facades.PagoFacade ejbFacade;
-    private List<Pago> items = null;
-    private Pago selected;
+    private Facades.ConceptoFacade ejbFacade;
+    private List<Concepto> items = null;
+    private Concepto selected;
 
-    public PagoController() {
+    public ConceptoController() {
     }
 
-    public Pago getSelected() {
+    public Concepto getSelected() {
         return selected;
     }
 
-    public void setSelected(Pago selected) {
+    public void setSelected(Concepto selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class PagoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private PagoFacade getFacade() {
+    private ConceptoFacade getFacade() {
         return ejbFacade;
     }
 
-    public Pago prepareCreate() {
-        selected = new Pago();
+    public Concepto prepareCreate() {
+        selected = new Concepto();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleConcepto").getString("ConceptoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePago").getString("PagoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleConcepto").getString("ConceptoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePago").getString("PagoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleConcepto").getString("ConceptoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Pago> getItems() {
+    public List<Concepto> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -100,38 +100,38 @@ public class PagoController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePago").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleConcepto").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePago").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleConcepto").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Pago getPago(java.lang.Long id) {
+    public Concepto getConcepto(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<Pago> getItemsAvailableSelectMany() {
+    public List<Concepto> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Pago> getItemsAvailableSelectOne() {
+    public List<Concepto> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Pago.class)
-    public static class PagoControllerConverter implements Converter {
+    @FacesConverter(forClass = Concepto.class)
+    public static class ConceptoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            PagoController controller = (PagoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pagoController");
-            return controller.getPago(getKey(value));
+            ConceptoController controller = (ConceptoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "conceptoController");
+            return controller.getConcepto(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -151,11 +151,11 @@ public class PagoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Pago) {
-                Pago o = (Pago) object;
+            if (object instanceof Concepto) {
+                Concepto o = (Concepto) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Pago.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Concepto.class.getName()});
                 return null;
             }
         }

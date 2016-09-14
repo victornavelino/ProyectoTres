@@ -5,7 +5,7 @@
  */
 package Facades;
 
-import Entidades.Pago.Pago;
+import Entidades.Pago.Cuenta;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author hugo
  */
 @Stateless
-public class PagoFacade extends AbstractFacade<Pago> {
+public class CuentaFacade extends AbstractFacade<Cuenta> {
 
     @PersistenceContext(unitName = "ProyectoColegioPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class PagoFacade extends AbstractFacade<Pago> {
         return em;
     }
 
-    public PagoFacade() {
-        super(Pago.class);
+    public CuentaFacade() {
+        super(Cuenta.class);
     }
     
 }

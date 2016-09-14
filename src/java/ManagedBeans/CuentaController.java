@@ -1,9 +1,9 @@
 package ManagedBeans;
 
-import Entidades.Pago.Pago;
+import Entidades.Pago.Cuenta;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
-import Facades.PagoFacade;
+import Facades.CuentaFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("pagoController")
+@Named("cuentaController")
 @SessionScoped
-public class PagoController implements Serializable {
+public class CuentaController implements Serializable {
 
     @EJB
-    private Facades.PagoFacade ejbFacade;
-    private List<Pago> items = null;
-    private Pago selected;
+    private Facades.CuentaFacade ejbFacade;
+    private List<Cuenta> items = null;
+    private Cuenta selected;
 
-    public PagoController() {
+    public CuentaController() {
     }
 
-    public Pago getSelected() {
+    public Cuenta getSelected() {
         return selected;
     }
 
-    public void setSelected(Pago selected) {
+    public void setSelected(Cuenta selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class PagoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private PagoFacade getFacade() {
+    private CuentaFacade getFacade() {
         return ejbFacade;
     }
 
-    public Pago prepareCreate() {
-        selected = new Pago();
+    public Cuenta prepareCreate() {
+        selected = new Cuenta();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCuenta").getString("CuentaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePago").getString("PagoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCuenta").getString("CuentaUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePago").getString("PagoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCuenta").getString("CuentaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Pago> getItems() {
+    public List<Cuenta> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -100,38 +100,38 @@ public class PagoController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePago").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleCuenta").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePago").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleCuenta").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Pago getPago(java.lang.Long id) {
+    public Cuenta getCuenta(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<Pago> getItemsAvailableSelectMany() {
+    public List<Cuenta> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Pago> getItemsAvailableSelectOne() {
+    public List<Cuenta> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Pago.class)
-    public static class PagoControllerConverter implements Converter {
+    @FacesConverter(forClass = Cuenta.class)
+    public static class CuentaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            PagoController controller = (PagoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pagoController");
-            return controller.getPago(getKey(value));
+            CuentaController controller = (CuentaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "cuentaController");
+            return controller.getCuenta(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -151,11 +151,11 @@ public class PagoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Pago) {
-                Pago o = (Pago) object;
+            if (object instanceof Cuenta) {
+                Cuenta o = (Cuenta) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Pago.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Cuenta.class.getName()});
                 return null;
             }
         }

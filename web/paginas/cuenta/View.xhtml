@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentaViewDlg" widgetVar="CuentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCuenta.ViewCuentaTitle}">
+            <h:form id="CuentaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuentaController.selected != null}">
+                        <h:outputText value="#{bundleCuenta.ViewCuentaLabel_id}"/>
+                        <h:outputText value="#{cuentaController.selected.id}" title="#{bundleCuenta.ViewCuentaTitle_id}"/>
+                        <h:outputText value="#{bundleCuenta.ViewCuentaLabel_descripcion}"/>
+                        <h:outputText value="#{cuentaController.selected.descripcion}" title="#{bundleCuenta.ViewCuentaTitle_descripcion}"/>
+                        <h:outputText value="#{bundleCuenta.ViewCuentaLabel_importe}"/>
+                        <h:outputText value="#{cuentaController.selected.importe}" title="#{bundleCuenta.ViewCuentaTitle_importe}"/>
+                        <h:outputText value="#{bundleCuenta.ViewCuentaLabel_habilitada}"/>
+                        <p:selectBooleanCheckbox value="#{cuentaController.selected.habilitada}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleCuenta.Close}" onclick="CuentaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
