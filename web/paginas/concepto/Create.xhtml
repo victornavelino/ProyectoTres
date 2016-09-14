@@ -12,8 +12,6 @@
             <h:form id="ConceptoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{conceptoController.selected != null}">
-                        <p:outputLabel value="#{bundleConcepto.CreateConceptoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{conceptoController.selected.id}" title="#{bundleConcepto.CreateConceptoTitle_id}" />
                         <p:outputLabel value="#{bundleConcepto.CreateConceptoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{conceptoController.selected.descripcion}" title="#{bundleConcepto.CreateConceptoTitle_descripcion}" />
                     </p:panelGrid>

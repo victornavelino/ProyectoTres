@@ -12,8 +12,6 @@
             <h:form id="ConceptoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{conceptoController.selected != null}">
-                        <p:outputLabel value="#{bundleConcepto.EditConceptoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{conceptoController.selected.id}" title="#{bundleConcepto.EditConceptoTitle_id}" />
                         <p:outputLabel value="#{bundleConcepto.EditConceptoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{conceptoController.selected.descripcion}" title="#{bundleConcepto.EditConceptoTitle_descripcion}" />
                     </p:panelGrid>

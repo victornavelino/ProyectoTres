@@ -24,6 +24,10 @@
             <base-name>/BundleConcepto</base-name>
             <var>bundleConcepto</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleBanco</base-name>
+            <var>bundleBanco</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
