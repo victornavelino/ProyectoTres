@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IngresoCreateDlg" widgetVar="IngresoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleIngrso.CreateIngresoTitle}">
+            <h:form id="IngresoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}">
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
+                        <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipoDeIngreso}" >
+                            <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
+                                           var="tipoDeIngresoItem"
+                                           itemValue="#{tipoDeIngresoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{ingresoController.selected.anio}" title="#{bundleIngrso.CreateIngresoTitle_anio}" />
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_mes}" for="mes" />
+                        <p:inputText id="mes" value="#{ingresoController.selected.mes}" title="#{bundleIngrso.CreateIngresoTitle_mes}" />
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_medico}" for="medico" />
+                        <p:selectOneMenu id="medico" value="#{ingresoController.selected.medico}" >
+                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
+                                           var="medicoItem"
+                                           itemValue="#{medicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.CreateIngresoTitle_observaciones}" />
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ingresoController.selected.id}" title="#{bundleIngrso.CreateIngresoTitle_id}" />
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_formaDePago}" for="formaDePago" />
+                        <p:inputText id="formaDePago" value="#{ingresoController.selected.formaDePago}" title="#{bundleIngrso.CreateIngresoTitle_formaDePago}" />
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_usuario}" for="usuario" />
+                        <p:selectOneMenu id="usuario" value="#{ingresoController.selected.usuario}" >
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioItem"
+                                           itemValue="#{usuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ingresoController.create}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'IngresoCreateDialog');"/>
+                    <p:commandButton value="#{bundleIngrso.Cancel}" onclick="IngresoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

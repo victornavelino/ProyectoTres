@@ -8,8 +8,10 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
+
+
         <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
-            
+
             <br/><br/>
             <b:navbarLinks>
 
@@ -53,8 +55,12 @@
 
                 </b:dropMenu> 
                 <b:dropMenu value="Caja">
-                    <b:navLink value="Caja" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
+                    <p:commandButton value="Abrir" image="fa fa-folder-open" oncomplete="PF('dlg2').show();"></p:commandButton>
+                    <b:navLink value="Abrir Caja" iconAwesome="fa fa-folder-open" onclick="PF('dlg2').show();"></b:navLink>
+                    <b:navLink value="Cajas" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
                     <b:navLink value="Egresos" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
+                    <b:navLink value="Egresos" iconAwesome="fa fa-sign-in" href="/paginas/ingreso/List.xhtml"></b:navLink>
+                    <b:navLink value="Cerrar" iconAwesome="fa fa-times-circle" href="/paginas/ingreso/List.xhtml"></b:navLink>
                 </b:dropMenu>
                 <b:dropMenu value="Consultas">
                     <b:navLink value="Consultas" iconAwesome="search" href="/consulta.xhtml?faces-redirect=true"></b:navLink>
@@ -65,11 +71,6 @@
                     <b:navLink value="Generar" iconAwesome="search" href="/paginas/reportes/reporteGenericoGenerar.xhtml?faces-redirect=true"></b:navLink>
                 </b:dropMenu>
 
-
-
-
-
-
             </b:navbarLinks>
             <b:navbarLinks pull="right"> 
                 <b:iconAwesome name="user" size="3x"></b:iconAwesome>
@@ -79,4 +80,12 @@
             </b:navbarLinks>
 
         </b:navBar> 
-    </ui:composition></html>
+        <p:dialog header="Modal Dialog" widgetVar="dlg2" appendTo="@(body)" modal="true" height="100">
+            <h:form id="CajaAbreForm">
+                <h:outputText value="This is a Modal Dialog." />
+            </h:form>
+
+        </p:dialog>
+    </ui:composition>
+
+</html>

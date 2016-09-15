@@ -36,6 +36,10 @@
             <base-name>/BundleEgreso</base-name>
             <var>bundleEgreso</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleIngrso</base-name>
+            <var>bundleIngrso</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
