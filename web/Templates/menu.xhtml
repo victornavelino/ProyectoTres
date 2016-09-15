@@ -9,6 +9,7 @@
 
     <ui:composition>
         <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
+            
             <br/><br/>
             <b:navbarLinks>
 
@@ -51,6 +52,10 @@
                     <b:navLink value="Bancos" iconAwesome="fa fa-university" href="/paginas/banco/List.xhtml"></b:navLink>
 
                 </b:dropMenu> 
+                <b:dropMenu value="Caja">
+                    <b:navLink value="Caja" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
+                    <b:navLink value="Egresos" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
+                </b:dropMenu>
                 <b:dropMenu value="Consultas">
                     <b:navLink value="Consultas" iconAwesome="search" href="/consulta.xhtml?faces-redirect=true"></b:navLink>
                 </b:dropMenu>

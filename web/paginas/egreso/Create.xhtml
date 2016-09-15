@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EgresoCreateDlg" widgetVar="EgresoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleEgreso.CreateEgresoTitle}">
+            <h:form id="EgresoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{egresoController.selected != null}">
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.CreateEgresoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_tipoDeEgreso}" for="tipoDeEgreso" />
+                        <p:selectOneMenu id="tipoDeEgreso" value="#{egresoController.selected.tipoDeEgreso}" >
+                            <f:selectItems value="#{tipoDeEgresoController.itemsAvailableSelectOne}"
+                                           var="tipoDeEgresoItem"
+                                           itemValue="#{tipoDeEgresoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_importe}" for="importe" />
+                        <p:inputText id="importe" value="#{egresoController.selected.importe}" title="#{bundleEgreso.CreateEgresoTitle_importe}" required="true" requiredMessage="#{bundleEgreso.CreateEgresoRequiredMessage_importe}"/>
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{egresoController.selected.id}" title="#{bundleEgreso.CreateEgresoTitle_id}" />
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_fecha}" for="fecha" />
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{egresoController.selected.fecha}" title="#{bundleEgreso.EditEgresoTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_formaDePago}" for="formaDePago" />
+                        <p:inputText id="formaDePago" value="#{egresoController.selected.formaDePago}" title="#{bundleEgreso.CreateEgresoTitle_formaDePago}" />
+                        <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_usuario}" for="usuario" />
+                        <p:selectOneMenu id="usuario" value="#{egresoController.selected.usuario}" >
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioItem"
+                                           itemValue="#{usuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{egresoController.create}" value="#{bundleEgreso.Save}" update="display,:EgresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'EgresoCreateDialog');"/>
+                    <p:commandButton value="#{bundleEgreso.Cancel}" onclick="EgresoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

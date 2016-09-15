@@ -28,6 +28,14 @@
             <base-name>/BundleBanco</base-name>
             <var>bundleBanco</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCaja</base-name>
+            <var>bundleCaja</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleEgreso</base-name>
+            <var>bundleEgreso</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>

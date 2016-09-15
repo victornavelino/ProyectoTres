@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CajaViewDlg" widgetVar="CajaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCaja.ViewCajaTitle}">
+            <h:form id="CajaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cajaController.selected != null}">
+                        <h:outputText value="#{bundleCaja.ViewCajaLabel_id}"/>
+                        <h:outputText value="#{cajaController.selected.id}" title="#{bundleCaja.ViewCajaTitle_id}"/>
+                        <h:outputText value="#{bundleCaja.ViewCajaLabel_usuario}"/>
+                        <h:outputText value="#{cajaController.selected.usuario}" title="#{bundleCaja.ViewCajaTitle_usuario}"/>
+                        <h:outputText value="#{bundleCaja.ViewCajaLabel_fechaInicio}"/>
+                        <h:outputText value="#{cajaController.selected.fechaInicio}" title="#{bundleCaja.ViewCajaTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCaja.ViewCajaLabel_fechaFin}"/>
+                        <h:outputText value="#{cajaController.selected.fechaFin}" title="#{bundleCaja.ViewCajaTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCaja.ViewCajaLabel_cajaInicial}"/>
+                        <h:outputText value="#{cajaController.selected.cajaInicial}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}"/>
+                        <h:outputText value="#{bundleCaja.ViewCajaLabel_cajaFinal}"/>
+                        <h:outputText value="#{cajaController.selected.cajaFinal}" title="#{bundleCaja.ViewCajaTitle_cajaFinal}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleCaja.Close}" onclick="CajaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
