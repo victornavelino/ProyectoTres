@@ -46,14 +46,26 @@ public class MedicoRN implements MedicoRNLocal {
     public List<Medico> buscarXApellido(String apellido) {
         Query q = null;
         q = em.createNamedQuery("Medico.buscarXApellido");
-        q.setParameter("apellido","%"+ apellido+"%");
-        if (q.getResultList()!=null) {
-            System.out.println("medicosss: "+q.getResultList());
+        q.setParameter("apellido", "%" + apellido + "%");
+        if (q.getResultList() != null) {
             return q.getResultList();
         } else {
             return new ArrayList<>();
         }
-        
+
+    }
+
+    @Override
+    public List<Medico> buscarXMatricula(String matriculaProfesional) {
+        Query q = null;
+        q = em.createNamedQuery("Medico.buscarXMatricula");
+        q.setParameter("matriculaProfesional", matriculaProfesional);
+        if (q.getResultList() != null) {
+            return q.getResultList();
+        } else {
+            return new ArrayList<>();
+        }
+
     }
 
 }
