@@ -17,35 +17,42 @@
 
 
         <h:form id="EspecializacionListForm">
-            <b:panelGrid size="xs" colSpans="2,3,7" >
-                <p:outputLabel value="Seleccionar Profesional: " />
-                <p:autoComplete id="ac" size="45" value="#{especializacionController.medico}" 
-                                completeMethod="#{especializacionController.completeMedico}"
-                                minQueryLength="3"
-                                /> 
-                <p:commandButton id="btnSeleccionar" value="Seleccionar"
-                                 actionListener="#{especializacionController.cargarEspecializaciones}"
-                                 update=":EspecializacionListForm:datalist"/>
-            </b:panelGrid>
-            <br/>
-
-            <p:panel header="#{bundle.ListEspecializacionTitle}">
-
+            <!-- <b:panelGrid size="xs" colSpans="2,3,7" >
+                 <p:outputLabel value="Seleccionar Profesional: " />
+                 <p:autoComplete id="ac" size="45" value=" # {especializacionController.medico}" 
+                                 completeMethod="# {especializacionController.completeMedico}"
+                                 converter="ConversorGenerico"
+                                 minQueryLength="3"
+                                 /> 
+                 <p:commandButton id="btnSeleccionar" value="Seleccionar"
+                                  actionListener="# { especializacionController.cargarEspecializaciones}"
+                                  update=":EspecializacionListForm:datalist"/>
+             </b:panelGrid>
+             <br/>
+            -->
+            <p:panel>
 
                 <p:dataTable id="datalist" value="#{especializacionController.items}" var="item"
                              selectionMode="single" selection="#{especializacionController.selected}"
                              paginator="true"
                              rowKey="#{item.id}"
                              rows="10"
-                             rowsPerPageTemplate="10,20,30,40,50"
-                             >
+                             rowsPerPageTemplate="10,20,30,40,50,100,300"
+                             filterEvent="enter"
 
-                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                             >
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListEspecializacionTitle}"/>
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:commandButton id="toggler" type="button" value="Columnas" style="float:right" icon="ui-icon-calculator" />
+                        <p:columnToggler datasource="datalist" trigger="toggler" />                        </f:facet>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEspecializacionTitle_id}"/>
+
                         </f:facet>
                         <h:outputText value="#{item.id}"/>
                     </p:column>         
@@ -53,15 +60,15 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEspecializacionTitle_medico}"/>
                         </f:facet>
-                        <h:outputText value="#{item.medico}"/>
+                        <h:outputText value="#{item.medico.persona.apellido} , #{item.medico.persona.nombre}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.especialidad.descripcion}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEspecializacionTitle_especialidad}"/>
                         </f:facet>
-                        <h:outputText value="#{item.especialidad}"/>
+                        <h:outputText value="#{item.especialidad.descripcion}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEspecializacionTitle_matriculaEspecialidad}"/>
                         </f:facet>
@@ -123,13 +130,36 @@
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EspecializacionViewForm" oncomplete="PF('EspecializacionViewDialog').show()" disabled="#{empty especializacionController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EspecializacionEditForm" oncomplete="PF('EspecializacionEditDialog').show()" disabled="#{empty especializacionController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{especializacionController.destroy}" update=":growl,datalist" disabled="#{empty especializacionController.selected}"/>
+                        <p:commandButton id="reporteButton"   icon="ui-icon-document" value="Reporte" update=":dReporteForm" oncomplete="PF('dlgReporte').show()" disabled="#{empty especializacionController.selected}"/>
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                            <p:dataExporter type="xls" target="datalist" fileName="#{bundle.ListEspecializacionTitle}"/>
+                        </h:commandLink>
+
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                            <p:dataExporter type="csv" target="datalist" fileName="#{bundle.ListEspecializacionTitle}"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar Egresos Filtrados"/>
+                            <p:dataExporter type="xls" postProcessor="#{pagosDocenteBean.postProcessXLS}" 
+                                            target="datalist" fileName="#{bundle.ListEspecializacionTitle}filtro"   pageOnly="true"/>
+                        </h:commandLink>
+                        <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                            <p:printer target="datalist" />
+                        </p:commandButton>
                     </f:facet>
                 </p:dataTable>
+
             </p:panel>
         </h:form>
 
         <ui:include src="Create.xhtml"/>
         <ui:include src="Edit.xhtml"/>
         <ui:include src="View.xhtml"/>
+        <ui:include src="Reporte.xhtml"/>
     </ui:define>
 </ui:composition>

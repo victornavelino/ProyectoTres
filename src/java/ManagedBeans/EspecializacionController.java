@@ -203,6 +203,9 @@ public class EspecializacionController implements Serializable {
     }
     public void cargarEspecializaciones(){
         System.out.println(" medicoooo seleccionado: "+medico);
-        items=especializacionRNLocal.buscarPorMedico(medico);
+        try {
+            items = especializacionRNLocal.buscarPorMedico(medico);
+        } catch (Exception e) {
+        }
     }
 }

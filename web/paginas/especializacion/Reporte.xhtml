@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="dReporte"
+                  widgetVar="dlgReporte"
+                  closable="true" position="top" appendTo="@(body)">
+            <h:form id="dReporteForm">
+
+            <h:inputHidden value="#{pagosDocenteBean.pagoDocente.id }" />
+
+            <p:panel id="pReporte" rendered="#{especializacionController.selected != null}">
+                <p><img src="Imagenes/logocolegio.png "/></p>
+                <h:outputText value="  Ejemplo: El Colegio Certifica que " />
+                <strong> <h:outputText value="#{especializacionController.selected.medico.persona.apellido}, 
+                                       #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
+                </strong> 
+                <h:outputText value="  posee la Matricula " />
+                <h:outputText value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.ViewEspecializacionTitle_matriculaEspecialidad}"/>
+
+                <h:outputText value="  de la Especialidad " />
+                <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+
+                <h:outputText value="  con fecha " /> <h:outputText value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.ViewEspecializacionTitle_fechaMatriculacion}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+
+                <p>                                                          
+                    <h:outputText value="En San Fernando del Valle de Catamarca,  " />
+                    <h:outputText value="#{now}">
+                        <f:convertDateTime pattern="dddd, dd MMMM yyyy" type="date" />
+                    </h:outputText>
+                </p>                                
+
+            </p:panel>
+            <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                <p:printer target="pReporte" />
+            </p:commandButton>
+            <p:commandButton value="#{bundle.Close}" onclick="dlgReporte.hide()"/>
+            </h:form>
+        </p:dialog>
+        
+    </ui:composition>
+</html>

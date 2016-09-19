@@ -39,12 +39,17 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_medico}"/>
-                        <h:outputText value="#{especializacionController.selected.medico}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
+                        <h:outputText value="#{especializacionController.selected.medico.persona.apellido}, 
+                                      #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
-                        <h:outputText value="#{especializacionController.selected.especialidad}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="EspecializacionViewDialog.hide()"/>
                 </h:panelGroup>
+
+                <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                    <p:printer target="display" />
+                </p:commandButton>
             </h:form>
         </p:dialog>
 
