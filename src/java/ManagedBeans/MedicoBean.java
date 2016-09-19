@@ -116,8 +116,8 @@ public class MedicoBean implements Serializable{
     @PostConstruct
     private void inicializar() {
         medico = new Medico();
-        //medico.setPersona(new Persona());
-        //medico.getPersona().setDomicilio(new Domicilio());
+        medico.setPersona(new Persona());
+        medico.getPersona().setDomicilio(new Domicilio());
     }
 
     public void actionBtn() {
@@ -201,7 +201,7 @@ public class MedicoBean implements Serializable{
         FacesMessage fm;
         FacesMessage.Severity severity = null;
         try {
-            this.getMedico().setPersona(personaBean.getPersona());
+            //this.getMedico().setPersona(personaBean.getPersona());
             this.getMedico().getPersona().setDomicilio(domicilioBean.getDomicilio());
             medicoFacade.edit(this.getMedico());
 

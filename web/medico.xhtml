@@ -12,14 +12,14 @@
 
 
     <ui:define name="content">
-        
-        
+
+
 
         <ui:include src="DomicilioDlg.xhtml"/>
 
 
         <!--Inicio Dialogo Usuario ABM -->
-            
+
         <p:dialog id="dMedico"
                   widgetVar="dlgMedico"
                   closable="false"
@@ -31,51 +31,45 @@
             <h:inputHidden value="#{medicoBean.bCamposSoloLectura}"/>
 
             <p:panel id="pPri" header="Datos Personales" >
+                <p:scrollPanel mode="native" style="width:750px;height:400px">
+                    <h:panelGrid columns="2">
 
-                <h:panelGrid columns="2">
+                        <p:outputLabel value="Nombre:" for="itNombre" />
+                        <p:inputText id="itNombre" 
+                                     value="#{medicoBean.medico.persona.nombre}"
+                                     title="Nombre"
+                                     size="50"
+                                     maxlength="100"/>
 
-                    <p:outputLabel value="Nombre:" for="itNombre" />
-                    <p:inputText id="itNombre" 
-                                 value="#{personaBean.persona.nombre}"
-                                 title="Nombre"
-                                 size="50"
-                                 maxlength="100"/>
-
-                    <p:outputLabel value="Apellido:" for="itApellido" />
-                    <p:inputText id="itApellido" 
-                                 value="#{personaBean.persona.apellido}" 
-                                 title="Apellido" 
-                                 size="50"
-                                 maxlength="100"/>
+                        <p:outputLabel value="Apellido:" for="itApellido" />
+                        <p:inputText id="itApellido" 
+                                     value="#{medicoBean.medico.persona.apellido}" 
+                                     title="Apellido" 
+                                     size="50"
+                                     maxlength="100"/>
 
 
-                    <p:outputLabel value="Cuil" for="itCuil" />
-                    <p:inputMask id="itCuil"
-                                 mask="99-99999999-9"
-                                 value="#{personaBean.persona.cuil}" 
-                                 title="Cuil" />
+                        <p:outputLabel value="Cuil" for="itCuil" />
+                        <p:inputMask id="itCuil"
+                                     mask="99-99999999-9"
+                                     value="#{medicoBean.medico.persona.cuil}" 
+                                     title="Cuil" />
 
-                    <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
-                    <p:calendar id="caFechaNacimiento" 
-                                value="#{personaBean.persona.fechaNacimiento}" 
-                                title="FechaNacimiento:" 
-                                />
-                    <p:outputLabel value="Matricula" for="imMatricula" />
-                    <p:inputMask id="imMatricula" 
-                                 value="#{medicoBean.medico.matriculaProfesional}" 
-                                 title="Matricula"
-                                 mask="9999"
-                                 size="4"
-                                 maxlength="4"/>
+                        <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
+                        <p:calendar id="caFechaNacimiento" 
+                                    value="#{medicoBean.medico.persona.fechaNacimiento}" 
+                                    title="FechaNacimiento:" 
+                                    />
 
-                </h:panelGrid>
-                 <br></br>
+
+                    </h:panelGrid>
+                    <br></br>
                     <h:panelGrid columns="1" 
                                  width="720"
                                  >
 
                         <p:panel header="Domicilio"
-                                 style="height: 180px;width: 600px">
+                                 style="width: 700px">
                             <h:panelGrid columns="2" width="550">
                                 <p:commandButton id="btnDomicilioMedico" 
                                                  value="Cargar Datos"
@@ -102,10 +96,53 @@
 
                     </h:panelGrid>
                     <br></br> 
-                        
+                    <h:panelGrid columns="1" 
+                                 width="720"
+                                 >
 
-                    
+                        <p:panel header="Datos Profesionales"
+                                 style="width: 700px">
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_titulo}" for="titulo" />
+                                <p:inputText id="titulo" value="#{medicoBean.medico.titulo}" title="#{bundle.CreateMedicoTitle_titulo}" size="70"/>
 
+                                <p:outputLabel value="Matricula: " for="imMatricula" />
+                                <p:inputMask id="imMatricula" 
+                                             value="#{medicoBean.medico.matriculaProfesional}" 
+                                             title="Matricula"
+                                             mask="9999"
+                                             size="10"
+                                             maxlength="4"/>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_tipoSocio} " for="tipoSocio" />
+                                <p:selectOneMenu id="tipoSocio" value="#{medicoBean.medico.tipoSocio}" >
+                                    <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
+                                                   var="tipoSocioItem"
+                                                   itemValue="#{tipoSocioItem}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaRecibido}" for="fechaRecibido" />
+                                <p:calendar id="fechaRecibido" 
+                                            pattern="MM/dd/yyyy" 
+                                            value="#{medicoBean.medico.fechaRecibido}" 
+                                            title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaTitulo}" for="fechaTitulo" />
+                                <p:calendar id="fechaTitulo" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_unidadFormadora}" for="unidadFormadora" />
+                                <p:selectOneMenu id="unidadFormadora" value="#{medicoBean.medico.unidadFormadora}" >
+                                    <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
+                                                   var="unidadFormadoraItem"
+                                                   itemValue="#{unidadFormadoraItem}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaBaja}" for="fechaBaja" />
+                                <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
+                            </h:panelGrid>
+
+                        </p:panel>
+                    </h:panelGrid>
+
+
+
+
+                </p:scrollPanel>
             </p:panel>
             <div style=" float: left;">
                 <p:messages autoUpdate="true"/>
@@ -211,6 +248,14 @@
                     <h:outputText value="Matricula"/>
                 </f:facet>
                 <h:outputText value="#{item.matriculaProfesional}"/>
+            </p:column>
+            <p:column
+                filterBy="#{item.titulo}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Titulo"/>
+                </f:facet>
+                <h:outputText value="#{item.titulo}"/>
             </p:column>
 
         </p:dataTable>

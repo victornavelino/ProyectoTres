@@ -40,8 +40,8 @@
                     <b:navLink value="Usuario" href="/paginas/usuario/List.xhtml" />
 
                 </b:dropMenu>
-                <b:dropMenu value="Profesionales">c
-                    <b:navLink value="Medicos" iconAwesome="fa fa-user-md" href="/paginas/medico/List.xhtml"></b:navLink>
+                <b:dropMenu value="Profesionales">
+                    <b:navLink value="Medicos" iconAwesome="fa fa-user-md" href="/medico.xhtml"></b:navLink>
                 </b:dropMenu> 
                 <b:dropMenu value="Especializaciones">
                     <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/paginas/especializacion/List.xhtml"></b:navLink>
@@ -55,8 +55,7 @@
 
                 </b:dropMenu> 
                 <b:dropMenu value="Caja">
-                    <p:commandButton value="Abrir" image="fa fa-folder-open" oncomplete="PF('dlg2').show();"></p:commandButton>
-                    <b:navLink value="Abrir Caja" iconAwesome="fa fa-folder-open" onclick="PF('dlg2').show();"></b:navLink>
+                    <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" oncomplete="PF('dlg2').show();"></p:commandButton>
                     <b:navLink value="Cajas" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
                     <b:navLink value="Egresos" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
                     <b:navLink value="Egresos" iconAwesome="fa fa-sign-in" href="/paginas/ingreso/List.xhtml"></b:navLink>
@@ -80,10 +79,10 @@
             </b:navbarLinks>
 
         </b:navBar> 
-        <p:dialog header="Modal Dialog" widgetVar="dlg2" appendTo="@(body)" modal="true" height="100">
-            <h:form id="CajaAbreForm">
+        <p:dialog header="Modal Dialog" widgetVar="dlg2"  modal="true" height="100">
+            
                 <h:outputText value="This is a Modal Dialog." />
-            </h:form>
+            
 
         </p:dialog>
     </ui:composition>
