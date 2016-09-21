@@ -60,7 +60,26 @@
                                     value="#{medicoBean.medico.persona.fechaNacimiento}" 
                                     title="FechaNacimiento:" 
                                     />
-
+                        <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
+                        <p:selectOneMenu id="tipoDocumento" value="#{medicoBean.medico.persona.documentoIdentidad.tipoDocumento}" >
+                            <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
+                                           var="tipoDocumentoItem"
+                                           itemValue="#{tipoDocumentoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{medicoBean.medico.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
+                        <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{medicoBean.medico.persona.sexo}" >
+                            <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
+                                           var="sexoItem"
+                                           itemValue="#{sexoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
+                        <p:selectOneMenu id="estadoCivil" value="#{medicoBean.medico.persona.estadoCivil}" >
+                            <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                           var="estadoCivilItem"
+                                           itemValue="#{estadoCivilItem}"/>
+                        </p:selectOneMenu>
 
                     </h:panelGrid>
                     <br></br>
@@ -134,6 +153,20 @@
                                 </p:selectOneMenu>
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaBaja}" for="fechaBaja" />
                                 <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_motivoBaja}" for="motivoBaja" />
+                                <p:inputText id="motivoBaja" value="#{medicoBean.medico.motivoBaja}" title="#{bundle.CreateMedicoTitle_motivoBaja}" />
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_organismo}" for="organismo" />
+                                <p:selectOneMenu id="organismo" value="#{medicoBean.medico.organismo}" >
+                                    <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
+                                                   var="organismoItem"
+                                                   itemValue="#{organismoItem}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_libro}" for="libro" />
+                                <p:inputText id="libro" value="#{medicoBean.medico.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
+                                <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
+                                <p:inputText id="folio" value="#{medicoBean.medico.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
+
+
                             </h:panelGrid>
 
                         </p:panel>

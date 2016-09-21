@@ -8,46 +8,53 @@
 
     <ui:composition>
 
-        <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaTitle}">
+        <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePersona.EditPersonaTitle}">
             <h:form id="PersonaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{personaController.selected.id}" title="#{bundle.EditPersonaTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_apellido}" for="apellido" />
-                        <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.EditPersonaTitle_apellido}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_apellido}"/>
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.EditPersonaTitle_nombre}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_nombre}"/>
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{personaController.selected.id}" title="#{bundlePersona.EditPersonaTitle_id}" />
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundlePersona.EditPersonaTitle_apellido}" required="true" requiredMessage="#{bundlePersona.EditPersonaRequiredMessage_apellido}"/>
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundlePersona.EditPersonaTitle_nombre}" required="true" requiredMessage="#{bundlePersona.EditPersonaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_documentoIdentidad}" for="documentoIdentidad" />
                         <p:selectOneMenu id="documentoIdentidad" value="#{personaController.selected.documentoIdentidad}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="#{bundlePersona.SelectOneMessage}"/>
                             <f:selectItems value="#{documentoIdentidadController.itemsAvailableSelectOne}"
                                            var="documentoIdentidadItem"
                                            itemValue="#{documentoIdentidadItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_cuil}" for="cuil" />
-                        <p:inputText id="cuil" value="#{personaController.selected.cuil}" title="#{bundle.EditPersonaTitle_cuil}" />
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
-                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_domicilio}" for="domicilio" />
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_cuil}" for="cuil" />
+                        <p:inputText id="cuil" value="#{personaController.selected.cuil}" title="#{bundlePersona.EditPersonaTitle_cuil}" />
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{bundlePersona.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_domicilio}" for="domicilio" />
                         <p:selectOneMenu id="domicilio" value="#{personaController.selected.domicilio}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="#{bundlePersona.SelectOneMessage}"/>
                             <f:selectItems value="#{domicilioController.itemsAvailableSelectOne}"
                                            var="domicilioItem"
                                            itemValue="#{domicilioItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_cuit}" for="cuit" />
-                        <p:inputText id="cuit" value="#{personaController.selected.cuit}" title="#{bundle.EditPersonaTitle_cuit}" />
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_sexo}" for="sexo" />
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_cuit}" for="cuit" />
+                        <p:inputText id="cuit" value="#{personaController.selected.cuit}" title="#{bundlePersona.EditPersonaTitle_cuit}" />
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_sexo}" for="sexo" />
                         <p:selectOneMenu id="sexo" value="#{personaController.selected.sexo}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="#{bundlePersona.SelectOneMessage}"/>
                             <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
                                            var="sexoItem"
                                            itemValue="#{sexoItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePersona.EditPersonaLabel_estadoCivil}" for="estadoCivil" />
+                        <p:selectOneMenu id="estadoCivil" value="#{personaController.selected.estadoCivil}" >
+                            <f:selectItem itemLabel="#{bundlePersona.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                           var="estadoCivilItem"
+                                           itemValue="#{estadoCivilItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonaEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{personaController.update}" value="#{bundlePersona.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
+                    <p:commandButton value="#{bundlePersona.Cancel}" onclick="PersonaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

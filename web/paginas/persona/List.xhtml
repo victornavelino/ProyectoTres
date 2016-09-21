@@ -1,23 +1,21 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-     <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-     <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
-                     xmlns:ui="http://java.sun.com/jsf/facelets"
-                      template="../../Templates/paginasTemplate.xhtml"
-                      xmlns:p="http://primefaces.org/ui"
-                      xmlns:h="http://java.sun.com/jsf/html"
-                      xmlns:f="http://java.sun.com/jsf/core"
-                      xmlns:b="http://bootsfaces.net/ui"
-                      >
-     <ui:define name="content">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
 
 
-        <h3>
-            <h:outputText value="#{bundle.ListPersonaTitle}"></h:outputText>
-        </h3>
+        <ui:define name="title">
+            <h:outputText value="#{bundlePersona.ListPersonaTitle}"></h:outputText>
+        </ui:define>
 
-        
+        <ui:define name="body">
             <h:form id="PersonaListForm">
-                <p:panel header="#{bundle.ListPersonaTitle}">
+                <p:panel header="#{bundlePersona.ListPersonaTitle}">
                     <p:dataTable id="datalist" value="#{personaController.items}" var="item"
                                  selectionMode="single" selection="#{personaController.selected}"
                                  paginator="true"
@@ -31,37 +29,37 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_id}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_apellido}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_apellido}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_nombre}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_documentoIdentidad}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_documentoIdentidad}"/>
                             </f:facet>
                             <h:outputText value="#{item.documentoIdentidad}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_cuil}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_cuil}"/>
                             </f:facet>
                             <h:outputText value="#{item.cuil}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_fechaNacimiento}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_fechaNacimiento}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaNacimiento}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -69,27 +67,33 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_domicilio}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_domicilio}"/>
                             </f:facet>
                             <h:outputText value="#{item.domicilio}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_cuit}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_cuit}"/>
                             </f:facet>
                             <h:outputText value="#{item.cuit}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPersonaTitle_sexo}"/>
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_sexo}"/>
                             </f:facet>
                             <h:outputText value="#{item.sexo}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlePersona.ListPersonaTitle_estadoCivil}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoCivil}"/>
+                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty personaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" disabled="#{empty personaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlePersona.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePersona.View}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlePersona.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlePersona.Delete}" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -100,3 +104,5 @@
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
+
+</html>

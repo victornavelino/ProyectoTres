@@ -6,6 +6,7 @@
 package ManagedBeans;
 
 import Entidades.Medico.Medico;
+import Entidades.Persona.DocumentoIdentidad;
 import Entidades.Persona.Domicilio;
 import Entidades.Persona.Persona;
 import Facades.MedicoFacade;
@@ -118,6 +119,7 @@ public class MedicoBean implements Serializable{
         medico = new Medico();
         medico.setPersona(new Persona());
         medico.getPersona().setDomicilio(new Domicilio());
+        medico.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
     }
 
     public void actionBtn() {
