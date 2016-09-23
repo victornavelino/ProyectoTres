@@ -16,13 +16,15 @@
 
 
         <ui:include src="DomicilioDlg.xhtml"/>
-
+        <ui:include src="TelefonosDlg.xhtml" />
+        <ui:include src="CorreosElectronicosDlg.xhtml" />
 
         <!--Inicio Dialogo Usuario ABM -->
 
         <p:dialog id="dMedico"
                   widgetVar="dlgMedico"
                   closable="false"
+                  position="top"
                   >
 
             <h3><h:outputText value="Datos de Profesional Medico"/></h3>
@@ -82,6 +84,45 @@
                         </p:selectOneMenu>
 
                     </h:panelGrid>
+                    <br></br>
+                    <p:panel header="Telefonos"
+                             style="width: 700px">
+                        <div class="flotar">
+
+                            <h:panelGrid columns="2"
+                                         width="550px"
+                                         cellpadding="10px">
+                                <p:dataTable var="telmed" 
+                                             value="#{listadoTelefonosBean.lstTelefonos}" 
+                                             id="dtTelefonosMedico"
+                                             > 
+                                    <p:column>
+
+
+                                        <p:commandButton id="btnDeleteTelMedico" 
+                                                         actionListener="#{listadoTelefonosBean.borrarTelefono(telmed)}"                                                                         
+                                                         icon="ui-icon-close"
+                                                         update=":frmPri:dtTelefonosMedico">
+                                        </p:commandButton>
+                                    </p:column>
+                                    <p:column headerText="Tipo">  
+                                        <h:outputText value="#{telmed.tipoTelefono}" />  
+                                    </p:column>  
+
+                                    <p:column headerText="Numero">  
+                                        <h:outputText value="#{telmed.numero}" />  
+                                    </p:column>  
+                                </p:dataTable> 
+
+                                <p:commandButton id="btnCreateTelefonosMedicos"
+                                                 value="Agregar" 
+                                                 oncomplete="PF('dlgTel').show();"
+                                                 icon="ui-icon-disk"
+                                                 actionListener="#{listadoTelefonosBean.definirActionBoton}"
+                                                 update="dTelefonos"/>
+                            </h:panelGrid>
+                        </div>
+                    </p:panel>  
                     <br></br>
                     <h:panelGrid columns="1" 
                                  width="720"

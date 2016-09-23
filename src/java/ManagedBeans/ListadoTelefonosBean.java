@@ -179,17 +179,12 @@ public class ListadoTelefonosBean implements Serializable {
             this.setiTipoBoton(0);
         }//fin if
 
-        if (btnSelect.getId().equals("btnCreateTelefonosAlumnos")) {
+        if (btnSelect.getId().equals("btnCreateTelefonosMedicos")) {
             this.setTelefono(new Telefono());
             this.getCbActionTelefonos().setValue("Guardar");
             this.setiTipoBoton(0);
         }//fin if
 
-        if (btnSelect.getId().equals("btnCreateTelefonosProveedor")) {
-            this.setTelefono(new Telefono());
-            this.getCbActionTelefonos().setValue("Guardar");
-            this.setiTipoBoton(0);
-        }//fin if
 
         //System.out.println("termino el definir: " + this.getPersona());
     }
@@ -234,26 +229,14 @@ public class ListadoTelefonosBean implements Serializable {
         System.out.println("Ejecuta new telefono");
         //telefono.setNumero("");
         System.out.println(btnSelect.getId());
-        if (btnSelect.getId().equals("btnCreateTelefonosDocentes")) {
-            System.out.println("guardar btnCreateTelefonosDocentes" + this.getLstTelefonos());
+        if (btnSelect.getId().equals("btnCreateTelefonosMedicos")) {
+            System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
             //Entra al if si es llamado por Docente.xhtml
-            RequestContext.getCurrentInstance().update("frmPri:dtTelefonosDocentes");
+            RequestContext.getCurrentInstance().update("frmPri:dtTelefonosMedico");
             RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
 
         }
-        if (btnSelect.getId().equals("btnCreateTelefonosAlumnos")) {
-            System.out.println("guardar btnCreateTelefonosAlumnos" + this.getLstTelefonos());
-            //Entra al else si es llamado por Alumno.xhtml
-            RequestContext.getCurrentInstance().update("frmPri:dtTelefonosAlumnos");
-            RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
-        }
 
-        if (btnSelect.getId().equals("btnCreateTelefonosProveedor")) {
-            System.out.println("guardar btnCreateTelefonosProveedor" + this.getLstTelefonos());
-            //Entra al else si es llamado por Proveedor.xhtml
-            RequestContext.getCurrentInstance().update("frmPri:dtTelefonosProveedor");
-            RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
-        }
         //System.out.println("Entro al cargar telefonos: " + telefono.getNumero());
         // this.getListadoTelefonosBean().getLstTelefonos().add(telefono);
     }
