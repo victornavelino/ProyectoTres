@@ -63,7 +63,7 @@
                                     title="FechaNacimiento:" 
                                     />
                         <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
-                        <p:selectOneMenu id="tipoDocumento" value="#{medicoBean.medico.persona.documentoIdentidad.tipoDocumento}" >
+                        <p:selectOneMenu id="tipoDocumento" value="#{medicoBean.tipoDocumento}" >
                             <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
                                            var="tipoDocumentoItem"
                                            itemValue="#{tipoDocumentoItem}"/>
@@ -71,7 +71,7 @@
                         <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_numero}" for="numero" />
                         <p:inputText id="numero" value="#{medicoBean.medico.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
                         <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
-                        <p:selectOneMenu id="sexo" value="#{medicoBean.medico.persona.sexo}" >
+                        <p:selectOneMenu id="sexo" value="#{medicoBean.sexo}" >
                             <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
                                            var="sexoItem"
                                            itemValue="#{sexoItem}"/>

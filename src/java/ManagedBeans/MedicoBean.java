@@ -8,12 +8,14 @@ package ManagedBeans;
 import Entidades.Medico.Medico;
 import Entidades.Persona.DocumentoIdentidad;
 import Entidades.Persona.Domicilio;
+import Entidades.Persona.EstadoCivil;
 import Entidades.Persona.Persona;
+import Entidades.Persona.Sexo;
+import Entidades.Persona.TipoDocumento;
 import Facades.MedicoFacade;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -27,7 +29,7 @@ import org.primefaces.component.commandbutton.CommandButton;
  * @author nago
  */
 @Named(value = "medicoBean")
-@RequestScoped
+@SessionScoped
 public class MedicoBean implements Serializable{
 
     /**
@@ -45,11 +47,29 @@ public class MedicoBean implements Serializable{
     private DomicilioBean domicilioBean;
     @Inject
     private PersonaBean personaBean;
+    private TipoDocumento tipoDocumento;
+    private Sexo sexo;
 
     public MedicoBean() {
 
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+    
     public PersonaBean getPersonaBean() {
         return personaBean;
     }
@@ -119,7 +139,10 @@ public class MedicoBean implements Serializable{
         medico = new Medico();
         medico.setPersona(new Persona());
         medico.getPersona().setDomicilio(new Domicilio());
+        medico.getPersona().setEstadoCivil(new EstadoCivil());
         medico.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
+        medico.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        tipoDocumento=new TipoDocumento();
     }
 
     public void actionBtn() {
@@ -180,6 +203,8 @@ public class MedicoBean implements Serializable{
         try {
             this.getMedico().setPersona(personaBean.getPersona());
             this.getMedico().getPersona().setDomicilio(domicilioBean.getDomicilio());
+            this.getMedico().getPersona().getDocumentoIdentidad().setTipoDocumento(tipoDocumento);
+            this.getMedico().getPersona().setSexo(sexo);
             medicoFacade.create(this.getMedico());
             sMensaje = "Insertado correctamente";
             severity = FacesMessage.SEVERITY_INFO;
