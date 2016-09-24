@@ -7,10 +7,13 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <!--Inicio Dialogo Cargar telefonos-->
-
+    <ui:composition>
+        
+ 
     <p:dialog id="dTelefonos" 
               widgetVar="dlgTel" 
               modal="false" position="top">
@@ -85,4 +88,5 @@ and open the template in the editor.
         </table>
     </p:confirmDialog> 
     <!--Fin Dialogo Confirmar Borrar Telefono-->
+       </ui:composition>
 </html>

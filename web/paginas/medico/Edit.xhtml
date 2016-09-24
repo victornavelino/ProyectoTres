@@ -12,15 +12,26 @@
             <h:form id="MedicoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{medicoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditMedicoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{medicoController.selected.id}" title="#{bundle.EditMedicoTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditMedicoLabel_persona}" for="persona" />
-                        <p:selectOneMenu id="persona" value="#{medicoController.selected.persona}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="personaItem"
-                                           itemValue="#{personaItem}"/>
-                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Nombre: " for="itNombre" />
+                        <p:inputText id="itNombre" 
+                                     value="#{medicoController.selected.persona.nombre}"
+                                     title="Nombre"
+                                     size="50"
+                                     maxlength="100"/>
+
+                        <p:outputLabel value="Apellido: " for="itApellido" />
+                        <p:inputText id="itApellido" 
+                                     value="#{medicoController.selected.persona.apellido}"
+                                     title="Nombre"
+                                     size="50"
+                                     maxlength="100"/>
+
+                        <p:outputLabel value="Cuil" for="itCuil" />
+                        <p:inputMask id="itCuil"
+                                     mask="99-99999999-9"
+                                     value="#{medicoController.selected.persona.cuil}" 
+                                     title="Cuil" />
                         <p:outputLabel value="#{bundle.EditMedicoLabel_matriculaProfesional}" for="matriculaProfesional" />
                         <p:inputText id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.EditMedicoTitle_matriculaProfesional}" />
                         <p:outputLabel value="#{bundle.EditMedicoLabel_tipoSocio}" for="tipoSocio" />

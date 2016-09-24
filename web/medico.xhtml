@@ -2,7 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
-                 template="./Templates/adminTemplate.xhtml"
+                 template="./Templates/paginasTemplate.xhtml"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:h="http://java.sun.com/jsf/html"
                  xmlns:f="http://java.sun.com/jsf/core"
@@ -15,323 +15,325 @@
 
 
 
-        <ui:include src="DomicilioDlg.xhtml"/>
-        <ui:include src="TelefonosDlg.xhtml" />
-        <ui:include src="CorreosElectronicosDlg.xhtml" />
+
 
         <!--Inicio Dialogo Usuario ABM -->
-
-        <p:dialog id="dMedico"
-                  widgetVar="dlgMedico"
-                  closable="false"
-                  position="top"
-                  >
-
-            <h3><h:outputText value="Datos de Profesional Medico"/></h3>
-            <h:inputHidden value="#{medicoBean.medico.id}" />
-            <h:inputHidden value="#{medicoBean.tipoOperacion}"/>
-            <h:inputHidden value="#{medicoBean.bCamposSoloLectura}"/>
-
-            <p:panel id="pPri" header="Datos Personales" >
-                <p:scrollPanel mode="native" style="width:750px;height:400px">
-                    <h:panelGrid columns="2">
-
-                        <p:outputLabel value="Nombre:" for="itNombre" />
-                        <p:inputText id="itNombre" 
-                                     value="#{medicoBean.medico.persona.nombre}"
-                                     title="Nombre"
-                                     size="50"
-                                     maxlength="100"/>
-
-                        <p:outputLabel value="Apellido:" for="itApellido" />
-                        <p:inputText id="itApellido" 
-                                     value="#{medicoBean.medico.persona.apellido}" 
-                                     title="Apellido" 
-                                     size="50"
-                                     maxlength="100"/>
+        <h:form id="MedicoListaForm">
 
 
-                        <p:outputLabel value="Cuil" for="itCuil" />
-                        <p:inputMask id="itCuil"
-                                     mask="99-99999999-9"
-                                     value="#{medicoBean.medico.persona.cuil}" 
-                                     title="Cuil" />
+            <p:dialog id="dMedico"
+                      widgetVar="dlgMedico"
+                      closable="false"
+                      position="top"
+                      >
 
-                        <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
-                        <p:calendar id="caFechaNacimiento" 
-                                    value="#{medicoBean.medico.persona.fechaNacimiento}" 
-                                    title="FechaNacimiento:" 
-                                    />
-                        <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
-                        <p:selectOneMenu id="tipoDocumento" value="#{medicoBean.tipoDocumento}" >
-                            <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
-                                           var="tipoDocumentoItem"
-                                           itemValue="#{tipoDocumentoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_numero}" for="numero" />
-                        <p:inputText id="numero" value="#{medicoBean.medico.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
-                        <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
-                        <p:selectOneMenu id="sexo" value="#{medicoBean.sexo}" >
-                            <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
-                                           var="sexoItem"
-                                           itemValue="#{sexoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
-                        <p:selectOneMenu id="estadoCivil" value="#{medicoBean.medico.persona.estadoCivil}" >
-                            <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
-                                           var="estadoCivilItem"
-                                           itemValue="#{estadoCivilItem}"/>
-                        </p:selectOneMenu>
+                <h3><h:outputText value="Datos de Profesional Medico"/></h3>
+                <h:inputHidden value="#{medicoBean.medico.id}" />
+                <h:inputHidden value="#{medicoBean.tipoOperacion}"/>
+                <h:inputHidden value="#{medicoBean.bCamposSoloLectura}"/>
 
-                    </h:panelGrid>
-                    <br></br>
-                    <p:panel header="Telefonos"
-                             style="width: 700px">
-                        <div class="flotar">
+                <p:panel id="pPri" header="Datos Personales" >
+                    <p:scrollPanel mode="native" style="width:750px;height:400px">
+                        <h:panelGrid columns="2">
 
-                            <h:panelGrid columns="2"
-                                         width="550px"
-                                         cellpadding="10px">
-                                <p:dataTable var="telmed" 
-                                             value="#{listadoTelefonosBean.lstTelefonos}" 
-                                             id="dtTelefonosMedico"
-                                             > 
-                                    <p:column>
+                            <p:outputLabel value="Nombre:" for="itNombre" />
+                            <p:inputText id="itNombre" 
+                                         value="#{medicoBean.medico.persona.nombre}"
+                                         title="Nombre"
+                                         size="50"
+                                         maxlength="100"/>
+
+                            <p:outputLabel value="Apellido:" for="itApellido" />
+                            <p:inputText id="itApellido" 
+                                         value="#{medicoBean.medico.persona.apellido}" 
+                                         title="Apellido" 
+                                         size="50"
+                                         maxlength="100"/>
 
 
-                                        <p:commandButton id="btnDeleteTelMedico" 
-                                                         actionListener="#{listadoTelefonosBean.borrarTelefono(telmed)}"                                                                         
-                                                         icon="ui-icon-close"
-                                                         update=":frmPri:dtTelefonosMedico">
-                                        </p:commandButton>
-                                    </p:column>
-                                    <p:column headerText="Tipo">  
-                                        <h:outputText value="#{telmed.tipoTelefono}" />  
-                                    </p:column>  
+                            <p:outputLabel value="Cuil" for="itCuil" />
+                            <p:inputMask id="itCuil"
+                                         mask="99-99999999-9"
+                                         value="#{medicoBean.medico.persona.cuil}" 
+                                         title="Cuil" />
 
-                                    <p:column headerText="Numero">  
-                                        <h:outputText value="#{telmed.numero}" />  
-                                    </p:column>  
-                                </p:dataTable> 
+                            <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
+                            <p:calendar id="caFechaNacimiento" 
+                                        value="#{medicoBean.medico.persona.fechaNacimiento}" 
+                                        title="FechaNacimiento:" 
+                                        />
+                            <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
+                            <p:selectOneMenu id="tipoDocumento" value="#{medicoBean.tipoDocumento}" >
+                                <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
+                                               var="tipoDocumentoItem"
+                                               itemValue="#{tipoDocumentoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_numero}" for="numero" />
+                            <p:inputText id="numero" value="#{medicoBean.medico.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
+                            <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
+                            <p:selectOneMenu id="sexo" value="#{medicoBean.sexo}" >
+                                <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
+                                               var="sexoItem"
+                                               itemValue="#{sexoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
+                            <p:selectOneMenu id="estadoCivil" value="#{medicoBean.medico.persona.estadoCivil}" >
+                                <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                               var="estadoCivilItem"
+                                               itemValue="#{estadoCivilItem}"/>
+                            </p:selectOneMenu>
 
-                                <p:commandButton id="btnCreateTelefonosMedicos"
-                                                 value="Agregar" 
-                                                 oncomplete="PF('dlgTel').show();"
-                                                 icon="ui-icon-disk"
-                                                 actionListener="#{listadoTelefonosBean.definirActionBoton}"
-                                                 update="dTelefonos"/>
-                            </h:panelGrid>
-                        </div>
-                    </p:panel>  
-                    <br></br>
-                    <h:panelGrid columns="1" 
-                                 width="720"
-                                 >
-
-                        <p:panel header="Domicilio"
+                        </h:panelGrid>
+                        <br></br>
+                        <p:panel header="Telefonos"
                                  style="width: 700px">
-                            <h:panelGrid columns="2" width="550">
-                                <p:commandButton id="btnDomicilioMedico" 
-                                                 value="Cargar Datos"
-                                                 oncomplete="PF('dgDomicilio').show();"
-                                                 actionListener="#{domicilioBean.definirActionBoton}"
-                                                 icon="ui-icon-disk"
-                                                 >
-                                    <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+                            <div class="flotar">
 
-                                </p:commandButton> 
-
-                                <p:panel id="pnDomicilio" >
-                                    <h:outputText  value="Localidad:  "/>
-                                    <h:outputText  value="#{domicilioBean.domicilio.localidad}"/> <br></br>
-                                    <h:outputText  value="Barrio:  "/>
-                                    <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
-                                    <h:outputText  value="Calle:  "/>
-                                    <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
-                                    <h:outputText  value="Numero:  "/>
-                                    <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
-                                </p:panel>
-                            </h:panelGrid>
-                        </p:panel>
-
-                    </h:panelGrid>
-                    <br></br> 
-                    <h:panelGrid columns="1" 
-                                 width="720"
-                                 >
-
-                        <p:panel header="Datos Profesionales"
-                                 style="width: 700px">
-                            <h:panelGrid columns="2">
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_titulo}" for="titulo" />
-                                <p:inputText id="titulo" value="#{medicoBean.medico.titulo}" title="#{bundle.CreateMedicoTitle_titulo}" size="70"/>
-
-                                <p:outputLabel value="Matricula: " for="imMatricula" />
-                                <p:inputMask id="imMatricula" 
-                                             value="#{medicoBean.medico.matriculaProfesional}" 
-                                             title="Matricula"
-                                             mask="9999"
-                                             size="10"
-                                             maxlength="4"/>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_tipoSocio} " for="tipoSocio" />
-                                <p:selectOneMenu id="tipoSocio" value="#{medicoBean.medico.tipoSocio}" >
-                                    <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
-                                                   var="tipoSocioItem"
-                                                   itemValue="#{tipoSocioItem}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaRecibido}" for="fechaRecibido" />
-                                <p:calendar id="fechaRecibido" 
-                                            pattern="MM/dd/yyyy" 
-                                            value="#{medicoBean.medico.fechaRecibido}" 
-                                            title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaTitulo}" for="fechaTitulo" />
-                                <p:calendar id="fechaTitulo" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_unidadFormadora}" for="unidadFormadora" />
-                                <p:selectOneMenu id="unidadFormadora" value="#{medicoBean.medico.unidadFormadora}" >
-                                    <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
-                                                   var="unidadFormadoraItem"
-                                                   itemValue="#{unidadFormadoraItem}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaBaja}" for="fechaBaja" />
-                                <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_motivoBaja}" for="motivoBaja" />
-                                <p:inputText id="motivoBaja" value="#{medicoBean.medico.motivoBaja}" title="#{bundle.CreateMedicoTitle_motivoBaja}" />
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_organismo}" for="organismo" />
-                                <p:selectOneMenu id="organismo" value="#{medicoBean.medico.organismo}" >
-                                    <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
-                                                   var="organismoItem"
-                                                   itemValue="#{organismoItem}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_libro}" for="libro" />
-                                <p:inputText id="libro" value="#{medicoBean.medico.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
-                                <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
-                                <p:inputText id="folio" value="#{medicoBean.medico.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
+                                <h:panelGrid columns="2"
+                                             width="550px"
+                                             cellpadding="10px">
+                                    <p:dataTable var="telmed" 
+                                                 value="#{listadoTelefonosBean.lstTelefonos}" 
+                                                 id="dtTelefonosMedico"
+                                                 > 
+                                        <p:column>
 
 
-                            </h:panelGrid>
+                                            <p:commandButton id="btnDeleteTelMedico" 
+                                                             actionListener="#{listadoTelefonosBean.borrarTelefono(telmed)}"                                                                         
+                                                             icon="ui-icon-close"
+                                                             update=":dtTelefonosMedico">
+                                            </p:commandButton>
+                                        </p:column>
+                                        <p:column headerText="Tipo">  
+                                            <h:outputText value="#{telmed.tipoTelefono}" />  
+                                        </p:column>  
 
-                        </p:panel>
-                    </h:panelGrid>
+                                        <p:column headerText="Numero">  
+                                            <h:outputText value="#{telmed.numero}" />  
+                                        </p:column>  
+                                    </p:dataTable> 
+
+                                    <p:commandButton id="btnCreateTelefonosMedicos"
+                                                     value="Agregar" 
+                                                     oncomplete="PF('dlgTel').show();"
+                                                     icon="ui-icon-disk"
+                                                     actionListener="#{listadoTelefonosBean.definirActionBoton}"
+                                                     />
+                                </h:panelGrid>
+                            </div>
+                        </p:panel>  
+                        <br></br>
+                        <h:panelGrid columns="1" 
+                                     width="720"
+                                     >
+
+                            <p:panel header="Domicilio"
+                                     style="width: 700px">
+                                <h:panelGrid columns="2" width="550">
+                                    <p:commandButton id="btnDomicilioMedico" 
+                                                     value="Cargar Datos"
+                                                     oncomplete="PF('dgDomicilio').show();"
+                                                     actionListener="#{domicilioBean.definirActionBoton}"
+                                                     icon="ui-icon-disk"
+                                                     >
+                                        <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+
+                                    </p:commandButton> 
+
+                                    <p:panel id="pnDomicilio" >
+                                        <h:outputText  value="Localidad:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.localidad}"/> <br></br>
+                                        <h:outputText  value="Barrio:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
+                                        <h:outputText  value="Calle:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
+                                        <h:outputText  value="Numero:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                    </p:panel>
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </h:panelGrid>
+                        <br></br> 
+                        <h:panelGrid columns="1" 
+                                     width="720"
+                                     >
+
+                            <p:panel header="Datos Profesionales"
+                                     style="width: 700px">
+                                <h:panelGrid columns="2">
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_titulo}" for="titulo" />
+                                    <p:inputText id="titulo" value="#{medicoBean.medico.titulo}" title="#{bundle.CreateMedicoTitle_titulo}" size="70"/>
+
+                                    <p:outputLabel value="Matricula: " for="imMatricula" />
+                                    <p:inputMask id="imMatricula" 
+                                                 value="#{medicoBean.medico.matriculaProfesional}" 
+                                                 title="Matricula"
+                                                 mask="9999"
+                                                 size="10"
+                                                 maxlength="4"/>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_tipoSocio} " for="tipoSocio" />
+                                    <p:selectOneMenu id="tipoSocio" value="#{medicoBean.medico.tipoSocio}" >
+                                        <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
+                                                       var="tipoSocioItem"
+                                                       itemValue="#{tipoSocioItem}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaRecibido}" for="fechaRecibido" />
+                                    <p:calendar id="fechaRecibido" 
+                                                pattern="MM/dd/yyyy" 
+                                                value="#{medicoBean.medico.fechaRecibido}" 
+                                                title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaTitulo}" for="fechaTitulo" />
+                                    <p:calendar id="fechaTitulo" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_unidadFormadora}" for="unidadFormadora" />
+                                    <p:selectOneMenu id="unidadFormadora" value="#{medicoBean.medico.unidadFormadora}" >
+                                        <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
+                                                       var="unidadFormadoraItem"
+                                                       itemValue="#{unidadFormadoraItem}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaBaja}" for="fechaBaja" />
+                                    <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoBean.medico.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_motivoBaja}" for="motivoBaja" />
+                                    <p:inputText id="motivoBaja" value="#{medicoBean.medico.motivoBaja}" title="#{bundle.CreateMedicoTitle_motivoBaja}" />
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_organismo}" for="organismo" />
+                                    <p:selectOneMenu id="organismo" value="#{medicoBean.medico.organismo}" >
+                                        <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
+                                                       var="organismoItem"
+                                                       itemValue="#{organismoItem}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_libro}" for="libro" />
+                                    <p:inputText id="libro" value="#{medicoBean.medico.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
+                                    <p:inputText id="folio" value="#{medicoBean.medico.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
+
+
+                                </h:panelGrid>
+
+                            </p:panel>
+                        </h:panelGrid>
 
 
 
 
-                </p:scrollPanel>
-            </p:panel>
-            <div style=" float: left;">
-                <p:messages autoUpdate="true"/>
-            </div>
-            <div style="clear: both;"/>
+                    </p:scrollPanel>
+                </p:panel>
+                <div style=" float: left;">
+                    <p:messages autoUpdate="true"/>
+                </div>
+                <div style="clear: both;"/>
 
-            <div class="divboton">
+                <div class="divboton">
 
-                <p:commandButton id="btnAction"
-                                 value=" " 
-                                 actionListener="#{medicoBean.actionBtn}" 
-                                 update=":frmPri:pPri, :frmPri:dtMedico, @this"
-                                 binding="#{medicoBean.cbAction}"
-                                 styleClass="boton"
-                                 />
-
-
-                <p:commandButton id="btnSalir"
-                                 value="Salir"  
-                                 actionListener="#{medicoBean.limpiar()}"
-                                 oncomplete="PF('dlgMedico').hide()"
-                                 icon="ui-icon-cancel"
-                                 update=":frmPri:dMedico, :frmPri:dtMedico"
-                                 styleClass="boton"/>
-
-            </div>
+                    <p:commandButton id="btnAction"
+                                     value=" " 
+                                     actionListener="#{medicoBean.actionBtn}" 
+                                     update=":dtMedico, @this"
+                                     binding="#{medicoBean.cbAction}"
+                                     styleClass="boton"
+                                     />
 
 
-        </p:dialog>
+                    <p:commandButton id="btnSalir"
+                                     value="Salir"  
+                                     actionListener="#{medicoBean.limpiar()}"
+                                     oncomplete="PF('dlgMedico').hide()"
+                                     icon="ui-icon-cancel"
+                                     update=":dMedico, :dtMedico"
+                                     styleClass="boton"/>
 
-        <!--Fin  Dialogo Usuario ABM -->
-
-        <!--TABLA NIVEL -->
-
-        <h2> Profesionales Medicos</h2>
+                </div>
 
 
-        <p>
+            </p:dialog>
 
-            <p:commandButton id="cbCreate"
-                             value="Nuevo" 
-                             icon="ui-icon-circle-plus" 
-                             oncomplete="PF('dlgMedico').show()"
-                             update=":frmPri:dtMedico, dMedico"
-                             actionListener="#{medicoBean.setBtnSelect}"
-                             />
-        </p> 
+            <!--Fin  Dialogo Usuario ABM -->
 
-        <p:dataTable id="dtMedico"
-                     value="#{listaMedicoBean.medicos}"
-                     var="item"
-                     style="overflow-x: auto;"
-                     paginator="true"
-                     rows="20"
-                     >
+            <!--TABLA NIVEL -->
 
-            <p:column width="100">
-                <p:commandButton id="cbEdit"
-                                 title="Editar"
-                                 icon="ui-icon-pencil" 
-                                 update=":frmPri:dMedico"
-                                 oncomplete="PF('dlgMedico').show();"
-                                 actionListener="#{medicoBean.setBtnSelect}"
-                                 process="@form">                    
+            <h2> Profesionales Medicos</h2>
 
-                    <f:setPropertyActionListener value="#{item}" target="#{medicoBean.medico}"/> 
 
-                </p:commandButton>
+            <p>
 
-                <p:commandButton id="cbDelete"
-                                 title="Eliminar"
-                                 icon="ui-icon-circle-close" 
-                                 update=":frmPri:dMedico"
-                                 oncomplete="PF('dlgMedico').show();"
-                                 actionListener="#{medicoBean.setBtnSelect}">
-                    <f:setPropertyActionListener value="#{item}" target="#{medicoBean.medico}"/> 
+                <p:commandButton id="cbCreate" icon="ui-icon-plus"   
+                                 value="#{bundle.Create}" 
+                                 actionListener="#{medicoBean.setBtnSelect}" 
+                                 update=":MedicoDlgForm" 
+                                 oncomplete="PF('MedicoDlg').show()"/>
+            </p> 
 
-                </p:commandButton>
+            <p:dataTable id="dtMedico"
+                         value="#{listaMedicoBean.medicos}"
+                         var="item"
+                         style="overflow-x: auto;"
+                         paginator="true"
+                         rows="20"
+                         >
 
-            </p:column>
-            <p:column 
-                filterBy="#{item.persona.nombre}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Nombre"/>
-                </f:facet>
-                <h:outputText value="#{item.persona.nombre}"/>
-            </p:column>
+                <p:column width="100">
+                    <p:commandButton id="cbEdit"
+                                     title="Editar"
+                                     icon="ui-icon-pencil" 
+                                     update=":dMedico"
+                                     oncomplete="PF('dlgMedico').show();"
+                                     actionListener="#{medicoBean.setBtnSelect}"
+                                     process="@form">                    
 
-            <p:column
-                filterBy="#{item.persona.apellido}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Apellido"/>
-                </f:facet>
-                <h:outputText value="#{item.persona.apellido}"/>
-            </p:column>
+                        <f:setPropertyActionListener value="#{item}" target="#{medicoBean.medico}"/> 
 
-            <p:column
-                filterBy="#{item.matriculaProfesional}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Matricula"/>
-                </f:facet>
-                <h:outputText value="#{item.matriculaProfesional}"/>
-            </p:column>
-            <p:column
-                filterBy="#{item.titulo}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Titulo"/>
-                </f:facet>
-                <h:outputText value="#{item.titulo}"/>
-            </p:column>
+                    </p:commandButton>
 
-        </p:dataTable>
+                    <p:commandButton id="cbDelete"
+                                     title="Eliminar"
+                                     icon="ui-icon-circle-close" 
+                                     update=":dMedico"
+                                     oncomplete="PF('dlgMedico').show();"
+                                     actionListener="#{medicoBean.setBtnSelect}">
+                        <f:setPropertyActionListener value="#{item}" target="#{medicoBean.medico}"/> 
+
+                    </p:commandButton>
+
+                </p:column>
+                <p:column 
+                    filterBy="#{item.persona.nombre}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.nombre}"/>
+                </p:column>
+
+                <p:column
+                    filterBy="#{item.persona.apellido}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Apellido"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.apellido}"/>
+                </p:column>
+
+                <p:column
+                    filterBy="#{item.matriculaProfesional}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Matricula"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matriculaProfesional}"/>
+                </p:column>
+                <p:column
+                    filterBy="#{item.titulo}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Titulo"/>
+                    </f:facet>
+                    <h:outputText value="#{item.titulo}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+ 
     </ui:define>
+
 </ui:composition>

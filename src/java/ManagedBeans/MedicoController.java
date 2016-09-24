@@ -1,6 +1,9 @@
 package ManagedBeans;
 
 import Entidades.Medico.Medico;
+import Entidades.Persona.DocumentoIdentidad;
+import Entidades.Persona.Persona;
+import Entidades.Persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MedicoFacade;
@@ -51,6 +54,9 @@ public class MedicoController implements Serializable {
 
     public Medico prepareCreate() {
         selected = new Medico();
+        selected.setPersona(new Persona());
+        selected.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
+        selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
         initializeEmbeddableKey();
         return selected;
     }
