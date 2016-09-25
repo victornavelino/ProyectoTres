@@ -12,14 +12,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
 
-@ManagedBean(name = "telefonoController")
+
+@Named("telefonoController")
 @SessionScoped
 public class TelefonoController implements Serializable {
 
@@ -31,7 +32,7 @@ public class TelefonoController implements Serializable {
     public TelefonoController() {
     }
 
-    public Telefono getSelected() {
+      public Telefono getSelected() {
         return selected;
     }
 
@@ -51,6 +52,7 @@ public class TelefonoController implements Serializable {
 
     public Telefono prepareCreate() {
         selected = new Telefono();
+       
         initializeEmbeddableKey();
         return selected;
     }

@@ -194,11 +194,12 @@ public class DomicilioBean  {
     public void cargarLocalidades() {
 
         try {
-            listaLocalidades = new ArrayList<SelectItem>();
+            listaLocalidades = new ArrayList<>();
             for (Localidad loc : localidadRNLocal.buscarLocalidadesDepto(departamento)) {
                 listaLocalidades.add(new SelectItem(loc, loc.toString()));
 
             }
+            System.out.println("LOCALIDADESSSSS. "+listaLocalidades);
         } catch (Exception ex) {
             Logger.getLogger(DomicilioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -245,7 +246,7 @@ public class DomicilioBean  {
         //this.setsDireccion(this.getPersona().getLugarNacimiento().getDepartamento().getDescripcion() + ", " + this.getPersona().getLugarNacimiento().getDescripcion());
         //System.out.println(actualizarPanel);
         if (btnSelect.getId().equals("btnDomicilioMedico")) {
-            RequestContext.getCurrentInstance().update("frmPri:pnDomicilio");
+            RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
             RequestContext.getCurrentInstance().execute("PF('dgDomicilio').hide();");
         }
 

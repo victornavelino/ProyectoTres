@@ -10,18 +10,19 @@
                  >
     <ui:define name="content">
 
-
         <h3>
             <h:outputText value="#{bundle.ListMedicoTitle}"></h:outputText><br/>
-                   </h3>
+        </h3>
+
 
 
         <h:form id="MedicoListForm">
+
             <p:commandButton id="createButton" style="width: 150px" icon="ui-icon-plus"   value="Nuevo Profesional" actionListener="#{medicoController.prepareCreate}" update=":MedicoCreateForm" oncomplete="PF('MedicoCreateDialog').show()"/>
-                 
+
             <p:panel header="#{bundle.ListMedicoTitle}">
-               
- 
+
+
                 <p:dataTable id="datalist" value="#{medicoController.items}" var="item"
                              selectionMode="single" selection="#{medicoController.selected}"
                              paginator="true"
@@ -32,53 +33,40 @@
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-                    <p:column filterBy="#{item.persona.apellido}">
+                    <p:column filterBy="#{item.persona.apellido}" width="200">
                         <f:facet name="header">
                             <h:outputText value="Apellido"/>
                         </f:facet>
                         <h:outputText value="#{item.persona.apellido}"/>
                     </p:column>
-                    <p:column>
+                    <p:column width="200">
                         <f:facet name="header">
                             <h:outputText value="Nombre"/>
                         </f:facet>
                         <h:outputText value="#{item.persona.nombre}"/>
                     </p:column>
 
-                    <p:column filterBy="#{item.matriculaProfesional}">
+                    <p:column filterBy="#{item.persona.documentoIdentidad.numero}" width="200">
                         <f:facet name="header">
-                            <h:outputText value="Matricula"/>
+                            <h:outputText value="Documento"/>
                         </f:facet>
-                        <h:outputText value="#{item.matriculaProfesional}"/>
+                        <h:outputText value="#{item.persona.documentoIdentidad.numero}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_tipoSocio}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.tipoSocio}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_fechaInscripcion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaInscripcion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column>
+
+                    <p:column filterBy="#{item.titulo}" width="200">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMedicoTitle_titulo}"/>
                         </f:facet>
                         <h:outputText value="#{item.titulo}"/>
                     </p:column>
-                    <p:column>
+
+                    <p:column filterBy="#{item.matriculaProfesional}" width="120">
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_fechaRecibido}"/>
+                            <h:outputText value="Matricula"/>
                         </f:facet>
-                        <h:outputText value="#{item.fechaRecibido}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
+                        <h:outputText value="#{item.matriculaProfesional}"/>
                     </p:column>
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMedicoTitle_fechaTitulo}"/>
@@ -87,48 +75,18 @@
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
                     </p:column>
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListMedicoTitle_unidadFormadora}"/>
                         </f:facet>
                         <h:outputText value="#{item.unidadFormadora}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_fechaBaja}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaBaja}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_motivoBaja}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.motivoBaja}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_organismo}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.organismo}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_libro}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.libro}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListMedicoTitle_folio}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.folio}"/>
-                    </p:column>
+
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{medicoController.prepareCreate}" update=":MedicoCreateForm" oncomplete="PF('MedicoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MedicoViewForm" oncomplete="PF('MedicoViewDialog').show()" disabled="#{empty medicoController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MedicoEditForm" oncomplete="PF('MedicoEditDialog').show()" disabled="#{empty medicoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{medicoController.prepareUpdate}" update=":MedicoEditForm" oncomplete="PF('MedicoEditDialog').show()" disabled="#{empty medicoController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicoController.destroy}" update=":growl,datalist" disabled="#{empty medicoController.selected}"/>
                     </f:facet>
                 </p:dataTable>
@@ -138,5 +96,8 @@
         <ui:include src="Create.xhtml"/>
         <ui:include src="Edit.xhtml"/>
         <ui:include src="View.xhtml"/>
+        <ui:include src="TelefonosProfesionalDlg.xhtml"/>
+        <ui:include src="MailProfesionalDlg.xhtml"/>
+        <ui:include src="DomicilioDlgProfesional.xhtml"/>
     </ui:define>
 </ui:composition>

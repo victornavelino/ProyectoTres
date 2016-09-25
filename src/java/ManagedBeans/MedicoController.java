@@ -1,14 +1,16 @@
 package ManagedBeans;
 
 import Entidades.Medico.Medico;
+import Entidades.Persona.CorreoElectronico;
 import Entidades.Persona.DocumentoIdentidad;
 import Entidades.Persona.Persona;
+import Entidades.Persona.Telefono;
 import Entidades.Persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MedicoFacade;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,10 +19,13 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 @Named("medicoController")
 @SessionScoped
@@ -28,10 +33,34 @@ public class MedicoController implements Serializable {
 
     @EJB
     private Facades.MedicoFacade ejbFacade;
+    @EJB
+    private Facades.TelefonoFacade telefonoFacade;
+    @EJB
+    private Facades.CorreoElectronicoFacade correoElectronicoFacade;
     private List<Medico> items = null;
     private Medico selected;
+    @Inject
+    private ListadoTelefonosBean listadoTelefonosBean;
+    @Inject
+    private ListadoEmailBean listadoEmailBean;
 
     public MedicoController() {
+    }
+
+    public ListadoEmailBean getListadoEmailBean() {
+        return listadoEmailBean;
+    }
+
+    public void setListadoEmailBean(ListadoEmailBean listadoEmailBean) {
+        this.listadoEmailBean = listadoEmailBean;
+    }
+
+    public ListadoTelefonosBean getListadoTelefonosBean() {
+        return listadoTelefonosBean;
+    }
+
+    public void setListadoTelefonosBean(ListadoTelefonosBean listadoTelefonosBean) {
+        this.listadoTelefonosBean = listadoTelefonosBean;
     }
 
     public Medico getSelected() {
@@ -57,11 +86,21 @@ public class MedicoController implements Serializable {
         selected.setPersona(new Persona());
         selected.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
         selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        listadoTelefonosBean.setLstTelefonos(new ArrayList<Telefono>());
+        listadoEmailBean.setLstCorreoElectronico(new ArrayList<CorreoElectronico>());
         initializeEmbeddableKey();
         return selected;
     }
 
+    public void prepareUpdate() {
+        listadoTelefonosBean.setLstTelefonos(selected.getPersona().getTelefonos());
+        listadoEmailBean.setLstCorreoElectronico(selected.getPersona().getCorreosElectronicos());
+    }
+
     public void create() {
+
+        selected.getPersona().setTelefonos(listadoTelefonosBean.getLstTelefonos());
+        selected.getPersona().setCorreosElectronicos(listadoEmailBean.getLstCorreoElectronico());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MedicoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -73,6 +112,9 @@ public class MedicoController implements Serializable {
     }
 
     public void destroy() {
+        
+        selected.getPersona().setTelefonos(null);
+        selected.getPersona().setCorreosElectronicos(null);
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("MedicoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection

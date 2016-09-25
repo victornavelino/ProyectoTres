@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
@@ -27,7 +27,7 @@ import org.primefaces.context.RequestContext;
  *
  * @author vouilloz
  */
-@ManagedBean
+@Named("listadoTelefonosBean")
 @SessionScoped
 public class ListadoTelefonosBean implements Serializable {
 
@@ -59,7 +59,7 @@ public class ListadoTelefonosBean implements Serializable {
     public void setTipoTelefonoFacade(TipoTelefonoFacade tipoTelefonoFacade) {
         this.tipoTelefonoFacade = tipoTelefonoFacade;
     }
-    
+
     public int getiTipoBoton() {
         return iTipoBoton;
     }
@@ -155,14 +155,14 @@ public class ListadoTelefonosBean implements Serializable {
         }
     }
 
-    public void definirActionBoton(ActionEvent e) {
+    public void prepararDialogTelefonos(ActionEvent e) {
 
         //System.out.println("Entro al evento definirActionBoton");
         //System.out.println("boton : " + e);
         //System.out.println("boton 2 : " + e.getSource());
         btnSelect = (CommandButton) e.getSource();
 
-        //System.out.println("boton id: " + btnSelect.getId());
+        System.out.println("boton id: " + btnSelect.getId());
         //this.getCbAction().setDisabled(false);
         if (btnSelect.getId().equals("btnEdit")) {
             this.getCbActionTelefonos().setValue("Editar");
@@ -179,12 +179,18 @@ public class ListadoTelefonosBean implements Serializable {
             this.setiTipoBoton(0);
         }//fin if
 
-        if (btnSelect.getId().equals("btnCreateTelefonosMedicos")) {
+        if (btnSelect.getId().equals("btnCreateTelefonosProfesional")) {
             this.setTelefono(new Telefono());
             this.getCbActionTelefonos().setValue("Guardar");
             this.setiTipoBoton(0);
+            System.out.println("OKOKOK");
         }//fin if
-
+                if (btnSelect.getId().equals("btnCreateTelefonosProfesionalUpdate")) {
+            this.setTelefono(new Telefono());
+            this.getCbActionTelefonos().setValue("Guardar");
+            this.setiTipoBoton(0);
+            System.out.println("OKOKOK");
+        }//fin if
 
         //System.out.println("termino el definir: " + this.getPersona());
     }
@@ -222,19 +228,26 @@ public class ListadoTelefonosBean implements Serializable {
         if (lstTelefonos == null) {
             lstTelefonos = new ArrayList<>();
         }
-        System.out.println("Cargar Tabla Telefonos" + tipoBoton);
+
         telefono.setTipoTelefono(tipotelefono);
+        System.out.println("Telegonods_ " + telefono);
         lstTelefonos.add(telefono);
         //this.setTelefonios(new Telefono());
         System.out.println("Ejecuta new telefono");
         //telefono.setNumero("");
         System.out.println(btnSelect.getId());
-        if (btnSelect.getId().equals("btnCreateTelefonosMedicos")) {
+        if (btnSelect.getId().equals("btnCreateTelefonosProfesional")) {
             System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
             //Entra al if si es llamado por Docente.xhtml
-            RequestContext.getCurrentInstance().update("frmPri:dtTelefonosMedico");
+            RequestContext.getCurrentInstance().update("MedicoCreateForm:dtTelefonosProf");
             RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
 
+        }
+        if (btnSelect.getId().equals("btnCreateTelefonosProfesionalUpdate")) {
+            System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
+            //Entra al if si es llamado por Docente.xhtml
+            RequestContext.getCurrentInstance().update("MedicoEditForm:dtTelefonosProf");
+            RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
         }
 
         //System.out.println("Entro al cargar telefonos: " + telefono.getNumero());

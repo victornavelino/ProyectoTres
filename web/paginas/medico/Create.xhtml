@@ -8,12 +8,13 @@
 
     <ui:composition>
 
+
         <p:dialog id="MedicoCreateDlg" widgetVar="MedicoCreateDialog" modal="true" position="top" resizable="false" appendTo="@(body)" header="#{bundle.CreateMedicoTitle}">
             <h:form id="MedicoCreateForm">
                 <h:panelGroup id="display" style="width: 700px">
                     <p:panel id="pPri" header="Datos Personales" > 
                         <p:scrollPanel mode="native" style="width:750px;height:400px">
-                            <h:panelGrid columns="2" rendered="#{medicoController.selected != null}">
+                            <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
 
                                 <p:outputLabel value="Nombre: " for="itNombre" />
                                 <p:inputText id="itNombre" 
@@ -40,16 +41,140 @@
                                             value="#{medicoController.selected.persona.fechaNacimiento}" 
                                             title="FechaNacimiento:" 
                                             />
-                                
+
                                 <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
-                                <p:selectOneMenu id="tipoDocumento" value="#{medicoController.selected.persona.documentoIdentidad.tipoDocumento}" >
+                                <p:selectOneMenu id="tipoDocumento" value="#{medicoController.selected.persona.documentoIdentidad.tipoDocumento}" 
+                                                 style="width: 150px">
                                     <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
                                                    var="tipoDocumentoItem"
                                                    itemValue="#{tipoDocumentoItem}"/>
                                 </p:selectOneMenu>
 
+                                <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_numero}" for="numero" />
+                                <p:inputText id="numero" value="#{medicoController.selected.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
+
+                                <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
+                                <p:selectOneMenu id="sexo" value="#{medicoController.selected.persona.sexo}" >
+                                    <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
+                                                   var="sexoItem"
+                                                   itemValue="#{sexoItem}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
+                                <p:selectOneMenu id="estadoCivil" value="#{medicoController.selected.persona.estadoCivil}" >
+                                    <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                                   var="estadoCivilItem"
+                                                   itemValue="#{estadoCivilItem}"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                            <br></br>
+                            <p:panel header="Telefonos"
+                                     style="width: 700px">
+                                <h:panelGrid columns="2"
+                                             width="550px"
+                                             cellpadding="10px">
+                                    <p:dataTable var="telmed" 
+                                                 value="#{listadoTelefonosBean.lstTelefonos}" 
+                                                 id="dtTelefonosProf"
+                                                 > 
+                                        <p:column>
 
 
+                                            <p:commandButton id="btnDeleteTelMedico" 
+                                                             actionListener="#{listadoTelefonosBean.borrarTelefono(telmed)}"                                                                         
+                                                             icon="ui-icon-close"
+                                                             update=":MedicoCreateForm:dtTelefonosProf">
+                                            </p:commandButton>
+                                        </p:column>
+                                        <p:column headerText="Tipo">  
+                                            <h:outputText value="#{telmed.tipoTelefono}" />  
+                                        </p:column>  
+
+                                        <p:column headerText="Numero">  
+                                            <h:outputText value="#{telmed.numero}" />  
+                                        </p:column>  
+                                    </p:dataTable> 
+
+                                    <p:commandButton id="btnCreateTelefonosProfesional"
+                                                     value="Agregar" 
+                                                     oncomplete="PF('dlgTel').show();"
+                                                     icon="ui-icon-disk"
+                                                     actionListener="#{listadoTelefonosBean.prepararDialogTelefonos}"
+                                                     update=":telefonoCreateForm:dTelefonos"/>
+                                </h:panelGrid>
+
+                            </p:panel><br/>
+                            <p:panel header="Correos Electronicos"
+                                     style="width: 700px">
+                                <div class="flotar">
+
+                                    <h:panelGrid columns="2"
+                                                 width="550px"
+                                                 cellpadding="10px">
+                                        <p:dataTable var="mailProf"
+                                                     id="dtEmailProfesional"
+                                                     value="#{listadoEmailBean.lstCorreoElectronico}"
+                                                     >  
+                                            <p:column>
+
+
+                                                <p:commandButton id="btnDeleteEmailProf" 
+                                                                 actionListener="#{listadoEmailBean.borrarEmail(mailProf)}"
+                                                                 update=":MedicoCreateForm:dtEmailProfesional"
+                                                                 icon="ui-icon-close">
+                                                </p:commandButton>
+                                            </p:column>  
+
+                                            <p:column headerText="Email">  
+                                                <h:outputText value="#{mailProf.direccion}" />  
+                                            </p:column>  
+                                        </p:dataTable>
+
+                                        <p:commandButton id="btnCreateEmailProfesional"
+                                                         value="Agregar" 
+                                                         actionListener="#{listadoEmailBean.definirActionBotonEmail}"
+                                                         oncomplete="PF('dlgEmail').show();"
+                                                         icon="ui-icon-disk"
+                                                         update=":mailCreateForm:dEmail"/>
+
+                                    </h:panelGrid>
+                                </div>
+                            </p:panel>
+                            <br></br>
+                            <h:panelGrid columns="1" 
+                                         width="720"
+                                         >
+
+                                <p:panel header="Domicilio"
+                                         style="width: 700px">
+                                    <h:panelGrid columns="2" width="550">
+                                        <p:commandButton id="btnDomicilioMedico" 
+                                                         value="Cargar Datos"
+                                                         oncomplete="PF('dgDomicilioProf').show();"
+                                                         actionListener="#{domicilioBean.definirActionBoton}"
+                                                         icon="ui-icon-disk"
+                                                         >
+                                            <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+
+                                        </p:commandButton> 
+
+                                        <p:panel id="pnDomicilio" >
+                                            <h:outputText  value="Localidad:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.localidad}"/> <br></br>
+                                            <h:outputText  value="Barrio:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
+                                            <h:outputText  value="Calle:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
+                                            <h:outputText  value="Numero:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                        </p:panel>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </h:panelGrid>
+                            <br></br> 
+
+                            <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_matriculaProfesional}" for="matriculaProfesional" />
                                 <p:inputText id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.CreateMedicoTitle_matriculaProfesional}" />
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_tipoSocio}" for="tipoSocio" />
@@ -86,8 +211,8 @@
                                 <p:inputText id="libro" value="#{medicoController.selected.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
                                 <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
-                            </h:panelGrid>
 
+                            </p:panelGrid>
                         </p:scrollPanel>
                     </p:panel>
                     <p:commandButton actionListener="#{medicoController.create}" value="#{bundle.Save}" update="display,:MedicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MedicoCreateDialog');"/>

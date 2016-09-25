@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Named;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
@@ -24,9 +24,9 @@ import org.primefaces.context.RequestContext;
  *
  * @author vouilloz
  */
-@ManagedBean(name = "listadoEmailBean")
+@Named("listadoEmailBean")
 @SessionScoped
-public class ListadoEmailBean implements Serializable{
+public class ListadoEmailBean implements Serializable {
 
     @EJB
     private CorreoElectronicoRNLocal listadoEmailRNLocal;
@@ -125,7 +125,14 @@ public class ListadoEmailBean implements Serializable{
             this.setiTipoBoton(2);
         }
 
-        if (btnSelect.getId().equals("btnCreateEmailDocentes") || (btnSelect.getId().equals("btnCreateEmailAlumnos"))) {
+        if (btnSelect.getId().equals("btnCreateEmailProfesional")) {
+            //System.out.println("Entro al if : " + this.getPersona());
+            //   this.getCbAction().setValue("Guardar");
+            this.setCorreoElectronico(new CorreoElectronico());
+            this.setiTipoBoton(0);
+
+        }//fin if
+        if (btnSelect.getId().equals("btnCreateEmailProfesionalUpdate")) {
             //System.out.println("Entro al if : " + this.getPersona());
             //   this.getCbAction().setValue("Guardar");
             this.setCorreoElectronico(new CorreoElectronico());
@@ -166,17 +173,19 @@ public class ListadoEmailBean implements Serializable{
             lstCorreoElectronico = new ArrayList<>();
         }
         lstCorreoElectronico.add(correoElectronico);
-        if (btnSelect.getId().equals("btnCreateEmailDocentes")) {
+        if (btnSelect.getId().equals("btnCreateEmailProfesional")) {
             //Entra al if si es llamado por Docente.xhtml
-            context.update("frmPri:dtEmailDocentes");
+            context.update("MedicoCreateForm:dtEmailProfesional");
             context.execute("PF('dlgEmail').hide();");
 
         }
-        if (btnSelect.getId().equals("btnCreateEmailAlumnos")) {
-            //Entra al else si es llamado por Alumno.xhtml
-            context.update("frmPri:dtEmailAlumnos");
+        if (btnSelect.getId().equals("btnCreateEmailProfesionalUpdate")) {
+            //Entra al if si es llamado por Docente.xhtml
+            context.update("MedicoEditForm:dtEmailProfesional");
             context.execute("PF('dlgEmail').hide();");
+
         }
+
     }
 
     //ESTE METODO NO LO USO POR QUE REQUIERE QUE LA TABLA HAGA UN BINDING A UN DATATABLE EN EL BEAN Y ESO 
