@@ -254,3 +254,8 @@ h3,h1 {margin-top:4px}
     text-shadow: 0.1em 0.1em 0.3em black;
     color: #FFF;
 }
+
+.ui-columntoggler-item label {
+    width: 120px;
+    overflow: hidden;
+}

@@ -5,6 +5,7 @@
  */
 package Entidades.Medico;
 
+import Entidades.Base.Base;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -32,10 +33,13 @@ import javax.persistence.Temporal;
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarPorMedico",
             query = "SELECT e FROM Especializacion e WHERE e.medico=:medico "
+            + " ORDER BY e.id DESC"),
+    @NamedQuery(name = "Especializacion.findAll",
+            query = "SELECT e FROM Especializacion e WHERE e.eliminado = false "
             + " ORDER BY e.id DESC")
 
 })
-public class Especializacion implements Serializable {
+public class Especializacion extends Base implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

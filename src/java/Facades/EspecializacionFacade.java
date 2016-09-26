@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class EspecializacionFacade extends AbstractFacade<Especializacion> {
+
     @PersistenceContext(unitName = "ProyectoColegioPU")
     private EntityManager em;
 
@@ -27,5 +28,5 @@ public class EspecializacionFacade extends AbstractFacade<Especializacion> {
     public EspecializacionFacade() {
         super(Especializacion.class);
     }
-    
+
 }

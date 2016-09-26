@@ -20,16 +20,11 @@ import javax.persistence.Query;
 public interface EspecializacionRNLocal {
 
     public List<Especializacion> findAll();
-//    @Override
-//    public List<Especializacion> findCobrosByDniOTexto(String dni) {
-//        Query q = null;
-//        q = em.createNamedQuery("Especializacion.findCobrosByDniOTexto");
-//                q.setParameter("texto", "%" + dni + "%");
-//        return q.getResultList();
-//    }
 
     public List<Especializacion> buscarPorEspecialidad(Especialidad especialidad);
+
     public List<Especializacion> buscarPorProfesional(String medico);
+
     public List<Especializacion> buscarPorMedico(Medico medico);
-    
+
 }

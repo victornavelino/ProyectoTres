@@ -7,41 +7,81 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="dReporte"
-                  widgetVar="dlgReporte"
-                  closable="true" position="top" appendTo="@(body)">
+
+        <p:dialog id="dlgReporteDlg" widgetVar="dlgReporte" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEspecializacionTitle}">
             <h:form id="dReporteForm">
+                <h:panelGroup id="displayReporte">
 
-            <p:panel id="pReporte" rendered="#{especializacionController.selected != null}">
-                <p><img src="Imagenes/logocolegio.png "/></p>
-                <h:outputText value="  Ejemplo: El Colegio Certifica que " />
-                <strong> <h:outputText value="#{especializacionController.selected.medico.persona.apellido}, 
-                                       #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
-                </strong> 
-                <h:outputText value="  posee la Matricula " />
-                <h:outputText value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.ViewEspecializacionTitle_matriculaEspecialidad}"/>
+                    <p>            <p:graphicImage value="/Imagenes/logocolegio.png" />  </p>
+                    <h:outputText value="  Ejemplo: El Colegio Certifica que " />
+                    <strong> <h:outputText value="#{especializacionController.selected.medico.persona.apellido}, 
+                                           #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
+                    </strong> 
+                    <h:outputText value="  posee la Matricula " />
+                    <strong> <h:outputText value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.ViewEspecializacionTitle_matriculaEspecialidad}"/>
+                    </strong>
+                    <h:outputText value="  de la Especialidad " />
+                    <strong><h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                    </strong>
+                    <h:outputText value="  con fecha " /> 
+                    <strong><h:outputText value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.ViewEspecializacionTitle_fechaMatriculacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </strong>
+                    <p>                                                          
+                        <h:outputText value="En San Fernando del Valle de Catamarca,  " />
+                        <h:outputText value="#{especializacionController.date}">
+                                    <f:convertDateTime dateStyle="full" timeZone="America/Argentina/Catamarca"  type="date" locale="es_AR"/>
 
-                <h:outputText value="  de la Especialidad " />
-                <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                        </h:outputText>
+                        <h:outputText value="." /><br />
 
-                <h:outputText value="  con fecha " /> <h:outputText value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.ViewEspecializacionTitle_fechaMatriculacion}">
-                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                </h:outputText>
+                    </p>   
 
-                <p>                                                          
-                    <h:outputText value="En San Fernando del Valle de Catamarca,  " />
-                    <h:outputText value="#{now}">
-                        <f:convertDateTime pattern="dddd, dd MMMM yyyy" type="date" />
-                    </h:outputText>
-                </p>                                
 
-            </p:panel>
-            <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
-                <p:printer target="pReporte" />
-            </p:commandButton>
-            <p:commandButton value="#{bundle.Close}" onclick="dlgReporte.hide()"/>
+                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
+
+
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_id}"/>
+                        <h:outputText value="#{especializacionController.selected.id}" title="#{bundle.ViewEspecializacionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_matriculaEspecialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.ViewEspecializacionTitle_matriculaEspecialidad}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaMatriculacion}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.ViewEspecializacionTitle_fechaMatriculacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaVencimiento}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.ViewEspecializacionTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_libro}"/>
+                        <h:outputText value="#{especializacionController.selected.libro}" title="#{bundle.ViewEspecializacionTitle_libro}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_folio}"/>
+                        <h:outputText value="#{especializacionController.selected.folio}" title="#{bundle.ViewEspecializacionTitle_folio}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_unidadFormadora}"/>
+                        <h:outputText value="#{especializacionController.selected.unidadFormadora}" title="#{bundle.ViewEspecializacionTitle_unidadFormadora}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaRevision}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaRevision}" title="#{bundle.ViewEspecializacionTitle_fechaRevision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaVencimientoRevision}"/>
+                        <h:outputText value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.ViewEspecializacionTitle_fechaVencimientoRevision}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_medico}"/>
+                        <h:outputText value="#{especializacionController.selected.medico.persona.apellido}, 
+                                      #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+                <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                    <p:printer target="displayReporte" />
+                </p:commandButton>
+                <p:commandButton value="#{bundle.Close}" onclick="dlgReporte.hide()"/>
+
             </h:form>
         </p:dialog>
-        
+
     </ui:composition>
 </html>

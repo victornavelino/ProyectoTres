@@ -117,25 +117,25 @@
     <h:body>
 
         <f:view contentType="text/html">
-
-            <f:event type="preRenderView" listener="#{usuarioLogerBean.navigationStatus()}" />
-
-            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-
-            <p:dialog modal="true" widgetVar="statusDialog" header="Estado"   
-                      draggable="false" closable="true" position="top">  
-                <p:graphicImage value="/Imagenes/load.gif" />  
-            </p:dialog>  
-
-            <p:growl id="growl" life="3000" />
-
             <h:form id="frmPri" enctype="multipart/form-data">
+
+                <f:event type="preRenderView" listener="#{usuarioLogerBean.navigationStatus()}" />
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+                <p:dialog modal="true" widgetVar="statusDialog" header="Estado"   
+                          draggable="false" closable="true" position="top">  
+                    <p:graphicImage value="/Imagenes/load.gif" />  
+                </p:dialog>  
+
+
 
                 <ui:include src="dialogosSesion.xhtml"/>
 
-            </h:form>
-            <ui:include src="menu.xhtml"/>
+                <ui:include src="menu.xhtml"/>
 
+            </h:form>
+            <p:growl id="growl" life="3000" />
 
             <b:panel>
                 <ui:insert name="content">Content</ui:insert>

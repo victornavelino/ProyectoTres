@@ -10,6 +10,7 @@ import RN.MedicoRNLocal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
 
 @Named("especializacionController")
 @SessionScoped
@@ -81,18 +83,33 @@ public class EspecializacionController implements Serializable {
     }
 
     public void create() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        String user = (String) session.getAttribute("userName");
+        selected.setCreadoPor(user);
+        selected.setFechaCreado(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionCreated"));
+
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        String user = (String) session.getAttribute("userName");
+        selected.setModificadoPor(user);
+        selected.setFechaModificado(new Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionDeleted"));
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        String user = (String) session.getAttribute("userName");
+        selected.setEliminado(Boolean.TRUE);
+        selected.setModificadoPor(user);
+        selected.setFechaModificado(new Date());
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionDeleted"));
+        //  persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -101,7 +118,7 @@ public class EspecializacionController implements Serializable {
 
     public List<Especializacion> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = especializacionRNLocal.findAll();
         }
         return items;
     }
@@ -139,11 +156,11 @@ public class EspecializacionController implements Serializable {
     }
 
     public List<Especializacion> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return especializacionRNLocal.findAll();
     }
 
     public List<Especializacion> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return especializacionRNLocal.findAll();
     }
 
     @FacesConverter(forClass = Especializacion.class)
@@ -187,25 +204,7 @@ public class EspecializacionController implements Serializable {
 
     }
 
-    public List<Medico> completeText(String apellido) {
-
-        return medicoRNLocal.buscarXApellido(apellido);
-    }
-
-    public List<Medico> completeMedico(String apellido) {
-        List<Medico> medicosFiltrados = new ArrayList<>();
-        for (Medico med:medicoRNLocal.buscarTodos()) {
-            if(med.getPersona().getApellido().startsWith(apellido.toUpperCase())){
-                medicosFiltrados.add(med);
-            }
-        }
-        return medicosFiltrados;
-    }
-    public void cargarEspecializaciones(){
-        System.out.println(" medicoooo seleccionado: "+medico);
-        try {
-            items = especializacionRNLocal.buscarPorMedico(medico);
-        } catch (Exception e) {
-        }
+    public Date getDate() {
+        return new Date();
     }
 }

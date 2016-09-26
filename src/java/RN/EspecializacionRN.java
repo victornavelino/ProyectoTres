@@ -30,11 +30,6 @@ public class EspecializacionRN implements EspecializacionRNLocal {
     private EspecializacionFacade facade;
 
     @Override
-    public List<Especializacion> findAll() {
-        return facade.findAll();
-    }
-
-    @Override
     public List<Especializacion> buscarPorEspecialidad(Especialidad especialidad) {
         Query q = null;
         q = em.createNamedQuery("Especializacion.buscarEspecialidad");
@@ -55,6 +50,13 @@ public class EspecializacionRN implements EspecializacionRNLocal {
         Query q = null;
         q = em.createNamedQuery("Especializacion.buscarPorMedico");
         q.setParameter("medico", medico);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Especializacion> findAll() {
+        Query q = null;
+        q = em.createNamedQuery("Especializacion.findAll");
         return q.getResultList();
     }
 
