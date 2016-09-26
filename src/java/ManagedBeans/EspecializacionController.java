@@ -6,10 +6,7 @@ import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EspecializacionFacade;
 import RN.EspecializacionRNLocal;
-import RN.MedicoRNLocal;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,9 +28,8 @@ public class EspecializacionController implements Serializable {
 
     @EJB
     private Facades.EspecializacionFacade ejbFacade;
-    private EspecializacionRNLocal especializacionRNLocal;
     @EJB
-    private MedicoRNLocal medicoRNLocal;
+    private EspecializacionRNLocal especializacionRNLocal;
     private List<Especializacion> items = null;
     private Especializacion selected;
     private Medico medico;
@@ -64,6 +60,14 @@ public class EspecializacionController implements Serializable {
 
     public void setSelected(Especializacion selected) {
         this.selected = selected;
+    }
+
+    public EspecializacionRNLocal getEspecializacionRNLocal() {
+        return especializacionRNLocal;
+    }
+
+    public void setEspecializacionRNLocal(EspecializacionRNLocal especializacionRNLocal) {
+        this.especializacionRNLocal = especializacionRNLocal;
     }
 
     protected void setEmbeddableKeys() {
@@ -118,7 +122,7 @@ public class EspecializacionController implements Serializable {
 
     public List<Especializacion> getItems() {
         if (items == null) {
-            items = especializacionRNLocal.findAll();
+            items = getEspecializacionRNLocal().findAll();
         }
         return items;
     }
@@ -156,11 +160,11 @@ public class EspecializacionController implements Serializable {
     }
 
     public List<Especializacion> getItemsAvailableSelectMany() {
-        return especializacionRNLocal.findAll();
+        return getEspecializacionRNLocal().findAll();
     }
 
     public List<Especializacion> getItemsAvailableSelectOne() {
-        return especializacionRNLocal.findAll();
+        return getEspecializacionRNLocal().findAll();
     }
 
     @FacesConverter(forClass = Especializacion.class)
