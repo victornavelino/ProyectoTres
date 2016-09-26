@@ -3,6 +3,7 @@ package ManagedBeans;
 import Entidades.Medico.Medico;
 import Entidades.Persona.CorreoElectronico;
 import Entidades.Persona.DocumentoIdentidad;
+import Entidades.Persona.Domicilio;
 import Entidades.Persona.Persona;
 import Entidades.Persona.Telefono;
 import Entidades.Persona.TipoDocumento;
@@ -43,6 +44,8 @@ public class MedicoController implements Serializable {
     private ListadoTelefonosBean listadoTelefonosBean;
     @Inject
     private ListadoEmailBean listadoEmailBean;
+    @Inject
+    private DomicilioBean domicilioBean;
 
     public MedicoController() {
     }
@@ -88,6 +91,7 @@ public class MedicoController implements Serializable {
         selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
         listadoTelefonosBean.setLstTelefonos(new ArrayList<Telefono>());
         listadoEmailBean.setLstCorreoElectronico(new ArrayList<CorreoElectronico>());
+        domicilioBean.setDomicilio(new Domicilio());
         initializeEmbeddableKey();
         return selected;
     }
@@ -98,7 +102,7 @@ public class MedicoController implements Serializable {
     }
 
     public void create() {
-
+        selected.getPersona().setDomicilio(domicilioBean.getDomicilio());
         selected.getPersona().setTelefonos(listadoTelefonosBean.getLstTelefonos());
         selected.getPersona().setCorreosElectronicos(listadoEmailBean.getLstCorreoElectronico());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MedicoCreated"));

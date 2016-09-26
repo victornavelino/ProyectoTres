@@ -22,9 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -39,8 +37,8 @@ import org.primefaces.context.RequestContext;
  * @author hugo
  */
 @Named(value = "domicilioBean")
-@RequestScoped
-public class DomicilioBean  {
+@SessionScoped
+public class DomicilioBean implements Serializable{
 
     @EJB
     private DomicilioRNLocal domicilioRNLocal;
@@ -158,6 +156,7 @@ public class DomicilioBean  {
         domicilio = new Domicilio();
         cargarPaises();
         cargarProvincias();
+        cargarDepartamentos();
     }
 
     public void cargarProvincias() {
@@ -195,7 +194,7 @@ public class DomicilioBean  {
 
         try {
             listaLocalidades = new ArrayList<>();
-            for (Localidad loc : localidadRNLocal.buscarLocalidadesDepto(departamento)) {
+            for (Localidad loc : localidadRNLocal.buscarLocalidadesDepto(departamento)) { 
                 listaLocalidades.add(new SelectItem(loc, loc.toString()));
 
             }
@@ -247,7 +246,7 @@ public class DomicilioBean  {
         //System.out.println(actualizarPanel);
         if (btnSelect.getId().equals("btnDomicilioMedico")) {
             RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
-            RequestContext.getCurrentInstance().execute("PF('dgDomicilio').hide();");
+            RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
         }
 
 

@@ -22,98 +22,85 @@ and open the template in the editor.
                 <h:outputText value="Domicilio"/>
             </f:facet>
             <p:panel header="Domicilio">
-                <div>
-                    <div class="alineados">
+                <p:panelGrid columns="2" styleClass="noBorders">
 
-                        <div class="left">
-                            <h:outputText value="Provincia"/>
-                        </div>
-                        <div class="contenidopanel">
-                            <p:selectOneMenu id="somProvincia"
-                                             converter="ConversorGenerico"
-                                             value="#{domicilioBean.provincia}">
-                                <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
-                                <f:selectItems value="#{domicilioBean.listaProvincias}"/>
-                                <p:ajax                                    
-                                    listener="#{domicilioBean.cargarDepartamentos()}"
-                                    update=":domicilioCreateForm:somDepartamento,:domicilioCreateForm:somLocalidad"/> 
-                            </p:selectOneMenu>
-                        </div>
-                        <div class="left">
-                            <h:outputText value="Departamento"/>
-                        </div>
-                        <div class="contenidopanel">
-                            <p:selectOneMenu id="somDepartamento"
-                                             converter="ConversorGenerico"
-                                             value="#{domicilioBean.departamento}"
-                                             >
-                                <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+                    <h:outputText value="Provincia"/>
 
-                                <f:selectItems value="#{domicilioBean.listaDepartamentos}"/>
 
-                                <p:ajax  
-                                    update=":domicilioCreateForm:somLocalidad"
-                                    listener="#{domicilioBean.cargarLocalidades()}"/>
-                            </p:selectOneMenu>
+                    <p:selectOneMenu id="somProvincia"
+                                     converter="ConversorGenerico"
+                                     value="#{domicilioBean.provincia}"
+                                     >
+                        <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+                        <f:selectItems value="#{domicilioBean.listaProvincias}"/>
+                        <p:ajax                                    
+                            listener="#{domicilioBean.cargarDepartamentos()}"
+                            update=":domicilioCreateForm:somDepartamento,:domicilioCreateForm:somLocalidad"/> 
+                    </p:selectOneMenu>
 
-                        </div>
-                        <div class="left">
-                            <h:outputText value="Localidad"/>
-                        </div>
-                        <div class="contenidopanel">
-                            <p:selectOneMenu id="somLocalidad"
-                                             converter="ConversorGenerico"
-                                             value="#{domicilioBean.domicilio.localidad}">
-                                <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
-                                <f:selectItems value="#{domicilioBean.listaLocalidades}"/>
-                            </p:selectOneMenu>
+                    <h:outputText value="Departamento"/>
 
-                        </div>
-                        <div class="left">
-                            <h:outputText value="Calle"/>
-                        </div>
-                        <div class="contenidopanel">
-                            <p:inputText id="itCalle"
-                                         value="#{domicilioBean.domicilio.calle}"
-                                         required="false"/>
 
-                        </div>
+                    <p:selectOneMenu id="somDepartamento"
+                                     converter="ConversorGenerico"
+                                     value="#{domicilioBean.departamento}"
+                                     >
+                        <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
 
-                        <div class="left">
-                            <h:outputText value="Barrio"/>
-                        </div>
-                        <div class="contenidopanel">
-                            <p:inputText id="itBarrio"
-                                         value="#{domicilioBean.domicilio.barrio}"
-                                         required="false"/>
+                        <f:selectItems value="#{domicilioBean.listaDepartamentos}"/>
 
-                        </div>
+                        <p:ajax  
+                            update=":domicilioCreateForm:somLocalidad"
+                            listener="#{domicilioBean.cargarLocalidades()}"/>
+                    </p:selectOneMenu>
 
-                        <div class="left">
-                            <h:outputText value="Nro"/>
-                        </div>
-                        <div class="contenidopanel">
-                            <p:inputText id="itNro"
-                                         value="#{domicilioBean.domicilio.numero}"
-                                         required="false"/>
+                    <h:outputText value="Localidad"/>
 
-                        </div>
-                    </div>
-                </div>
+
+                    <p:selectOneMenu id="somLocalidad"
+                                     converter="ConversorGenerico"
+                                     value="#{domicilioBean.domicilio.localidad}">
+                        <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+                        <f:selectItems value="#{domicilioBean.listaLocalidades}"/>
+                    </p:selectOneMenu>
+
+
+
+                    <h:outputText value="Calle"/>
+
+                    <p:inputText id="itCalle"
+                                 value="#{domicilioBean.domicilio.calle}"
+                                 required="false"/>
+
+
+                    <h:outputText value="Barrio"/>
+
+                    <p:inputText id="itBarrio"
+                                 value="#{domicilioBean.domicilio.barrio}"
+                                 required="false"/>
+
+
+                    <h:outputText value="Nro"/>
+
+                    <p:inputText id="itNro"
+                                 value="#{domicilioBean.domicilio.numero}"
+                                 required="false"/>
+
+
+                </p:panelGrid>
             </p:panel>
-            <div class="contenidopanel">
-                <p:commandButton id="cbDomicilio"
-                                 value="Aceptar"
-                                 actionListener="#{domicilioBean.validarLocalidad}"
-                                 process="dDomicilioProf"
-                                 ajax="true"
 
-                                 >
+            <p:commandButton id="cbDomicilio"
+                             value="Aceptar"
+                             actionListener="#{domicilioBean.validarLocalidad}"
+                             ajax="true"
+                             
+                             >
 
-                </p:commandButton>
-                <p:messages autoUpdate="true"/>
+            </p:commandButton>
+            <p:messages autoUpdate="true"/>
 
-            </div>
+
         </p:dialog> 
     </h:form>
 </html>
