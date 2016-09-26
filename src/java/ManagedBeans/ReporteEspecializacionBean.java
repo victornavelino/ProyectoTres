@@ -62,7 +62,7 @@ public class ReporteEspecializacionBean implements Serializable {
 
         List<Object[]> cantidadMedicos = getEspecializacionRNLocal().cantidadEspecializacion();
         for (Object[] row : cantidadMedicos) {
-            pieModel1.set((String) row[1], (int) row[0]);
+            pieModel1.set((String) row[1], (Long) row[0]);
         }
 
         pieModel1.setTitle("Especializaciones");
