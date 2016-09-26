@@ -38,8 +38,8 @@ import javax.persistence.Temporal;
             query = "SELECT e FROM Especializacion e WHERE e.eliminado = false "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.cantidadEspecializacion",
-            query = "SELECT e FROM Especializacion e WHERE e.eliminado = false "
-            + " ORDER BY e.id DESC")
+            query = "SELECT count(e.especialidad),e.especialidad.descripcion "
+                    + " FROM Especializacion e group by e.especialidad ORDER by count(e.especialidad) desc")
 
 })
 public class Especializacion extends Base implements Serializable {
