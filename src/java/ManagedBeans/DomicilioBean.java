@@ -38,7 +38,7 @@ import org.primefaces.context.RequestContext;
  */
 @Named(value = "domicilioBean")
 @SessionScoped
-public class DomicilioBean implements Serializable{
+public class DomicilioBean implements Serializable {
 
     @EJB
     private DomicilioRNLocal domicilioRNLocal;
@@ -182,9 +182,9 @@ public class DomicilioBean implements Serializable{
 
             for (Departamento depto : departamentoRNLocal.buscarDptoProvincia(provincia)) {
                 listaDepartamentos.add(new SelectItem(depto, depto.toString()));
-                
+
             }
-            System.out.println("Departammentoos :"+departamentoRNLocal.buscarDptoProvincia(provincia));
+            System.out.println("Departammentoos :" + departamentoRNLocal.buscarDptoProvincia(provincia));
         } catch (Exception ex) {
             Logger.getLogger(DomicilioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -194,11 +194,11 @@ public class DomicilioBean implements Serializable{
 
         try {
             listaLocalidades = new ArrayList<>();
-            for (Localidad loc : localidadRNLocal.buscarLocalidadesDepto(departamento)) { 
+            for (Localidad loc : localidadRNLocal.buscarLocalidadesDepto(departamento)) {
                 listaLocalidades.add(new SelectItem(loc, loc.toString()));
 
             }
-            System.out.println("LOCALIDADESSSSS. "+listaLocalidades);
+            System.out.println("LOCALIDADESSSSS. " + listaLocalidades);
         } catch (Exception ex) {
             Logger.getLogger(DomicilioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -248,7 +248,10 @@ public class DomicilioBean implements Serializable{
             RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
             RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
         }
-
+        if (btnSelect.getId().equals("btnDomicilioMedicoUpdate")) {
+            RequestContext.getCurrentInstance().update("MedicoEditForm:pnDomicilio");
+            RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
+        }
 
     }
 

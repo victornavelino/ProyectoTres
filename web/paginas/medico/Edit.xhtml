@@ -139,48 +139,83 @@
                                     </h:panelGrid>
                                 </div>
                             </p:panel><br/>
-                            
-                            <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_matriculaProfesional}" for="matriculaProfesional" />
-                                <p:inputText id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.EditMedicoTitle_matriculaProfesional}" />
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_tipoSocio}" for="tipoSocio" />
-                                <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" >
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
-                                                   var="tipoSocioItem"
-                                                   itemValue="#{tipoSocioItem}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_fechaInscripcion}" for="fechaInscripcion" />
-                                <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.EditMedicoTitle_fechaInscripcion}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_titulo}" for="titulo" />
-                                <p:inputText id="titulo" value="#{medicoController.selected.titulo}" title="#{bundle.EditMedicoTitle_titulo}" />
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_fechaRecibido}" for="fechaRecibido" />
-                                <p:calendar id="fechaRecibido" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaRecibido}" title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_fechaTitulo}" for="fechaTitulo" />
-                                <p:calendar id="fechaTitulo" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_unidadFormadora}" for="unidadFormadora" />
-                                <p:selectOneMenu id="unidadFormadora" value="#{medicoController.selected.unidadFormadora}" >
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
-                                                   var="unidadFormadoraItem"
-                                                   itemValue="#{unidadFormadoraItem}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_fechaBaja}" for="fechaBaja" />
-                                <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_motivoBaja}" for="motivoBaja" />
-                                <p:inputText id="motivoBaja" value="#{medicoController.selected.motivoBaja}" title="#{bundle.EditMedicoTitle_motivoBaja}" />
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_organismo}" for="organismo" />
-                                <p:selectOneMenu id="organismo" value="#{medicoController.selected.organismo}" >
-                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                    <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
-                                                   var="organismoItem"
-                                                   itemValue="#{organismoItem}"/>
-                                </p:selectOneMenu>
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_libro}" for="libro" />
-                                <p:inputText id="libro" value="#{medicoController.selected.libro}" title="#{bundle.EditMedicoTitle_libro}" />
-                                <p:outputLabel value="#{bundle.EditMedicoLabel_folio}" for="folio" />
-                                <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.EditMedicoTitle_folio}" />
-                            </p:panelGrid>
+                            <br></br>
+                            <h:panelGrid columns="1" 
+                                         width="720"
+                                         >
+
+                                <p:panel header="Domicilio"
+                                         style="width: 700px">
+                                    <h:panelGrid columns="2" width="550">
+                                        <p:commandButton id="btnDomicilioMedicoUpdate" 
+                                                         value="Cargar Datos"
+                                                         oncomplete="PF('dgDomicilioProf').show();"
+                                                         actionListener="#{domicilioBean.definirActionBoton}"
+                                                         icon="ui-icon-disk"
+                                                         >
+                                            <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+
+                                        </p:commandButton> 
+
+                                        <p:panel id="pnDomicilio" >
+                                            <h:outputText  value="Localidad:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.localidad.descripcion}"/> <br></br>
+                                            <h:outputText  value="Barrio:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
+                                            <h:outputText  value="Calle:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
+                                            <h:outputText  value="Numero:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                        </p:panel>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </h:panelGrid>
+                            <br></br>
+                            <p:panel header="Datos Profesionales"
+                                     style="width: 700px">
+                                <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_matriculaProfesional}" for="matriculaProfesional" />
+                                    <p:inputText id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.EditMedicoTitle_matriculaProfesional}" />
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_tipoSocio}" for="tipoSocio" />
+                                    <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" >
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
+                                                       var="tipoSocioItem"
+                                                       itemValue="#{tipoSocioItem}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_fechaInscripcion}" for="fechaInscripcion" />
+                                    <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.EditMedicoTitle_fechaInscripcion}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_titulo}" for="titulo" />
+                                    <p:inputText id="titulo" value="#{medicoController.selected.titulo}" title="#{bundle.EditMedicoTitle_titulo}" />
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_fechaRecibido}" for="fechaRecibido" />
+                                    <p:calendar id="fechaRecibido" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaRecibido}" title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_fechaTitulo}" for="fechaTitulo" />
+                                    <p:calendar id="fechaTitulo" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_unidadFormadora}" for="unidadFormadora" />
+                                    <p:selectOneMenu id="unidadFormadora" value="#{medicoController.selected.unidadFormadora}" >
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
+                                                       var="unidadFormadoraItem"
+                                                       itemValue="#{unidadFormadoraItem}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_fechaBaja}" for="fechaBaja" />
+                                    <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_motivoBaja}" for="motivoBaja" />
+                                    <p:inputText id="motivoBaja" value="#{medicoController.selected.motivoBaja}" title="#{bundle.EditMedicoTitle_motivoBaja}" />
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_organismo}" for="organismo" />
+                                    <p:selectOneMenu id="organismo" value="#{medicoController.selected.organismo}" >
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
+                                                       var="organismoItem"
+                                                       itemValue="#{organismoItem}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_libro}" for="libro" />
+                                    <p:inputText id="libro" value="#{medicoController.selected.libro}" title="#{bundle.EditMedicoTitle_libro}" />
+                                    <p:outputLabel value="#{bundle.EditMedicoLabel_folio}" for="folio" />
+                                    <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.EditMedicoTitle_folio}" />
+                                </p:panelGrid>
+                                </p:panel>
                         </p:scrollPanel>
                     </p:panel>
                     <p:commandButton actionListener="#{medicoController.update}" value="#{bundle.Save}" update="display,:MedicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MedicoEditDialog');"/>

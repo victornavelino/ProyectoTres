@@ -10,45 +10,49 @@
 
         <p:dialog id="MedicoViewDlg" widgetVar="MedicoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMedicoTitle}">
             <h:form id="MedicoViewForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{medicoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMedicoLabel_id}"/>
-                        <h:outputText value="#{medicoController.selected.id}" title="#{bundle.ViewMedicoTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_persona}"/>
-                        <h:outputText value="#{medicoController.selected.persona}" title="#{bundle.ViewMedicoTitle_persona}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_matriculaProfesional}"/>
-                        <h:outputText value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.ViewMedicoTitle_matriculaProfesional}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_tipoSocio}"/>
-                        <h:outputText value="#{medicoController.selected.tipoSocio}" title="#{bundle.ViewMedicoTitle_tipoSocio}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_fechaInscripcion}"/>
-                        <h:outputText value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.ViewMedicoTitle_fechaInscripcion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_titulo}"/>
-                        <h:outputText value="#{medicoController.selected.titulo}" title="#{bundle.ViewMedicoTitle_titulo}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_fechaRecibido}"/>
-                        <h:outputText value="#{medicoController.selected.fechaRecibido}" title="#{bundle.ViewMedicoTitle_fechaRecibido}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_fechaTitulo}"/>
-                        <h:outputText value="#{medicoController.selected.fechaTitulo}" title="#{bundle.ViewMedicoTitle_fechaTitulo}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_unidadFormadora}"/>
-                        <h:outputText value="#{medicoController.selected.unidadFormadora}" title="#{bundle.ViewMedicoTitle_unidadFormadora}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_fechaBaja}"/>
-                        <h:outputText value="#{medicoController.selected.fechaBaja}" title="#{bundle.ViewMedicoTitle_fechaBaja}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_motivoBaja}"/>
-                        <h:outputText value="#{medicoController.selected.motivoBaja}" title="#{bundle.ViewMedicoTitle_motivoBaja}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_organismo}"/>
-                        <h:outputText value="#{medicoController.selected.organismo}" title="#{bundle.ViewMedicoTitle_organismo}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_libro}"/>
-                        <h:outputText value="#{medicoController.selected.libro}" title="#{bundle.ViewMedicoTitle_libro}"/>
-                        <h:outputText value="#{bundle.ViewMedicoLabel_folio}"/>
-                        <h:outputText value="#{medicoController.selected.folio}" title="#{bundle.ViewMedicoTitle_folio}"/>
-                    </p:panelGrid>
+                <h:panelGroup id="display" style="width: 700px">
+                    <p:panel id="pPri" header="Datos del Profesional" > 
+                        <p:scrollPanel mode="native" style="width:750px;height:400px">
+                            <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
+                                <h:outputText value="#{bundle.ViewMedicoLabel_id}"/>
+                                <h:outputText value="#{medicoController.selected.id}" title="#{bundle.ViewMedicoTitle_id}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_persona}"/>
+                                <h:outputText value="#{medicoController.selected.persona}" title="#{bundle.ViewMedicoTitle_persona}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_matriculaProfesional}"/>
+                                <h:outputText value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.ViewMedicoTitle_matriculaProfesional}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_tipoSocio}"/>
+                                <h:outputText value="#{medicoController.selected.tipoSocio}" title="#{bundle.ViewMedicoTitle_tipoSocio}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_fechaInscripcion}"/>
+                                <h:outputText value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.ViewMedicoTitle_fechaInscripcion}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_titulo}"/>
+                                <h:outputText value="#{medicoController.selected.titulo}" title="#{bundle.ViewMedicoTitle_titulo}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_fechaRecibido}"/>
+                                <h:outputText value="#{medicoController.selected.fechaRecibido}" title="#{bundle.ViewMedicoTitle_fechaRecibido}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_fechaTitulo}"/>
+                                <h:outputText value="#{medicoController.selected.fechaTitulo}" title="#{bundle.ViewMedicoTitle_fechaTitulo}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_unidadFormadora}"/>
+                                <h:outputText value="#{medicoController.selected.unidadFormadora}" title="#{bundle.ViewMedicoTitle_unidadFormadora}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_fechaBaja}"/>
+                                <h:outputText value="#{medicoController.selected.fechaBaja}" title="#{bundle.ViewMedicoTitle_fechaBaja}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_motivoBaja}"/>
+                                <h:outputText value="#{medicoController.selected.motivoBaja}" title="#{bundle.ViewMedicoTitle_motivoBaja}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_organismo}"/>
+                                <h:outputText value="#{medicoController.selected.organismo}" title="#{bundle.ViewMedicoTitle_organismo}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_libro}"/>
+                                <h:outputText value="#{medicoController.selected.libro}" title="#{bundle.ViewMedicoTitle_libro}"/>
+                                <h:outputText value="#{bundle.ViewMedicoLabel_folio}"/>
+                                <h:outputText value="#{medicoController.selected.folio}" title="#{bundle.ViewMedicoTitle_folio}"/>
+                            </p:panelGrid>
+                        </p:scrollPanel>
+                    </p:panel>
                     <p:commandButton value="#{bundle.Close}" onclick="MedicoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

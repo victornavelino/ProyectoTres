@@ -173,7 +173,8 @@
 
                             </h:panelGrid>
                             <br></br> 
-
+                            <p:panel header="Datos Profesionales"
+                                     style="width: 700px">
                             <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_matriculaProfesional}" for="matriculaProfesional" />
                                 <p:inputText id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.CreateMedicoTitle_matriculaProfesional}" />
@@ -213,6 +214,7 @@
                                 <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
 
                             </p:panelGrid>
+                                </p:panel>
                         </p:scrollPanel>
                     </p:panel>
                     <p:commandButton actionListener="#{medicoController.create}" value="#{bundle.Save}" update="display,:MedicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MedicoCreateDialog');"/>

@@ -99,6 +99,7 @@ public class MedicoController implements Serializable {
     public void prepareUpdate() {
         listadoTelefonosBean.setLstTelefonos(selected.getPersona().getTelefonos());
         listadoEmailBean.setLstCorreoElectronico(selected.getPersona().getCorreosElectronicos());
+        domicilioBean.setDomicilio(selected.getPersona().getDomicilio());
     }
 
     public void create() {
