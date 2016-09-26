@@ -64,9 +64,14 @@ public class ReporteEspecializacionBean implements Serializable {
         for (Object[] row : cantidadMedicos) {
             pieModel1.set((String) row[1], (Long) row[0]);
         }
-
+        pieModel1.setShadow(true);
         pieModel1.setTitle("Especializaciones");
-        pieModel1.setLegendPosition("w");
+        pieModel1.setLegendPosition("e");
+        pieModel1.setShowDataLabels(true);
+        pieModel1.setMouseoverHighlight(true);
+        pieModel1.setLegendRows(20);
+        pieModel1.setLegendCols(1);
+
     }
 
     public ReporteEspecializacionBean() {
