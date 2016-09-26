@@ -22,19 +22,12 @@
                     <b:navLink value="Departamento" href="/paginas/departamento/List.xhtml" />
                     <b:navLink value="Localidad" href="/paginas/localidad/List.xhtml" />
                     <b:navLink value="Provincia" href="/paginas/provincia/List.xhtml" />
-                    <b:navLink value="Especialidad" href="/paginas/especialidad/List.xhtml" />
+                    <b:navLink  />
                     <b:navLink value="Facultad" href="/paginas/facultad/List.xhtml" />
-                    <b:navLink value="Medico" href="/paginas/medico/List.xhtml" />
                     <b:navLink value="Organismo" href="/paginas/organismo/List.xhtml" />
                     <b:navLink value="Tipo de Especialidad" href="/paginas/tipoEspecialidad/List.xhtml" />
                     <b:navLink value="Tipo de Socio" href="/paginas/tipoSocio/List.xhtml" />
                     <b:navLink value="Unidad Formadora" href="/paginas/unidadFormadora/List.xhtml" />
-                    <b:navLink value="Correo Electronico" href="/paginas/correoElectronico/List.xhtml" />
-                    <b:navLink value="Documento de Identidad" href="/paginas/documentoIdentidad/List.xhtml" />
-                    <b:navLink value="Domicilio" href="/paginas/domicilio/List.xhtml" />
-                    <b:navLink value="Persona" href="/paginas/persona/List.xhtml" />
-                    <b:navLink value="Sexo" href="/paginas/sexo/List.xhtml" />
-                    <b:navLink value="Telefono" href="/paginas/telefono/List.xhtml" />
                     <b:navLink value="Tipo de Documento" href="/paginas/tipoDocumento/List.xhtml" />
                     <b:navLink value="Tipo de Telefono" href="/paginas/tipoTelefono/List.xhtml" />
                     <b:navLink value="Usuario" href="/paginas/usuario/List.xhtml" />
@@ -66,6 +59,7 @@
                 </b:dropMenu>
 
                 <b:dropMenu value="Reportes">
+                    <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/paginas/especializacion/Grafico.xhtml"></b:navLink>
                     <b:navLink value="Nuevo" iconAwesome="search" href="/paginas/reportes/reporteGenerico.xhtml?faces-redirect=true"></b:navLink>
                     <b:navLink value="Generar" iconAwesome="search" href="/paginas/reportes/reporteGenericoGenerar.xhtml?faces-redirect=true"></b:navLink>
                 </b:dropMenu>
@@ -80,9 +74,9 @@
 
         </b:navBar> 
         <p:dialog header="Modal Dialog" widgetVar="dlg2"  modal="true" height="100">
-            
-                <h:outputText value="This is a Modal Dialog." />
-            
+
+            <h:outputText value="This is a Modal Dialog." />
+
 
         </p:dialog>
     </ui:composition>

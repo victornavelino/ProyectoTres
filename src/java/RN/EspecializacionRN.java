@@ -9,6 +9,7 @@ import Entidades.Medico.Especialidad;
 import Entidades.Medico.Especializacion;
 import Entidades.Medico.Medico;
 import Facades.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -53,11 +54,23 @@ public class EspecializacionRN implements EspecializacionRNLocal {
         return q.getResultList();
     }
 
-    @Override
+   @Override
+    public List<Object[]> cantidadEspecializacion() {
+              Query q = null;
+        q = em.createNamedQuery("Especializacion.cantidadEspecializacion");
+        try {
+            return q.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<Object[]>();
+        }
+    }
+    
+     @Override
     public List<Especializacion> findAll() {
         Query q = null;
         q = em.createNamedQuery("Especializacion.findAll");
         return q.getResultList();
     }
+    
 
 }

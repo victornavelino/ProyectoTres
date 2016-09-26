@@ -27,4 +27,6 @@ public interface EspecializacionRNLocal {
 
     public List<Especializacion> buscarPorMedico(Medico medico);
 
+    public List<Object[]> cantidadEspecializacion();
+
 }

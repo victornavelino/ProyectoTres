@@ -36,6 +36,9 @@ import javax.persistence.Temporal;
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.findAll",
             query = "SELECT e FROM Especializacion e WHERE e.eliminado = false "
+            + " ORDER BY e.id DESC"),
+    @NamedQuery(name = "Especializacion.cantidadEspecializacion",
+            query = "SELECT e FROM Especializacion e WHERE e.eliminado = false "
             + " ORDER BY e.id DESC")
 
 })
