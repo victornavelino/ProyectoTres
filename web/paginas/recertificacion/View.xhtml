@@ -14,7 +14,7 @@
 
                     <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
                         <p:outputLabel value="Medico:"/>
-                        <p:outputLabel id="medico" value="#{recertificacionController.selected.medico}" />
+                        <p:outputLabel id="medico" value="#{recertificacionController.selected.especializacion.medico}" />
 
                         <p:outputLabel value="Cuenta:"/>
                         <p:outputLabel id="cuenta" value="#{recertificacionController.selected.cuenta}" />

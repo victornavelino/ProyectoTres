@@ -29,82 +29,82 @@
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Id"/>
                         </f:facet>
                         <h:outputText value="#{item.id}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Medico"/>
                         </f:facet>
-                        <h:outputText value="#{item.medico}"/>
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{item.medico.persona.apellido}, #{item.medico.persona.nombre}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.especializacion.medico.persona.apellido}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Medico"/>
+                        </f:facet>
+                        <h:outputText value="#{item.especializacion.medico.persona.apellido}, #{item.especializacion.medico.persona.nombre}"/>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Cuenta"/>
                         </f:facet>
-                        <h:outputText value="#{item.cuenta}"/>
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{item.cuenta.descripcion}"/>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Especializacion"/>
                         </f:facet>
-                        <h:outputText value="#{item.especializacion}"/>
-                    </h:column>
-                    <h:column>
+                        <h:outputText value="#{item.especializacion.especialidad.nombreEspecialidad}"/>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="FechaRecertificacion"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaRecertificacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="NroActa"/>
                         </f:facet>
                         <h:outputText value="#{item.nroActa}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="NroResolucion"/>
                         </f:facet>
                         <h:outputText value="#{item.nroResolucion}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Libro"/>
                         </f:facet>
                         <h:outputText value="#{item.libro}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Folio"/>
                         </f:facet>
                         <h:outputText value="#{item.folio}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Usuario"/>
-                        </f:facet>
-                        <h:outputText value="#{item.usuario}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>                   
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Observaciones"/>
                         </f:facet>
                         <h:outputText value="#{item.observaciones}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="FechaVencimiento"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaVencimiento}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                    </h:column>
+                    </p:column>
 
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{recertificacionController.prepareCreate}" update=":RecertificacionCreateForm" oncomplete="PF('RecertificacionCreateDialog').show()"/>

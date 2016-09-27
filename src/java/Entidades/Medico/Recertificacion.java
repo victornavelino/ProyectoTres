@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,7 +25,12 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "recertificacion")
+@NamedQueries({
+    @NamedQuery(name = "Recertificacion.cantidadVigente",
+            query = "SELECT count(r.especializacion.especialidad),r.especializacion.especialidad.descripcion FROM Recertificacion r where r.fechaVencimiento > :today group by r.especializacion.especialidad ORDER by count(r.especializacion.especialidad) desc")
+})
 public class Recertificacion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +47,9 @@ public class Recertificacion implements Serializable {
     private String nroResolucion;
     private String libro;
     private String folio;
-    @OneToOne
-    private Usuario usuario;
     private String observaciones;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaVencimiento;
-    
 
     public Long getId() {
         return id;
@@ -119,14 +123,6 @@ public class Recertificacion implements Serializable {
         this.folio = folio;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
@@ -142,7 +138,7 @@ public class Recertificacion implements Serializable {
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -167,5 +163,5 @@ public class Recertificacion implements Serializable {
     public String toString() {
         return "Entidades.Medico.Recertificacion[ id=" + id + " ]";
     }
-    
+
 }
