@@ -8,6 +8,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.PieChartModel;
 
 @Named("reporteRecertificacionBean")
@@ -21,6 +25,7 @@ public class ReporteRecertificacionBean implements Serializable {
     private List<Recertificacion> items = null;
     private Recertificacion selected;
     private PieChartModel pieModel1;
+    private BarChartModel barModel;
 
     public RecertificacionFacade getEjbFacade() {
         return ejbFacade;
@@ -46,13 +51,14 @@ public class ReporteRecertificacionBean implements Serializable {
         this.pieModel1 = pieModel1;
     }
 
-    private void createPieModels() {
+    private void createModels() {
         createPieModel1();
+        createBarModel();
     }
 
     @PostConstruct
     public void init() {
-        createPieModels();
+        createModels();
     }
 
     private void createPieModel1() {
@@ -71,6 +77,33 @@ public class ReporteRecertificacionBean implements Serializable {
         pieModel1.setLegendCols(1);
         pieModel1.setFill(true);
 
+    }
+
+    private void createBarModel() {
+
+        BarChartModel model = new BarChartModel();
+
+        ChartSeries especialidades = new ChartSeries();
+        especialidades.setLabel("Especialidades");
+        List<Object[]> cantidadMedicos = getRecertificacionRNLocal().cantidadVigente();
+        for (Object[] row : cantidadMedicos) {
+            especialidades.set((String) row[1], (Long) row[0]);
+        }
+
+        model.addSeries(especialidades);
+
+        barModel = model;
+
+        barModel.setTitle("Recertificaciones Vigentes");
+        barModel.setLegendPosition("ne");
+
+        Axis xAxis = barModel.getAxis(AxisType.X);
+        xAxis.setLabel("Especialidades");
+
+        Axis yAxis = barModel.getAxis(AxisType.Y);
+        yAxis.setLabel("Cantidades");
+        yAxis.setMin(0);
+        yAxis.setMax(200);
     }
 
     public ReporteRecertificacionBean() {
