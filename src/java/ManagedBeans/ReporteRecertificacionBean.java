@@ -73,7 +73,7 @@ public class ReporteRecertificacionBean implements Serializable {
         pieModel1 = new PieChartModel();
 
         List<Object[]> cantidadMedicos = getRecertificacionRNLocal().cantidadVigente();
-        for (Object[] row : cantidadMedicos) {
+        for (Object[] row : cantidadMedicos.subList(0, 10)) {
             pieModel1.set((String) row[1], (Long) row[0]);
         }
         pieModel1.setShadow(true);
@@ -94,8 +94,8 @@ public class ReporteRecertificacionBean implements Serializable {
         ChartSeries especialidades = new ChartSeries();
         especialidades.setLabel("Especialidades");
         List<Object[]> cantidadMedicos = getRecertificacionRNLocal().cantidadVigente();
-        for (Object[] row : cantidadMedicos) {
-            especialidades.set((String) row[1], (Long) row[0]);
+        for (Object[] row : cantidadMedicos.subList(0, 10)) {
+            especialidades.set(((String) row[1]).substring(0, 12), (Long) row[0]);
         }
 
         model.addSeries(especialidades);
@@ -111,7 +111,7 @@ public class ReporteRecertificacionBean implements Serializable {
         Axis yAxis = barModel.getAxis(AxisType.Y);
         yAxis.setLabel("Cantidades");
         yAxis.setMin(0);
-        yAxis.setMax(200);
+        yAxis.setMax(50);
     }
 
     public ReporteRecertificacionBean() {
