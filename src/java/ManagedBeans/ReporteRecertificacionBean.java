@@ -95,7 +95,7 @@ public class ReporteRecertificacionBean implements Serializable {
         especialidades.setLabel("Especialidades");
         List<Object[]> cantidadMedicos = getRecertificacionRNLocal().cantidadVigente();
         for (Object[] row : cantidadMedicos.subList(0, 10)) {
-            especialidades.set(((String) row[1]).substring(0, 12), (Long) row[0]);
+            especialidades.set(((String) row[1]), (Long) row[0]);
         }
 
         model.addSeries(especialidades);
