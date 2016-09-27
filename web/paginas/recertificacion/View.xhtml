@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecertificacionViewDlg" widgetVar="RecertificacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Recertificacion">
+            <h:form id="RecertificacionViewForm">
+                <h:panelGroup id="display">
+
+                    <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
+                        <p:outputLabel value="Medico:"/>
+                        <p:outputLabel id="medico" value="#{recertificacionController.selected.medico}" />
+
+                        <p:outputLabel value="Cuenta:"/>
+                        <p:outputLabel id="cuenta" value="#{recertificacionController.selected.cuenta}" />
+
+                        <p:outputLabel value="Especializacion:"/>
+
+                        <p:outputLabel id="especializacion" value="#{recertificacionController.selected.especializacion}" />
+
+
+                        <p:outputLabel value="FechaRecertificacion (dd/MM/yyyy):"/>
+                        <p:outputLabel id="fechaRecertificacion" value="#{recertificacionController.selected.fechaRecertificacion}" title="FechaRecertificacion"  />
+
+                        <p:outputLabel value="NroActa:"/>
+                        <p:outputLabel id="nroActa" value="#{recertificacionController.selected.nroActa}" title="NroActa" />
+                        <p:outputLabel value="NroResolucion:"/>
+                        <p:outputLabel id="nroResolucion" value="#{recertificacionController.selected.nroResolucion}" title="NroResolucion" />
+                        <p:outputLabel value="Libro:"/>
+                        <p:outputLabel id="libro" value="#{recertificacionController.selected.libro}" title="Libro" />
+                        <p:outputLabel value="Folio:"/>
+                        <p:outputLabel id="folio" value="#{recertificacionController.selected.folio}" title="Folio" />
+                        <p:outputLabel value="Observaciones:"/>
+                        <p:outputLabel id="observaciones" value="#{recertificacionController.selected.observaciones}" />
+                        <p:outputLabel value="FechaVencimiento (dd/MM/yyyy):"/>
+                        <p:outputLabel id="fechaVencimiento"  value="#{recertificacionController.selected.fechaVencimiento}" title="FechaVencimiento" />
+
+
+
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

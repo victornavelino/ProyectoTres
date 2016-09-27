@@ -24,7 +24,10 @@
                              paginator="true"
                              rowKey="#{item.id}"
                              rows="10"
-                             rowsPerPageTemplate="10,20,30,40,50"
+                             rowsPerPageTemplate="10,20,30,40,50,100,300"
+                             filterEvent="enter"
+                             widgetVar="datalist"
+                             filteredValue=""
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
@@ -36,11 +39,18 @@
                         </f:facet>
                         <h:outputText value="#{item.id}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
                         <f:facet name="header">
-                            <h:outputText value="#{bundlePago.ListPagoTitle_medico}"/>
+                            <h:outputText value="Apellido"/>
                         </f:facet>
-                        <h:outputText value="#{item.medico}"/>
+                        <h:outputText value="#{item.medico.persona.apellido}"/>
+                    </p:column>
+
+                    <p:column filterBy="#{item.medico.persona.nombre}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{item.medico.persona.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -60,13 +70,31 @@
                         </f:facet>
                         <h:outputText value="#{item.nroRecibo}"/>
                     </p:column>
-                    <p:column>
+                    <p:column headerText="Fecha Pago" filterBy="#{item.fechaPago}" filterFunction="#{dateRangeFilter.filterByDate}">
+                        <f:facet name="filter">
+                            <h:inputHidden id="filter" />
+                        </f:facet>
+
                         <f:facet name="header">
-                            <h:outputText value="#{bundlePago.ListPagoTitle_fechaPago}"/>
+                            <h:outputText value="Fecha Pago" />                  
+                        </f:facet>
+                        <f:facet name="header">
+
+                            <p:calendar id="from" pattern="dd/MM/yyyy">
+                                <p:ajax event="dateSelect" 
+                                        onstart="$(PrimeFaces.escapeClientId('#{p:component('filter')}'))[0].value = $(PrimeFaces.escapeClientId('#{p:component('from')}_input'))[0].value + '-' + $(PrimeFaces.escapeClientId('#{p:component('to')}_input'))[0].value" 
+                                        oncomplete="PF('datalist').filter()" />
+                            </p:calendar>
+                            <p:calendar id="to" pattern="dd/MM/yyyy">
+                                <p:ajax event="dateSelect" 
+                                        onstart="$(PrimeFaces.escapeClientId('#{p:component('filter')}'))[0].value = $(PrimeFaces.escapeClientId('#{p:component('from')}_input'))[0].value + '-' + $(PrimeFaces.escapeClientId('#{p:component('to')}_input'))[0].value" 
+                                        oncomplete="PF('datalist').filter()" />
+                            </p:calendar>
+
                         </f:facet>
                         <h:outputText value="#{item.fechaPago}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>    
                     </p:column>
                     <p:column>
                         <f:facet name="header">

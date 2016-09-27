@@ -71,6 +71,7 @@ public class ReporteEspecializacionBean implements Serializable {
         pieModel1.setMouseoverHighlight(true);
         pieModel1.setLegendRows(20);
         pieModel1.setLegendCols(1);
+        pieModel1.setFill(true);
 
     }
 

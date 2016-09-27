@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="RecertificacionCreateDlg" widgetVar="RecertificacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear Recertificación">
+            <h:form id="RecertificacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
+                        <p:outputLabel value="Medico:"/>
+                        <p:selectOneMenu id="medico" value="#{recertificacionController.selected.medico}" >
+                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
+                                           var="medicoItem"
+                                           itemValue="#{medicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Cuenta:"/>
+                        <p:selectOneMenu id="cuenta" value="#{recertificacionController.selected.cuenta}" >
+                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                                           var="cuentaItem"
+                                           itemValue="#{cuentaItem}"/>
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Especializacion:"/>
+
+                        <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" >
+                            <f:selectItems value="#{especializacionController.itemsAvailableSelectOne}"
+                                           var="especializacionItem"
+                                           itemValue="#{especializacionItem}"/>
+                        </p:selectOneMenu>    
+
+                        <p:outputLabel value="FechaRecertificacion (dd/MM/yyyy):"/>
+                        <p:calendar id="fechaRecertificacion" pattern="dd/MM/yyyy" value="#{recertificacionController.selected.fechaRecertificacion}" title="FechaRecertificacion"  showOn="button"/>
+
+                        <p:outputLabel value="NroActa:"/>
+                        <h:inputText id="nroActa" value="#{recertificacionController.selected.nroActa}" title="NroActa" />
+                        <p:outputLabel value="NroResolucion:"/>
+                        <h:inputText id="nroResolucion" value="#{recertificacionController.selected.nroResolucion}" title="NroResolucion" />
+                        <p:outputLabel value="Libro:"/>
+                        <h:inputText id="libro" value="#{recertificacionController.selected.libro}" title="Libro" />
+                        <p:outputLabel value="Folio:"/>
+                        <h:inputText id="folio" value="#{recertificacionController.selected.folio}" title="Folio" />
+                        <p:outputLabel value="Observaciones:"/>
+                        <h:inputTextarea id="observaciones" value="#{recertificacionController.selected.observaciones}" />
+                        <p:outputLabel value="FechaVencimiento (dd/MM/yyyy):"/>
+                        <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{recertificacionController.selected.fechaVencimiento}" title="FechaVencimiento"  showOn="button"/>
+
+
+                    </p:panelGrid>
+                    <p:commandButton id="crearRecertificacion" actionListener="#{recertificacionController.create}" value="#{bundle.Save}" update=":RecertificacionCreateForm:display,:RecertificacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecertificacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RecertificacionCreateDialog.hide()"/>
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

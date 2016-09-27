@@ -70,8 +70,30 @@
                 </f:facet>
                 <h:outputText value="#{item.matriculaEspecialidad}"/>
             </p:column>
-
-
+            <p:column 
+                filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Apellido"/>
+                </f:facet>
+                <h:outputText value="#{item.medico.persona.apellido}"/>
+            </p:column>
+            <p:column 
+                filterBy="#{item.medico.persona.nombre}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Nombre"/>
+                </f:facet>
+                <h:outputText value="#{item.medico.persona.apellido}"/>
+            </p:column>
+             <p:column 
+                filterBy="#{item.matriculaEspecialidad}"
+                style="word-wrap:break-word;">
+                <f:facet name="header">
+                    <h:outputText value="Matricula"/>
+                </f:facet>
+                <h:outputText value="#{item.matriculaEspecialidad}"/>
+            </p:column>
         </p:dataTable>
 
 

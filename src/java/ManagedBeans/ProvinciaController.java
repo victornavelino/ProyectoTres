@@ -57,7 +57,6 @@ public class ProvinciaController implements Serializable {
     }
 
     public void create() {
-        System.out.println("Prueba");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ProvinciaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

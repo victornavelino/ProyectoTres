@@ -53,6 +53,7 @@ public class ListaEspecialidadBean {
     
     public ListaEspecialidadBean() {
     }
+    
     @PostConstruct
     private void inicializar(){
         this.especialidades= new ArrayList<>();
@@ -61,7 +62,6 @@ public class ListaEspecialidadBean {
 
     public void cargarEspecialidades() {
         this.setEspecialidades(especialidadFacade.findAll());
-        System.out.println("ESPECLIAIDADES: "+this.getEspecialidades());
     }
     public void buscarEspecialidades(String especialidad){
         this.setEspecialidades(especialidadFacade.buscarEspecialidad(especialidad));
