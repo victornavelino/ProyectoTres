@@ -27,6 +27,14 @@ public class ReporteRecertificacionBean implements Serializable {
     private PieChartModel pieModel1;
     private BarChartModel barModel;
 
+    public BarChartModel getBarModel() {
+        return barModel;
+    }
+
+    public void setBarModel(BarChartModel barModel) {
+        this.barModel = barModel;
+    }
+
     public RecertificacionFacade getEjbFacade() {
         return ejbFacade;
     }
