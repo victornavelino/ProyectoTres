@@ -4,6 +4,7 @@ import Entidades.Caja.Caja;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.CajaFacade;
+import RN.CajaRNLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,12 +26,22 @@ public class CajaController implements Serializable {
 
     @EJB
     private Facades.CajaFacade ejbFacade;
+    @EJB
+    private CajaRNLocal cajaRNLocal;
     private List<Caja> items = null;
     private Caja selected;
-
+ 
     public CajaController() {
     }
 
+    public CajaRNLocal getCajaRNLocal() {
+        return cajaRNLocal;
+    }
+
+    public void setCajaRNLocal(CajaRNLocal cajaRNLocal) {
+        this.cajaRNLocal = cajaRNLocal;
+    }
+    
     public Caja getSelected() {
         return selected;
     }
@@ -119,6 +130,36 @@ public class CajaController implements Serializable {
 
     public List<Caja> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public void abrirCaja() {
+        // SI ES DISTINTO DIA, tiene que cerrar el turno 
+        if (hayCajaAbierta()) {
+            Caja cAbierta = getCajaAbierta(sucursal);
+            JOptionPane.showMessageDialog(null, "Ya se encuentra abierta una Caja del usuario: " + cAbierta.getUsuario() + "\n "
+                    + "El usuario " + cAbierta.getUsuario() + " debe cerrarla para poder abrir otra");
+        } else {
+            altaAbrirCaja(usuario, sucursal);
+        }
+
+    }
+
+    public boolean hayCajaAbierta() {
+        boolean respuesta = false;
+        List listCajasAbiertas = cajaRNLocal.buscarCajaAbierta();
+        if (listCajasAbiertas.size() > 0) {
+            respuesta = true;
+        }
+        return respuesta;
+    }
+
+    public List<Caja> buscarCajaAbierta() {
+        Query quCajaAbierta = null;
+        EntityManager em = emf.createEntityManager();
+        quCajaAbierta = em.createQuery("SELECT c FROM Caja c  WHERE c.fechaFin IS NULL AND c.sucursal.id = " + sucursal.getId());
+
+        return quCajaAbierta.getResultList();
+
     }
 
     @FacesConverter(forClass = Caja.class)
