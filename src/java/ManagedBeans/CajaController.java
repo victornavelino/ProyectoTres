@@ -7,6 +7,7 @@ import Facades.CajaFacade;
 import RN.CajaRNLocal;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,10 +17,13 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 @Named("cajaController")
 @SessionScoped
@@ -31,8 +35,35 @@ public class CajaController implements Serializable {
     private CajaRNLocal cajaRNLocal;
     private List<Caja> items = null;
     private Caja selected;
- 
+    private boolean isCajaAbierta;
+    String sMensaje = "";
+    private BigDecimal cajaInicial;
+
     public CajaController() {
+    }
+
+    public BigDecimal getCajaInicial() {
+        return cajaInicial;
+    }
+
+    public void setCajaInicial(BigDecimal cajaInicial) {
+        this.cajaInicial = cajaInicial;
+    }
+    
+    public boolean isIsCajaAbierta() {
+        return isCajaAbierta;
+    }
+
+    public void setIsCajaAbierta(boolean isCajaAbierta) {
+        this.isCajaAbierta = isCajaAbierta;
+    }
+
+    public String getsMensaje() {
+        return sMensaje;
+    }
+
+    public void setsMensaje(String sMensaje) {
+        this.sMensaje = sMensaje;
     }
 
     public CajaRNLocal getCajaRNLocal() {
@@ -42,7 +73,7 @@ public class CajaController implements Serializable {
     public void setCajaRNLocal(CajaRNLocal cajaRNLocal) {
         this.cajaRNLocal = cajaRNLocal;
     }
-    
+
     public Caja getSelected() {
         return selected;
     }
@@ -68,6 +99,8 @@ public class CajaController implements Serializable {
     }
 
     public void create() {
+
+        cajaInicial = selected.getCajaInicial();
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCaja").getString("CajaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -134,13 +167,18 @@ public class CajaController implements Serializable {
     }
 
     public void abrirCaja() {
-        // SI ES DISTINTO DIA, tiene que cerrar el turno 
+        
+        FacesMessage fm;
+        FacesMessage.Severity severity = null;
+        
         if (hayCajaAbierta()) {
-            Caja cAbierta = getCajaAbierta(sucursal);
-            JOptionPane.showMessageDialog(null, "Ya se encuentra abierta una Caja del usuario: " + cAbierta.getUsuario() + "\n "
-                    + "El usuario " + cAbierta.getUsuario() + " debe cerrarla para poder abrir otra");
-        } else {
-            altaAbrirCaja(usuario, sucursal);
+            selected = cajaRNLocal.getCajaAbierta();
+            sMensaje = "Ya se encuentra abierta una Caja del usuario: " + selected.getUsuario();
+            isCajaAbierta=true;
+        } else{
+            selected=new Caja();
+            isCajaAbierta=false;
+            sMensaje = "";
         }
 
     }
@@ -154,53 +192,40 @@ public class CajaController implements Serializable {
         return respuesta;
     }
 
-    public List<Caja> buscarCajaAbierta() {
-        Query quCajaAbierta = null;
-        EntityManager em = emf.createEntityManager();
-        quCajaAbierta = em.createQuery("SELECT c FROM Caja c  WHERE c.fechaFin IS NULL AND c.sucursal.id = " + sucursal.getId());
 
-        return quCajaAbierta.getResultList();
-
-    }
-        public void altaAbrirCaja(Usuario usuario) {
-//        if (getCantidadTurnosAbiertosHoy(puesto) < 2) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
-        DiagAbrirCaja diagAbrirCaja = new DiagAbrirCaja(null, true);
-        diagAbrirCaja.setLocation(Comunes.centrarDialog(diagAbrirCaja));
-        diagAbrirCaja.setVisible(true);
-        String cadenaCajaInicial = diagAbrirCaja.getCajaInicial();
-        if (cadenaCajaInicial != null) {
-            while (!Comunes.validarBigDecimal(cadenaCajaInicial)) {
-                //revisas que solo sea numero
-                JOptionPane.showMessageDialog(null, "Escriba solamente números y . de separador", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
-                cadenaCajaInicial = JOptionPane.showInputDialog("Ingrese la Caja Inicial");
-            }
-            BigDecimal cajaInicial = new BigDecimal(cadenaCajaInicial);
-            Caja caja = new Caja();
-            Date fechaInicio = Comunes.obtenerFechaActualDesdeDB();
-            //se me hace un quilombo el exportador al excel para compara la fecha con milisegundos
-            String fechaInicioSinMilisegundos = format.format(fechaInicio);
-            try {
-                caja.setFechaInicio(format.parse(fechaInicioSinMilisegundos));
-            } catch (ParseException ex) {
-                Logger.getLogger(CajaFacade.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            caja.setUsuario(usuario);
-            //movimientosCaja.setTurno(new TurnoFacade().determinarTurno(fechaInicio));
-            caja.setSucursal(sucursal);
-            caja.setCajaInicial(cajaInicial);
-//            movimientosCaja.setSaldoCreditosInicial(new CuentaCorrienteFacade().calcularCreditosPuesto(puesto));
-            alta(caja);
-//        } else {
-//            //si hay mas de dos turnos ya abiertos, muestra mensaje de error y cierra el programa
-//            JOptionPane.showMessageDialog(null, "No se puede abrir turno. "
-//                    + "Ya se cerraron los dos turnos diarios permitidos\n"
-//                    + "Presione Aceptar para cerrar el programa",
-//                    "Error", JOptionPane.ERROR_MESSAGE);
-//            System.exit(1);
+//    public void altaAbrirCaja() {
+//
+//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+//        DiagAbrirCaja diagAbrirCaja = new DiagAbrirCaja(null, true);
+//        diagAbrirCaja.setLocation(Comunes.centrarDialog(diagAbrirCaja));
+//        diagAbrirCaja.setVisible(true);
+//        String cadenaCajaInicial = diagAbrirCaja.getCajaInicial();
+//        if (cadenaCajaInicial != null) {
+//            while (!Comunes.validarBigDecimal(cadenaCajaInicial)) {
+//                //revisas que solo sea numero
+//                JOptionPane.showMessageDialog(null, "Escriba solamente números y . de separador", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+//                cadenaCajaInicial = JOptionPane.showInputDialog("Ingrese la Caja Inicial");
+//            }
+//            BigDecimal cajaInicial = new BigDecimal(cadenaCajaInicial);
+//            Caja caja = new Caja();
+//            Date fechaInicio = Comunes.obtenerFechaActualDesdeDB();
+//            //se me hace un quilombo el exportador al excel para compara la fecha con milisegundos
+//            String fechaInicioSinMilisegundos = format.format(fechaInicio);
+//            try {
+//                caja.setFechaInicio(format.parse(fechaInicioSinMilisegundos));
+//            } catch (ParseException ex) {
+//                Logger.getLogger(CajaFacade.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            caja.setUsuario(usuario);
+//            caja.setSucursal(sucursal);
+//            caja.setCajaInicial(cajaInicial);
+//
+//            alta(caja);
+//
 //        }
-        }
-    }
+//    }
+
+
 
     private void alta(Caja caja) {
         getFacade().create(caja);

@@ -7,27 +7,15 @@
     <ui:composition>
 
         <p:dialog id="CajaAbreDlg" widgetVar="CajaAbreDlg" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCaja.ViewCajaTitle}">
-            <h:form id="CajaViewForm">
+            <h:form id="CajaAbreForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{cajaController.selected != null}">
-                        <h:outputText value="#{bundleCaja.ViewCajaLabel_id}"/>
-                        <h:outputText value="#{cajaController.selected.id}" title="#{bundleCaja.ViewCajaTitle_id}"/>
-                        <h:outputText value="#{bundleCaja.ViewCajaLabel_usuario}"/>
-                        <h:outputText value="#{cajaController.selected.usuario}" title="#{bundleCaja.ViewCajaTitle_usuario}"/>
-                        <h:outputText value="#{bundleCaja.ViewCajaLabel_fechaInicio}"/>
-                        <h:outputText value="#{cajaController.selected.fechaInicio}" title="#{bundleCaja.ViewCajaTitle_fechaInicio}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                        <h:outputText value="#{bundleCaja.ViewCajaLabel_fechaFin}"/>
-                        <h:outputText value="#{cajaController.selected.fechaFin}" title="#{bundleCaja.ViewCajaTitle_fechaFin}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                        <h:outputText value="#{bundleCaja.ViewCajaLabel_cajaInicial}"/>
-                        <h:outputText value="#{cajaController.selected.cajaInicial}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}"/>
-                        <h:outputText value="#{bundleCaja.ViewCajaLabel_cajaFinal}"/>
-                        <h:outputText value="#{cajaController.selected.cajaFinal}" title="#{bundleCaja.ViewCajaTitle_cajaFinal}"/>
+
+                    <p:panelGrid columns="2" rendered="#{cajaController.selected != null}" styleClass="noBorders">
+
+                       <p:outputLabel value="Caja Inicial: "/>
+                        <p:inputText value="#{cajaController.selected.cajaInicial}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundleCaja.Close}" onclick="CajaViewDialog.hide()"/>
+                    <p:commandButton actionListener="#{cajaController.create}" value="#{bundleCaja.Save}" oncomplete="CajaAbreDlg.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -50,7 +50,7 @@
 
                 </b:dropMenu> 
                 <b:dropMenu value="Caja">
-                    <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" oncomplete="PF('dlg2').show();" actionListener="#{cajaController.abrirCaja}"></p:commandButton>
+                    <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" oncomplete="PF('CajaAbreDlg').show();" actionListener="#{cajaController.abrirCaja}"></p:commandButton>
                     <b:navLink value="Cajas" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
                     <b:navLink value="Egresos" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
                     <b:navLink value="Egresos" iconAwesome="fa fa-sign-in" href="/paginas/ingreso/List.xhtml"></b:navLink>
@@ -76,12 +76,7 @@
             </b:navbarLinks>
 
         </b:navBar> 
-        <p:dialog header="Modal Dialog" widgetVar="dlg2"  modal="true" height="100">
-
-            <h:outputText value="This is a Modal Dialog." />
-
-
-        </p:dialog>
+<ui:include src="/paginas/caja/AbreCaja.xhtml"/>
     </ui:composition>
 
 </html>

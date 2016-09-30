@@ -66,4 +66,16 @@ public class CajaRN implements CajaRNLocal {
 
     }
 
+    @Override
+    public Caja getCajaAbierta() {
+        Caja caja=null;
+        Query q = null;
+        q = em.createQuery("SELECT c FROM Caja c  WHERE c.fechaFin IS NULL");
+        List listaCajasAbiertas = q.getResultList();
+        if (listaCajasAbiertas.size() > 0) {
+            caja = (Caja) listaCajasAbiertas.get(listaCajasAbiertas.size() - 1);
+        }
+        return caja;
+    }
+
 }

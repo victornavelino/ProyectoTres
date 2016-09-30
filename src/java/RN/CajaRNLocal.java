@@ -31,5 +31,7 @@ public interface CajaRNLocal {
     int count();
 
     public List buscarCajaAbierta();
+
+    public Caja getCajaAbierta();
     
 }
