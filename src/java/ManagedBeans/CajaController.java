@@ -7,6 +7,7 @@ import Facades.CajaFacade;
 import RN.CajaRNLocal;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -160,6 +161,49 @@ public class CajaController implements Serializable {
 
         return quCajaAbierta.getResultList();
 
+    }
+        public void altaAbrirCaja(Usuario usuario) {
+//        if (getCantidadTurnosAbiertosHoy(puesto) < 2) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+        DiagAbrirCaja diagAbrirCaja = new DiagAbrirCaja(null, true);
+        diagAbrirCaja.setLocation(Comunes.centrarDialog(diagAbrirCaja));
+        diagAbrirCaja.setVisible(true);
+        String cadenaCajaInicial = diagAbrirCaja.getCajaInicial();
+        if (cadenaCajaInicial != null) {
+            while (!Comunes.validarBigDecimal(cadenaCajaInicial)) {
+                //revisas que solo sea numero
+                JOptionPane.showMessageDialog(null, "Escriba solamente números y . de separador", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
+                cadenaCajaInicial = JOptionPane.showInputDialog("Ingrese la Caja Inicial");
+            }
+            BigDecimal cajaInicial = new BigDecimal(cadenaCajaInicial);
+            Caja caja = new Caja();
+            Date fechaInicio = Comunes.obtenerFechaActualDesdeDB();
+            //se me hace un quilombo el exportador al excel para compara la fecha con milisegundos
+            String fechaInicioSinMilisegundos = format.format(fechaInicio);
+            try {
+                caja.setFechaInicio(format.parse(fechaInicioSinMilisegundos));
+            } catch (ParseException ex) {
+                Logger.getLogger(CajaFacade.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            caja.setUsuario(usuario);
+            //movimientosCaja.setTurno(new TurnoFacade().determinarTurno(fechaInicio));
+            caja.setSucursal(sucursal);
+            caja.setCajaInicial(cajaInicial);
+//            movimientosCaja.setSaldoCreditosInicial(new CuentaCorrienteFacade().calcularCreditosPuesto(puesto));
+            alta(caja);
+//        } else {
+//            //si hay mas de dos turnos ya abiertos, muestra mensaje de error y cierra el programa
+//            JOptionPane.showMessageDialog(null, "No se puede abrir turno. "
+//                    + "Ya se cerraron los dos turnos diarios permitidos\n"
+//                    + "Presione Aceptar para cerrar el programa",
+//                    "Error", JOptionPane.ERROR_MESSAGE);
+//            System.exit(1);
+//        }
+        }
+    }
+
+    private void alta(Caja caja) {
+        getFacade().create(caja);
     }
 
     @FacesConverter(forClass = Caja.class)
