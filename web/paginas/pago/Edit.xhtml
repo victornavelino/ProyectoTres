@@ -42,6 +42,12 @@
                         <p:selectBooleanCheckbox id="anulado" value="#{pagoController.selected.anulado}" />
                         <p:outputLabel value="#{bundlePago.EditPagoLabel_observaciones}" for="observaciones" />
                         <p:inputText id="observaciones" value="#{pagoController.selected.observaciones}" title="#{bundlePago.EditPagoTitle_observaciones}" />
+                        <p:outputLabel value="Cuenta:"/>
+                        <p:selectOneMenu id="cuenta" value="#{pagoController.selected.cuenta}" >
+                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                                           var="cuentaItem"
+                                           itemValue="#{cuentaItem}"/>
+                        </p:selectOneMenu>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{pagoController.update}" value="#{bundlePago.Save}" update="display,:PagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PagoEditDialog');"/>
                     <p:commandButton value="#{bundlePago.Cancel}" onclick="PagoEditDialog.hide()"/>

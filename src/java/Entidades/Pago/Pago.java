@@ -28,6 +28,7 @@ import javax.print.attribute.standard.Media;
 @Entity
 @Table(name = "pago")
 public class Pago implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +44,8 @@ public class Pago implements Serializable {
     private BigDecimal importe;
     @OneToOne
     private Concepto concepto;
+    @OneToOne
+    private Cuenta cuenta;
     private Boolean anulado;
     private String observaciones;
 
@@ -52,6 +55,14 @@ public class Pago implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 
     public Medico getMedico() {
@@ -125,7 +136,7 @@ public class Pago implements Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -150,5 +161,5 @@ public class Pago implements Serializable {
     public String toString() {
         return "Entidades.Pago.Pago[ id=" + id + " ]";
     }
-    
+
 }

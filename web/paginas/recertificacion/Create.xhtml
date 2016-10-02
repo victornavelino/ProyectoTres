@@ -12,14 +12,7 @@
             <h:form id="RecertificacionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
-                        <p:outputLabel value="Cuenta:"/>
-                        <p:selectOneMenu id="cuenta" value="#{recertificacionController.selected.cuenta}" >
-                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
-                                           var="cuentaItem"
-                                           itemValue="#{cuentaItem}"/>
-                        </p:selectOneMenu>                        
                         <p:outputLabel value="Especializacion:"/>
-
                         <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" >
                             <f:selectItems value="#{especializacionController.itemsAvailableSelectOne}"
                                            var="especializacionItem"

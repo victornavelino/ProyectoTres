@@ -24,7 +24,7 @@
                         <h:outputText value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.ViewPagoTitle_nroRecibo}"/>
                         <h:outputText value="#{bundlePago.ViewPagoLabel_fechaPago}"/>
                         <h:outputText value="#{pagoController.selected.fechaPago}" title="#{bundlePago.ViewPagoTitle_fechaPago}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundlePago.ViewPagoLabel_importe}"/>
                         <h:outputText value="#{pagoController.selected.importe}" title="#{bundlePago.ViewPagoTitle_importe}"/>
@@ -34,6 +34,8 @@
                         <p:selectBooleanCheckbox value="#{pagoController.selected.anulado}" disabled="true"/>
                         <h:outputText value="#{bundlePago.ViewPagoLabel_observaciones}"/>
                         <h:outputText value="#{pagoController.selected.observaciones}" title="#{bundlePago.ViewPagoTitle_observaciones}"/>
+                        <p:outputLabel value="Cuenta:"/>
+                        <p:outputLabel id="cuenta" value="#{pagoController.selected.cuenta}" />
                     </p:panelGrid>
                     <p:commandButton value="#{bundlePago.Close}" onclick="PagoViewDialog.hide()"/>
                 </h:panelGroup>

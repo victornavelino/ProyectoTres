@@ -132,6 +132,7 @@ public class MedicoController implements Serializable {
         selected.setPersona(new Persona());
         selected.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
         selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        selected.setArchivo(new Archivo());
         listadoTelefonosBean.setLstTelefonos(new ArrayList<Telefono>());
         listadoEmailBean.setLstCorreoElectronico(new ArrayList<CorreoElectronico>());
         domicilioBean.setDomicilio(new Domicilio());

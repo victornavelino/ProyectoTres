@@ -5,8 +5,6 @@
  */
 package Entidades.Medico;
 
-import Entidades.Pago.Cuenta;
-import Entidades.Usuario.Usuario;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -35,11 +33,7 @@ public class Recertificacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Medico medico;
-    @OneToOne
-    private Cuenta cuenta;
-    @OneToOne
+     @OneToOne
     private Especializacion especializacion;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaRecertificacion;
@@ -57,22 +51,6 @@ public class Recertificacion implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
     }
 
     public Especializacion getEspecializacion() {
@@ -162,8 +140,8 @@ public class Recertificacion implements Serializable {
     @Override
     public String toString() {
         try {
-            return medico.getPersona().getApellido() + ", "
-                    + medico.getPersona().getNombre() + " - "
+            return especializacion.getMedico().getPersona().getApellido() + ", "
+                    + especializacion.getMedico().getPersona().getNombre() + " - "
                     + especializacion.getEspecialidad().getNombreEspecialidad();
         } catch (Exception e) {
             return "";

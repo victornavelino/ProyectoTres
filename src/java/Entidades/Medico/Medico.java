@@ -42,7 +42,7 @@ public class Medico implements Serializable {
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     private Persona persona;
-    private String matriculaProfesional;
+    private int matriculaProfesional;
     @OneToOne
     private TipoSocio tipoSocio;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -90,11 +90,11 @@ public class Medico implements Serializable {
         this.persona = persona;
     }
 
-    public String getMatriculaProfesional() {
+    public int getMatriculaProfesional() {
         return matriculaProfesional;
     }
 
-    public void setMatriculaProfesional(String matriculaProfesional) {
+    public void setMatriculaProfesional(int matriculaProfesional) {
         this.matriculaProfesional = matriculaProfesional;
     }
 

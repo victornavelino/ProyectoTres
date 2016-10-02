@@ -35,23 +35,11 @@
                         </f:facet>
                         <h:outputText value="#{item.id}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Medico"/>
-                        </f:facet>
-                        <h:outputText value="#{item.medico.persona.apellido}, #{item.medico.persona.nombre}"/>
-                    </p:column>
                     <p:column filterBy="#{item.especializacion.medico.persona.apellido}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="Medico"/>
                         </f:facet>
                         <h:outputText value="#{item.especializacion.medico.persona.apellido}, #{item.especializacion.medico.persona.nombre}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Cuenta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cuenta.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

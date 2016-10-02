@@ -39,7 +39,7 @@ import javax.persistence.Temporal;
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.cantidadEspecializacion",
             query = "SELECT count(e.especialidad),e.especialidad.descripcion "
-                    + " FROM Especializacion e group by e.especialidad ORDER by count(e.especialidad) desc")
+            + " FROM Especializacion e group by e.especialidad ORDER by count(e.especialidad) desc")
 
 })
 public class Especializacion extends Base implements Serializable {
@@ -50,7 +50,7 @@ public class Especializacion extends Base implements Serializable {
     private Long id;
     @OneToOne
     private Especialidad especialidad;
-    private String matriculaEspecialidad;
+    private int matriculaEspecialidad;
     @OneToOne
     private Medico medico;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -74,11 +74,11 @@ public class Especializacion extends Base implements Serializable {
         this.id = id;
     }
 
-    public String getMatriculaEspecialidad() {
+    public int getMatriculaEspecialidad() {
         return matriculaEspecialidad;
     }
 
-    public void setMatriculaEspecialidad(String matriculaEspecialidad) {
+    public void setMatriculaEspecialidad(int matriculaEspecialidad) {
         this.matriculaEspecialidad = matriculaEspecialidad;
     }
 
@@ -176,7 +176,14 @@ public class Especializacion extends Base implements Serializable {
 
     @Override
     public String toString() {
-        return especialidad + " , " + matriculaEspecialidad;
+        try {
+            return matriculaEspecialidad
+                    + getMedico().getPersona().getApellido() + ", "
+                    + getMedico().getPersona().getNombre() + " - "
+                    + especialidad.getDescripcion();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 }

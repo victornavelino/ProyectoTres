@@ -259,3 +259,5 @@ h3,h1 {margin-top:4px}
     width: 120px;
     overflow: hidden;
 }
+
+.ui-dialog .ui-inputtext { text-transform: uppercase; }

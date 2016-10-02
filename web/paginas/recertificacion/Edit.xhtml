@@ -13,12 +13,7 @@
                 <h:panelGroup id="display">
                     <h1>Editar Recertificacion</h1>
                     <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
-                        <p:outputLabel value="Cuenta:"/>
-                        <p:selectOneMenu id="cuenta" value="#{recertificacionController.selected.cuenta}" >
-                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
-                                           var="cuentaItem"
-                                           itemValue="#{cuentaItem}"/>
-                        </p:selectOneMenu>                        
+                     
                         <p:outputLabel value="Especializacion:"/>
 
                         <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" >
