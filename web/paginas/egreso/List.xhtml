@@ -10,7 +10,7 @@
                 >
 
     <ui:define name="content">
-
+        <f:event listener="#{cajaController.verificarEstadoCaja()}" type="preRenderView"/> 
 
         <h3>
             <h:outputText value="#{bundleEgreso.ListEgresoTitle}"></h:outputText>
