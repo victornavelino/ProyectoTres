@@ -50,11 +50,13 @@
 
                 </b:dropMenu> 
                 <b:dropMenu value="Caja">
-                    <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" oncomplete="PF('CajaAbreDlg').show();" actionListener="#{cajaController.abrirCaja}"></p:commandButton>
+                    
+                    <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" 
+                                     update=":frmPri:CajaAbreForm,growl" actionListener="#{cajaController.abrirCaja()}" ajax="false"></p:commandButton>
                     <b:navLink value="Cajas" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
-                    <b:navLink value="Egresos" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
-                    <b:navLink value="Egresos" iconAwesome="fa fa-sign-in" href="/paginas/ingreso/List.xhtml"></b:navLink>
-                    <b:navLink value="Cerrar" iconAwesome="fa fa-times-circle" href="/paginas/ingreso/List.xhtml"></b:navLink>
+                    <b:navLink value="Egresos de Caja" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
+                    <b:navLink value="Ingreso de Caja" iconAwesome="fa fa-sign-in"  href="/paginas/ingreso/List.xhtml"></b:navLink>
+                    <p:commandButton value="Cerrar Caja" style="" icon="ui-icon-circle-close" actionListener="#{cajaController.cerrarCaja()}" ajax="false" ></p:commandButton>
                 </b:dropMenu>
                 <b:dropMenu value="Consultas">
                     <b:navLink value="Consultas" iconAwesome="search" href="/consulta.xhtml?faces-redirect=true"></b:navLink>
@@ -76,7 +78,8 @@
             </b:navbarLinks>
 
         </b:navBar> 
-<ui:include src="/paginas/caja/AbreCaja.xhtml"/>
+        <p:growl id="growl" sticky="true" />
+        <ui:include src="AbreCaja.xhtml"/>
     </ui:composition>
 
 </html>

@@ -9,10 +9,12 @@ import RN.CajaRNLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -24,6 +26,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import org.primefaces.context.RequestContext;
 
 @Named("cajaController")
 @SessionScoped
@@ -36,7 +39,7 @@ public class CajaController implements Serializable {
     private List<Caja> items = null;
     private Caja selected;
     private boolean isCajaAbierta;
-    String sMensaje = "";
+    private String sMensaje = "";
     private BigDecimal cajaInicial;
 
     public CajaController() {
@@ -49,7 +52,7 @@ public class CajaController implements Serializable {
     public void setCajaInicial(BigDecimal cajaInicial) {
         this.cajaInicial = cajaInicial;
     }
-    
+
     public boolean isIsCajaAbierta() {
         return isCajaAbierta;
     }
@@ -98,9 +101,13 @@ public class CajaController implements Serializable {
         return selected;
     }
 
-    public void create() {
 
-        cajaInicial = selected.getCajaInicial();
+    public void create() {
+        isCajaAbierta = true;
+        sMensaje = "";
+        selected.setFechaInicio(new Date());
+        System.out.println("ManagedBeans.CajaController.create()");
+
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCaja").getString("CajaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -166,19 +173,37 @@ public class CajaController implements Serializable {
         return getFacade().findAll();
     }
 
-    public void abrirCaja() {
-        
-        FacesMessage fm;
-        FacesMessage.Severity severity = null;
-        
+    public Caja abrirCaja() {
+        //selected = new Caja();
         if (hayCajaAbierta()) {
+            System.out.println("ya se encuentra caja abierta");
             selected = cajaRNLocal.getCajaAbierta();
             sMensaje = "Ya se encuentra abierta una Caja del usuario: " + selected.getUsuario();
-            isCajaAbierta=true;
-        } else{
-            selected=new Caja();
-            isCajaAbierta=false;
-            sMensaje = "";
+            isCajaAbierta = true;
+            RequestContext.getCurrentInstance().update(":frmPri:EgresoListForm,:frmPri:IngresoListForm");
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ya se encuentra una caja Abierta", null);
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, fm);
+
+        } else {
+            selected = new Caja();
+            System.out.println("nueva caja");
+            RequestContext.getCurrentInstance().update(":frmPri:CajaAbreForm,:frmPri:EgresoListForm");
+            RequestContext.getCurrentInstance().execute("PF('CajaAbreDlg').show();");
+
+        }
+        return selected;
+    }
+
+    public void cerrarCaja() {
+        if (selected != null) {
+            selected.setFechaFin(new Date());
+            update();
+            isCajaAbierta = false;
+            selected = null;
+            RequestContext.getCurrentInstance().update(":frmPri:EgresoListForm,:frmPri:IngresoListForm");
+        }else{
+            JsfUtil.addSuccessMessage("La caja esta Cerrada");
         }
 
     }
@@ -191,7 +216,6 @@ public class CajaController implements Serializable {
         }
         return respuesta;
     }
-
 
 //    public void altaAbrirCaja() {
 //
@@ -224,11 +248,15 @@ public class CajaController implements Serializable {
 //
 //        }
 //    }
-
-
-
-    private void alta(Caja caja) {
+    public void alta(Caja caja) {
+        cajaInicial = selected.getCajaInicial();
+        selected.setFechaInicio(new Date());
         getFacade().create(caja);
+    }
+
+    @PostConstruct
+    public void inicializar() {
+        isCajaAbierta = false;
     }
 
     @FacesConverter(forClass = Caja.class)
