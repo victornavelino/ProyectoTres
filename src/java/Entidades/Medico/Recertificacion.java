@@ -161,7 +161,13 @@ public class Recertificacion implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Medico.Recertificacion[ id=" + id + " ]";
+        try {
+            return medico.getPersona().getApellido() + ", "
+                    + medico.getPersona().getNombre() + " - "
+                    + especializacion.getEspecialidad().getNombreEspecialidad();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 }

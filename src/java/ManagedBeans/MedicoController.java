@@ -1,5 +1,6 @@
 package ManagedBeans;
 
+import Entidades.Base.Archivo;
 import Entidades.Medico.Medico;
 import Entidades.Persona.CorreoElectronico;
 import Entidades.Persona.DocumentoIdentidad;
@@ -7,9 +8,15 @@ import Entidades.Persona.Domicilio;
 import Entidades.Persona.Persona;
 import Entidades.Persona.Telefono;
 import Entidades.Persona.TipoDocumento;
+import Facades.CorreoElectronicoFacade;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MedicoFacade;
+import Facades.TelefonoFacade;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +27,17 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.model.SelectItem;
+import javax.faces.event.PhaseId;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.CaptureEvent;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @Named("medicoController")
 @SessionScoped
@@ -48,6 +59,38 @@ public class MedicoController implements Serializable {
     private DomicilioBean domicilioBean;
 
     public MedicoController() {
+    }
+
+    public MedicoFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(MedicoFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public TelefonoFacade getTelefonoFacade() {
+        return telefonoFacade;
+    }
+
+    public void setTelefonoFacade(TelefonoFacade telefonoFacade) {
+        this.telefonoFacade = telefonoFacade;
+    }
+
+    public CorreoElectronicoFacade getCorreoElectronicoFacade() {
+        return correoElectronicoFacade;
+    }
+
+    public void setCorreoElectronicoFacade(CorreoElectronicoFacade correoElectronicoFacade) {
+        this.correoElectronicoFacade = correoElectronicoFacade;
+    }
+
+    public DomicilioBean getDomicilioBean() {
+        return domicilioBean;
+    }
+
+    public void setDomicilioBean(DomicilioBean domicilioBean) {
+        this.domicilioBean = domicilioBean;
     }
 
     public ListadoEmailBean getListadoEmailBean() {
@@ -117,7 +160,7 @@ public class MedicoController implements Serializable {
     }
 
     public void destroy() {
-        
+
         selected.getPersona().setTelefonos(null);
         selected.getPersona().setCorreosElectronicos(null);
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("MedicoDeleted"));
@@ -215,4 +258,78 @@ public class MedicoController implements Serializable {
 
     }
 
+    public void handleFileUpload(FileUploadEvent event) {
+        try {
+
+            if (selected.getArchivo() == null) {
+                selected.setArchivo(new Archivo());
+            }
+            selected.getArchivo().setNombre(event.getFile().getFileName());
+            selected.getArchivo().setContenidoArchivo(
+                    this.getFileContents(event.getFile().getInputstream()));
+
+        } catch (IOException ex) {
+            //Logger.getLogger(CategoriaEditDlgBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private byte[] getFileContents(InputStream in) {
+        byte[] bytes = null;
+        try {
+            // write the inputStream to a FileOutputStream            
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            int read = 0;
+            bytes = new byte[1024];
+
+            while ((read = in.read(bytes)) != -1) {
+                bos.write(bytes, 0, read);
+            }
+            bytes = bos.toByteArray();
+            in.close();
+            in = null;
+            bos.flush();
+            bos.close();
+            bos = null;
+            //logger.debug("New file created!");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return bytes;
+    }//fin getFileContents
+
+    private String getRandomImageName() {
+        int i = (int) (Math.random() * 10000000);
+
+        return String.valueOf(i);
+    }
+
+    public void oncapture(CaptureEvent captureEvent) {
+
+        byte[] data = captureEvent.getData();
+
+        if (selected.getArchivo() == null) {
+            selected.setArchivo(new Archivo());
+        }
+        selected.getArchivo().setNombre(getRandomImageName());
+
+        selected.getArchivo().setContenidoArchivo(data);
+
+    }
+
+    public StreamedContent getImage() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+                // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
+                return new DefaultStreamedContent();
+            } else {
+                // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+                return new DefaultStreamedContent(new ByteArrayInputStream(selected.getArchivo().getContenidoArchivo()));
+            }
+        } catch (Exception e) {
+            return new DefaultStreamedContent();
+        }
+    }
 }

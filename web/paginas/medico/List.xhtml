@@ -29,17 +29,20 @@
                              rowKey="#{item.id}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             filterEvent="enter"
+                             sortField="#{item.id}"
+                             sortOrder="DESCENDING"
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-                    <p:column filterBy="#{item.persona.apellido}" width="200">
+                    <p:column sortBy="#{item.persona.apellido}" filterBy="#{item.persona.apellido}" width="200">
                         <f:facet name="header">
                             <h:outputText value="Apellido"/>
                         </f:facet>
                         <h:outputText value="#{item.persona.apellido}"/>
                     </p:column>
-                    <p:column width="200">
+                    <p:column width="200" filterBy="#{item.persona.nombre}" >
                         <f:facet name="header">
                             <h:outputText value="Nombre"/>
                         </f:facet>
@@ -60,7 +63,7 @@
                         <h:outputText value="#{item.titulo}"/>
                     </p:column>
 
-                    <p:column filterBy="#{item.matriculaProfesional}" width="120">
+                    <p:column filterBy="#{item.matriculaProfesional}" sortBy="#{item.matriculaProfesional}" width="120">
                         <f:facet name="header">
                             <h:outputText value="Matricula"/>
                         </f:facet>
@@ -72,7 +75,7 @@
                             <h:outputText value="#{bundle.ListMedicoTitle_fechaTitulo}"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaTitulo}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
 

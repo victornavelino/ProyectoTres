@@ -13,11 +13,11 @@ and open the template in the editor.
     <!--Inicio Dialogo Cargar telefonos-->
     <ui:composition>
 
-<h:form id="telefonoCreateForm">
-        <p:dialog id="dTelefonos" 
-                  widgetVar="dlgTel" 
-                  modal="false" position="top">
-            
+        <h:form id="telefonoCreateForm">
+            <p:dialog id="dTelefonos" 
+                      widgetVar="dlgTel" 
+                      modal="false" position="top">
+
                 <f:facet name="header">  
                     <h:outputText value="Telefonos"/>
                 </f:facet>  
@@ -48,46 +48,47 @@ and open the template in the editor.
                     </table>
 
                 </p:panel>
-                      <center>
-            <table cellpadding="5" cellspacing="5">
-                <tr>
-                    <td align="center">
-                        <p:commandButton id="btnActionTelefono"
-                                         value="Agregar Telefono" 
-                                         action="#{listadoTelefonosBean.actionButton()}"
-                                         binding="#{listadoTelefonosBean.cbActionTelefonos}"
-                                         icon="ui-icon-disk"
-                                         />
-                    </td>
-                    <td align="center">
-                        <p:commandButton value="Salir" 
-                                         oncomplete="PF('dlgTel').hide();"/>
-                    </td>
-                </tr>
-            </table>
-        </center> 
+                <center>
+                    <table cellpadding="5" cellspacing="5">
+                        <tr>
+                            <td align="center">
+                                <p:commandButton id="btnActionTelefono"
+                                                 value="Agregar Telefono" 
+                                                 action="#{listadoTelefonosBean.actionButton()}"
+                                                 binding="#{listadoTelefonosBean.cbActionTelefonos}"
+                                                 icon="ui-icon-disk"
+                                                 />
+                            </td>
+                            <td align="center">
+                                <p:commandButton value="Salir" 
+                                                 oncomplete="PF('dlgTel').hide();"/>
+                            </td>
+                        </tr>
+                    </table>
+                </center> 
 
 
-            
-        </p:dialog>
-    </h:form>
-        <!--Fin Dialogo Cargar telefonos--> 
 
-        <!--Inicio Dialogo Confirmar Borrar telefono-->  
-        <p:confirmDialog id="confirmDialogTel" message="Seguro Desea Eliminar El Telefono Seleccionado?"  
-                         header="Proceso de Eliminacion" severity="alert" widgetVar="confirmationTel">  
+            </p:dialog>
+            <!--Fin Dialogo Cargar telefonos--> 
 
-            <table cellpadding="5" cellspacing="5" width="350">
-                <tr>
-                    <td align="right">
-                        <p:commandButton id="confirmTel" value="Aceptar" oncomplete="PF('confirmationTel').hide()" actionListener="#{docenteBean.quitarTablaTelefonos()}" /> 
-                    </td>  
-                    <td align="left">
-                        <p:commandButton id="declineTel" value="Cancelar" onclick="PF('confirmationTel').hide()" type="button" />   
-                    </td>
-                </tr>
-            </table>
-        </p:confirmDialog> 
-        <!--Fin Dialogo Confirmar Borrar Telefono-->
+            <!--Inicio Dialogo Confirmar Borrar telefono-->  
+            <p:confirmDialog id="confirmDialogTel" message="Seguro Desea Eliminar El Telefono Seleccionado?"  
+                             header="Proceso de Eliminacion" severity="alert" widgetVar="confirmationTel">  
+
+                <table cellpadding="5" cellspacing="5" width="350">
+                    <tr>
+                        <td align="right">
+                            <p:commandButton id="confirmTel" value="Aceptar" oncomplete="PF('confirmationTel').hide()" actionListener="#{docenteBean.quitarTablaTelefonos()}" /> 
+                        </td>  
+                        <td align="left">
+                            <p:commandButton id="declineTel" value="Cancelar" onclick="PF('confirmationTel').hide()" type="button" />   
+                        </td>
+                    </tr>
+                </table>
+            </p:confirmDialog> 
+            <!--Fin Dialogo Confirmar Borrar Telefono-->
+        </h:form>
     </ui:composition>
+
 </html>

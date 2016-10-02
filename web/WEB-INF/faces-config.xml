@@ -52,4 +52,11 @@
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
     </application>
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
+            <renderer-class>ManagedBeans.util.FileUploadRenderer</renderer-class>
+        </renderer>
+    </render-kit>
 </faces-config>

@@ -5,6 +5,7 @@
  */
 package Entidades.Medico;
 
+import Entidades.Base.Archivo;
 import Entidades.Persona.Persona;
 import java.io.Serializable;
 import java.util.Date;
@@ -62,6 +63,16 @@ public class Medico implements Serializable {
     private Organismo organismo;
     private Integer libro;
     private Integer folio;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Archivo archivo;
+
+    public Archivo getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(Archivo archivo) {
+        this.archivo = archivo;
+    }
 
     public Long getId() {
         return id;

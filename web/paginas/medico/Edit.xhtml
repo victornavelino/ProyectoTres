@@ -8,11 +8,11 @@
 
     <ui:composition>
 
-        <p:dialog id="MedicoEditDlg" widgetVar="MedicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMedicoTitle}">
+        <p:dialog id="MedicoEditDlg" widgetVar="MedicoEditDialog" modal="true"  height="500" resizable="true" position="top" appendTo="@(body)" header="#{bundle.EditMedicoTitle}">
             <h:form id="MedicoEditForm">
-                <h:panelGroup id="display" style="width: 700px">
+                <h:panelGroup id="display">
                     <p:panel id="pPri" header="Datos Personales" > 
-                        <p:scrollPanel mode="native" style="width:750px;height:400px">
+                        <p:scrollPanel mode="native" style="height:700px">
                             <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">
 
                                 <p:outputLabel value="Nombre: " for="itNombre" />
@@ -39,6 +39,7 @@
                                 <p:calendar id="caFechaNacimiento" 
                                             value="#{medicoController.selected.persona.fechaNacimiento}" 
                                             title="FechaNacimiento:" 
+                                            pattern="dd/MM/yyyy"
                                             />
 
                                 <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
@@ -185,13 +186,13 @@
                                                        itemValue="#{tipoSocioItem}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_fechaInscripcion}" for="fechaInscripcion" />
-                                    <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.EditMedicoTitle_fechaInscripcion}"  showOn="button"/>
+                                    <p:calendar id="fechaInscripcion" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.EditMedicoTitle_fechaInscripcion}"  showOn="button"/>
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_titulo}" for="titulo" />
                                     <p:inputText id="titulo" value="#{medicoController.selected.titulo}" title="#{bundle.EditMedicoTitle_titulo}" />
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_fechaRecibido}" for="fechaRecibido" />
-                                    <p:calendar id="fechaRecibido" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaRecibido}" title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
+                                    <p:calendar id="fechaRecibido" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaRecibido}" title="#{bundle.EditMedicoTitle_fechaRecibido}"  showOn="button"/>
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_fechaTitulo}" for="fechaTitulo" />
-                                    <p:calendar id="fechaTitulo" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
+                                    <p:calendar id="fechaTitulo" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  showOn="button"/>
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_unidadFormadora}" for="unidadFormadora" />
                                     <p:selectOneMenu id="unidadFormadora" value="#{medicoController.selected.unidadFormadora}" >
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -200,7 +201,7 @@
                                                        itemValue="#{unidadFormadoraItem}"/>
                                     </p:selectOneMenu>
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_fechaBaja}" for="fechaBaja" />
-                                    <p:calendar id="fechaBaja" pattern="MM/dd/yyyy" value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
+                                    <p:calendar id="fechaBaja" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_motivoBaja}" for="motivoBaja" />
                                     <p:inputText id="motivoBaja" value="#{medicoController.selected.motivoBaja}" title="#{bundle.EditMedicoTitle_motivoBaja}" />
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_organismo}" for="organismo" />
@@ -215,7 +216,44 @@
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_folio}" for="folio" />
                                     <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.EditMedicoTitle_folio}" />
                                 </p:panelGrid>
-                                </p:panel>
+                            </p:panel>
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <p:photoCam widgetVar="fotoCam" listener="#{medicoController.oncapture}" 
+                                            update=":MedicoEditForm:panelFoto"
+                                            />
+                                <p:commandButton type="button" value="Tomar Foto" onclick="PF('fotoCam').capture()" update=":MedicoEditForm:panelFoto"/>
+
+                                <p:outputPanel id="panelFoto">
+                                    <p:graphicImage id="giFoto" value="#{medicoController.image}"
+                                                    width="300"
+                                                    height="250"
+                                                    cache="false"
+                                                    rendered="#{medicoController.selected.archivo != null}"
+                                                    />
+
+                                </p:outputPanel>
+                            </h:panelGrid>
+
+                            <h:panelGroup>
+                                <h:inputHidden id="ihArchivoBE" value="#{medicoController.selected.archivo.nombre}"/> 
+                                <h:inputHidden id="ihArchivoIdBE" value="#{medicoController.selected.archivo.id}"/>
+                                <h:outputText value="Puede subir una foto haciendo click en el boton de abajo"
+                                              />
+                                <h:form id="frmArchivoCE" enctype="multipart/form-data">
+                                    <p:fileUpload id="fuArchivoBE"
+                                                  fileUploadListener="#{medicoController.handleFileUpload}"
+                                                  auto="true"
+                                                  update="otArchivoBE, :MedicoEditForm:ihArchivoBE, :MedicoEditForm:panelFoto"
+                                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                  />
+
+
+
+                                    <h:outputText id="otArchivoBE" value="#{medicoController.selected.archivo.nombre}"/>
+
+
+                                </h:form>
+                            </h:panelGroup>
                         </p:scrollPanel>
                     </p:panel>
                     <p:commandButton actionListener="#{medicoController.update}" value="#{bundle.Save}" update="display,:MedicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MedicoEditDialog');"/>

@@ -175,7 +175,6 @@ public class DomicilioBean implements Serializable {
     }
 
     public void cargarDepartamentos() {
-        System.out.println("paso por departamentos");
 
         try {
             listaDepartamentos = new ArrayList<>();
@@ -184,7 +183,6 @@ public class DomicilioBean implements Serializable {
                 listaDepartamentos.add(new SelectItem(depto, depto.toString()));
 
             }
-            System.out.println("Departammentoos :" + departamentoRNLocal.buscarDptoProvincia(provincia));
         } catch (Exception ex) {
             Logger.getLogger(DomicilioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -198,7 +196,6 @@ public class DomicilioBean implements Serializable {
                 listaLocalidades.add(new SelectItem(loc, loc.toString()));
 
             }
-            System.out.println("LOCALIDADESSSSS. " + listaLocalidades);
         } catch (Exception ex) {
             Logger.getLogger(DomicilioBean.class.getName()).log(Level.SEVERE, null, ex);
         }

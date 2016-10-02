@@ -11,70 +11,70 @@ and open the template in the editor.
 
     <!--Inicio Dialogo Cargar Correos Electronicos-->
     <h:form id="mailCreateForm">
-    <p:dialog id="dEmail" 
-              widgetVar="dlgEmail" 
-              modal="true"
-              width="500" position="top">
+        <p:dialog id="dEmail" 
+                  widgetVar="dlgEmail" 
+                  modal="true"
+                  width="500" position="top">
 
-        <f:facet name="header">  
-            <h:outputText value="Correos Electronicos"/>
-        </f:facet>  
-        <p:panel id="pEmail">
-            <div>
-                <div class="left">
-                    <h:outputText value="Email"/>
+            <f:facet name="header">  
+                <h:outputText value="Correos Electronicos"/>
+            </f:facet>  
+            <p:panel id="pEmail">
+                <div>
+                    <div class="left">
+                        <h:outputText value="Email"/>
+                    </div>
+                    <div class="contenidopanel">
+                        <p:inputText id="itEmail"
+                                     value="#{listadoEmailBean.correoElectronico.direccion}"
+
+                                     required="false"
+                                     >
+
+                            <!--<f:validator validatorId="EmailValidator"/-->
+
+                        </p:inputText>
+
+                    </div>
                 </div>
-                <div class="contenidopanel">
-                    <p:inputText id="itEmail"
-                                 value="#{listadoEmailBean.correoElectronico.direccion}"
-
-                                 required="false"
-                                 >
-
-                        <!--<f:validator validatorId="EmailValidator"/-->
-
-                    </p:inputText>
-
-                </div>
-            </div>
-        </p:panel>
+            </p:panel>
 
 
-        <center>
-            <table cellpadding="5" cellspacing="5">
+            <center>
+                <table cellpadding="5" cellspacing="5">
+                    <tr>
+                        <td align="center">
+                            <p:commandButton id="btnAction2"
+                                             value="Agregar Email" 
+                                             action="#{listadoEmailBean.actionButtonEmail}"
+                                             binding="#{listadoEmailBean.cbActionEmail}"
+                                             icon="ui-icon-disk"
+                                             />
+                        </td>
+                        <td align="center">
+                            <p:commandButton value="Salir" 
+                                             oncomplete="PF('dlgEmail').hide();"/>
+                        </td>
+                    </tr>
+                </table>
+            </center> 
+        </p:dialog>
+        <!--Fin Dialogo Cargar Correos Electronicos-->  
+
+        <!--Inicio Dialogo Confirmar Borrar Correo Electronico-->  
+        <p:confirmDialog id="confirmDialog" message="Seguro Desea Eliminar Correo Electronico?"  
+                         header="Proceso de Eliminacion" severity="alert" widgetVar="confirmation">  
+            <table cellpadding="5" cellspacing="5" width="350">
                 <tr>
-                    <td align="center">
-                        <p:commandButton id="btnAction2"
-                                         value="Agregar Email" 
-                                         action="#{listadoEmailBean.actionButtonEmail}"
-                                         binding="#{listadoEmailBean.cbActionEmail}"
-                                         icon="ui-icon-disk"
-                                         />
-                    </td>
-                    <td align="center">
-                        <p:commandButton value="Salir" 
-                                         oncomplete="PF('dlgEmail').hide();"/>
+                    <td align="right">
+                        <p:commandButton id="confirm" value="Aceptar" oncomplete="PF('confirmation').hide()" actionListener="#{docenteBean.quitarTablaEmail()}" /> 
+                    </td>  
+                    <td align="left">
+                        <p:commandButton id="decline" value="Cancelar" onclick="PF('confirmation').hide()" type="button" />   
                     </td>
                 </tr>
             </table>
-        </center> 
-    </p:dialog>
-        </h:form>
-    <!--Fin Dialogo Cargar Correos Electronicos-->  
-
-    <!--Inicio Dialogo Confirmar Borrar Correo Electronico-->  
-    <p:confirmDialog id="confirmDialog" message="Seguro Desea Eliminar Correo Electronico?"  
-                     header="Proceso de Eliminacion" severity="alert" widgetVar="confirmation">  
-        <table cellpadding="5" cellspacing="5" width="350">
-            <tr>
-                <td align="right">
-                    <p:commandButton id="confirm" value="Aceptar" oncomplete="PF('confirmation').hide()" actionListener="#{docenteBean.quitarTablaEmail()}" /> 
-                </td>  
-                <td align="left">
-                    <p:commandButton id="decline" value="Cancelar" onclick="PF('confirmation').hide()" type="button" />   
-                </td>
-            </tr>
-        </table>
-    </p:confirmDialog> 
-    <!--Fin Dialogo Confirmar Borrar Correo Electronico-->
+        </p:confirmDialog> 
+        <!--Fin Dialogo Confirmar Borrar Correo Electronico-->
+    </h:form>
 </html>
