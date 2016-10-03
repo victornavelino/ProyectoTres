@@ -270,7 +270,7 @@ public class CajaController implements Serializable {
             //calculamos el saldo
             System.out.println("entro calcular sadlo");
             saldoFinalCaja = selected.getCajaInicial().add(totalIngresosCaja).subtract(totalEgresosCaja);
-            RequestContext.getCurrentInstance().update(":frmPri:CajaCierreForm");
+            //RequestContext.getCurrentInstance().update(":frmPri:CajaCierreForm");
             RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').show();");
         } else {
         }
@@ -278,12 +278,15 @@ public class CajaController implements Serializable {
 
     public void cerrarCaja() {
         if (selected != null) {
+            System.out.println("entro cerrar caja");
             selected.setFechaFin(new Date());
             selected.setCajaFinal(cajaArqueo);
             update();
             isCajaAbierta = false;
             selected = null;
             RequestContext.getCurrentInstance().update(":frmPri:EgresoListForm,:frmPri:IngresoListForm");
+            JsfUtil.addSuccessMessage("La caja se cerró exitosamente");
+             System.out.println("pasoooo cerrar caja");
         } else {
             JsfUtil.addSuccessMessage("La caja esta Cerrada");
         }

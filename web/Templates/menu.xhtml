@@ -61,7 +61,7 @@
                     <b:navLink value="Cajas" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
                     <b:navLink value="Egresos de Caja" iconAwesome="fa fa-sign-out" href="/paginas/egreso/List.xhtml"></b:navLink>
                     <b:navLink value="Ingreso de Caja" iconAwesome="fa fa-sign-in"  href="/paginas/ingreso/List.xhtml"></b:navLink>
-                    <p:commandButton value="Cerrar Caja" icon="ui-icon-circle-close" actionListener="#{cajaController.calcularSaldo()}" ajax="false" ></p:commandButton>
+                    <p:commandButton value="Cerrar Caja" update=":frmPri:CajaCierreForm,growl" icon="ui-icon-circle-close" actionListener="#{cajaController.calcularSaldo()}" ajax="false" ></p:commandButton>
                 </b:dropMenu>
                 <b:dropMenu value="Consultas">
                     <b:navLink value="Consultas" iconAwesome="search" href="/consulta.xhtml?faces-redirect=true"></b:navLink>
