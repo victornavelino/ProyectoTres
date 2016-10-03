@@ -44,13 +44,18 @@
                 </b:dropMenu>
                 <b:dropMenu value="Pagos">
                     <b:navLink value="Pagos" iconAwesome="fa fa-money" href="/paginas/pago/List.xhtml"></b:navLink>
+                    <b:navLink value="Plan de Pagos" iconAwesome="fa fa-credit-car" href="/paginas/planPago/List.xhtml"></b:navLink>
+
+                    <b:navLink  />
+
                     <b:navLink value="Cuentas" iconAwesome="fa fa-list-alt" href="/paginas/cuenta/List.xhtml"></b:navLink>
                     <b:navLink value="Conceptos" iconAwesome="fa fa-cog" href="/paginas/concepto/List.xhtml"></b:navLink>
                     <b:navLink value="Bancos" iconAwesome="fa fa-university" href="/paginas/banco/List.xhtml"></b:navLink>
+                    <b:navLink value="Tipo de Plan de Pagos" iconAwesome="fa fa-calculator" href="/paginas/tipoPlanPago/List.xhtml"></b:navLink>
 
                 </b:dropMenu> 
                 <b:dropMenu value="Caja">
-                    
+
                     <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" 
                                      update=":frmPri:CajaAbreForm,growl" actionListener="#{cajaController.abrirCaja()}" ajax="false"></p:commandButton>
                     <b:navLink value="Cajas" iconAwesome="fa fa-calculator" href="/paginas/caja/List.xhtml"></b:navLink>
