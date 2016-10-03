@@ -16,76 +16,82 @@
             <h:outputText value="#{bundleEgreso.ListEgresoTitle}"></h:outputText>
         </h3>
 
-            <h:form id="EgresoListForm">
-                <p:panel header="#{bundleEgreso.ListEgresoTitle}">
-                    <p:dataTable id="datalist" value="#{egresoController.items}" var="item"
-                                 selectionMode="single" selection="#{egresoController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+        <h:form id="EgresoListForm">
+            <p:panel header="#{bundleEgreso.ListEgresoTitle}">
+                <p:dataTable id="datalist" value="#{egresoController.items}" var="item"
+                             selectionMode="single" selection="#{egresoController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_descripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_tipoDeEgreso}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipoDeEgreso}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_importe}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.importe}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_fecha}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_formaDePago}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.formaDePago}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_usuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usuario}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleEgreso.Create}" actionListener="#{egresoController.prepareCreate}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.View}" update=":EgresoViewForm" oncomplete="PF('EgresoViewDialog').show()" disabled="#{empty egresoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Edit}" update=":EgresoEditForm" oncomplete="PF('EgresoEditDialog').show()" disabled="#{empty egresoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Delete}" actionListener="#{egresoController.destroy}" update=":growl,datalist" disabled="#{empty egresoController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_descripcion}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                        <h:outputText value="#{item.descripcion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_tipoDeEgreso}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoDeEgreso}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_importe}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.importe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_fecha}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_formaDePago}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.formaDePago}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_importe}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.importe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_usuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usuario}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleEgreso.Create}" actionListener="#{egresoController.prepareCreate}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.View}" update=":EgresoViewForm" oncomplete="PF('EgresoViewDialog').show()" disabled="#{empty egresoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Edit}" update=":EgresoEditForm" oncomplete="PF('EgresoEditDialog').show()" disabled="#{empty egresoController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Delete}" actionListener="#{egresoController.destroy}" update=":growl,datalist" disabled="#{empty egresoController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </ui:define>
+</ui:composition>
 

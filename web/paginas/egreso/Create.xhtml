@@ -28,6 +28,7 @@
                         <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{egresoController.selected.fecha}" title="#{bundleEgreso.EditEgresoTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_formaDePago}" for="formaDePago" />
                         <p:inputText id="formaDePago" value="#{egresoController.selected.formaDePago}" title="#{bundleEgreso.CreateEgresoTitle_formaDePago}" />
+                        
                         <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_usuario}" for="usuario" />
                         <p:selectOneMenu id="usuario" value="#{egresoController.selected.usuario}" >
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"

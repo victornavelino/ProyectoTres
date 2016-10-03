@@ -27,9 +27,7 @@ public class Egreso extends MovimientoCaja implements Serializable {
     private static final long serialVersionUID = 1L;
     @OneToOne
     private TipoDeEgreso tipoDeEgreso;
-    @Basic(optional = false)
-    @Column(scale = 3, precision = 12)
-    private BigDecimal importe;
+
     private String descripcion;
 
     public String getDescripcion() {
@@ -46,14 +44,6 @@ public class Egreso extends MovimientoCaja implements Serializable {
 
     public void setTipoDeEgreso(TipoDeEgreso tipoDeEgreso) {
         this.tipoDeEgreso = tipoDeEgreso;
-    }
-
-    public BigDecimal getImporte() {
-        return importe;
-    }
-
-    public void setImporte(BigDecimal importe) {
-        this.importe = importe;
     }
 
     @Override

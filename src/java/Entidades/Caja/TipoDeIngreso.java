@@ -28,9 +28,6 @@ public class TipoDeIngreso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcion;
-    @Basic(optional = false)
-    @Column(scale = 3, precision = 12)
-    private BigDecimal importe;
     private boolean habilitado;
     
 
@@ -48,14 +45,6 @@ public class TipoDeIngreso implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public BigDecimal getImporte() {
-        return importe;
-    }
-
-    public void setImporte(BigDecimal importe) {
-        this.importe = importe;
     }
 
     public boolean isHabilitado() {

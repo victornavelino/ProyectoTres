@@ -7,6 +7,7 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.CajaFacade;
 import RN.CajaRNLocal;
 import RN.MovimientoCajaRNLocal;
+import com.sun.tools.xjc.reader.Ring;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -45,8 +46,52 @@ public class CajaController implements Serializable {
     private boolean isCajaAbierta;
     private String sMensaje = "";
     private BigDecimal cajaInicial;
+    BigDecimal saldoFinalCaja = new BigDecimal("0.00");
+    BigDecimal totalIngresosCaja = new BigDecimal("0.00");
+    BigDecimal totalEgresosCaja = new BigDecimal("0.00");
+    BigDecimal cajaArqueo = new BigDecimal("0.00");
 
     public CajaController() {
+    }
+
+    public BigDecimal getCajaArqueo() {
+        return cajaArqueo;
+    }
+
+    public void setCajaArqueo(BigDecimal cajaArqueo) {
+        this.cajaArqueo = cajaArqueo;
+    }
+    
+    public MovimientoCajaRNLocal getMovimientoCajaRNLocal() {
+        return movimientoCajaRNLocal;
+    }
+
+    public void setMovimientoCajaRNLocal(MovimientoCajaRNLocal movimientoCajaRNLocal) {
+        this.movimientoCajaRNLocal = movimientoCajaRNLocal;
+    }
+
+    public BigDecimal getSaldoFinalCaja() {
+        return saldoFinalCaja;
+    }
+
+    public void setSaldoFinalCaja(BigDecimal saldoFinalCaja) {
+        this.saldoFinalCaja = saldoFinalCaja;
+    }
+
+    public BigDecimal getTotalIngresosCaja() {
+        return totalIngresosCaja;
+    }
+
+    public void setTotalIngresosCaja(BigDecimal totalIngresosCaja) {
+        this.totalIngresosCaja = totalIngresosCaja;
+    }
+
+    public BigDecimal getTotalEgresosCaja() {
+        return totalEgresosCaja;
+    }
+
+    public void setTotalEgresosCaja(BigDecimal totalEgresosCaja) {
+        this.totalEgresosCaja = totalEgresosCaja;
     }
 
     public BigDecimal getCajaInicial() {
@@ -201,19 +246,40 @@ public class CajaController implements Serializable {
     public void verificarEstadoCaja() {
         if (!isCajaAbierta) {
             JsfUtil.addSuccessMessage("La Caja esta Cerrada, no puede realizar movimientos");
-            
+
         }
     }
-    public void calcularSaldo(){
+
+    public void calcularSaldo() {
         if (isCajaAbierta) {
-            selected=cajaRNLocal.getCajaAbierta();
+
+            selected = cajaRNLocal.getCajaAbierta();
             selected.setMovimientosCaja(movimientoCajaRNLocal.getMovimientosdesdeFecha(selected.getFechaInicio()));
+            for (MovimientoCaja movimientoCaja : selected.getMovimientosCaja()) {
+
+                switch (movimientoCaja.getClass().getSimpleName()) {
+                    case "Ingreso":
+                        totalIngresosCaja = totalIngresosCaja.add(movimientoCaja.getImporte());
+                        break;
+                    case "Egreso":
+                        totalEgresosCaja = totalEgresosCaja.add(movimientoCaja.getImporte());
+                        break;
+                }
+
+            }
+            //calculamos el saldo
+            System.out.println("entro calcular sadlo");
+            saldoFinalCaja = selected.getCajaInicial().add(totalIngresosCaja).subtract(totalEgresosCaja);
+            RequestContext.getCurrentInstance().update(":frmPri:CajaCierreForm");
+            RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').show();");
         } else {
         }
     }
+
     public void cerrarCaja() {
         if (selected != null) {
             selected.setFechaFin(new Date());
+            selected.setCajaFinal(cajaArqueo);
             update();
             isCajaAbierta = false;
             selected = null;

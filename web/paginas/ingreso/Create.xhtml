@@ -36,6 +36,8 @@
                         <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_formaDePago}" for="formaDePago" />
                         <p:inputText id="formaDePago" value="#{ingresoController.selected.formaDePago}" title="#{bundleIngrso.CreateIngresoTitle_formaDePago}" />
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
+                        <p:inputText id="importe" value="#{ingresoController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
                         <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_usuario}" for="usuario" />
                         <p:selectOneMenu id="usuario" value="#{ingresoController.selected.usuario}" >
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"

@@ -17,14 +17,14 @@
                         <p:panelGrid columns="2" rendered="#{cajaController.selected != null}" styleClass="noBorders">
 
                             <p:outputLabel value="Caja Final: "/>
-                            <p:inputText disabled="true" value="#{cajaController.selected.cajaInicial}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}" />
+                            <p:inputText disabled="true" value="#{cajaController.saldoFinalCaja}" title="Caja Final" />
                             <p:outputLabel value="Caja Real: "/>
-                            <p:inputText value="#{cajaController.selected.cajaInicial}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}" />
+                            <p:inputText value="#{cajaController.cajaArqueo}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}" />
                             <br/>
 
                         </p:panelGrid>
                     </p:panel>
-                    <b:commandButton actionListener="#{cajaController.accion}" value="Aceptar" onclick="CajaAbreDlg.hide()" styleClass="btn btn-lg btn-primary btn-block"/>
+                    <b:commandButton actionListener="#{cajaController.cerrarCaja()}" value="Aceptar" onclick="CajaCierreDlg.hide()" styleClass="btn btn-lg btn-primary btn-block"/>
                 </h:panelGroup>
             </h:form>
 

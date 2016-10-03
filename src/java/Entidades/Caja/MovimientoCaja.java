@@ -28,7 +28,7 @@ import javax.persistence.Temporal;
  * @author root
  */
 @Entity
-@Table(name="caja_movimientocaja")
+@Table(name = "caja_movimientocaja")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class MovimientoCaja implements Serializable {
 
@@ -40,6 +40,9 @@ public class MovimientoCaja implements Serializable {
     private Date fecha;
     @Enumerated(EnumType.STRING)
     private FormaDePago formaDePago;
+    @Basic(optional = false)
+    @Column(scale = 3, precision = 12)
+    private BigDecimal importe;
     @OneToOne
     private Usuario usuario;
     private boolean cerrado;
@@ -68,6 +71,14 @@ public class MovimientoCaja implements Serializable {
         this.formaDePago = formaDePago;
     }
 
+    public BigDecimal getImporte() {
+        return importe;
+    }
+
+    public void setImporte(BigDecimal importe) {
+        this.importe = importe;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -76,7 +87,7 @@ public class MovimientoCaja implements Serializable {
         this.usuario = usuario;
     }
 
-     public boolean isCerrado() {
+    public boolean isCerrado() {
         return cerrado;
     }
 
@@ -84,7 +95,6 @@ public class MovimientoCaja implements Serializable {
         this.cerrado = cerrado;
     }
 
-  
     @Override
     public int hashCode() {
         int hash = 0;
