@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlanPagoViewDlg" widgetVar="PlanPagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.ViewPlanPagoTitle}">
+            <h:form id="PlanPagoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planPagoController.selected != null}">
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_id}"/>
+                        <h:outputText value="#{planPagoController.selected.id}" title="#{bundlePlanPagos.ViewPlanPagoTitle_id}"/>
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_tipoPlanPago}"/>
+                        <h:outputText value="#{planPagoController.selected.tipoPlanPago}" title="#{bundlePlanPagos.ViewPlanPagoTitle_tipoPlanPago}"/>
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_importe}"/>
+                        <h:outputText value="#{planPagoController.selected.importe}" title="#{bundlePlanPagos.ViewPlanPagoTitle_importe}"/>
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_medico}"/>
+                        <h:outputText value="#{planPagoController.selected.medico}" title="#{bundlePlanPagos.ViewPlanPagoTitle_medico}"/>
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_fechaPago}"/>
+                        <h:outputText value="#{planPagoController.selected.fechaPago}" title="#{bundlePlanPagos.ViewPlanPagoTitle_fechaPago}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_fechaVencimiento}"/>
+                        <h:outputText value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.ViewPlanPagoTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_cuota}"/>
+                        <h:outputText value="#{planPagoController.selected.cuota}" title="#{bundlePlanPagos.ViewPlanPagoTitle_cuota}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundlePlanPagos.Close}" onclick="PlanPagoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

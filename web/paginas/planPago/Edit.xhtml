@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlanPagoEditDlg" widgetVar="PlanPagoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.EditPlanPagoTitle}">
+            <h:form id="PlanPagoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{planPagoController.selected != null}">
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{planPagoController.selected.id}" title="#{bundlePlanPagos.EditPlanPagoTitle_id}" />
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_tipoPlanPago}" for="tipoPlanPago" />
+                        <p:selectOneMenu id="tipoPlanPago" value="#{planPagoController.selected.tipoPlanPago}" >
+                            <f:selectItem itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoPlanPagoController.itemsAvailableSelectOne}"
+                                           var="tipoPlanPagoItem"
+                                           itemValue="#{tipoPlanPagoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_importe}" for="importe" />
+                        <p:inputText id="importe" value="#{planPagoController.selected.importe}" title="#{bundlePlanPagos.EditPlanPagoTitle_importe}" />
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_medico}" for="medico" />
+                        <p:selectOneMenu id="medico" value="#{planPagoController.selected.medico}" >
+                            <f:selectItem itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
+                                           var="medicoItem"
+                                           itemValue="#{medicoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_fechaPago}" for="fechaPago" />
+                        <p:calendar id="fechaPago" pattern="MM/dd/yyyy" value="#{planPagoController.selected.fechaPago}" title="#{bundlePlanPagos.EditPlanPagoTitle_fechaPago}"  showOn="button"/>
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_fechaVencimiento}" for="fechaVencimiento" />
+                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.EditPlanPagoTitle_fechaVencimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_cuota}" for="cuota" />
+                        <p:inputText id="cuota" value="#{planPagoController.selected.cuota}" title="#{bundlePlanPagos.EditPlanPagoTitle_cuota}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{planPagoController.update}" value="#{bundlePlanPagos.Save}" update="display,:PlanPagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlanPagoEditDialog');"/>
+                    <p:commandButton value="#{bundlePlanPagos.Cancel}" onclick="PlanPagoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
