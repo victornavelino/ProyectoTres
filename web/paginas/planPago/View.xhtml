@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="PlanPagoViewDlg" widgetVar="PlanPagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.ViewPlanPagoTitle}">
+        <p:dialog id="PlanPagoViewDlg" position="top" widgetVar="PlanPagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.ViewPlanPagoTitle}">
             <h:form id="PlanPagoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{planPagoController.selected != null}">
@@ -21,15 +21,10 @@
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_medico}"/>
                         <h:outputText value="#{planPagoController.selected.medico}" title="#{bundlePlanPagos.ViewPlanPagoTitle_medico}"/>
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_fechaPago}"/>
-                        <h:outputText value="#{planPagoController.selected.fechaPago}" title="#{bundlePlanPagos.ViewPlanPagoTitle_fechaPago}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_fechaVencimiento}"/>
                         <h:outputText value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.ViewPlanPagoTitle_fechaVencimiento}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_cuota}"/>
-                        <h:outputText value="#{planPagoController.selected.cuota}" title="#{bundlePlanPagos.ViewPlanPagoTitle_cuota}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundlePlanPagos.Close}" onclick="PlanPagoViewDialog.hide()"/>
                 </h:panelGroup>

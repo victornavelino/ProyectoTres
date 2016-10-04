@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuotaPlanPagoViewDlg" widgetVar="CuotaPlanPagoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle}">
+            <h:form id="CuotaPlanPagoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuotaPlanPagoController.selected != null}">
+                        <h:outputText value="#{bundleCuotaPlan.ViewCuotaPlanPagoLabel_id}"/>
+                        <h:outputText value="#{cuotaPlanPagoController.selected.id}" title="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle_id}"/>
+                        <h:outputText value="#{bundleCuotaPlan.ViewCuotaPlanPagoLabel_importe}"/>
+                        <h:outputText value="#{cuotaPlanPagoController.selected.importe}" title="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle_importe}"/>
+                        <h:outputText value="#{bundleCuotaPlan.ViewCuotaPlanPagoLabel_fechaPago}"/>
+                        <h:outputText value="#{cuotaPlanPagoController.selected.fechaPago}" title="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle_fechaPago}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCuotaPlan.ViewCuotaPlanPagoLabel_fechaVencimiento}"/>
+                        <h:outputText value="#{cuotaPlanPagoController.selected.fechaVencimiento}" title="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCuotaPlan.ViewCuotaPlanPagoLabel_cuota}"/>
+                        <h:outputText value="#{cuotaPlanPagoController.selected.cuota}" title="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle_cuota}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleCuotaPlan.Close}" onclick="CuotaPlanPagoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -8,12 +8,10 @@
 
     <ui:composition>
 
-        <p:dialog id="PlanPagoEditDlg" widgetVar="PlanPagoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.EditPlanPagoTitle}">
+        <p:dialog id="PlanPagoEditDlg" position="top" widgetVar="PlanPagoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.EditPlanPagoTitle}">
             <h:form id="PlanPagoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{planPagoController.selected != null}">
-                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{planPagoController.selected.id}" title="#{bundlePlanPagos.EditPlanPagoTitle_id}" />
                         <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_tipoPlanPago}" for="tipoPlanPago" />
                         <p:selectOneMenu id="tipoPlanPago" value="#{planPagoController.selected.tipoPlanPago}" >
                             <f:selectItem itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
@@ -24,18 +22,14 @@
                         <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_importe}" for="importe" />
                         <p:inputText id="importe" value="#{planPagoController.selected.importe}" title="#{bundlePlanPagos.EditPlanPagoTitle_importe}" />
                         <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{planPagoController.selected.medico}" >
+                        <p:selectOneMenu id="medico" value="#{planPagoController.selected.medico}" filterMatchMode="contains" filter="true" >
                             <f:selectItem itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
                             <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
                                            var="medicoItem"
                                            itemValue="#{medicoItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_fechaPago}" for="fechaPago" />
-                        <p:calendar id="fechaPago" pattern="MM/dd/yyyy" value="#{planPagoController.selected.fechaPago}" title="#{bundlePlanPagos.EditPlanPagoTitle_fechaPago}"  showOn="button"/>
                         <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_fechaVencimiento}" for="fechaVencimiento" />
-                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.EditPlanPagoTitle_fechaVencimiento}"  showOn="button"/>
-                        <p:outputLabel value="#{bundlePlanPagos.EditPlanPagoLabel_cuota}" for="cuota" />
-                        <p:inputText id="cuota" value="#{planPagoController.selected.cuota}" title="#{bundlePlanPagos.EditPlanPagoTitle_cuota}" />
+                        <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.EditPlanPagoTitle_fechaVencimiento}"  showOn="button"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{planPagoController.update}" value="#{bundlePlanPagos.Save}" update="display,:PlanPagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PlanPagoEditDialog');"/>
                     <p:commandButton value="#{bundlePlanPagos.Cancel}" onclick="PlanPagoEditDialog.hide()"/>

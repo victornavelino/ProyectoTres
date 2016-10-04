@@ -1,11 +1,15 @@
 package ManagedBeans;
 
+import Entidades.Pago.CuotaPlanPago;
 import Entidades.Pago.PlanPago;
+import Facades.PlanPagoFacade;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
-import Facades.PlanPagoFacade;
-
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -81,9 +85,37 @@ public class PlanPagoController implements Serializable {
         return items;
     }
 
+    public static Date addMonth(Date date, int months) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, months); //minus number would decrement the months
+        return cal.getTime();
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
+            if (selected.getTipoPlanPago() != null) {
+                int cantidadCuotas = selected.getTipoPlanPago().getCuotas();
+                BigDecimal interes = selected.getTipoPlanPago().getInteres();
+                Date vencimiento = selected.getFechaVencimiento();
+
+                List<CuotaPlanPago> cuotas = new ArrayList<>();
+                BigDecimal importe = selected.getImporte();
+                BigDecimal importeInteres = importe.add(importe.multiply(interes));
+                BigDecimal importeParcial = importeInteres.divide(new BigDecimal(cantidadCuotas));
+
+                for (int i = 1; i <= selected.getTipoPlanPago().getCuotas(); i++) {
+                    CuotaPlanPago cpp = new CuotaPlanPago();
+                    cpp.setCuota(i);
+                    cpp.setImporte(importeParcial);
+                    cpp.setFechaVencimiento(vencimiento);
+                    vencimiento = addMonth(vencimiento, 1);
+                    cuotas.add(cpp);
+                }
+                selected.setCuotas(cuotas);
+            }
             setEmbeddableKeys();
+
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);

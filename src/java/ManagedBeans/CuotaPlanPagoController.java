@@ -1,9 +1,9 @@
 package ManagedBeans;
 
-import Entidades.Pago.TipoPlanPago;
+import Entidades.Pago.CuotaPlanPago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
-import Facades.TipoPlanPagoFacade;
+import Facades.CuotaPlanPagoFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("tipoPlanPagoController")
+@Named("cuotaPlanPagoController")
 @SessionScoped
-public class TipoPlanPagoController implements Serializable {
+public class CuotaPlanPagoController implements Serializable {
 
     @EJB
-    private Facades.TipoPlanPagoFacade ejbFacade;
-    private List<TipoPlanPago> items = null;
-    private TipoPlanPago selected;
+    private Facades.CuotaPlanPagoFacade ejbFacade;
+    private List<CuotaPlanPago> items = null;
+    private CuotaPlanPago selected;
 
-    public TipoPlanPagoController() {
+    public CuotaPlanPagoController() {
     }
 
-    public TipoPlanPago getSelected() {
+    public CuotaPlanPago getSelected() {
         return selected;
     }
 
-    public void setSelected(TipoPlanPago selected) {
+    public void setSelected(CuotaPlanPago selected) {
         this.selected = selected;
     }
 
@@ -45,37 +45,36 @@ public class TipoPlanPagoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TipoPlanPagoFacade getFacade() {
+    private CuotaPlanPagoFacade getFacade() {
         return ejbFacade;
     }
 
-    public TipoPlanPago prepareCreate() {
-        selected = new TipoPlanPago();
-        selected.setHabilitada(Boolean.TRUE);
+    public CuotaPlanPago prepareCreate() {
+        selected = new CuotaPlanPago();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePlanPagos").getString("TipoPlanPagoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePlanPagos").getString("TipoPlanPagoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePlanPagos").getString("TipoPlanPagoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<TipoPlanPago> getItems() {
+    public List<CuotaPlanPago> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -101,38 +100,38 @@ public class TipoPlanPagoController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePlanPagos").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleCuotaPlan").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundlePlanPagos").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleCuotaPlan").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public TipoPlanPago getTipoPlanPago(java.lang.Long id) {
+    public CuotaPlanPago getCuotaPlanPago(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<TipoPlanPago> getItemsAvailableSelectMany() {
+    public List<CuotaPlanPago> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<TipoPlanPago> getItemsAvailableSelectOne() {
+    public List<CuotaPlanPago> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = TipoPlanPago.class)
-    public static class TipoPlanPagoControllerConverter implements Converter {
+    @FacesConverter(forClass = CuotaPlanPago.class)
+    public static class CuotaPlanPagoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TipoPlanPagoController controller = (TipoPlanPagoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tipoPlanPagoController");
-            return controller.getTipoPlanPago(getKey(value));
+            CuotaPlanPagoController controller = (CuotaPlanPagoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "cuotaPlanPagoController");
+            return controller.getCuotaPlanPago(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -152,11 +151,11 @@ public class TipoPlanPagoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TipoPlanPago) {
-                TipoPlanPago o = (TipoPlanPago) object;
+            if (object instanceof CuotaPlanPago) {
+                CuotaPlanPago o = (CuotaPlanPago) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TipoPlanPago.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), CuotaPlanPago.class.getName()});
                 return null;
             }
         }

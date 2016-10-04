@@ -30,7 +30,6 @@ public class TipoPlanPago implements Serializable {
     @Column(scale = 2, precision = 12)
     private BigDecimal interes;
     private int cuotas;
-
     private Boolean habilitada;
 
     public Long getId() {

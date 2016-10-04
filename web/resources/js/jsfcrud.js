@@ -6,3 +6,7 @@ function handleSubmit(args, dialog) {
         PF(dialog).hide();
     }
 }
+
+$('.ui-dialog input[type=text].ui-inputtext').val (function () {
+    return this.value.toUpperCase();
+})

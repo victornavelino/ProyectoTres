@@ -52,6 +52,10 @@
             <base-name>/BundlePlanPagos</base-name>
             <var>bundlePlanPagos</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCuotaPlan</base-name>
+            <var>bundleCuotaPlan</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>

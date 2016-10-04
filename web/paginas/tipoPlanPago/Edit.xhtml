@@ -8,12 +8,10 @@
 
     <ui:composition>
 
-        <p:dialog id="TipoPlanPagoEditDlg" widgetVar="TipoPlanPagoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.EditTipoPlanPagoTitle}">
+        <p:dialog id="TipoPlanPagoEditDlg" position="top" widgetVar="TipoPlanPagoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.EditTipoPlanPagoTitle}">
             <h:form id="TipoPlanPagoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoPlanPagoController.selected != null}">
-                        <p:outputLabel value="#{bundlePlanPagos.EditTipoPlanPagoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{tipoPlanPagoController.selected.id}" title="#{bundlePlanPagos.EditTipoPlanPagoTitle_id}" />
                         <p:outputLabel value="#{bundlePlanPagos.EditTipoPlanPagoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{tipoPlanPagoController.selected.descripcion}" title="#{bundlePlanPagos.EditTipoPlanPagoTitle_descripcion}" />
                         <p:outputLabel value="#{bundlePlanPagos.EditTipoPlanPagoLabel_interes}" for="interes" />

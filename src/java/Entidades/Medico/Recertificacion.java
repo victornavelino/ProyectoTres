@@ -33,7 +33,7 @@ public class Recertificacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-     @OneToOne
+    @OneToOne
     private Especializacion especializacion;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaRecertificacion;

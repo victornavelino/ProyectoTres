@@ -8,18 +8,16 @@
 
     <ui:composition>
 
-        <p:dialog id="TipoPlanPagoCreateDlg" widgetVar="TipoPlanPagoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.CreateTipoPlanPagoTitle}">
+        <p:dialog id="TipoPlanPagoCreateDlg" position="top" widgetVar="TipoPlanPagoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlePlanPagos.CreateTipoPlanPagoTitle}">
             <h:form id="TipoPlanPagoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoPlanPagoController.selected != null}">
-                        <p:outputLabel value="#{bundlePlanPagos.CreateTipoPlanPagoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{tipoPlanPagoController.selected.id}" title="#{bundlePlanPagos.CreateTipoPlanPagoTitle_id}" />
                         <p:outputLabel value="#{bundlePlanPagos.CreateTipoPlanPagoLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{tipoPlanPagoController.selected.descripcion}" title="#{bundlePlanPagos.CreateTipoPlanPagoTitle_descripcion}" />
                         <p:outputLabel value="#{bundlePlanPagos.CreateTipoPlanPagoLabel_interes}" for="interes" />
-                        <p:inputText id="interes" value="#{tipoPlanPagoController.selected.interes}" title="#{bundlePlanPagos.CreateTipoPlanPagoTitle_interes}" />
+                        <p:inputText id="interes" value="#{tipoPlanPagoController.selected.interes}" title="#{bundlePlanPagos.CreateTipoPlanPagoTitle_interes}"  />
                         <p:outputLabel value="#{bundlePlanPagos.CreateTipoPlanPagoLabel_cuotas}" for="cuotas" />
-                        <p:inputText id="cuotas" value="#{tipoPlanPagoController.selected.cuotas}" title="#{bundlePlanPagos.CreateTipoPlanPagoTitle_cuotas}" />
+                        <p:inputText id="cuotas" value="#{tipoPlanPagoController.selected.cuotas}" title="#{bundlePlanPagos.CreateTipoPlanPagoTitle_cuotas}"  />
                         <p:outputLabel value="#{bundlePlanPagos.CreateTipoPlanPagoLabel_habilitada}" for="habilitada" />
                         <p:selectBooleanCheckbox id="habilitada" value="#{tipoPlanPagoController.selected.habilitada}" />
                     </p:panelGrid>

@@ -6,7 +6,6 @@
 package Entidades.Pago;
 
 import Entidades.Medico.Medico;
-import Entidades.Usuario.Usuario;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.print.attribute.standard.Media;
 
 /**
  *
@@ -55,14 +53,6 @@ public class Pago implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Cuenta getCuenta() {
-        return cuenta;
-    }
-
-    public void setCuenta(Cuenta cuenta) {
-        this.cuenta = cuenta;
     }
 
     public Medico getMedico() {
@@ -119,6 +109,14 @@ public class Pago implements Serializable {
 
     public void setConcepto(Concepto concepto) {
         this.concepto = concepto;
+    }
+
+    public Cuenta getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(Cuenta cuenta) {
+        this.cuenta = cuenta;
     }
 
     public Boolean getAnulado() {
