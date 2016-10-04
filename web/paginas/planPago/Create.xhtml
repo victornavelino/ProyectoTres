@@ -21,11 +21,10 @@
                         <p:outputLabel value="#{bundlePlanPagos.CreatePlanPagoLabel_importe}" for="importe" />
                         <p:inputText id="importe" value="#{planPagoController.selected.importe}" title="#{bundlePlanPagos.CreatePlanPagoTitle_importe}" />
                         <p:outputLabel value="#{bundlePlanPagos.CreatePlanPagoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{planPagoController.selected.medico}" filterMatchMode="contains" filter="true" >
+                        <p:selectOneMenu id="medico" value="#{planPagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" >
                             <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
-                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
-                                           var="medicoItem"
-                                           itemValue="#{medicoItem}"/>
+                            <f:selectItems value="#{medicoController.items}"
+                                         />
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePlanPagos.CreatePlanPagoLabel_fechaVencimiento}" for="fechaVencimiento" />
                         <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.EditPlanPagoTitle_fechaVencimiento}"  showOn="button"/>
