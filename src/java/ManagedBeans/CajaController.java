@@ -163,7 +163,10 @@ public class CajaController implements Serializable {
     }
 
     public void update() {
+        selected.setFechaFin(new Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCaja").getString("CajaUpdated"));
+        selected=null;
+        isCajaAbierta = false;
     }
 
     public void destroy() {
@@ -270,25 +273,27 @@ public class CajaController implements Serializable {
             //calculamos el saldo
             System.out.println("entro calcular sadlo");
             saldoFinalCaja = selected.getCajaInicial().add(totalIngresosCaja).subtract(totalEgresosCaja);
-            //RequestContext.getCurrentInstance().update(":frmPri:CajaCierreForm");
-            RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').show();");
+            RequestContext.getCurrentInstance().update(":frmPri:CajaEditForm");
+            RequestContext.getCurrentInstance().execute("PF('CajaEditDialog').show();");
         } else {
+            JsfUtil.addSuccessMessage("La caja esta Cerrada");
         }
     }
 
     public void cerrarCaja() {
         if (selected != null) {
-            System.out.println("entro cerrar caja");
+            System.out.println("entro cerrar caja: "+selected.getCajaFinal());
+            
             selected.setFechaFin(new Date());
-            selected.setCajaFinal(cajaArqueo);
+            //selected.setCajaFinal(cajaArqueo);
             update();
             isCajaAbierta = false;
             selected = null;
-            RequestContext.getCurrentInstance().update(":frmPri:EgresoListForm,:frmPri:IngresoListForm");
-            JsfUtil.addSuccessMessage("La caja se cerró exitosamente");
              System.out.println("pasoooo cerrar caja");
+             RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').hide();");
         } else {
-            JsfUtil.addSuccessMessage("La caja esta Cerrada");
+
+            System.out.println("entro cerrar caja else");
         }
 
     }

@@ -8,29 +8,17 @@
 
     <ui:composition>
 
-        <p:dialog id="CajaEditDlg" widgetVar="CajaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCaja.EditCajaTitle}">
+        <p:dialog id="CajaEditDlg" widgetVar="CajaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Cierre de Caja">
             <h:form id="CajaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{cajaController.selected != null}">
-                        <p:outputLabel value="#{bundleCaja.EditCajaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{cajaController.selected.id}" title="#{bundleCaja.EditCajaTitle_id}" />
-                        <p:outputLabel value="#{bundleCaja.EditCajaLabel_usuario}" for="usuario" />
-                        <p:selectOneMenu id="usuario" value="#{cajaController.selected.usuario}" >
-                            <f:selectItem itemLabel="#{bundleCaja.SelectOneMessage}"/>
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="usuarioItem"
-                                           itemValue="#{usuarioItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleCaja.EditCajaLabel_fechaInicio}" for="fechaInicio" />
-                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{cajaController.selected.fechaInicio}" title="#{bundleCaja.EditCajaTitle_fechaInicio}"  showOn="button"/>
-                        <p:outputLabel value="#{bundleCaja.EditCajaLabel_fechaFin}" for="fechaFin" />
-                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy HH:mm:ss" value="#{cajaController.selected.fechaFin}" title="#{bundleCaja.EditCajaTitle_fechaFin}"  showOn="button"/>
-                        <p:outputLabel value="#{bundleCaja.EditCajaLabel_cajaInicial}" for="cajaInicial" />
-                        <p:inputText id="cajaInicial" value="#{cajaController.selected.cajaInicial}" title="#{bundleCaja.EditCajaTitle_cajaInicial}" />
-                        <p:outputLabel value="#{bundleCaja.EditCajaLabel_cajaFinal}" for="cajaFinal" />
+                    <p:panelGrid columns="2" rendered="#{cajaController.selected != null}" styleClass="noBorders">
+
+                        <p:outputLabel value="Saldo de Caja: " for="cajaInicial" />
+                        <p:inputText id="cajaInicial" value="#{cajaController.saldoFinalCaja}" title="#{bundleCaja.EditCajaTitle_cajaInicial}" />
+                        <p:outputLabel value="Saldo Real: " for="cajaFinal" />
                         <p:inputText id="cajaFinal" value="#{cajaController.selected.cajaFinal}" title="#{bundleCaja.EditCajaTitle_cajaFinal}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{cajaController.update}" value="#{bundleCaja.Save}" update="display,:CajaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CajaEditDialog');"/>
+                    <p:commandButton actionListener="#{cajaController.update}" value="#{bundleCaja.Save}" update="display,:growl"  process="CajaEditForm" oncomplete="handleSubmit(args, 'CajaEditDialog');"/>
                     <p:commandButton value="#{bundleCaja.Cancel}" onclick="CajaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

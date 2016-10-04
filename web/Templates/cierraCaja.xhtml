@@ -9,24 +9,20 @@
 
     <ui:composition>
 
-        <p:dialog id="CajaCierreDlg" widgetVar="CajaCierreDlg" modal="true" resizable="false" position="top" header="Cerrar Caja">
-            <p:messages autoUpdate="true"/>
-            <h:form id="CajaCierreForm">
-                <h:panelGroup id="display" style="width: 700px">
-                    <p:panel id="pPri" header="Saldo de Caja" >
-                        <p:panelGrid columns="2" rendered="#{cajaController.selected != null}" styleClass="noBorders">
+        <p:dialog id="CierreDlg" widgetVar="CajaCierreDlg" modal="true" position="top" header="Cierre de Caja">
+            <p:panel id="pCajaCierre" header="Saldo de Caja" >
+                <p:panelGrid columns="2" rendered="#{cajaController.selected != null}" styleClass="noBorders">
 
-                            <p:outputLabel value="Caja Final: "/>
-                            <p:inputText disabled="true" value="#{cajaController.saldoFinalCaja}" title="Caja Final" />
-                            <p:outputLabel value="Caja Real: "/>
-                            <p:inputText value="#{cajaController.cajaArqueo}" title="#{bundleCaja.ViewCajaTitle_cajaInicial}" />
-                            <br/>
+                    <p:outputLabel value="Caja Final: "/>
+                    <p:inputText disabled="true" value="#{cajaController.saldoFinalCaja}" title="Caja Final" />
+                    <p:outputLabel value="Caja Real: "/>
+                    <p:inputText id="itCajaFinal" value="#{cajaController.selected.cajaFinal}"/>
+                    <br/>
 
-                        </p:panelGrid>
-                    </p:panel>
-                    <b:commandButton actionListener="#{cajaController.cerrarCaja()}" value="Aceptar" oncomplete="CajaCierreDlg.hide()" styleClass="btn btn-lg btn-primary btn-block"/>
-                </h:panelGroup>
-            </h:form>
+                </p:panelGrid>
+            </p:panel>
+
+            <p:commandButton actionListener="#{cajaController.cerrarCaja()}" value="Aceptar"/>
 
         </p:dialog>
 
