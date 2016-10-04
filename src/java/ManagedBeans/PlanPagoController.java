@@ -26,50 +26,50 @@ import javax.faces.convert.FacesConverter;
 @Named("planPagoController")
 @SessionScoped
 public class PlanPagoController implements Serializable {
-
+    
     @EJB
     private Facades.PlanPagoFacade ejbFacade;
     private List<PlanPago> items = null;
     private PlanPago selected;
-
+    
     public PlanPagoController() {
     }
-
+    
     public PlanPago getSelected() {
         return selected;
     }
-
+    
     public void setSelected(PlanPago selected) {
         this.selected = selected;
     }
-
+    
     protected void setEmbeddableKeys() {
     }
-
+    
     protected void initializeEmbeddableKey() {
     }
-
+    
     private PlanPagoFacade getFacade() {
         return ejbFacade;
     }
-
+    
     public PlanPago prepareCreate() {
         selected = new PlanPago();
         initializeEmbeddableKey();
         return selected;
     }
-
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePlanPagos").getString("PlanPagoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePlanPagos").getString("PlanPagoUpdated"));
     }
-
+    
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePlanPagos").getString("PlanPagoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -77,45 +77,48 @@ public class PlanPagoController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public List<PlanPago> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-
+    
     public static Date addMonth(Date date, int months) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.MONTH, months); //minus number would decrement the months
         return cal.getTime();
     }
-
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
-            if (selected.getTipoPlanPago() != null) {
-                int cantidadCuotas = selected.getTipoPlanPago().getCuotas();
-                BigDecimal interes = selected.getTipoPlanPago().getInteres();
-                Date vencimiento = selected.getFechaVencimiento();
+            try {
+                if (selected.getTipoPlanPago() != null) {
+                    int cantidadCuotas = selected.getTipoPlanPago().getCuotas();
+                    BigDecimal interes = selected.getTipoPlanPago().getInteres();
+                    Date vencimiento = selected.getFechaVencimiento();
 
-                List<CuotaPlanPago> cuotas = new ArrayList<>();
-                BigDecimal importe = selected.getImporte();
-                BigDecimal importeInteres = importe.add(importe.multiply(interes));
-                BigDecimal importeParcial = importeInteres.divide(new BigDecimal(cantidadCuotas));
+                    List<CuotaPlanPago> cuotas = new ArrayList<>();
+                    BigDecimal importe = selected.getImporte();
+                    BigDecimal importeInteres = importe.add(importe.multiply(interes).divide(new BigDecimal("100")));
+                    BigDecimal importeParcial = importeInteres.divide(new BigDecimal(cantidadCuotas));
 
-                for (int i = 1; i <= selected.getTipoPlanPago().getCuotas(); i++) {
-                    CuotaPlanPago cpp = new CuotaPlanPago();
-                    cpp.setCuota(i);
-                    cpp.setImporte(importeParcial);
-                    cpp.setFechaVencimiento(vencimiento);
-                    vencimiento = addMonth(vencimiento, 1);
-                    cuotas.add(cpp);
+                    for (int i = 1; i <= selected.getTipoPlanPago().getCuotas(); i++) {
+                        CuotaPlanPago cpp = new CuotaPlanPago();
+                        cpp.setCuota(i);
+                        cpp.setImporte(importeParcial);
+                        cpp.setFechaVencimiento(vencimiento);
+                        vencimiento = addMonth(vencimiento, 1);
+                        cuotas.add(cpp);
+                    }
+                    selected.setCuotas(cuotas);
                 }
-                selected.setCuotas(cuotas);
+            } catch (Exception e) {
             }
             setEmbeddableKeys();
-
+            
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);
@@ -140,22 +143,22 @@ public class PlanPagoController implements Serializable {
             }
         }
     }
-
+    
     public PlanPago getPlanPago(java.lang.Long id) {
         return getFacade().find(id);
     }
-
+    
     public List<PlanPago> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-
+    
     public List<PlanPago> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-
+    
     @FacesConverter(forClass = PlanPago.class)
     public static class PlanPagoControllerConverter implements Converter {
-
+        
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -165,19 +168,19 @@ public class PlanPagoController implements Serializable {
                     getValue(facesContext.getELContext(), null, "planPagoController");
             return controller.getPlanPago(getKey(value));
         }
-
+        
         java.lang.Long getKey(String value) {
             java.lang.Long key;
             key = Long.valueOf(value);
             return key;
         }
-
+        
         String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-
+        
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -191,7 +194,7 @@ public class PlanPagoController implements Serializable {
                 return null;
             }
         }
-
+        
     }
-
+    
 }
