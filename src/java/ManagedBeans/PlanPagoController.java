@@ -97,12 +97,12 @@ public class PlanPagoController implements Serializable {
             try {
                 if (selected.getTipoPlanPago() != null) {
                     int cantidadCuotas = selected.getTipoPlanPago().getCuotas();
-                    BigDecimal interes = selected.getTipoPlanPago().getInteres();
+                    BigDecimal interes = selected.getTipoPlanPago().getInteres().divide(new BigDecimal("100"));
                     Date vencimiento = selected.getFechaVencimiento();
 
                     List<CuotaPlanPago> cuotas = new ArrayList<>();
                     BigDecimal importe = selected.getImporte();
-                    BigDecimal importeInteres = importe.add(importe.multiply(interes).divide(new BigDecimal("100")));
+                    BigDecimal importeInteres = importe.add(importe.multiply(interes));
                     BigDecimal importeParcial = importeInteres.divide(new BigDecimal(cantidadCuotas));
 
                     for (int i = 1; i <= selected.getTipoPlanPago().getCuotas(); i++) {
