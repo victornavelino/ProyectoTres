@@ -261,3 +261,7 @@ h3,h1 {margin-top:4px}
 }
 
 .ui-dialog .ui-inputtext { text-transform: uppercase; }
+
+.old {
+    background-color: #e2b9b9;
+}

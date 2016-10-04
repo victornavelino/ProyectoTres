@@ -16,72 +16,79 @@
             <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle}"></h:outputText>
         </h3>
 
-            <h:form id="CuotaPlanPagoListForm">
-                <p:panel header="#{bundleCuotaPlan.ListCuotaPlanPagoTitle}">
-                    <p:dataTable id="datalist" value="#{cuotaPlanPagoController.items}" var="item"
-                                 selectionMode="single" selection="#{cuotaPlanPagoController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 filterEvent="enter"
-                                 >
+        <h:form id="CuotaPlanPagoListForm">
+            <p:panel header="#{bundleCuotaPlan.ListCuotaPlanPagoTitle}">
+                <p:dataTable id="datalist" value="#{cuotaPlanPagoController.items}" var="item"
+                             selectionMode="single" selection="#{cuotaPlanPagoController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             filterEvent="enter"
+                             rowStyleClass="#{item.fechaPago == null ?  item.fechaVencimiento le cuotaPlanPagoController.now ? 'old' : null : null}"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.planPago.medico.persona}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="Médico"/>
-                            </f:facet>
-                              <h:outputText value="#{item.planPago.medico.persona}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_importe}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.importe}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaPago}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaPago}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaVencimiento}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaVencimiento}">
-                                <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_cuota}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cuota}"/>
-                        </p:column>
-                                              <f:facet name="footer">
-                                                  <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleCuotaPlan.Create}" actionListener="#{cuotaPlanPagoController.prepareCreate}" update=":CuotaPlanPagoCreateForm" oncomplete="PF('CuotaPlanPagoCreateDialog').show()" disabled="true"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleCuotaPlan.View}" update=":CuotaPlanPagoViewForm" oncomplete="PF('CuotaPlanPagoViewDialog').show()" disabled="#{empty cuotaPlanPagoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleCuotaPlan.Edit}" update=":CuotaPlanPagoEditForm" oncomplete="PF('CuotaPlanPagoEditDialog').show()" disabled="#{empty cuotaPlanPagoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleCuotaPlan.Delete}" actionListener="#{cuotaPlanPagoController.destroy}" update=":growl,datalist" disabled="#{empty cuotaPlanPagoController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_id}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.planPago.medico.persona}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Médico"/>
+                        </f:facet>
+                        <h:outputText value="#{item.planPago.medico.persona}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_importe}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.importe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaPago}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaPago}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaVencimiento}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaVencimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.cuota}">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_cuota}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cuota}"/>
+                    </p:column>
+                    <p:column sortBy="#{item.planPago.id}">
+                        <f:facet name="header">
+                            <h:outputText value="Plan de Pagos"/>
+                        </f:facet>
+                        <h:outputText value="#{item.planPago.id}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleCuotaPlan.Create}" actionListener="#{cuotaPlanPagoController.prepareCreate}" update=":CuotaPlanPagoCreateForm" oncomplete="PF('CuotaPlanPagoCreateDialog').show()" disabled="true"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleCuotaPlan.View}" update=":CuotaPlanPagoViewForm" oncomplete="PF('CuotaPlanPagoViewDialog').show()" disabled="#{empty cuotaPlanPagoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleCuotaPlan.Edit}" update=":CuotaPlanPagoEditForm" oncomplete="PF('CuotaPlanPagoEditDialog').show()" disabled="#{empty cuotaPlanPagoController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleCuotaPlan.Delete}" actionListener="#{cuotaPlanPagoController.destroy}" update=":growl,datalist" disabled="#{empty cuotaPlanPagoController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </ui:define>
+</ui:composition>

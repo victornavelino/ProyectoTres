@@ -6,6 +6,7 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.CuotaPlanPagoFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -47,6 +48,18 @@ public class CuotaPlanPagoController implements Serializable {
 
     private CuotaPlanPagoFacade getFacade() {
         return ejbFacade;
+    }
+
+    public Date getNow() {
+        return new Date();
+    }
+
+    public String estiloTabla(CuotaPlanPago cpp) {
+        if (cpp.getFechaPago() == null && cpp.getFechaVencimiento().compareTo(getNow()) >= 0) {
+            return "old";
+        } else {
+            return null;
+        }
     }
 
     public CuotaPlanPago prepareCreate() {
