@@ -47,11 +47,11 @@
                         </f:facet>
                         <h:outputText value="#{item.importe}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundlePlanPagos.ListPlanPagoTitle_medico}"/>
                         </f:facet>
-                        <h:outputText value="#{item.medico}"/>
+                        <h:outputText value="#{item.medico.persona.apellido},#{item.medico.persona.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -64,7 +64,7 @@
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlePlanPagos.Create}" actionListener="#{planPagoController.prepareCreate}" update=":PlanPagoCreateForm" oncomplete="PF('PlanPagoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePlanPagos.View}" update=":PlanPagoViewForm" oncomplete="PF('PlanPagoViewDialog').show()" disabled="#{empty planPagoController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlePlanPagos.Edit}" update=":PlanPagoEditForm" oncomplete="PF('PlanPagoEditDialog').show()" disabled="#{empty planPagoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlePlanPagos.Edit}" update=":PlanPagoEditForm" oncomplete="PF('PlanPagoEditDialog').show()" disabled="true"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlePlanPagos.Delete}" actionListener="#{planPagoController.destroy}" update=":growl,datalist" disabled="#{empty planPagoController.selected}"/>
                     </f:facet>
                 </p:dataTable>

@@ -1,14 +1,17 @@
 package ManagedBeans;
 
+import Entidades.Medico.Medico;
 import Entidades.Pago.CuotaPlanPago;
 import Entidades.Pago.PlanPago;
 import Facades.PlanPagoFacade;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
+import RN.PlanPagoRNLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,6 +32,9 @@ public class PlanPagoController implements Serializable {
 
     @EJB
     private Facades.PlanPagoFacade ejbFacade;
+    @EJB
+    private RN.PlanPagoRNLocal planPagoRNLocal;
+
     private List<PlanPago> items = null;
     private PlanPago selected;
 
@@ -53,8 +59,19 @@ public class PlanPagoController implements Serializable {
         return ejbFacade;
     }
 
+       public PlanPagoRNLocal getPlanPagoRNLocal() {
+        return planPagoRNLocal;
+    }
+
+    public void setPlanPagoRNLocal(PlanPagoRNLocal planPagoRNLocal) {
+        this.planPagoRNLocal = planPagoRNLocal;
+    }
+    
+    
+
     public PlanPago prepareCreate() {
         selected = new PlanPago();
+        selected.setMedico(new Medico());
         initializeEmbeddableKey();
         return selected;
     }
@@ -110,9 +127,11 @@ public class PlanPagoController implements Serializable {
                         cpp.setCuota(i);
                         cpp.setImporte(importeParcial);
                         cpp.setFechaVencimiento(vencimiento);
+                        cpp.setPlanPago(selected);
                         vencimiento = addMonth(vencimiento, 1);
                         cuotas.add(cpp);
                     }
+                    Collections.sort(cuotas);
                     selected.setCuotas(cuotas);
                 }
             } catch (Exception e) {
@@ -122,9 +141,9 @@ public class PlanPagoController implements Serializable {
 
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    getPlanPagoRNLocal().edit(selected);
                 } else {
-                    getFacade().remove(selected);
+                    getPlanPagoRNLocal().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {

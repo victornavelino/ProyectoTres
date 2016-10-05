@@ -15,17 +15,55 @@
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_id}"/>
                         <h:outputText value="#{planPagoController.selected.id}" title="#{bundlePlanPagos.ViewPlanPagoTitle_id}"/>
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_tipoPlanPago}"/>
-                        <h:outputText value="#{planPagoController.selected.tipoPlanPago}" title="#{bundlePlanPagos.ViewPlanPagoTitle_tipoPlanPago}"/>
+                        <h:outputText value="#{planPagoController.selected.tipoPlanPago.descripcion}" title="#{bundlePlanPagos.ViewPlanPagoTitle_tipoPlanPago}"/>
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_importe}"/>
                         <h:outputText value="#{planPagoController.selected.importe}" title="#{bundlePlanPagos.ViewPlanPagoTitle_importe}"/>
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_medico}"/>
-                        <h:outputText value="#{planPagoController.selected.medico}" title="#{bundlePlanPagos.ViewPlanPagoTitle_medico}"/>
-                        <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_fechaPago}"/>
+                        <h:outputText value="#{planPagoController.selected.medico.persona.apellido}, #{planPagoController.selected.medico.persona.nombre}" title="#{bundlePlanPagos.ViewPlanPagoTitle_medico}"/>
                         <h:outputText value="#{bundlePlanPagos.ViewPlanPagoLabel_fechaVencimiento}"/>
                         <h:outputText value="#{planPagoController.selected.fechaVencimiento}" title="#{bundlePlanPagos.ViewPlanPagoTitle_fechaVencimiento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:outputText>
-                    </p:panelGrid>
+                        </h:outputText>                    </p:panelGrid>
+
+                    <p:panel>
+                        <p:panel header="#{bundleCuotaPlan.ListCuotaPlanPagoTitle}">
+                            <p:dataTable id="datalist" value="#{planPagoController.selected.cuotas}" var="item"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         rowStyleClass="#{item.fechaPago == null ?  item.fechaVencimiento le cuotaPlanPagoController.now ? 'old' : null : null}"
+                                         >                                            
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_importe}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.importe}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaPago}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaPago}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaVencimiento}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaVencimiento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_cuota}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cuota}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                    </p:panel>
                     <p:commandButton value="#{bundlePlanPagos.Close}" onclick="PlanPagoViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

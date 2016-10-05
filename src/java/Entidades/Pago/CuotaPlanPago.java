@@ -5,7 +5,6 @@
  */
 package Entidades.Pago;
 
-import Entidades.Medico.Medico;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -25,7 +23,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "pago_cuota_plan_pago")
-public class CuotaPlanPago implements Serializable {
+public class CuotaPlanPago implements Serializable, Comparable<CuotaPlanPago> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -116,6 +114,11 @@ public class CuotaPlanPago implements Serializable {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    @Override
+    public int compareTo(CuotaPlanPago o) {
+        return this.getCuota() - o.getCuota(); // use your logic
     }
 
 }

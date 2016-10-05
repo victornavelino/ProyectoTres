@@ -13,13 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cuotaPlanPagoController.selected != null}">
                         <p:outputLabel value="#{bundleCuotaPlan.EditCuotaPlanPagoLabel_importe}" for="importe" />
-                        <p:inputText id="importe" value="#{cuotaPlanPagoController.selected.importe}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_importe}" />
+                        <p:outputLabel id="importe" value="#{cuotaPlanPagoController.selected.importe}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_importe}" />
                         <p:outputLabel value="#{bundleCuotaPlan.EditCuotaPlanPagoLabel_fechaPago}" for="fechaPago" />
                         <p:calendar id="fechaPago" pattern="dd/MM/yyyy" value="#{cuotaPlanPagoController.selected.fechaPago}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_fechaPago}"  showOn="button"/>
                         <p:outputLabel value="#{bundleCuotaPlan.EditCuotaPlanPagoLabel_fechaVencimiento}" for="fechaVencimiento" />
-                        <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{cuotaPlanPagoController.selected.fechaVencimiento}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_fechaVencimiento}"  showOn="button"/>
+                        <p:outputLabel id="fechaVencimiento" value="#{cuotaPlanPagoController.selected.fechaVencimiento}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </p:outputLabel>
                         <p:outputLabel value="#{bundleCuotaPlan.EditCuotaPlanPagoLabel_cuota}" for="cuota" />
-                        <p:inputText id="cuota" value="#{cuotaPlanPagoController.selected.cuota}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_cuota}" />
+                        <p:outputLabel id="cuota" value="#{cuotaPlanPagoController.selected.cuota}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_cuota}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cuotaPlanPagoController.update}" value="#{bundleCuotaPlan.Save}" update="display,:CuotaPlanPagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CuotaPlanPagoEditDialog');"/>
                     <p:commandButton value="#{bundleCuotaPlan.Cancel}" onclick="CuotaPlanPagoEditDialog.hide()"/>

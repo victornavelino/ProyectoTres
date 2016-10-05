@@ -30,18 +30,12 @@
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.planPago.medico.persona}" filterMatchMode="contains">
+                  
+                    <p:column filterBy="#{item.planPago.medico.persona.apellido}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="Médico"/>
                         </f:facet>
-                        <h:outputText value="#{item.planPago.medico.persona}"/>
+                        <h:outputText value="#{item.planPago.medico.persona.apellido},#{item.planPago.medico.persona.nombre}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

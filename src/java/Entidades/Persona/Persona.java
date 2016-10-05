@@ -28,6 +28,7 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name = "persona")
 public class Persona implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,9 +53,11 @@ public class Persona implements Serializable {
     private Sexo sexo;
     @OneToOne
     private EstadoCivil estadoCivil;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -146,7 +149,7 @@ public class Persona implements Serializable {
     public void setEstadoCivil(EstadoCivil estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -169,7 +172,11 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return apellido+", "+nombre;
+        try {
+            return apellido + ", " + nombre;
+        } catch (Exception e) {
+            return "";
+        }
     }
-    
+
 }

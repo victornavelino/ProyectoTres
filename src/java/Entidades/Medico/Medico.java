@@ -196,7 +196,11 @@ public class Medico implements Serializable {
 
     @Override
     public String toString() {
-        return persona.toString();
+        try {
+            return persona.toString();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 }

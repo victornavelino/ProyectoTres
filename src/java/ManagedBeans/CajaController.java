@@ -300,9 +300,12 @@ public class CajaController implements Serializable {
 
     public boolean hayCajaAbierta() {
         boolean respuesta = false;
-        List listCajasAbiertas = cajaRNLocal.buscarCajaAbierta();
-        if (listCajasAbiertas.size() > 0) {
-            respuesta = true;
+        try {
+            List listCajasAbiertas = cajaRNLocal.buscarCajaAbierta();
+            if (listCajasAbiertas.size() > 0) {
+                respuesta = true;
+            }
+        } catch (Exception e) {
         }
         return respuesta;
     }
