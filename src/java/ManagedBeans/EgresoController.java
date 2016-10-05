@@ -1,11 +1,14 @@
 package ManagedBeans;
 
 import Entidades.Caja.Egreso;
+import Entidades.Caja.FormaDePago;
+import Entidades.Caja.TipoDeEgreso;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EgresoFacade;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,9 +29,18 @@ public class EgresoController implements Serializable {
     @EJB
     private Facades.EgresoFacade ejbFacade;
     private List<Egreso> items = null;
+    private List<FormaDePago> listaFormaDePago=null;
     private Egreso selected;
 
     public EgresoController() {
+    }
+
+    public List<FormaDePago> getListaFormaDePago() {
+        return listaFormaDePago;
+    }
+
+    public void setListaFormaDePago(List<FormaDePago> listaFormaDePago) {
+        this.listaFormaDePago = listaFormaDePago;
     }
 
     public Egreso getSelected() {
@@ -80,6 +92,7 @@ public class EgresoController implements Serializable {
         }
         return items;
     }
+    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -160,6 +173,13 @@ public class EgresoController implements Serializable {
             }
         }
 
+    }
+
+    public List<FormaDePago> listaFormaDePago() {
+        if (listaFormaDePago == null) {
+            listaFormaDePago = Arrays.asList(FormaDePago.values());
+        }
+        return listaFormaDePago;
     }
 
 }
