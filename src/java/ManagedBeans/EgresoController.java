@@ -8,11 +8,13 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EgresoFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -29,7 +31,7 @@ public class EgresoController implements Serializable {
     @EJB
     private Facades.EgresoFacade ejbFacade;
     private List<Egreso> items = null;
-    private List<FormaDePago> listaFormaDePago=null;
+    private List<FormaDePago> listaFormaDePago=new ArrayList<>();
     private Egreso selected;
 
     public EgresoController() {
@@ -65,6 +67,11 @@ public class EgresoController implements Serializable {
         selected = new Egreso();
         initializeEmbeddableKey();
         return selected;
+    }
+    @PostConstruct
+    public void inicializar(){
+        listaFormaDePago=new ArrayList<>();
+        listaFormaDePago = (List)Arrays.asList(FormaDePago.values());
     }
 
     public void create() {
@@ -176,8 +183,9 @@ public class EgresoController implements Serializable {
     }
 
     public List<FormaDePago> listaFormaDePago() {
+        System.out.println("FORMAS DE PAGO "+FormaDePago.values());
         if (listaFormaDePago == null) {
-            listaFormaDePago = Arrays.asList(FormaDePago.values());
+            listaFormaDePago = (List)Arrays.asList(FormaDePago.values());
         }
         return listaFormaDePago;
     }
