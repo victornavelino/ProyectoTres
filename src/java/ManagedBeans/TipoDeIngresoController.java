@@ -1,20 +1,15 @@
 package ManagedBeans;
 
-import Entidades.Caja.Egreso;
-import Entidades.Caja.FormaDePago;
-import Entidades.Caja.TipoDeEgreso;
+import Entidades.Caja.TipoDeIngreso;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
-import Facades.EgresoFacade;
+import Facades.TipoDeIngresoFacade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -23,44 +18,24 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
-@Named("egresoController")
+@Named("tipoDeIngresoController")
 @SessionScoped
-public class EgresoController implements Serializable {
+public class TipoDeIngresoController implements Serializable {
 
     @EJB
-    private Facades.EgresoFacade ejbFacade;
-    private List<Egreso> items = null;
-    private List<FormaDePago> listaFormaDePago=new ArrayList<>();
-    private Egreso selected;
-    @Inject
-    private UsuarioLogerBean usuarioLogerBean;
+    private Facades.TipoDeIngresoFacade ejbFacade;
+    private List<TipoDeIngreso> items = null;
+    private TipoDeIngreso selected;
 
-    public EgresoController() {
+    public TipoDeIngresoController() {
     }
 
-    public UsuarioLogerBean getUsuarioLogerBean() {
-        return usuarioLogerBean;
-    }
-
-    public void setUsuarioLogerBean(UsuarioLogerBean usuarioLogerBean) {
-        this.usuarioLogerBean = usuarioLogerBean;
-    }
-    
-    public List<FormaDePago> getListaFormaDePago() {
-        return listaFormaDePago;
-    }
-
-    public void setListaFormaDePago(List<FormaDePago> listaFormaDePago) {
-        this.listaFormaDePago = listaFormaDePago;
-    }
-
-    public Egreso getSelected() {
+    public TipoDeIngreso getSelected() {
         return selected;
     }
 
-    public void setSelected(Egreso selected) {
+    public void setSelected(TipoDeIngreso selected) {
         this.selected = selected;
     }
 
@@ -70,49 +45,41 @@ public class EgresoController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private EgresoFacade getFacade() {
+    private TipoDeIngresoFacade getFacade() {
         return ejbFacade;
     }
 
-    public Egreso prepareCreate() {
-        selected = new Egreso();
+    public TipoDeIngreso prepareCreate() {
+        selected = new TipoDeIngreso();
         initializeEmbeddableKey();
         return selected;
     }
-    @PostConstruct
-    public void inicializar(){
-        listaFormaDePago=new ArrayList<>();
-        listaFormaDePago = (List)Arrays.asList(FormaDePago.values());
-    }
 
     public void create() {
-        selected.setUsuario(usuarioLogerBean.getUsuario());
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleEgreso").getString("EgresoCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleTipoDeIngreso").getString("TipoDeIngresoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        selected.setUsuario(usuarioLogerBean.getUsuario());
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleEgreso").getString("EgresoUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleTipoDeIngreso").getString("TipoDeIngresoUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleEgreso").getString("EgresoDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleTipoDeIngreso").getString("TipoDeIngresoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Egreso> getItems() {
+    public List<TipoDeIngreso> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -133,38 +100,38 @@ public class EgresoController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleEgreso").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleTipoDeIngreso").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleEgreso").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleTipoDeIngreso").getString("PersistenceErrorOccured"));
             }
         }
     }
 
-    public Egreso getEgreso(java.lang.Long id) {
+    public TipoDeIngreso getTipoDeIngreso(java.lang.Long id) {
         return getFacade().find(id);
     }
 
-    public List<Egreso> getItemsAvailableSelectMany() {
+    public List<TipoDeIngreso> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Egreso> getItemsAvailableSelectOne() {
+    public List<TipoDeIngreso> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Egreso.class)
-    public static class EgresoControllerConverter implements Converter {
+    @FacesConverter(forClass = TipoDeIngreso.class)
+    public static class TipoDeIngresoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            EgresoController controller = (EgresoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "egresoController");
-            return controller.getEgreso(getKey(value));
+            TipoDeIngresoController controller = (TipoDeIngresoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tipoDeIngresoController");
+            return controller.getTipoDeIngreso(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -184,23 +151,15 @@ public class EgresoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Egreso) {
-                Egreso o = (Egreso) object;
+            if (object instanceof TipoDeIngreso) {
+                TipoDeIngreso o = (TipoDeIngreso) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Egreso.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), TipoDeIngreso.class.getName()});
                 return null;
             }
         }
 
-    }
-
-    public List<FormaDePago> listaFormaDePago() {
-        System.out.println("FORMAS DE PAGO "+FormaDePago.values());
-        if (listaFormaDePago == null) {
-            listaFormaDePago = (List)Arrays.asList(FormaDePago.values());
-        }
-        return listaFormaDePago;
     }
 
 }

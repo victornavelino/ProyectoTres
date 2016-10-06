@@ -8,15 +8,15 @@
 
     <ui:composition>
 
-        <p:dialog id="TipoDeEgresoCreateDlg" widgetVar="TipoDeEgresoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleTipoDeEgreso.CreateTipoDeEgresoTitle}">
+        <p:dialog id="TipoDeEgresoCreateDlg" widgetVar="TipoDeEgresoCreateDialog" modal="true" position="top" width="750px" resizable="false" appendTo="@(body)" header="#{bundleTipoDeEgreso.CreateTipoDeEgresoTitle}">
             <h:form id="TipoDeEgresoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{tipoDeEgresoController.selected != null}">
-                        <p:outputLabel value="#{bundleTipoDeEgreso.CreateTipoDeEgresoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{tipoDeEgresoController.selected.id}" title="#{bundleTipoDeEgreso.CreateTipoDeEgresoTitle_id}" />
-                        <p:outputLabel value="#{bundleTipoDeEgreso.CreateTipoDeEgresoLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{tipoDeEgresoController.selected.descripcion}" title="#{bundleTipoDeEgreso.CreateTipoDeEgresoTitle_descripcion}" />
-                    </p:panelGrid>
+                    <p:panel id="pNuevoEgreso" header="Datos Tipo de Egreso" >
+                       <p:panelGrid columns="2" rendered="#{tipoDeEgresoController.selected != null}">
+                            <p:outputLabel value="#{bundleTipoDeEgreso.CreateTipoDeEgresoLabel_descripcion}" for="descripcion" />
+                            <p:inputText id="descripcion" value="#{tipoDeEgresoController.selected.descripcion}" title="#{bundleTipoDeEgreso.CreateTipoDeEgresoTitle_descripcion}" required="true"/>
+                        </p:panelGrid>
+                    </p:panel>
                     <p:commandButton actionListener="#{tipoDeEgresoController.create}" value="#{bundleTipoDeEgreso.Save}" update="display,:TipoDeEgresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoDeEgresoCreateDialog');"/>
                     <p:commandButton value="#{bundleTipoDeEgreso.Cancel}" onclick="TipoDeEgresoCreateDialog.hide()"/>
                 </h:panelGroup>

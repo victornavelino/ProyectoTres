@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="EgresoCreateDlg" widgetVar="EgresoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleEgreso.CreateEgresoTitle}">
+        <p:dialog id="EgresoCreateDlg" widgetVar="EgresoCreateDialog" modal="true" position="top" resizable="false" appendTo="@(body)" header="#{bundleEgreso.CreateEgresoTitle}" width="750px">
             <h:form id="EgresoCreateForm">
                 <h:panelGroup id="display">
                     <p:panel id="pNuevoEgreso" header="Datos Nuevo Egreso" >
@@ -16,7 +16,7 @@
 
                         <p:panelGrid columns="2" rendered="#{egresoController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_descripcion}" for="descripcion" />
-                            <p:inputText id="descripcion" value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.CreateEgresoTitle_descripcion}" />
+                            <p:inputText id="descripcion" value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.CreateEgresoTitle_descripcion}" size="70" required="true"/>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_tipoDeEgreso}" for="tipoDeEgreso" />
                             <p:selectOneMenu id="tipoDeEgreso" value="#{egresoController.selected.tipoDeEgreso}" >
                                 <f:selectItems value="#{tipoDeEgresoController.itemsAvailableSelectOne}"
@@ -26,7 +26,7 @@
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_importe}" for="importe" />
                             <p:inputText id="importe" value="#{egresoController.selected.importe}" title="#{bundleEgreso.CreateEgresoTitle_importe}" required="true" requiredMessage="#{bundleEgreso.CreateEgresoRequiredMessage_importe}"/>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_fecha}" for="fecha" />
-                            <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{egresoController.selected.fecha}" title="#{bundleEgreso.EditEgresoTitle_fecha}"  showOn="button"/>
+                            <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{egresoController.selected.fecha}" title="#{bundleEgreso.EditEgresoTitle_fecha}"  showOn="button"/>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_formaDePago}" for="formaDePago" />
                             <p:selectOneMenu id="formaDePago" value="#{egresoController.selected.formaDePago}" >
                                 <f:selectItems value="#{egresoController.listaFormaDePago}"

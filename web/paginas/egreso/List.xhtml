@@ -39,19 +39,13 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundleEgreso.ListEgresoTitle_tipoDeEgreso}"/>
                         </f:facet>
-                        <h:outputText value="#{item.tipoDeEgreso}"/>
+                        <h:outputText value="#{item.tipoDeEgreso.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleEgreso.ListEgresoTitle_importe}"/>
                         </f:facet>
                         <h:outputText value="#{item.importe}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -77,7 +71,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundleEgreso.ListEgresoTitle_usuario}"/>
                         </f:facet>
-                        <h:outputText value="#{item.usuario}"/>
+                        <h:outputText value="#{item.usuario.usuario}"/>
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleEgreso.Create}" actionListener="#{egresoController.prepareCreate}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
