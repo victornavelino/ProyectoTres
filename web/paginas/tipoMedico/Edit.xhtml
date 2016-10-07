@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoMedicoEditDlg" widgetVar="TipoMedicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleTipoMedico.EditTipoMedicoTitle}">
+            <h:form id="TipoMedicoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoMedicoController.selected != null}">
+                        <p:outputLabel value="#{bundleTipoMedico.EditTipoMedicoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{tipoMedicoController.selected.id}" title="#{bundleTipoMedico.EditTipoMedicoTitle_id}" />
+                        <p:outputLabel value="#{bundleTipoMedico.EditTipoMedicoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{tipoMedicoController.selected.descripcion}" title="#{bundleTipoMedico.EditTipoMedicoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundleTipoMedico.EditTipoMedicoLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{tipoMedicoController.selected.observaciones}" title="#{bundleTipoMedico.EditTipoMedicoTitle_observaciones}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoMedicoController.update}" value="#{bundleTipoMedico.Save}" update="display,:TipoMedicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoMedicoEditDialog');"/>
+                    <p:commandButton value="#{bundleTipoMedico.Cancel}" onclick="TipoMedicoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
