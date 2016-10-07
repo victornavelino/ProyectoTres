@@ -12,7 +12,7 @@
             <h:form id="TipoDeEgresoCreateForm">
                 <h:panelGroup id="display">
                     <p:panel id="pNuevoEgreso" header="Datos Tipo de Egreso" >
-                       <p:panelGrid columns="2" rendered="#{tipoDeEgresoController.selected != null}">
+                       <p:panelGrid columns="2" rendered="#{tipoDeEgresoController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="#{bundleTipoDeEgreso.CreateTipoDeEgresoLabel_descripcion}" for="descripcion" />
                             <p:inputText id="descripcion" value="#{tipoDeEgresoController.selected.descripcion}" title="#{bundleTipoDeEgreso.CreateTipoDeEgresoTitle_descripcion}" required="true"/>
                         </p:panelGrid>

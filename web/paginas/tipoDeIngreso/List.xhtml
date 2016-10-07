@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
 
-    <ui:composition template="/template.xhtml">
+    <ui:define name="content">
 
-
-        <ui:define name="title">
+        <h3>
             <h:outputText value="#{bundleTipoDeIngreso.ListTipoDeIngresoTitle}"></h:outputText>
-        </ui:define>
+        </h3>
 
-        <ui:define name="body">
-            <h:form id="TipoDeIngresoListForm">
+             <h:form id="TipoDeIngresoListForm">
                 <p:panel header="#{bundleTipoDeIngreso.ListTipoDeIngresoTitle}">
                     <p:dataTable id="datalist" value="#{tipoDeIngresoController.items}" var="item"
                                  selectionMode="single" selection="#{tipoDeIngresoController.selected}"
@@ -54,5 +55,3 @@
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
-
-</html>
