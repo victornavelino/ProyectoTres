@@ -56,6 +56,14 @@
             <base-name>/BundleCuotaPlan</base-name>
             <var>bundleCuotaPlan</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleTipoDeEgreso</base-name>
+            <var>bundleTipoDeEgreso</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleTipoDeIngreso</base-name>
+            <var>bundleTipoDeIngreso</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
