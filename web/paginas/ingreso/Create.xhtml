@@ -11,7 +11,7 @@
         <p:dialog id="IngresoCreateDlg" widgetVar="IngresoCreateDialog" modal="true"  position="top" width="750px" resizable="false" appendTo="@(body)" header="#{bundleIngrso.CreateIngresoTitle}">
             <h:form id="IngresoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panel id="pNuevoEgreso" header="Datos Nuevo Ingreso" >
+                    <p:panel id="pNuevoIngreso" header="Datos Nuevo Ingreso" >
 
                         <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
@@ -29,7 +29,8 @@
                                                itemValue="#{mesItem}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_medico}" for="medicoSOM" />
-                            <p:selectOneMenu id="medicoSOM" value="#{ingresoController.selected.medico}" filter="true" filterMatchMode="startsWith">
+                            <p:selectOneMenu id="medicoSOM" value="#{medicoController.selected}" converter="ConversorGenerico">
+                                <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}"/>
                                 <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
                                                var="medicoItem"
                                                itemValue="#{medicoItem}"/>
@@ -51,7 +52,7 @@
 
                         </p:panelGrid>
                     </p:panel>
-                    <p:commandButton actionListener="#{ingresoController.create()}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'IngresoCreateDialog');"/>
+                    <p:commandButton actionListener="#{ingresoController.create}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'IngresoCreateDialog');"/>
                     <p:commandButton value="#{bundleIngrso.Cancel}" onclick="IngresoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -61,7 +61,12 @@ public class IngresoController implements Serializable {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngrso").getString("IngresoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
+            
         }
+        
+    }
+    public void accion(){
+        System.out.println("ERROR AL CREARRRR" +selected.getMedico());
     }
 
     public void update() {
@@ -84,7 +89,7 @@ public class IngresoController implements Serializable {
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
-
+System.out.println("ERROR AL CREARRRR" +selected.getMedico());
         if (selected != null) {
                     
             setEmbeddableKeys();
@@ -111,6 +116,7 @@ public class IngresoController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleIngrso").getString("PersistenceErrorOccured"));
             }
         }
+        
     }
 
     public Ingreso getIngreso(java.lang.Long id) {
