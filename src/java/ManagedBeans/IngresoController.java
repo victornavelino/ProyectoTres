@@ -1,6 +1,7 @@
 package ManagedBeans;
 
 import Entidades.Caja.Ingreso;
+import Entidades.Medico.Medico;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.IngresoFacade;
@@ -56,6 +57,7 @@ public class IngresoController implements Serializable {
     }
 
     public void create() {
+
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngrso").getString("IngresoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -82,7 +84,9 @@ public class IngresoController implements Serializable {
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
+
         if (selected != null) {
+                    
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {

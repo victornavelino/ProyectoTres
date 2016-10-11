@@ -12,43 +12,46 @@
             <h:form id="IngresoCreateForm">
                 <h:panelGroup id="display">
                     <p:panel id="pNuevoEgreso" header="Datos Nuevo Ingreso" >
-                        
-                    <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}" styleClass="noBorders">
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
-                        <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipoDeIngreso}" >
-                            <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
-                                           var="tipoDeIngresoItem"
-                                           itemValue="#{tipoDeIngresoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_anio}" for="anio" />
-                        <p:inputText id="anio" value="#{ingresoController.selected.anio}" title="#{bundleIngrso.CreateIngresoTitle_anio}" />
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_mes}" for="mes" />
-                        <p:inputText id="mes" value="#{ingresoController.selected.mes}" title="#{bundleIngrso.CreateIngresoTitle_mes}" />
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{ingresoController.selected.medico}" filter="true" filterMatchMode="startsWith">
-                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
-                                           var="medicoItem"
-                                           itemValue="#{medicoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.CreateIngresoTitle_observaciones}" />
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{ingresoController.selected.id}" title="#{bundleIngrso.CreateIngresoTitle_id}" />
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_formaDePago}" for="formaDePago" />
-                        <p:inputText id="formaDePago" value="#{ingresoController.selected.formaDePago}" title="#{bundleIngrso.CreateIngresoTitle_formaDePago}" />
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
-                        <p:inputText id="importe" value="#{ingresoController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
-                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_usuario}" for="usuario" />
-                        <p:selectOneMenu id="usuario" value="#{ingresoController.selected.usuario}" >
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="usuarioItem"
-                                           itemValue="#{usuarioItem}"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                       </p:panel>
-                    <p:commandButton actionListener="#{ingresoController.create}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'IngresoCreateDialog');"/>
+
+                        <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}" styleClass="noBorders">
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
+                            <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipoDeIngreso}" >
+                                <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
+                                               var="tipoDeIngresoItem"
+                                               itemValue="#{tipoDeIngresoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Año" for="anio" />
+                            <p:inputMask  id="anio" value="#{ingresoController.selected.anio}" mask="9999" maxlength="4"/>
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_mes}" for="mes" />
+                            <p:selectOneMenu id="mes" value="#{ingresoController.selected.mes}" >
+                                <f:selectItems value="#{mesController.items}"
+                                               var="mesItem"
+                                               itemValue="#{mesItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_medico}" for="medicoSOM" />
+                            <p:selectOneMenu id="medicoSOM" value="#{ingresoController.selected.medico}" filter="true" filterMatchMode="startsWith">
+                                <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
+                                               var="medicoItem"
+                                               itemValue="#{medicoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
+                            <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.CreateIngresoTitle_observaciones}" />
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_id}" for="id" />
+                            <p:inputText id="id" value="#{ingresoController.selected.id}" title="#{bundleIngrso.CreateIngresoTitle_id}" />
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_fecha}" for="fecha" />
+                            <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_formaDePago}" for="formaDePagoSOM" />
+                            <p:selectOneMenu id="formaDePagoSOM" value="#{ingresoController.selected.formaDePago}" >
+                                <f:selectItems value="#{egresoController.listaFormaDePago}"
+                                               var="FormaDePagoItem"
+                                               itemValue="#{FormaDePagoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
+                            <p:inputText id="importe" value="#{ingresoController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
+
+                        </p:panelGrid>
+                    </p:panel>
+                    <p:commandButton actionListener="#{ingresoController.create()}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'IngresoCreateDialog');"/>
                     <p:commandButton value="#{bundleIngrso.Cancel}" onclick="IngresoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
