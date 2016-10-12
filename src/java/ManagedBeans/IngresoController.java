@@ -7,6 +7,7 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.IngresoFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("ingresoController")
 @SessionScoped
@@ -28,10 +30,29 @@ public class IngresoController implements Serializable {
     private Facades.IngresoFacade ejbFacade;
     private List<Ingreso> items = null;
     private Ingreso selected;
+    private Medico medico;
+    @Inject
+    private UsuarioLogerBean usuarioLogerBean;
 
     public IngresoController() {
     }
 
+    public UsuarioLogerBean getUsuarioLogerBean() {
+        return usuarioLogerBean;
+    }
+
+    public void setUsuarioLogerBean(UsuarioLogerBean usuarioLogerBean) {
+        this.usuarioLogerBean = usuarioLogerBean;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+    
     public Ingreso getSelected() {
         return selected;
     }
@@ -52,12 +73,14 @@ public class IngresoController implements Serializable {
 
     public Ingreso prepareCreate() {
         selected = new Ingreso();
+        medico = new Medico();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-
+        selected.setFecha(new Date());
+        selected.setUsuario(usuarioLogerBean.getUsuario());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleIngrso").getString("IngresoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -89,7 +112,7 @@ public class IngresoController implements Serializable {
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
-System.out.println("ERROR AL CREARRRR" +selected.getMedico());
+
         if (selected != null) {
                     
             setEmbeddableKeys();

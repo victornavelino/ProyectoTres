@@ -30,21 +30,13 @@
                                            var="medicoItem"
                                            itemValue="#{medicoItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.EditIngresoTitle_observaciones}" />
-                        <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{ingresoController.selected.id}" title="#{bundleIngrso.EditIngresoTitle_id}" />
+                      
                         <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}" disabled="true"/>
                         <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_formaDePago}" for="formaDePago" />
                         <p:inputText id="formaDePago" value="#{ingresoController.selected.formaDePago}" title="#{bundleIngrso.EditIngresoTitle_formaDePago}" />
-                        <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_usuario}" for="usuario" />
-                        <p:selectOneMenu id="usuario" value="#{ingresoController.selected.usuario}" >
-                            <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}"/>
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="usuarioItem"
-                                           itemValue="#{usuarioItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_observaciones}" for="observaciones" />
+                        <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.EditIngresoTitle_observaciones}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{ingresoController.update}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IngresoEditDialog');"/>
                     <p:commandButton value="#{bundleIngrso.Cancel}" onclick="IngresoEditDialog.hide()"/>

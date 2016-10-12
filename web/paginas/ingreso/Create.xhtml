@@ -34,12 +34,7 @@
                                 <f:selectItems value="#{medicoController.items}"
                                                />
                             </p:selectOneMenu>
-                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
-                            <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.CreateIngresoTitle_observaciones}" />
-                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_id}" for="id" />
-                            <p:inputText id="id" value="#{ingresoController.selected.id}" title="#{bundleIngrso.CreateIngresoTitle_id}" />
-                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_fecha}" for="fecha" />
-                            <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
+
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_formaDePago}" for="formaDePagoSOM" />
                             <p:selectOneMenu id="formaDePagoSOM" value="#{ingresoController.selected.formaDePago}" >
                                 <f:selectItems value="#{egresoController.listaFormaDePago}"
@@ -48,7 +43,8 @@
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
                             <p:inputText id="importe" value="#{ingresoController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
-
+                            <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
+                            <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.CreateIngresoTitle_observaciones}" />
                         </p:panelGrid>
                     </p:panel>
                     <p:commandButton actionListener="#{ingresoController.create}" value="#{bundleIngrso.Save}" update="display,:IngresoListForm:datalist,:growl" oncomplete="handleSubmit(args,'IngresoCreateDialog');"/>
