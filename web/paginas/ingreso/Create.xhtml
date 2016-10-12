@@ -29,18 +29,17 @@
                                                itemValue="#{mesItem}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_medico}" for="medicoSOM" />
-                            <p:selectOneMenu id="medicoSOM" value="#{medicoController.selected}" converter="ConversorGenerico">
-                                <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}"/>
-                                <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
-                                               var="medicoItem"
-                                               itemValue="#{medicoItem}"/>
+                            <p:selectOneMenu id="medicoSOM" value="#{ingresoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" >
+                                <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
+                                <f:selectItems value="#{medicoController.items}"
+                                               />
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
                             <p:inputText id="observaciones" value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.CreateIngresoTitle_observaciones}" />
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_id}" for="id" />
                             <p:inputText id="id" value="#{ingresoController.selected.id}" title="#{bundleIngrso.CreateIngresoTitle_id}" />
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_fecha}" for="fecha" />
-                            <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
+                            <p:calendar id="fecha" pattern="MM/dd/yyyy" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}"  showOn="button"/>
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_formaDePago}" for="formaDePagoSOM" />
                             <p:selectOneMenu id="formaDePagoSOM" value="#{ingresoController.selected.formaDePago}" >
                                 <f:selectItems value="#{egresoController.listaFormaDePago}"
