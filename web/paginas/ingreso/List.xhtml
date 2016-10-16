@@ -40,43 +40,26 @@
                         </f:facet>
                         <h:outputText value="#{item.tipoDeIngreso}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleIngrso.ListIngresoTitle_anio}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.anio}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleIngrso.ListIngresoTitle_mes}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.mes}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleIngrso.ListIngresoTitle_medico}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.medico}"/>
-                    </p:column>
+                   
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleIngrso.ListIngresoTitle_observaciones}"/>
                         </f:facet>
-                        <h:outputText value="#{item.observaciones}"/>
+                        <h:outputText value="#{item.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleIngrso.ListIngresoTitle_fecha}"/>
                         </f:facet>
                         <h:outputText value="#{item.fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleIngrso.ListIngresoTitle_formaDePago}"/>
                         </f:facet>
-                        <h:outputText value="#{item.formaDePago}"/>
+                        <h:outputText value="#{item.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

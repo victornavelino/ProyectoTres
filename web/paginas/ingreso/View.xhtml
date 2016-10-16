@@ -13,23 +13,18 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}">
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_tipoDeIngreso}"/>
-                        <h:outputText value="#{ingresoController.selected.tipoDeIngreso}" title="#{bundleIngrso.ViewIngresoTitle_tipoDeIngreso}"/>
-                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_anio}"/>
-                        <h:outputText value="#{ingresoController.selected.anio}" title="#{bundleIngrso.ViewIngresoTitle_anio}"/>
-                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_mes}"/>
-                        <h:outputText value="#{ingresoController.selected.mes}" title="#{bundleIngrso.ViewIngresoTitle_mes}"/>
-                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_medico}"/>
-                        <h:outputText value="#{ingresoController.selected.medico}" title="#{bundleIngrso.ViewIngresoTitle_medico}"/>
+                        <h:outputText value="#{ingresoController.selected.tipoDeIngreso.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_tipoDeIngreso}"/>
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_observaciones}"/>
-                        <h:outputText value="#{ingresoController.selected.observaciones}" title="#{bundleIngrso.ViewIngresoTitle_observaciones}"/>
+                        <h:outputText value="#{ingresoController.selected.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_observaciones}"/>
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_id}"/>
                         <h:outputText value="#{ingresoController.selected.id}" title="#{bundleIngrso.ViewIngresoTitle_id}"/>
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_fecha}"/>
-                        <h:outputText value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.ViewIngresoTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        <h:outputText value="#{ingresoController.selected.fecha}" title="Fecha Sistema">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_formaDePago}"/>
-                        <h:outputText value="#{ingresoController.selected.formaDePago}" title="#{bundleIngrso.ViewIngresoTitle_formaDePago}"/>
+                        <h:outputText value="#{ingresoController.selected.fechaOperacion}" title="#{bundleIngrso.ViewIngresoTitle_fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_usuario}"/>
                         <h:outputText value="#{ingresoController.selected.usuario}" title="#{bundleIngrso.ViewIngresoTitle_usuario}"/>
                     </p:panelGrid>

@@ -12,8 +12,6 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +27,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "caja_movimientocaja")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class MovimientoCaja implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,14 +36,31 @@ public class MovimientoCaja implements Serializable {
     private Long id;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fecha;
-    @Enumerated(EnumType.STRING)
-    private FormaDePago formaDePago;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date fechaOperacion;
     @Basic(optional = false)
     @Column(scale = 3, precision = 12)
     private BigDecimal importe;
+    private String descripcion;
     @OneToOne
     private Usuario usuario;
     private boolean cerrado;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getFechaOperacion() {
+        return fechaOperacion;
+    }
+
+    public void setFechaOperacion(Date fechaOperacion) {
+        this.fechaOperacion = fechaOperacion;
+    }
 
     public Long getId() {
         return id;
@@ -61,14 +76,6 @@ public class MovimientoCaja implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public FormaDePago getFormaDePago() {
-        return formaDePago;
-    }
-
-    public void setFormaDePago(FormaDePago formaDePago) {
-        this.formaDePago = formaDePago;
     }
 
     public BigDecimal getImporte() {
@@ -95,6 +102,10 @@ public class MovimientoCaja implements Serializable {
         this.cerrado = cerrado;
     }
 
+    public String getClase() {
+        return this.getClass().getSimpleName();
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -117,7 +128,7 @@ public class MovimientoCaja implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.caja.Caja[ id=" + id + " ]";
+        return descripcion;
     }
 
 }

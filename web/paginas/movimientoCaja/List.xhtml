@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
+
+    <ui:define name="content">
+        <f:event listener="#{cajaController.verificarEstadoCaja()}" type="preRenderView"/> 
+
+
+        <h3>
+            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle}"></h:outputText>
+        </h3>
+
+        <h:form id="MovimientoCajaListForm">
+            <p:panel header="#{bundleMovimientoCaja.ListMovimientoCajaTitle}">
+                <p:dataTable id="datalist" value="#{movimientoCajaController.items}" var="item"
+                             selectionMode="single" selection="#{movimientoCajaController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <p:ajax event="rowSelect"   update="createButtonI createButtonE viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButtonI createButtonE viewButton editButton deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_descripcion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_fecha}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_importe}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.importe}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_usuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usuario.usuario}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.clase}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButtonI" icon="ui-icon-plus"   value="#{bundleMovimientoCaja.CreateI}" actionListener="#{movimientoCajaController.prepareCreateI}" update=":IngresoCreateDialog" oncomplete="PF('IngresoCreateDialog').show()"/>
+                        <p:commandButton id="createButtonE" icon="ui-icon-plus"   value="#{bundleMovimientoCaja.CreateE}" actionListener="#{movimientoCajaController.prepareCreateE}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+        <ui:include src="CreateI.xhtml"/>
+        <ui:include src="CreateE.xhtml"/>
+
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </ui:define>
+</ui:composition>

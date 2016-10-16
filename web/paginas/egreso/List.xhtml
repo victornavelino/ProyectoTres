@@ -52,14 +52,8 @@
                             <h:outputText value="#{bundleEgreso.ListEgresoTitle_fecha}"/>
                         </f:facet>
                         <h:outputText value="#{item.fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_formaDePago}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.formaDePago}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

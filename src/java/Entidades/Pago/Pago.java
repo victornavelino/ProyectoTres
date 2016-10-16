@@ -6,6 +6,7 @@
 package Entidades.Pago;
 
 import Entidades.Medico.Medico;
+import Entidades.Medico.Organismo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -44,6 +45,8 @@ public class Pago implements Serializable {
     private Concepto concepto;
     @OneToOne
     private Cuenta cuenta;
+    @OneToOne
+    private Organismo organismoPago;
     private Boolean anulado;
     private String observaciones;
 
@@ -53,6 +56,14 @@ public class Pago implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Organismo getOrganismoPago() {
+        return organismoPago;
+    }
+
+    public void setOrganismoPago(Organismo organismoPago) {
+        this.organismoPago = organismoPago;
     }
 
     public Medico getMedico() {

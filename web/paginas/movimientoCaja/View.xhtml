@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MovimientoCajaViewDlg" widgetVar="MovimientoCajaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMovimientoCaja.ViewMovimientoCajaTitle}">
+            <h:form id="MovimientoCajaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}">
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_descripcion}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.descripcion}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_descripcion}"/>
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_id}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.id}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_id}"/>
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_fecha}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.fecha}" title="Fecha Sistema">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_fecha}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>                       
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_importe}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.importe}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_importe}"/>
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_usuario}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.usuario}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_usuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMovimientoCaja.Close}" onclick="MovimientoCajaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

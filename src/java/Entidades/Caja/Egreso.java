@@ -28,17 +28,7 @@ public class Egreso extends MovimientoCaja implements Serializable {
     @OneToOne
     private TipoDeEgreso tipoDeEgreso;
 
-    private String descripcion;
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public TipoDeEgreso getTipoDeEgreso() {
+       public TipoDeEgreso getTipoDeEgreso() {
         return tipoDeEgreso;
     }
 
@@ -48,7 +38,7 @@ public class Egreso extends MovimientoCaja implements Serializable {
 
     @Override
     public String toString() {
-        return descripcion;
+        return super.getDescripcion();
     }
 
 }

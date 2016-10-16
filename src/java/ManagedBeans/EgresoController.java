@@ -10,6 +10,7 @@ import Facades.EgresoFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -32,7 +33,7 @@ public class EgresoController implements Serializable {
     @EJB
     private Facades.EgresoFacade ejbFacade;
     private List<Egreso> items = null;
-    private List<FormaDePago> listaFormaDePago=new ArrayList<>();
+    private List<FormaDePago> listaFormaDePago = new ArrayList<>();
     private Egreso selected;
     @Inject
     private UsuarioLogerBean usuarioLogerBean;
@@ -47,7 +48,7 @@ public class EgresoController implements Serializable {
     public void setUsuarioLogerBean(UsuarioLogerBean usuarioLogerBean) {
         this.usuarioLogerBean = usuarioLogerBean;
     }
-    
+
     public List<FormaDePago> getListaFormaDePago() {
         return listaFormaDePago;
     }
@@ -76,17 +77,20 @@ public class EgresoController implements Serializable {
 
     public Egreso prepareCreate() {
         selected = new Egreso();
+        selected.setFecha(new Date());
         initializeEmbeddableKey();
         return selected;
     }
+
     @PostConstruct
-    public void inicializar(){
-        listaFormaDePago=new ArrayList<>();
-        listaFormaDePago = (List)Arrays.asList(FormaDePago.values());
+    public void inicializar() {
+        listaFormaDePago = new ArrayList<>();
+        listaFormaDePago = (List) Arrays.asList(FormaDePago.values());
     }
 
     public void create() {
         selected.setUsuario(usuarioLogerBean.getUsuario());
+        selected.setFecha(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleEgreso").getString("EgresoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -112,7 +116,6 @@ public class EgresoController implements Serializable {
         }
         return items;
     }
-    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -196,9 +199,9 @@ public class EgresoController implements Serializable {
     }
 
     public List<FormaDePago> listaFormaDePago() {
-        System.out.println("FORMAS DE PAGO "+FormaDePago.values());
+        System.out.println("FORMAS DE PAGO " + FormaDePago.values());
         if (listaFormaDePago == null) {
-            listaFormaDePago = (List)Arrays.asList(FormaDePago.values());
+            listaFormaDePago = (List) Arrays.asList(FormaDePago.values());
         }
         return listaFormaDePago;
     }

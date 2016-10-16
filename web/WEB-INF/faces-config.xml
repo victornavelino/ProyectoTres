@@ -64,6 +64,10 @@
             <base-name>/BundleTipoDeIngreso</base-name>
             <var>bundleTipoDeIngreso</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleMovimientoCaja</base-name>
+            <var>bundleMovimientoCaja</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>

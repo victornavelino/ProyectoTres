@@ -7,6 +7,13 @@ function handleSubmit(args, dialog) {
     }
 }
 
-$('.ui-dialog input[type=text].ui-inputtext').val (function () {
+$('.ui-dialog input[type=text].ui-inputtext').val(function () {
     return this.value.toUpperCase();
 })
+
+window.alert = function (str) {
+    PF('growl').renderMessage({"summary": "Advertencia",
+        "detail": str,
+        "severity": "warn"})
+};
+
