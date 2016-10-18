@@ -88,7 +88,25 @@
                         <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                            <p:dataExporter type="xls" target="datalist" fileName="movimientos"/>
+                        </h:commandLink>
 
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                            <p:dataExporter type="csv" target="datalist" fileName="movimientos"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                            <p:dataExporter type="xls" postProcessor="#{pagosDocenteBean.postProcessXLS}" 
+                                            target="datalist" fileName="movimientospagina"   pageOnly="true"/>
+                        </h:commandLink>
+                        <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                            <p:printer target="datalist" />
+                        </p:commandButton>
                     </f:facet>
                     <p:summaryRow listener="#{movimientoCajaController.calculateTotal}">
                         <p:column colspan="3" style="text-align:right">

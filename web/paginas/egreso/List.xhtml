@@ -62,10 +62,10 @@
                         <h:outputText value="#{item.usuario.usuario}"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleEgreso.Create}" actionListener="#{egresoController.prepareCreate}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   disabled="true" value="#{bundleEgreso.Create}" actionListener="#{egresoController.prepareCreate}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.View}" update=":EgresoViewForm" oncomplete="PF('EgresoViewDialog').show()" disabled="#{empty egresoController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Edit}" update=":EgresoEditForm" oncomplete="PF('EgresoEditDialog').show()" disabled="#{empty egresoController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Delete}" actionListener="#{egresoController.destroy}" update=":growl,datalist" disabled="#{empty egresoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Edit}" update=":EgresoEditForm" oncomplete="PF('EgresoEditDialog').show()" disabled="true"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleEgreso.Delete}" actionListener="#{egresoController.destroy}" update=":growl,datalist" disabled="true"/>
                     </f:facet>
                 </p:dataTable>
             </p:panel>

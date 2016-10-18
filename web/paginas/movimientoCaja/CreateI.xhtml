@@ -22,7 +22,7 @@
                                                itemValue="#{tipoDeIngresoItem}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_fecha}" for="fecha" />
-                            <p:calendar id="fecha"  pattern="dd/MM/yyyy HH:mm" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleIngrso.EditIngresoTitle_fecha}" required="true" />
+                            <p:calendar id="fecha"  pattern="dd/MM/yyyy HH:mm" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleIngrso.EditIngresoTitle_fecha}" showOn="button" required="true" />
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
                             <p:inputText id="importe" value="#{movimientoCajaController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />
