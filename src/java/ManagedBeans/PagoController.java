@@ -67,17 +67,17 @@ public class PagoController implements Serializable {
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
+        Ingreso caja = new Ingreso();
+        caja.setFechaOperacion(new Date());
+        caja.setFecha(selected.getFechaPago());
+        caja.setDescripcion("Pago, "
+                + selected.getMedico().getPersona()
+                + ", Cuota " + selected.getMes() + " " + selected.getAnio());
+        caja.setTipo(ingresoFacade.find(1L));
+        caja.setImporte(selected.getImporte());
+        caja.setUsuario(usuarioLogerBean.getUsuario());
+        cajaFacade.create(caja);
         if (!JsfUtil.isValidationFailed()) {
-            Ingreso caja = new Ingreso();
-            caja.setFechaOperacion(new Date());
-            caja.setFecha(selected.getFechaPago());
-            caja.setDescripcion("Pago, "
-                    + selected.getMedico().getPersona()
-                    + ", Cuota " + selected.getMes() + " " + selected.getAnio());
-            caja.setTipo(ingresoFacade.find(1L));
-            caja.setImporte(selected.getImporte());
-            caja.setUsuario(usuarioLogerBean.getUsuario());
-            cajaFacade.create(caja);
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }

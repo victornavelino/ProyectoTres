@@ -18,7 +18,7 @@
                             <f:selectItems value="#{medicoController.items}" />
                     </p:selectOneMenu>
                     <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
-                    <p:selectOneMenu id="cuenta" value="#{pagoController.selected.mes}" >
+                    <p:selectOneMenu id="mes" value="#{pagoController.selected.mes}" >
                         <f:selectItems value="#{pagoController.meses}"
                                        var="cuentaItem"
                                        itemValue="#{cuentaItem}"/>

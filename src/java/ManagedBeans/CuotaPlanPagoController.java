@@ -82,22 +82,22 @@ public class CuotaPlanPagoController implements Serializable {
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoCreated"));
         if (!JsfUtil.isValidationFailed()) {
-            Ingreso caja = new Ingreso();
-            caja.setFechaOperacion(new Date());
-            caja.setFecha(selected.getFechaPago());
-            caja.setDescripcion("Plan de Pago, "
-                    + selected.getPlanPago().getMedico().getPersona()
-                    + ", Cuota " + selected.getCuota());
-            caja.setTipo(ingresoFacade.find(2L));
-            caja.setImporte(selected.getImporte());
-            caja.setUsuario(usuarioLogerBean.getUsuario());
-            cajaFacade.create(caja);
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoUpdated"));
+        Ingreso caja = new Ingreso();
+        caja.setFechaOperacion(new Date());
+        caja.setFecha(selected.getFechaPago());
+        caja.setDescripcion("Plan de Pago, "
+                + selected.getPlanPago().getMedico().getPersona()
+                + ", Cuota " + selected.getCuota());
+        caja.setTipo(ingresoFacade.find(2L));
+        caja.setImporte(selected.getImporte());
+        caja.setUsuario(usuarioLogerBean.getUsuario());
+        cajaFacade.create(caja);
     }
 
     public void destroy() {

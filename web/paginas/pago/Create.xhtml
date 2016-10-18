@@ -18,12 +18,11 @@
                             <f:selectItems value="#{medicoController.items}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
-                        <p:selectOneMenu id="cuenta" value="#{pagoController.selected.mes}" >
+                        <p:selectOneMenu id="mes" value="#{pagoController.selected.mes}" >
                             <f:selectItems value="#{pagoController.meses}"
                                            var="cuentaItem"
                                            itemValue="#{cuentaItem}"/>
                         </p:selectOneMenu>   
-                        <p:inputText id="mes" value="#{pagoController.selected.mes}" title="#{bundlePago.CreatePagoTitle_mes}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.CreatePagoTitle_anio}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_nroRecibo}" for="nroRecibo" />
@@ -44,7 +43,7 @@
                         <p:inputText id="observaciones" value="#{pagoController.selected.observaciones}" title="#{bundlePago.CreatePagoTitle_observaciones}" />
                         <p:outputLabel value="Cuenta:"/>
                         <p:selectOneMenu id="cuenta" value="#{pagoController.selected.cuenta}" >
-                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}" 
                                            var="cuentaItem"
                                            itemValue="#{cuentaItem}"/>
                         </p:selectOneMenu>   
