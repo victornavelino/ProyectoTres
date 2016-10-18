@@ -89,8 +89,8 @@ public class CuotaPlanPagoController implements Serializable {
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoUpdated"));
         Ingreso caja = new Ingreso();
-        caja.setFechaOperacion(new Date());
-        caja.setFecha(selected.getFechaPago());
+        caja.setFecha(new Date());
+        caja.setFechaOperacion(selected.getFechaPago());
         caja.setDescripcion("Plan de Pago, "
                 + selected.getPlanPago().getMedico().getPersona()
                 + ", Cuota " + selected.getCuota());
