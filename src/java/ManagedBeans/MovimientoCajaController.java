@@ -159,34 +159,37 @@ public class MovimientoCajaController implements Serializable {
 
     public void calculateTotal(Object valueOfThisSorting) {
         calculo = BigDecimal.ZERO;
-
-        for (MovimientoCaja i : items) {
-            switch (valueOfThisSorting.getClass().getSimpleName()) {
-                case "Date":
-                    if (DateTimeComparator.getDateOnlyInstance().compare(i.getFechaOperacion(), valueOfThisSorting) == 0) {
-                        switch (i.getClase()) {
-                            case "Ingreso":
-                                calculo = calculo.add(i.getImporte());
-                                break;
-                            case "Egreso":
-                                calculo = calculo.subtract(i.getImporte());
-                                break;
+        try {
+            
+            for (MovimientoCaja i : items) {
+                switch (valueOfThisSorting.getClass().getSimpleName()) {
+                    case "Date":
+                        if (DateTimeComparator.getDateOnlyInstance().compare(i.getFechaOperacion(), valueOfThisSorting) == 0) {
+                            switch (i.getClase()) {
+                                case "Ingreso":
+                                    calculo = calculo.add(i.getImporte());
+                                    break;
+                                case "Egreso":
+                                    calculo = calculo.subtract(i.getImporte());
+                                    break;
+                            }
                         }
-                    }
-                    break;
-                case "String":
-                    if (i.getClass().getSimpleName().equals(valueOfThisSorting)) {
-                        switch (i.getClase()) {
-                            case "Ingreso":
-                                calculo = calculo.add(i.getImporte());
-                                break;
-                            case "Egreso":
-                                calculo = calculo.subtract(i.getImporte());
-                                break;
+                        break;
+                    case "String":
+                        if (i.getClass().getSimpleName().equals(valueOfThisSorting)) {
+                            switch (i.getClase()) {
+                                case "Ingreso":
+                                    calculo = calculo.add(i.getImporte());
+                                    break;
+                                case "Egreso":
+                                    calculo = calculo.subtract(i.getImporte());
+                                    break;
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
+        } catch (Exception e) {
         }
 
     }
