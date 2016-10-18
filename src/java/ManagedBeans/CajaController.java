@@ -249,7 +249,6 @@ public class CajaController implements Serializable {
     public void verificarEstadoCaja() {
         if (!isCajaAbierta) {
             JsfUtil.addSuccessMessage("La Caja esta Cerrada, no puede realizar movimientos");
-
         }
     }
 

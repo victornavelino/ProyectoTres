@@ -29,23 +29,12 @@
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_descripcion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleEgreso.ListEgresoTitle_tipoDeEgreso}"/>
                         </f:facet>
-                        <h:outputText value="#{item.tipoDeEgreso.descripcion}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_importe}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.importe}"/>
+                        <h:outputText value="#{item.tipo.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -62,6 +51,11 @@
                         <h:outputText value="#{item.importe}"/>
                     </p:column>
                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleEgreso.ListEgresoTitle_descripcion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}"/>
+                    </p:column> <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleEgreso.ListEgresoTitle_usuario}"/>
                         </f:facet>

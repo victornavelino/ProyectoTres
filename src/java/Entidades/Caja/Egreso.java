@@ -26,14 +26,14 @@ public class Egreso extends MovimientoCaja implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @OneToOne
-    private TipoDeEgreso tipoDeEgreso;
+    private TipoDeEgreso tipo;
 
-       public TipoDeEgreso getTipoDeEgreso() {
-        return tipoDeEgreso;
+    public TipoDeEgreso getTipo() {
+        return tipo;
     }
 
-    public void setTipoDeEgreso(TipoDeEgreso tipoDeEgreso) {
-        this.tipoDeEgreso = tipoDeEgreso;
+    public void setTipo(TipoDeEgreso tipo) {
+        this.tipo = tipo;
     }
 
     @Override

@@ -12,12 +12,8 @@
             <h:form id="EgresoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{egresoController.selected != null}">
-                        <h:outputText value="#{bundleEgreso.ViewEgresoLabel_descripcion}"/>
-                        <h:outputText value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.ViewEgresoTitle_descripcion}"/>
                         <h:outputText value="#{bundleEgreso.ViewEgresoLabel_tipoDeEgreso}"/>
-                        <h:outputText value="#{egresoController.selected.tipoDeEgreso.descripcion}" title="#{bundleEgreso.ViewEgresoTitle_tipoDeEgreso}"/>
-                        <h:outputText value="#{bundleEgreso.ViewEgresoLabel_importe}"/>
-                        <h:outputText value="#{egresoController.selected.importe}" title="#{bundleEgreso.ViewEgresoTitle_importe}"/>
+                        <h:outputText value="#{egresoController.selected.tipo.descripcion}" title="#{bundleEgreso.ViewEgresoTitle_tipoDeEgreso}"/>
                         <h:outputText value="Fecha Sistema"/>
                         <h:outputText value="#{egresoController.selected.fecha}" title="Fecha Sistema">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
@@ -27,6 +23,10 @@
                         <h:outputText value="#{egresoController.selected.fechaOperacion}" title="#{bundleEgreso.ViewEgresoTitle_fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                         </h:outputText>
+                        <h:outputText value="#{bundleEgreso.ViewEgresoLabel_importe}"/>
+                        <h:outputText value="#{egresoController.selected.importe}" title="#{bundleEgreso.ViewEgresoTitle_importe}"/>
+                        <h:outputText value="#{bundleEgreso.ViewEgresoLabel_descripcion}"/>
+                        <h:outputText value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.ViewEgresoTitle_descripcion}"/>
                         <h:outputText value="#{bundleEgreso.ViewEgresoLabel_usuario}"/>
                         <h:outputText value="#{egresoController.selected.usuario}" title="#{bundleEgreso.ViewEgresoTitle_usuario}"/>
                     </p:panelGrid>

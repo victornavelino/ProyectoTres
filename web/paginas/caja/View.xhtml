@@ -29,6 +29,55 @@
                         <h:outputText value="#{bundleCaja.ViewCajaLabel_cajaFinal}"/>
                         <h:outputText value="#{cajaController.selected.cajaFinal}" title="#{bundleCaja.ViewCajaTitle_cajaFinal}"/>
                     </p:panelGrid>
+                    <p:dataTable id="datalist" value="#{cajaController.selected.movimientosCaja}" var="item"
+                                 selectionMode="single" selection="#{movimientoCajaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_importe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.importe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_usuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuario.usuario}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.clase}"/>
+                        </p:column>
+                    </p:dataTable>
                     <p:commandButton value="#{bundleCaja.Close}" onclick="CajaViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

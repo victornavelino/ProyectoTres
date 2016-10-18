@@ -21,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "caja_movimientocaja_tipodeingreso")
-public class TipoDeIngreso implements Serializable {
+public class TipoDeIngreso extends Tipo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -29,7 +29,6 @@ public class TipoDeIngreso implements Serializable {
     private Long id;
     private String descripcion;
     private boolean habilitado;
-    
 
     public Long getId() {
         return id;
@@ -54,7 +53,7 @@ public class TipoDeIngreso implements Serializable {
     public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
     }
-  
+
     @Override
     public int hashCode() {
         int hash = 0;

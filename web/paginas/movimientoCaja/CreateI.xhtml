@@ -15,13 +15,14 @@
 
                         <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
-                            <p:selectOneMenu id="tipoDeIngreso" value="#{movimientoCajaController.selected.tipoDeIngreso}" >
+                            <p:selectOneMenu id="tipoDeIngreso" value="#{movimientoCajaController.selected.tipo}" required="true" >
+                                <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}" noSelectionOption="true"/>
                                 <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
                                                var="tipoDeIngresoItem"
                                                itemValue="#{tipoDeIngresoItem}"/>
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_fecha}" for="fecha" />
-                            <p:calendar id="fecha" value="#{movimientoCajaController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}" />
+                            <p:calendar id="fecha"  pattern="dd/MM/yyyy HH:mm" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleIngrso.EditIngresoTitle_fecha}" required="true" />
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
                             <p:inputText id="importe" value="#{movimientoCajaController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_observaciones}" for="observaciones" />

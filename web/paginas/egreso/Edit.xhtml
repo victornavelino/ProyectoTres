@@ -15,18 +15,18 @@
 
 
                         <p:panelGrid columns="2" rendered="#{egresoController.selected != null}" styleClass="noBorders">
-                            <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_descripcion}" for="descripcion" />
-                            <p:inputText id="descripcion" value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.CreateEgresoTitle_descripcion}" size="70" required="true"/>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_tipoDeEgreso}" for="tipoDeEgreso" />
-                            <p:selectOneMenu id="tipoDeEgreso" value="#{egresoController.selected.tipoDeEgreso}" required="true">
+                            <p:selectOneMenu id="tipoDeEgreso" value="#{egresoController.selected.tipo}" required="true">
                                 <f:selectItems value="#{tipoDeEgresoController.itemsAvailableSelectOne}"
                                                var="tipoDeEgresoItem"
                                                itemValue="#{tipoDeEgresoItem}"/>
                             </p:selectOneMenu>
-                            <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_importe}" for="importe" />
-                            <p:inputText id="importe" value="#{egresoController.selected.importe}" title="#{bundleEgreso.CreateEgresoTitle_importe}" required="true" requiredMessage="#{bundleEgreso.CreateEgresoRequiredMessage_importe}"/>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_fecha}" for="fechaOperacion" />
                             <p:calendar id="fechaOperacion" pattern="dd/MM/yyyy HH:mm" value="#{egresoController.selected.fechaOperacion}" title="#{bundleEgreso.EditEgresoTitle_fecha}"  showOn="button"/>
+                            <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_importe}" for="importe" />
+                            <p:inputText id="importe" value="#{egresoController.selected.importe}" title="#{bundleEgreso.CreateEgresoTitle_importe}" required="true" requiredMessage="#{bundleEgreso.CreateEgresoRequiredMessage_importe}"/>
+                            <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_descripcion}" for="descripcion" />
+                            <p:inputText id="descripcion" value="#{egresoController.selected.descripcion}" title="#{bundleEgreso.CreateEgresoTitle_descripcion}" size="70" required="true"/>
 
                         </p:panelGrid>
                     </p:panel>

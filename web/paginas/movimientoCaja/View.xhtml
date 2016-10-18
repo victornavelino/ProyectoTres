@@ -12,22 +12,24 @@
             <h:form id="MovimientoCajaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}">
-                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_descripcion}"/>
-                        <h:outputText value="#{movimientoCajaController.selected.descripcion}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_descripcion}"/>
                         <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_id}"/>
                         <h:outputText value="#{movimientoCajaController.selected.id}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_id}"/>
-                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_fecha}"/>
+                        <h:outputText value="Tipo"/>
+                        <h:outputText value="#{movimientoCajaController.selected.tipo.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_tipoDeIngreso}"/>
+                        <h:outputText value="Fecha Sistema:"/>
                         <h:outputText value="#{movimientoCajaController.selected.fecha}" title="Fecha Sistema">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_fecha}"/>
                         <h:outputText value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_fecha}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                         </h:outputText>                       
                         <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_importe}"/>
                         <h:outputText value="#{movimientoCajaController.selected.importe}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_importe}"/>
+                        <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_descripcion}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.descripcion}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_descripcion}"/>
                         <h:outputText value="#{bundleMovimientoCaja.ViewMovimientoCajaLabel_usuario}"/>
-                        <h:outputText value="#{movimientoCajaController.selected.usuario}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_usuario}"/>
+                        <h:outputText value="#{movimientoCajaController.selected.usuario.usuario}" title="#{bundleMovimientoCaja.ViewMovimientoCajaTitle_usuario}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundleMovimientoCaja.Close}" onclick="MovimientoCajaViewDialog.hide()"/>
                 </h:panelGroup>

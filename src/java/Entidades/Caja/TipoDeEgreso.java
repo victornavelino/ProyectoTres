@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Entidades.Caja;
 
 import java.io.Serializable;
@@ -19,7 +18,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "caja_movimientocaja_tipodeegreso")
-public class TipoDeEgreso implements Serializable {
+public class TipoDeEgreso extends Tipo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,6 @@ public class TipoDeEgreso implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
 
     @Override
     public int hashCode() {
@@ -67,5 +66,5 @@ public class TipoDeEgreso implements Serializable {
     public String toString() {
         return descripcion;
     }
-    
+
 }

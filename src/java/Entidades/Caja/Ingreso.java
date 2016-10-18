@@ -28,14 +28,14 @@ public class Ingreso extends MovimientoCaja implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @OneToOne
-    private TipoDeIngreso tipoDeIngreso;
+    private TipoDeIngreso tipo;
 
-    public TipoDeIngreso getTipoDeIngreso() {
-        return tipoDeIngreso;
+    public TipoDeIngreso getTipo() {
+        return tipo;
     }
 
-    public void setTipoDeIngreso(TipoDeIngreso tipoDeIngreso) {
-        this.tipoDeIngreso = tipoDeIngreso;
+    public void setTipo(TipoDeIngreso tipo) {
+        this.tipo = tipo;
     }
 
     @Override

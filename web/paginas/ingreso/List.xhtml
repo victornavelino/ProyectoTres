@@ -38,15 +38,10 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundleIngrso.ListIngresoTitle_tipoDeIngreso}"/>
                         </f:facet>
-                        <h:outputText value="#{item.tipoDeIngreso}"/>
+                        <h:outputText value="#{item.tipo}"/>
                     </p:column>
-                   
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleIngrso.ListIngresoTitle_observaciones}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
+
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleIngrso.ListIngresoTitle_fecha}"/>
@@ -57,15 +52,15 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleIngrso.ListIngresoTitle_formaDePago}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
                             <h:outputText value="#{bundleIngrso.ListIngresoTitle_importe}"/>
                         </f:facet>
                         <h:outputText value="#{item.importe}"/>
+                    </p:column> 
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleIngrso.ListIngresoTitle_observaciones}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -75,9 +70,9 @@
                     </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleIngrso.Create}" actionListener="#{ingresoController.prepareCreate}" update=":IngresoCreateForm" oncomplete="PF('IngresoCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleIngrso.View}" update=":IngresoViewForm" oncomplete="PF('IngresoViewDialog').show()" disabled="#{empty ingresoController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleIngrso.Edit}" update=":IngresoEditForm" oncomplete="PF('IngresoEditDialog').show()" disabled="#{empty ingresoController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleIngrso.Delete}" actionListener="#{ingresoController.destroy}" update=":growl,datalist" disabled="#{empty ingresoController.selected}"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleIngrso.View}" update=":IngresoViewForm" oncomplete="PF('IngresoViewDialog').show()" disabled="#{empty ingresoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleIngrso.Edit}" update=":IngresoEditForm" oncomplete="PF('IngresoEditDialog').show()" disabled="#{empty ingresoController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleIngrso.Delete}" actionListener="#{ingresoController.destroy}" update=":growl,datalist" disabled="#{empty ingresoController.selected}"/>
                     </f:facet>
                 </p:dataTable>
             </p:panel>

@@ -6,8 +6,13 @@ import Entidades.Caja.MovimientoCaja;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MovimientoCajaFacade;
-
+import Facades.TipoDeEgresoFacade;
+import Facades.TipoDeIngresoFacade;
+import RN.MovimientoCajaRNLocal;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import org.joda.time.DateTimeComparator;
 
 @Named("movimientoCajaController")
 @SessionScoped
@@ -29,16 +35,63 @@ public class MovimientoCajaController implements Serializable {
 
     @EJB
     private Facades.MovimientoCajaFacade ejbFacade;
+    @EJB
+    private MovimientoCajaRNLocal cajaRNLocal;
     private List<MovimientoCaja> items = null;
     private MovimientoCaja selected;
+    @EJB
+    private Facades.TipoDeEgresoFacade tipoDeEgresoFacade;
+    @EJB
+    private Facades.TipoDeIngresoFacade tipoDeIngresoFacade;
     @Inject
     private UsuarioLogerBean usuarioLogerBean;
+    BigDecimal calculo;
 
     public MovimientoCajaController() {
     }
 
     public MovimientoCaja getSelected() {
         return selected;
+    }
+
+    public MovimientoCajaFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(MovimientoCajaFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public MovimientoCajaRNLocal getCajaRNLocal() {
+        return cajaRNLocal;
+    }
+
+    public void setCajaRNLocal(MovimientoCajaRNLocal cajaRNLocal) {
+        this.cajaRNLocal = cajaRNLocal;
+    }
+
+    public TipoDeEgresoFacade getTipoDeEgresoFacade() {
+        return tipoDeEgresoFacade;
+    }
+
+    public void setTipoDeEgresoFacade(TipoDeEgresoFacade tipoDeEgresoFacade) {
+        this.tipoDeEgresoFacade = tipoDeEgresoFacade;
+    }
+
+    public TipoDeIngresoFacade getTipoDeIngresoFacade() {
+        return tipoDeIngresoFacade;
+    }
+
+    public void setTipoDeIngresoFacade(TipoDeIngresoFacade tipoDeIngresoFacade) {
+        this.tipoDeIngresoFacade = tipoDeIngresoFacade;
+    }
+
+    public UsuarioLogerBean getUsuarioLogerBean() {
+        return usuarioLogerBean;
+    }
+
+    public void setUsuarioLogerBean(UsuarioLogerBean usuarioLogerBean) {
+        this.usuarioLogerBean = usuarioLogerBean;
     }
 
     public void setSelected(MovimientoCaja selected) {
@@ -61,13 +114,15 @@ public class MovimientoCajaController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-      public MovimientoCaja prepareCreateI() {
+
+    public MovimientoCaja prepareCreateI() {
         selected = new Ingreso();
         selected.setFecha(new Date());
         initializeEmbeddableKey();
         return selected;
     }
-        public MovimientoCaja prepareCreateE() {
+
+    public MovimientoCaja prepareCreateE() {
         selected = new Egreso();
         selected.setFecha(new Date());
         initializeEmbeddableKey();
@@ -97,9 +152,63 @@ public class MovimientoCajaController implements Serializable {
 
     public List<MovimientoCaja> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = cajaRNLocal.getAbiertos();
         }
         return items;
+    }
+
+    public void calculateTotal(Object valueOfThisSorting) {
+        calculo = BigDecimal.ZERO;
+
+        for (MovimientoCaja i : items) {
+            switch (valueOfThisSorting.getClass().getSimpleName()) {
+                case "Date":
+                    if (DateTimeComparator.getDateOnlyInstance().compare(i.getFechaOperacion(), valueOfThisSorting) == 0) {
+                        switch (i.getClase()) {
+                            case "Ingreso":
+                                calculo = calculo.add(i.getImporte());
+                                break;
+                            case "Egreso":
+                                calculo = calculo.subtract(i.getImporte());
+                                break;
+                        }
+                    }
+                    break;
+                case "String":
+                    if (i.getClass().getSimpleName().equals(valueOfThisSorting)) {
+                        switch (i.getClase()) {
+                            case "Ingreso":
+                                calculo = calculo.add(i.getImporte());
+                                break;
+                            case "Egreso":
+                                calculo = calculo.subtract(i.getImporte());
+                                break;
+                        }
+                    }
+                    break;
+            }
+        }
+
+    }
+
+    public BigDecimal getValueTotal() {
+        return calculo;
+    }
+
+    public BigDecimal getTotalGeneral() {
+        calculo = BigDecimal.ZERO;
+
+        for (MovimientoCaja i : items) {
+            switch (i.getClase()) {
+                case "Ingreso":
+                    calculo = calculo.add(i.getImporte());
+                    break;
+                case "Egreso":
+                    calculo = calculo.subtract(i.getImporte());
+                    break;
+            }
+        }
+        return calculo;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {
@@ -138,8 +247,17 @@ public class MovimientoCajaController implements Serializable {
         return getFacade().findAll();
     }
 
-    public List<MovimientoCaja> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+    public <Tipo> List<Tipo> getItemsAvailableSelectOne() {
+        List<Tipo> list = new ArrayList<>();
+        switch (selected.getClase()) {
+            case "Ingreso":
+                list.addAll((Collection<? extends Tipo>) tipoDeIngresoFacade.findAll());
+                break;
+            case "Egreso":
+                list.addAll((Collection<? extends Tipo>) tipoDeEgresoFacade.findAll());
+                break;
+        }
+        return list;
     }
 
     @FacesConverter(forClass = MovimientoCaja.class)

@@ -12,22 +12,24 @@
             <h:form id="PagoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
-                        <p:outputLabel value="#{bundlePago.CreatePagoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{pagoController.selected.id}" title="#{bundlePago.CreatePagoTitle_id}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" >
-                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
-                                           var="medicoItem"
-                                           itemValue="#{medicoItem}"/>
+                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" >
+                            <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicoController.items}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
+                        <p:selectOneMenu id="cuenta" value="#{pagoController.selected.mes}" >
+                            <f:selectItems value="#{pagoController.meses}"
+                                           var="cuentaItem"
+                                           itemValue="#{cuentaItem}"/>
+                        </p:selectOneMenu>   
                         <p:inputText id="mes" value="#{pagoController.selected.mes}" title="#{bundlePago.CreatePagoTitle_mes}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.CreatePagoTitle_anio}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_nroRecibo}" for="nroRecibo" />
                         <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.CreatePagoTitle_nroRecibo}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_fechaPago}" for="fechaPago" />
-                        <p:calendar id="fechaPago" pattern="MM/dd/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
+                        <p:calendar id="fechaPago" pattern="dd/MM/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_importe}" for="importe" />
                         <p:inputText id="importe" value="#{pagoController.selected.importe}" title="#{bundlePago.CreatePagoTitle_importe}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_concepto}" for="concepto" />

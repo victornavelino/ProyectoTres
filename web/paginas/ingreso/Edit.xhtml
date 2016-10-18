@@ -13,15 +13,17 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}">
                         <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
-                        <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipoDeIngreso}" >
+                        <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipo}" >
                             <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}"/>
                             <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
                                            var="tipoDeIngresoItem"
                                            itemValue="#{tipoDeIngresoItem}"/>
                         </p:selectOneMenu>
-                     
+
                         <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" value="#{ingresoController.selected.fecha}" title="#{bundleIngrso.EditIngresoTitle_fecha}" disabled="true"/>
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_importe}" for="importe" />
+                        <p:inputText id="importe" value="#{ingresoController.selected.importe}" title="#{bundleIngrso.CreateIngresoTitle_importe}" required="true" requiredMessage="Debe ingresar el importe"/>             
                         <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_observaciones}" for="observaciones" />
                         <p:inputText id="observaciones" value="#{ingresoController.selected.descripcion}" title="#{bundleIngrso.EditIngresoTitle_observaciones}" />
                     </p:panelGrid>

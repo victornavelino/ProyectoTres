@@ -10,35 +10,38 @@ package Entidades.Pago;
  * @author hugo
  */
 public enum Mes {
-    
-ENERO ("ENERO"),
-FEBRERO ("FEBRERO"),
-MARZO ("MARZO"),
-ABRIL ("ABRIL"),
-MAYO ("MAYO"),
-JUNIO ("JUNIO"),
-JULIO ("JULIO"),
-AGOSTO ("AGOSTO"),
-SEPTIEMBRE ("SEPTIEMBRE"),
-OCTUBRE ("OCTUBRE"),
-NOVIEMBRE ("NOVIEMBRE"),
-DICIEMBRE ("DICIEMBRE");
 
-private String name ;
+    ENERO("ENERO"),
+    FEBRERO("FEBRERO"),
+    MARZO("MARZO"),
+    ABRIL("ABRIL"),
+    MAYO("MAYO"),
+    JUNIO("JUNIO"),
+    JULIO("JULIO"),
+    AGOSTO("AGOSTO"),
+    SEPTIEMBRE("SEPTIEMBRE"),
+    OCTUBRE("OCTUBRE"),
+    NOVIEMBRE("NOVIEMBRE"),
+    DICIEMBRE("DICIEMBRE");
+
+    private String name;
 
     private Mes(String name) {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
 
-public String getName() {
-return name;
-}
+    public Mes get(int n) {
+        return Mes.values()[n - 1];
+    }
 
-@Override
-public String toString(){
+    @Override
+    public String toString() {
 //para llenar combo box
-return name;
-}
+        return name;
+    }
 
 }

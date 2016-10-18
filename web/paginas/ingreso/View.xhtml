@@ -12,12 +12,11 @@
             <h:form id="IngresoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}">
-                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_tipoDeIngreso}"/>
-                        <h:outputText value="#{ingresoController.selected.tipoDeIngreso.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_tipoDeIngreso}"/>
-                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_observaciones}"/>
-                        <h:outputText value="#{ingresoController.selected.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_observaciones}"/>
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_id}"/>
                         <h:outputText value="#{ingresoController.selected.id}" title="#{bundleIngrso.ViewIngresoTitle_id}"/>
+                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_tipoDeIngreso}"/>
+                        <h:outputText value="#{ingresoController.selected.tipo.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_tipoDeIngreso}"/>
+
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_fecha}"/>
                         <h:outputText value="#{ingresoController.selected.fecha}" title="Fecha Sistema">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
@@ -25,6 +24,10 @@
                         <h:outputText value="#{ingresoController.selected.fechaOperacion}" title="#{bundleIngrso.ViewIngresoTitle_fecha}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                         </h:outputText>
+                        <h:outputText value="Importe"/>
+                        <h:outputText value="#{ingresoController.selected.importe}"/>
+                        <h:outputText value="#{bundleIngrso.ViewIngresoLabel_observaciones}"/>
+                        <h:outputText value="#{ingresoController.selected.descripcion}" title="#{bundleIngrso.ViewIngresoTitle_observaciones}"/>
                         <h:outputText value="#{bundleIngrso.ViewIngresoLabel_usuario}"/>
                         <h:outputText value="#{ingresoController.selected.usuario}" title="#{bundleIngrso.ViewIngresoTitle_usuario}"/>
                     </p:panelGrid>

@@ -12,48 +12,48 @@
             <h:form id="PagoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{pagoController.selected.id}" title="#{bundlePago.EditPagoTitle_id}" />
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" >
-                            <f:selectItem itemLabel="#{bundlePago.SelectOneMessage}"/>
-                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
-                                           var="medicoItem"
-                                           itemValue="#{medicoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_mes}" for="mes" />
-                        <p:inputText id="mes" value="#{pagoController.selected.mes}" title="#{bundlePago.EditPagoTitle_mes}" />
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_anio}" for="anio" />
-                        <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.EditPagoTitle_anio}" />
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_nroRecibo}" for="nroRecibo" />
-                        <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.EditPagoTitle_nroRecibo}" />
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_fechaPago}" for="fechaPago" />
-                        <p:calendar id="fechaPago" pattern="MM/dd/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_importe}" for="importe" />
-                        <p:inputText id="importe" value="#{pagoController.selected.importe}" title="#{bundlePago.EditPagoTitle_importe}" />
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_concepto}" for="concepto" />
-                        <p:selectOneMenu id="concepto" value="#{pagoController.selected.concepto}" >
-                            <f:selectItem itemLabel="#{bundlePago.SelectOneMessage}"/>
-                            <f:selectItems value="#{conceptoController.itemsAvailableSelectOne}"
-                                           var="conceptoItem"
-                                           itemValue="#{conceptoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_anulado}" for="anulado" />
-                        <p:selectBooleanCheckbox id="anulado" value="#{pagoController.selected.anulado}" />
-                        <p:outputLabel value="#{bundlePago.EditPagoLabel_observaciones}" for="observaciones" />
-                        <p:inputText id="observaciones" value="#{pagoController.selected.observaciones}" title="#{bundlePago.EditPagoTitle_observaciones}" />
-                        <p:outputLabel value="Cuenta:"/>
-                        <p:selectOneMenu id="cuenta" value="#{pagoController.selected.cuenta}" >
-                            <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
-                                           var="cuentaItem"
-                                           itemValue="#{cuentaItem}"/>
-                        </p:selectOneMenu>                        
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{pagoController.update}" value="#{bundlePago.Save}" update="display,:PagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PagoEditDialog');"/>
-                    <p:commandButton value="#{bundlePago.Cancel}" onclick="PagoEditDialog.hide()"/>
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
+                        <p:outputLabel value="#{bundlePago.CreatePagoLabel_medico}" for="medico" />
+                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" >
+                            <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicoController.items}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
+                    <p:selectOneMenu id="cuenta" value="#{pagoController.selected.mes}" >
+                        <f:selectItems value="#{pagoController.meses}"
+                                       var="cuentaItem"
+                                       itemValue="#{cuentaItem}"/>
+                    </p:selectOneMenu>  
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_anio}" for="anio" />
+                    <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.EditPagoTitle_anio}" />
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_nroRecibo}" for="nroRecibo" />
+                    <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.EditPagoTitle_nroRecibo}" />
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_fechaPago}" for="fechaPago" />
+                    <p:calendar id="fechaPago" pattern="MM/dd/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_importe}" for="importe" />
+                    <p:inputText id="importe" value="#{pagoController.selected.importe}" title="#{bundlePago.EditPagoTitle_importe}" />
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_concepto}" for="concepto" />
+                    <p:selectOneMenu id="concepto" value="#{pagoController.selected.concepto}" >
+                        <f:selectItem itemLabel="#{bundlePago.SelectOneMessage}"/>
+                        <f:selectItems value="#{conceptoController.itemsAvailableSelectOne}"
+                                       var="conceptoItem"
+                                       itemValue="#{conceptoItem}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_anulado}" for="anulado" />
+                    <p:selectBooleanCheckbox id="anulado" value="#{pagoController.selected.anulado}" />
+                    <p:outputLabel value="#{bundlePago.EditPagoLabel_observaciones}" for="observaciones" />
+                    <p:inputText id="observaciones" value="#{pagoController.selected.observaciones}" title="#{bundlePago.EditPagoTitle_observaciones}" />
+                    <p:outputLabel value="Cuenta:"/>
+                    <p:selectOneMenu id="cuenta" value="#{pagoController.selected.cuenta}" >
+                        <f:selectItems value="#{cuentaController.itemsAvailableSelectOne}"
+                                       var="cuentaItem"
+                                       itemValue="#{cuentaItem}"/>
+                    </p:selectOneMenu>                        
+                </p:panelGrid>
+                <p:commandButton actionListener="#{pagoController.update}" value="#{bundlePago.Save}" update="display,:PagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PagoEditDialog');"/>
+                <p:commandButton value="#{bundlePago.Cancel}" onclick="PagoEditDialog.hide()"/>
+            </h:panelGroup>
+        </h:form>
+    </p:dialog>
 
-    </ui:composition>
+</ui:composition>
 </html>

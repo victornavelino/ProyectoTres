@@ -1,11 +1,14 @@
 package ManagedBeans;
 
+import Entidades.Caja.Ingreso;
+import Entidades.Pago.Mes;
 import Entidades.Pago.Pago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.PagoFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("pagoController")
 @SessionScoped
@@ -25,6 +29,12 @@ public class PagoController implements Serializable {
 
     @EJB
     private Facades.PagoFacade ejbFacade;
+    @EJB
+    private Facades.IngresoFacade cajaFacade;
+    @EJB
+    private Facades.TipoDeIngresoFacade ingresoFacade;
+    @Inject
+    private UsuarioLogerBean usuarioLogerBean;
     private List<Pago> items = null;
     private Pago selected;
 
@@ -58,6 +68,16 @@ public class PagoController implements Serializable {
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
         if (!JsfUtil.isValidationFailed()) {
+            Ingreso caja = new Ingreso();
+            caja.setFechaOperacion(new Date());
+            caja.setFecha(selected.getFechaPago());
+            caja.setDescripcion("Pago, "
+                    + selected.getMedico().getPersona()
+                    + ", Cuota " + selected.getMes() + " " + selected.getAnio());
+            caja.setTipo(ingresoFacade.find(1L));
+            caja.setImporte(selected.getImporte());
+            caja.setUsuario(usuarioLogerBean.getUsuario());
+            cajaFacade.create(caja);
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
@@ -72,6 +92,10 @@ public class PagoController implements Serializable {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+
+    public Mes[] getMeses() {
+        return Mes.values();
     }
 
     public List<Pago> getItems() {

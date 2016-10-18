@@ -6,6 +6,7 @@
 package RN;
 
 import Entidades.Caja.MovimientoCaja;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -50,5 +51,15 @@ public class MovimientoCajaRN implements MovimientoCajaRNLocal {
         Query q = em.createQuery("SELECT c FROM MovimientoCaja c WHERE c.fecha >= :fechaInicio");
         q.setParameter("fechaInicio", fechaInicio);
         return q.getResultList();
+    }
+    
+    @Override
+    public List<MovimientoCaja> getAbiertos() {
+        Query q = em.createNamedQuery("MovimientoCaja.getAbiertos");
+        try {
+            return q.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 }

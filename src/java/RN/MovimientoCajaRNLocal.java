@@ -26,4 +26,6 @@ public interface MovimientoCajaRNLocal {
     public List<MovimientoCaja> findAll() throws Exception;
 
     public List<MovimientoCaja> getMovimientosdesdeFecha(Date fechaInicio);
+
+    public List<MovimientoCaja> getAbiertos();
 }

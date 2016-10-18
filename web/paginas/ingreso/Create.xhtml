@@ -15,7 +15,7 @@
 
                         <p:panelGrid columns="2" rendered="#{ingresoController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
-                            <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipoDeIngreso}" >
+                            <p:selectOneMenu id="tipoDeIngreso" value="#{ingresoController.selected.tipo}" >
                                 <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
                                                var="tipoDeIngresoItem"
                                                itemValue="#{tipoDeIngresoItem}"/>

@@ -1,9 +1,12 @@
 package ManagedBeans;
 
+import Entidades.Caja.Ingreso;
+import Entidades.Caja.MovimientoCaja;
 import Entidades.Pago.CuotaPlanPago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.CuotaPlanPagoFacade;
+import Facades.MovimientoCajaFacade;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +22,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 @Named("cuotaPlanPagoController")
 @SessionScoped
@@ -26,6 +31,12 @@ public class CuotaPlanPagoController implements Serializable {
 
     @EJB
     private Facades.CuotaPlanPagoFacade ejbFacade;
+    @EJB
+    private Facades.IngresoFacade cajaFacade;
+    @EJB
+    private Facades.TipoDeIngresoFacade ingresoFacade;
+    @Inject
+    private UsuarioLogerBean usuarioLogerBean;
     private List<CuotaPlanPago> items = null;
     private CuotaPlanPago selected;
 
@@ -71,6 +82,16 @@ public class CuotaPlanPagoController implements Serializable {
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleCuotaPlan").getString("CuotaPlanPagoCreated"));
         if (!JsfUtil.isValidationFailed()) {
+            Ingreso caja = new Ingreso();
+            caja.setFechaOperacion(new Date());
+            caja.setFecha(selected.getFechaPago());
+            caja.setDescripcion("Plan de Pago, "
+                    + selected.getPlanPago().getMedico().getPersona()
+                    + ", Cuota " + selected.getCuota());
+            caja.setTipo(ingresoFacade.find(2L));
+            caja.setImporte(selected.getImporte());
+            caja.setUsuario(usuarioLogerBean.getUsuario());
+            cajaFacade.create(caja);
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }

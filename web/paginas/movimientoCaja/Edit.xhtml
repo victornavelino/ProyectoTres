@@ -12,21 +12,19 @@
             <h:form id="MovimientoCajaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}">
-                        <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{movimientoCajaController.selected.descripcion}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_descripcion}" />
-                        <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{movimientoCajaController.selected.id}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_id}" />
+                        <p:outputLabel value="Tipo" />
+                        <p:selectOneMenu id="tipoDeIngreso" value="#{movimientoCajaController.selected.tipo}" required="true" >
+                            <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}" noSelectionOption="true"/>
+                            <f:selectItems value="#{movimientoCajaController.itemsAvailableSelectOne}"
+                                           var="tipoItem"
+                                           itemValue="#{tipoItem}"/>
+                        </p:selectOneMenu>    
                         <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_fecha}" for="fecha" />
-                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{movimientoCajaController.selected.fecha}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_fecha}"  showOn="button"/>
+                        <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_fecha}"  showOn="button"/>
                         <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_importe}" for="importe" />
                         <p:inputText id="importe" value="#{movimientoCajaController.selected.importe}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_importe}" required="true" requiredMessage="#{bundleMovimientoCaja.EditMovimientoCajaRequiredMessage_importe}"/>
-                        <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_usuario}" for="usuario" />
-                        <p:selectOneMenu id="usuario" value="#{movimientoCajaController.selected.usuario}" >
-                            <f:selectItem itemLabel="#{bundleMovimientoCaja.SelectOneMessage}"/>
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="usuarioItem"
-                                           itemValue="#{usuarioItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{movimientoCajaController.selected.descripcion}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_descripcion}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{movimientoCajaController.update}" value="#{bundleMovimientoCaja.Save}" update="display,:MovimientoCajaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MovimientoCajaEditDialog');"/>
                     <p:commandButton value="#{bundleMovimientoCaja.Cancel}" onclick="MovimientoCajaEditDialog.hide()"/>
