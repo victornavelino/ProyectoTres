@@ -23,6 +23,8 @@
                             </p:selectOneMenu>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_fecha}" for="fecha" />
                             <p:calendar id="fecha" pattern="dd/MM/yyyy HH:mm" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleEgreso.EditEgresoTitle_fecha}"  showOn="button" required="true"/>
+                            <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_nroComprobante}" for="nroComprobante" />
+                            <p:inputText id="nroComprobante" value="#{movimientoCajaController.selected.nroComprobante}" title="#{bundleEgreso.CreateEgresoTitle_nroComprobante}" />
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_importe}" for="importe" />
                             <p:inputText id="importe" value="#{movimientoCajaController.selected.importe}" title="#{bundleEgreso.CreateEgresoTitle_importe}" required="true" requiredMessage="#{bundleEgreso.CreateEgresoRequiredMessage_importe}"/>
                             <p:outputLabel value="#{bundleEgreso.CreateEgresoLabel_descripcion}" for="descripcion" />

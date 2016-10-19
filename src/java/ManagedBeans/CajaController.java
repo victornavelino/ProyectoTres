@@ -272,6 +272,7 @@ public class CajaController implements Serializable {
             //calculamos el saldo
             System.out.println("entro calcular sadlo");
             saldoFinalCaja = selected.getCajaInicial().add(totalIngresosCaja).subtract(totalEgresosCaja);
+            selected.setCajaFinal(saldoFinalCaja);
             RequestContext.getCurrentInstance().update(":frmPri:CajaEditForm");
             RequestContext.getCurrentInstance().execute("PF('CajaEditDialog').show();");
         } else {

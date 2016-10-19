@@ -52,6 +52,16 @@ public class MovimientoCaja implements Serializable {
     @OneToOne
     private Usuario usuario;
     private boolean cerrado;
+    
+    private int nroComprobante;
+
+    public int getNroComprobante() {
+        return nroComprobante;
+    }
+
+    public void setNroComprobante(int nroComprobante) {
+        this.nroComprobante = nroComprobante;
+    }
 
     public String getDescripcion() {
         return descripcion;

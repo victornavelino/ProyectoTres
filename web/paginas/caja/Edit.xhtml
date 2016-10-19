@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{cajaController.selected != null}" styleClass="noBorders">
 
                         <p:outputLabel value="Saldo de Caja: " for="cajaInicial" />
-                        <p:inputText id="cajaInicial" value="#{cajaController.saldoFinalCaja}" title="#{bundleCaja.EditCajaTitle_cajaInicial}" />
+                        <p:inputText id="cajaInicial" value="#{cajaController.saldoFinalCaja}" title="#{bundleCaja.EditCajaTitle_cajaInicial}" disabled="true"/>
                         <p:outputLabel value="Saldo Real: " for="cajaFinal" />
                         <p:inputText id="cajaFinal" value="#{cajaController.selected.cajaFinal}" title="#{bundleCaja.EditCajaTitle_cajaFinal}" required="true" requiredMessage="El Valor es Requerido"/>
                     </p:panelGrid>

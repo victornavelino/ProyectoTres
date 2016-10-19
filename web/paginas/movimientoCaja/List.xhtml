@@ -63,6 +63,12 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_nroComprobante}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nroComprobante}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_importe}"/>
                         </f:facet>
                         <h:outputText value="#{item.importe}"/>
