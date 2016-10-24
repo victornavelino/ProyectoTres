@@ -31,7 +31,10 @@
 
                     <p:ajax event="rowSelect"   update="createButtonI createButtonE viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButtonI createButtonE viewButton editButton deleteButton"/>
-
+                    <f:facet name="header">
+                        <h:outputText value="Saldo Inicial:" /><h:outputText value="#{cajaController.selected.cajaInicial}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText><br /></f:facet>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_id}"/>
