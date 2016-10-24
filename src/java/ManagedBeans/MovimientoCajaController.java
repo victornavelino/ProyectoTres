@@ -8,6 +8,7 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MovimientoCajaFacade;
 import Facades.TipoDeEgresoFacade;
 import Facades.TipoDeIngresoFacade;
+import RN.CajaRNLocal;
 import RN.MovimientoCajaRNLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -36,7 +37,7 @@ public class MovimientoCajaController implements Serializable {
     @EJB
     private Facades.MovimientoCajaFacade ejbFacade;
     @EJB
-    private MovimientoCajaRNLocal cajaRNLocal;
+    private CajaRNLocal cajaRNLocal;
     private List<MovimientoCaja> items = null;
     private MovimientoCaja selected;
     @EJB
@@ -62,12 +63,20 @@ public class MovimientoCajaController implements Serializable {
         this.ejbFacade = ejbFacade;
     }
 
-    public MovimientoCajaRNLocal getCajaRNLocal() {
+    public CajaRNLocal getCajaRNLocal() {
         return cajaRNLocal;
     }
 
-    public void setCajaRNLocal(MovimientoCajaRNLocal cajaRNLocal) {
+    public void setCajaRNLocal(CajaRNLocal cajaRNLocal) {
         this.cajaRNLocal = cajaRNLocal;
+    }
+
+    public BigDecimal getCalculo() {
+        return calculo;
+    }
+
+    public void setCalculo(BigDecimal calculo) {
+        this.calculo = calculo;
     }
 
     public TipoDeEgresoFacade getTipoDeEgresoFacade() {
@@ -152,7 +161,10 @@ public class MovimientoCajaController implements Serializable {
 
     public List<MovimientoCaja> getItems() {
         if (items == null) {
-            items = cajaRNLocal.getAbiertos();
+            try {
+                items = cajaRNLocal.getCajaAbierta().getMovimientosCaja();
+            } catch (Exception e) {
+            }
         }
         return items;
     }
@@ -160,7 +172,7 @@ public class MovimientoCajaController implements Serializable {
     public void calculateTotal(Object valueOfThisSorting) {
         calculo = BigDecimal.ZERO;
         try {
-            
+
             for (MovimientoCaja i : items) {
                 switch (valueOfThisSorting.getClass().getSimpleName()) {
                     case "Date":
@@ -200,6 +212,7 @@ public class MovimientoCajaController implements Serializable {
 
     public BigDecimal getTotalGeneral() {
         calculo = BigDecimal.ZERO;
+        calculo = cajaRNLocal.getCajaAbierta().getCajaInicial();
 
         for (MovimientoCaja i : items) {
             switch (i.getClase()) {
