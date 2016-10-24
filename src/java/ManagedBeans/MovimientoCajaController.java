@@ -45,9 +45,19 @@ public class MovimientoCajaController implements Serializable {
     private Facades.TipoDeIngresoFacade tipoDeIngresoFacade;
     @Inject
     private UsuarioLogerBean usuarioLogerBean;
+    @Inject
+    private CajaController cajaController;
     BigDecimal calculo;
 
     public MovimientoCajaController() {
+    }
+
+    public CajaController getCajaController() {
+        return cajaController;
+    }
+
+    public void setCajaController(CajaController cajaController) {
+        this.cajaController = cajaController;
     }
 
     public MovimientoCaja getSelected() {
@@ -133,6 +143,8 @@ public class MovimientoCajaController implements Serializable {
         selected.setUsuario(usuarioLogerBean.getUsuario());
         selected.setFecha(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
+        cajaController.getSelected().getMovimientosCaja().add(selected); 
+        cajaController.updateMovimientos();
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -160,7 +172,7 @@ public class MovimientoCajaController implements Serializable {
     public void calculateTotal(Object valueOfThisSorting) {
         calculo = BigDecimal.ZERO;
         try {
-            
+
             for (MovimientoCaja i : items) {
                 switch (valueOfThisSorting.getClass().getSimpleName()) {
                     case "Date":

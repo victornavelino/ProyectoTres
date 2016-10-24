@@ -61,7 +61,7 @@ public class CajaController implements Serializable {
     public void setCajaArqueo(BigDecimal cajaArqueo) {
         this.cajaArqueo = cajaArqueo;
     }
-    
+
     public MovimientoCajaRNLocal getMovimientoCajaRNLocal() {
         return movimientoCajaRNLocal;
     }
@@ -162,10 +162,15 @@ public class CajaController implements Serializable {
         }
     }
 
-    public void update() {
+    public void updateMovimientos() {
+        getFacade().edit(selected);
+        //persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCaja").getString("CajaUpdated"));
+    }
+
+    public void cerrar() {
         selected.setFechaFin(new Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCaja").getString("CajaUpdated"));
-        selected=null;
+        selected = null;
         isCajaAbierta = false;
     }
 
@@ -282,15 +287,15 @@ public class CajaController implements Serializable {
 
     public void cerrarCaja() {
         if (selected != null) {
-            System.out.println("entro cerrar caja: "+selected.getCajaFinal());
-            
+            System.out.println("entro cerrar caja: " + selected.getCajaFinal());
+
             selected.setFechaFin(new Date());
             //selected.setCajaFinal(cajaArqueo);
-            update();
+            cerrar();
             isCajaAbierta = false;
             selected = null;
-             System.out.println("pasoooo cerrar caja");
-             RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').hide();");
+            System.out.println("pasoooo cerrar caja");
+            RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').hide();");
         } else {
 
             System.out.println("entro cerrar caja else");
