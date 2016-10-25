@@ -6,8 +6,10 @@
 package RN;
 
 import Entidades.Caja.Caja;
+import Facades.CajaFacade;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +24,8 @@ public class CajaRN implements CajaRNLocal {
 
     @PersistenceContext(unitName = "ProyectoColegioPU")
     private EntityManager em;
+    @EJB
+    private CajaFacade cajaFacade;
 
     @Override
     public void create(Caja caja) {
@@ -30,7 +34,7 @@ public class CajaRN implements CajaRNLocal {
 
     @Override
     public void edit(Caja caja) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       cajaFacade.edit(caja);
     }
 
     @Override

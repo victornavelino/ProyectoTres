@@ -1,5 +1,6 @@
 package ManagedBeans;
 
+import Entidades.Caja.Caja;
 import Entidades.Caja.Egreso;
 import Entidades.Caja.Ingreso;
 import Entidades.Caja.MovimientoCaja;
@@ -151,12 +152,15 @@ public class MovimientoCajaController implements Serializable {
     public void create() {
         selected.setUsuario(usuarioLogerBean.getUsuario());
         selected.setFecha(new Date());
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
-        cajaController.getSelected().getMovimientosCaja().add(selected); 
-        cajaController.updateMovimientos();
+        getFacade().create(selected);
+        //persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
+        Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
+        cajaAbierta.getMovimientosCaja().add(selected);
+        cajaRNLocal.edit(cajaAbierta);
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        JsfUtil.addSuccessMessage("movimiento de Caja Creado!");
     }
 
     public void update() {
@@ -164,6 +168,10 @@ public class MovimientoCajaController implements Serializable {
     }
 
     public void destroy() {
+        
+        Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
+        cajaAbierta.getMovimientosCaja().remove(selected);
+        cajaRNLocal.edit(cajaAbierta);
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
