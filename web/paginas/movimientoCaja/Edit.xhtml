@@ -8,10 +8,10 @@
 
     <ui:composition>
 
-        <p:dialog id="MovimientoCajaEditDlg" widgetVar="MovimientoCajaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMovimientoCaja.EditMovimientoCajaTitle}">
+        <p:dialog id="MovimientoCajaEditDlg" widgetVar="MovimientoCajaEditDialog" modal="true" resizable="false" width="750px" position="top" appendTo="@(body)" header="#{bundleMovimientoCaja.EditMovimientoCajaTitle}">
             <h:form id="MovimientoCajaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}" styleClass="noBorders">
                         <p:outputLabel value="Tipo" />
                         <p:selectOneMenu id="tipoDeIngreso" value="#{movimientoCajaController.selected.tipo}" required="true" >
                             <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}" noSelectionOption="true"/>
@@ -21,6 +21,8 @@
                         </p:selectOneMenu>    
                         <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_fecha}" for="fecha" />
                         <p:calendar id="fecha" pattern="MM/dd/yyyy HH:mm:ss" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_fecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_nroComprobante}" for="nroComprobante" />
+                        <p:inputText id="nroComprobante" value="#{movimientoCajaController.selected.nroComprobante}" title="#{bundleIngrso.CreateIngresoTitle_nroComprobante}" />
                         <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_importe}" for="importe" />
                         <p:inputText id="importe" value="#{movimientoCajaController.selected.importe}" title="#{bundleMovimientoCaja.EditMovimientoCajaTitle_importe}" required="true" requiredMessage="#{bundleMovimientoCaja.EditMovimientoCajaRequiredMessage_importe}"/>
                         <p:outputLabel value="#{bundleMovimientoCaja.EditMovimientoCajaLabel_descripcion}" for="descripcion" />

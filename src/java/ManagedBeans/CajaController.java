@@ -261,7 +261,7 @@ public class CajaController implements Serializable {
         if (isCajaAbierta) {
 
             selected = cajaRNLocal.getCajaAbierta();
-            selected.setMovimientosCaja(movimientoCajaRNLocal.getMovimientosdesdeFecha(selected.getFechaInicio()));
+            //selected.setMovimientosCaja(movimientoCajaRNLocal.getMovimientosdesdeFecha(selected.getFechaInicio()));
             for (MovimientoCaja movimientoCaja : selected.getMovimientosCaja()) {
 
                 switch (movimientoCaja.getClass().getSimpleName()) {
