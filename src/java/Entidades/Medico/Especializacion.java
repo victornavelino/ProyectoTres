@@ -8,12 +8,15 @@ package Entidades.Medico;
 import Entidades.Base.Base;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -51,7 +54,7 @@ public class Especializacion extends Base implements Serializable {
     @OneToOne
     private Especialidad especialidad;
     private int matriculaEspecialidad;
-    @OneToOne
+    @ManyToOne
     private Medico medico;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaMatriculacion;
@@ -65,6 +68,16 @@ public class Especializacion extends Base implements Serializable {
     private Date fechaRevision;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaVencimientoRevision;
+    @OneToMany(mappedBy = "especializacion")
+    private List<Recertificacion> recertificaciones;
+
+    public List<Recertificacion> getRecertificaciones() {
+        return recertificaciones;
+    }
+
+    public void setRecertificaciones(List<Recertificacion> recertificaciones) {
+        this.recertificaciones = recertificaciones;
+    }
 
     public Long getId() {
         return id;

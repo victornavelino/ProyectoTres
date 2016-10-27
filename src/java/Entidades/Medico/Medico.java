@@ -6,6 +6,8 @@
 package Entidades.Medico;
 
 import Entidades.Base.Archivo;
+import Entidades.Pago.Pago;
+import Entidades.Pago.PlanPago;
 import Entidades.Persona.Persona;
 import java.io.Serializable;
 import java.util.Date;
@@ -65,6 +67,10 @@ public class Medico implements Serializable {
     private Integer folio;
     @OneToOne(cascade = CascadeType.ALL)
     private Archivo archivo;
+    @OneToMany(mappedBy = "medico")
+    private List<PlanPago> planPagos;
+    @OneToMany(mappedBy = "medico")
+    private List<Pago> pagos;
 
     public Archivo getArchivo() {
         return archivo;
@@ -72,6 +78,22 @@ public class Medico implements Serializable {
 
     public void setArchivo(Archivo archivo) {
         this.archivo = archivo;
+    }
+
+    public List<PlanPago> getPlanPagos() {
+        return planPagos;
+    }
+
+    public void setPlanPagos(List<PlanPago> planPagos) {
+        this.planPagos = planPagos;
+    }
+
+    public List<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<Pago> pagos) {
+        this.pagos = pagos;
     }
 
     public Long getId() {

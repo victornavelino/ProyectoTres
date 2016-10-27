@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,7 +38,7 @@ public class PlanPago implements Serializable {
     private BigDecimal importe;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaVencimiento;
-    @OneToOne
+    @ManyToOne
     private Medico medico;
     @OneToOne
     private TipoPlanPago tipoPlanPago;

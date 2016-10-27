@@ -147,6 +147,276 @@
 
                             </p:panelGrid>
                         </p:panel>
+                        <p:panel header="Especializaciones">
+
+                            <p:dataTable id="especializacioneslist" value="#{medicoController.selected.especializaciones}" var="item"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+
+                                         >
+
+
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_matriculaEspecialidad}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.matriculaEspecialidad}"/></p:column>
+                                <p:column>
+
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_especialidad}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.especialidad.descripcion}"/></p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_fechaMatriculacion}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaMatriculacion}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_fechaVencimiento}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaVencimiento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_libro}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.libro}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_folio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.folio}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_unidadFormadora}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.unidadFormadora}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_fechaRevision}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaRevision}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListEspecializacionTitle_fechaVencimientoRevision}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaVencimientoRevision}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+
+
+
+                            </p:dataTable>
+
+                        </p:panel>
+                        <p:panel header="Recertificaciones">
+                            <ui:repeat value="#{medicoController.selected.especializaciones}" var="item">
+                                <p:dataTable id="recertificacioneslist" value="#{item.recertificaciones}" var="recer"
+                                             paginator="true"
+                                             rowKey="#{recer.id}"
+                                             sortBy="#{recer.id}"
+                                             sortOrder="DESCENDING"
+                                             rows="10"
+                                             >
+
+
+                                    <f:facet name="header">
+                                        <h:outputText value="#{item.especialidad.descripcion}"/>
+                                    </f:facet>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEspecializacionTitle_matriculaEspecialidad}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.especializacion.matriculaEspecialidad}"/>
+                                    </p:column>                                   
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="FechaRecertificacion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.fechaRecertificacion}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NroActa"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.nroActa}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NroResolucion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.nroResolucion}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Libro"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.libro}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Folio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.folio}"/>
+                                    </p:column>                   
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Observaciones"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.observaciones}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="FechaVencimiento"/>
+                                        </f:facet>
+                                        <h:outputText value="#{recer.fechaVencimiento}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+
+
+
+                                </p:dataTable></ui:repeat>
+
+                        </p:panel>
+
+
+                        <p:panel header="Pagos">
+                            <p:dataTable id="pagos" value="#{medicoController.selected.pagos}" var="item"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         filterEvent="enter"
+                                         sortBy="#{item.id}"
+                                         sortOrder="DESCENDING"
+                                         >
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_mes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mes}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_anio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.anio}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_nroRecibo}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nroRecibo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha Pago" />                  
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaPago}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>    
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_importe}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.importe}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_concepto}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.concepto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_anulado}"/>
+                                    </f:facet>
+                                    <p:selectBooleanCheckbox value="#{item.anulado}" disabled="true"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_observaciones}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.observaciones}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cuenta"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cuenta.descripcion}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+                        <p:panel header="Planes de Pago">
+                            <ui:repeat value="#{medicoController.selected.planPagos}" var="plan" >
+                                <p:dataTable id="planes" value="#{plan.cuotas}" var="item"
+                                             paginator="true"
+                                             rowKey="#{item.id}"
+                                             rows="10"
+                                             sortBy="#{item.cuota}"
+
+                                             rowStyleClass="#{item.fechaPago == null ?  item.fechaVencimiento le cuotaPlanPagoController.now ? 'old' : null : null}"
+                                             >                                            
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_importe}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.importe}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaPago}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaPago}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_fechaVencimiento}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaVencimiento}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleCuotaPlan.ListCuotaPlanPagoTitle_cuota}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.cuota}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Plan"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.planPago.id}"/>
+                                    </p:column>
+                                </p:dataTable></ui:repeat>
+                        </p:panel>
                     </p:scrollPanel>
                     <p:commandButton value="#{bundle.Close}" onclick="MedicoViewDialog.hide()"/>
                 </h:panelGroup>
