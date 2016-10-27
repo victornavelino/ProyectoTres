@@ -52,7 +52,7 @@ public class MovimientoCaja implements Serializable {
     @OneToOne
     private Usuario usuario;
     private boolean cerrado;
-    
+
     private int nroComprobante;
 
     public int getNroComprobante() {
@@ -121,6 +121,20 @@ public class MovimientoCaja implements Serializable {
 
     public String getClase() {
         return this.getClass().getSimpleName();
+    }
+
+    public String getTipoMovimiento() {
+        try {
+            switch (getClase()) {
+                case "Ingreso":
+                    return ((Ingreso) this).getTipo().getDescripcion();
+                case "Egreso":
+                    return ((Egreso) this).getTipo().getDescripcion();
+            }
+        } catch (Exception e) {
+            return "";
+        }
+        return "";
     }
 
     @Override

@@ -73,7 +73,7 @@ public class PagoController implements Serializable {
         caja.setDescripcion("Pago, "
                 + selected.getMedico().getPersona()
                 + ", Cuota " + selected.getMes() + " " + selected.getAnio());
-        caja.setTipo(ingresoFacade.find(1L));
+        caja.setTipo(ingresoFacade.find(5L));
         caja.setImporte(selected.getImporte());
         caja.setUsuario(usuarioLogerBean.getUsuario());
         cajaFacade.create(caja);

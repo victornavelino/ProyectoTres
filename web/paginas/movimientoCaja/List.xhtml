@@ -23,39 +23,19 @@
                              selectionMode="single" selection="#{movimientoCajaController.selected}"
                              paginator="true"
                              sortBy="#{item.fechaOperacion}"
-                             sortOrder="DESCENDING"
+                             sortOrder="ASCENDING"
                              rowKey="#{item.id}"
                              rows="10"
+                             binding="#{movimientoCajaController.dataTable}"
                              rowsPerPageTemplate="10,20,30,40,50"
                              >
 
-                    <p:ajax event="rowSelect"   update="createButtonI createButtonE viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButtonI createButtonE viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButtonI createButtonE viewButton editButton deleteButton, :MovimientoCajaListForm:menuContextual"/>
+                    <p:ajax event="rowUnselect" update="createButtonI createButtonE viewButton editButton deleteButton, :MovimientoCajaListForm:menuContextual"/>
                     <f:facet name="header">
                         <h:outputText value="Saldo Inicial:" /><h:outputText value="#{cajaController.selected.cajaInicial}">
                             <f:convertNumber type="currency" currencySymbol="$" />
                         </h:outputText><br /></f:facet>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_id}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_descripcion}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.descripcion}"/>
-                    </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Fecha Sistema"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fecha}">
-                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                        </h:outputText>
-                    </p:column>
                     <p:column sortBy="#{item.fechaOperacion}">
                         <f:facet name="header">
                             <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_fecha}"/>
@@ -72,21 +52,51 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_importe}"/>
+                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_descripcion}"/>
                         </f:facet>
-                        <h:outputText value="#{item.importe}"/>
+                        <h:outputText value="#{item.descripcion}"/>
                     </p:column>
+
+
+
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundleMovimientoCaja.ListMovimientoCajaTitle_usuario}"/>
+                            <h:outputText value="Ingreso"/>
                         </f:facet>
-                        <h:outputText value="#{item.usuario.usuario}"/>
+                        <h:outputText value="#{item.importe}" rendered="#{item.clase=='Ingreso'}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText>
+
                     </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Salida"/>
+                        </f:facet>
+                        <h:outputText value="#{item.importe}" rendered="#{item.clase=='Egreso'}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText>
+
+                    </p:column>                   
                     <p:column sortBy="#{item.clase}">
                         <f:facet name="header">
                             <h:outputText value="Tipo"/>
                         </f:facet>
                         <h:outputText value="#{item.clase}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoMovimiento}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Saldo"/>
+                        </f:facet>
+                        <h:outputText value="#{movimientoCajaController.getCalculoParcial(item)}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText>
                     </p:column>
                     <f:facet name="footer">
                         <h:outputText value="Total General:" /><h:outputText value="#{movimientoCajaController.totalGeneral}">
@@ -129,6 +139,13 @@
                     </p:summaryRow>
 
                 </p:dataTable>
+                <p:contextMenu id="menuContextual" for="datalist">
+                    <p:menuitem  icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.CreateI}" actionListener="#{movimientoCajaController.prepareCreateI}" update=":IngresoCreateForm" oncomplete="PF('IngresoCreateDialog').show()"/>
+                    <p:menuitem  icon="ui-icon-plus"    disabled="#{!cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.CreateE}" actionListener="#{movimientoCajaController.prepareCreateE}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
+                    <p:menuitem   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                    <p:menuitem   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                    <p:menuitem  icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
+                </p:contextMenu>
             </p:panel>
         </h:form>
 

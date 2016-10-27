@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicoCarneDlg" widgetVar="MedicoCarneDialog" position="top" modal="true" height="500" resizable="true" appendTo="@(body)" header="Carné">
+            <h:form id="MedicoCarneForm">
+                <h:panelGroup id="display">
+                    <p:scrollPanel mode="native" id="scrollcarne">
+                        <div class="divTable" style="width: 650px; border: 1px solid #000;">
+                            <div class="divTableBody">
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        <div class="divTable" style="width: 325px; border: 1px solid #99ef88; text-align: center; background-color: #1d8409; border-radius: 15px;">
+                                            <img src="#{request.contextPath}/Imagenes/logocolegio.png" alt="" width="300px" align="center"/>
+                                           <!-- <h3><strong> COLEGIO DE MEDICOS DE CATAMARCA </strong></h3> -->
+                                            <h6>Hip&oacute;lito Yrigoyen N&deg; 1233</h6>
+                                            <h6>4700 - San Fernando del Valle de Catamarca.</h6>
+                                            <h6 style="background-color: #fff; color: #000;"><strong>RECONOCIDO POR LEY N&deg; 4652/91 </strong></h6>
+                                        </div>
+                                        <div class="divTable" style="width: 325px; border: none;">
+                                            <div class="divTableCell" style="width: 145px; border: none;">      <p:outputPanel id="panelFoto">
+                                                    <p:graphicImage id="giFoto" value="#{medicoController.image}"
+                                                                    width="145"
+                                                                    height="145"
+                                                                    cache="false"
+                                                                    rendered="#{medicoController.selected.archivo != null}"
+                                                                    />
+
+                                                </p:outputPanel>
+                                            </div>
+                                            <div class="divTableCell" style="width: 180px; border: none;">
+                                                <h3>CREDENCIAL PROFESIONAL</h3>
+                                                <p>&nbsp;</p>
+                                                <p>........................................</p>
+                                                <p>FIRMA del PRESIDENTE</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="divTableCell">
+                                        <div class="divTable" style="width: 325px; border: none;">
+                                            <p>Apellido: <strong>  <p:outputLabel id="itApellido" 
+                                                                                  value="#{medicoController.selected.persona.apellido}"
+                                                                                  title="Nombre"
+                                                                                  /> </strong></p>
+                                            <p>Nombres: <strong>  <p:outputLabel id="itNombre" 
+                                                                                 value="#{medicoController.selected.persona.nombre}"
+                                                                                 title="Nombre"
+                                                                                 /> </strong></p>
+                                            <p>DNI N&deg;: <strong><p:outputLabel id="numero" value="#{medicoController.selected.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
+                                                </strong></p>
+                                            <p>Mat. Prof. N&deg;: <strong>    
+                                                    <p:outputLabel id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.CreateMedicoTitle_matriculaProfesional}" />
+                                                </strong></p>                                            
+                                            <p>Libro: <strong>                     
+                                                    <p:outputLabel id="libro" value="#{medicoController.selected.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
+                                                </strong></p>
+                                            <p>Folio: <strong>                  
+                                                    <p:outputLabel id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
+                                                </strong></p>
+
+                                            <p>&nbsp;</p>
+                                            <p>Catamarca,  <p:outputLabel value="#{medicoController.date}" >    
+                                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                                </p:outputLabel></p>
+                                        </div>
+                                        <div class="divTable" style="width: 325px; border: none;">
+                                            <div class="divTableCell" style="width: 150px; border: none;">&nbsp;</div>
+                                            <div class="divTableCell" style="width: 150px; border: none;">
+                                                <p>....................................</p>
+                                                <p>Firma del Profesional</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- DivTable.com -->
+                    </p:scrollPanel>
+                    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                        <p:printer target="scrollcarne" />
+                    </p:commandButton>
+                    <p:commandButton value="#{bundle.Close}" onclick="MedicoCarneDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

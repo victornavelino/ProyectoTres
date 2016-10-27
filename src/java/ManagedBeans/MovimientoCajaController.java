@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -30,6 +31,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import org.joda.time.DateTimeComparator;
+import org.primefaces.component.datatable.DataTable;
 
 @Named("movimientoCajaController")
 @SessionScoped
@@ -50,8 +52,26 @@ public class MovimientoCajaController implements Serializable {
     @Inject
     private CajaController cajaController;
     BigDecimal calculo;
+    BigDecimal calculoParcial;
+    DataTable dataTable;
 
     public MovimientoCajaController() {
+    }
+
+    public BigDecimal getCalculoParcial() {
+        return calculoParcial;
+    }
+
+    public void setCalculoParcial(BigDecimal calculoParcial) {
+        this.calculoParcial = calculoParcial;
+    }
+
+    public DataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(DataTable dataTable) {
+        this.dataTable = dataTable;
     }
 
     public CajaController getCajaController() {
@@ -168,7 +188,7 @@ public class MovimientoCajaController implements Serializable {
     }
 
     public void destroy() {
-        
+
         Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
         cajaAbierta.getMovimientosCaja().remove(selected);
         cajaRNLocal.edit(cajaAbierta);
@@ -245,6 +265,22 @@ public class MovimientoCajaController implements Serializable {
             }
         }
         return calculo;
+    }
+
+    public BigDecimal getCalculoParcial(MovimientoCaja i) {
+        if (dataTable.getRowIndex() == 0) {
+            calculoParcial = cajaRNLocal.getCajaAbierta().getCajaInicial();
+        }
+        switch (i.getClase()) {
+            case "Ingreso":
+                calculoParcial = calculoParcial.add(i.getImporte());
+                break;
+            case "Egreso":
+                calculoParcial = calculoParcial.subtract(i.getImporte());
+                break;
+        }
+
+        return calculoParcial;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

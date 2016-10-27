@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -107,6 +108,10 @@ public class MedicoController implements Serializable {
 
     public void setListadoTelefonosBean(ListadoTelefonosBean listadoTelefonosBean) {
         this.listadoTelefonosBean = listadoTelefonosBean;
+    }
+
+    public Date getDate() {
+        return new Date();
     }
 
     public Medico getSelected() {

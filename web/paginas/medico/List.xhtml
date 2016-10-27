@@ -34,8 +34,8 @@
                              sortOrder="DESCENDING"
                              >
 
-                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton printButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton printButton"/>
                     <p:column sortBy="#{item.persona.apellido}" filterBy="#{item.persona.apellido}" width="200">
                         <f:facet name="header">
                             <h:outputText value="Apellido"/>
@@ -92,7 +92,7 @@
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{medicoController.prepareUpdate}" update=":MedicoEditForm" oncomplete="PF('MedicoEditDialog').show()" disabled="#{empty medicoController.selected}"/>
 
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicoController.destroy}" update=":growl,datalist" disabled="#{empty medicoController.selected}"/>
-                        <p:commandButton id="printButton" icon="ui-icon-trash"  value="Imprimir Carné"  update=":growl,datalist" disabled="#{empty medicoController.selected}"/>
+                        <p:commandButton id="printButton" icon="ui-icon-image"  value="Imprimir Carné"  update=":MedicoCarneForm" oncomplete="PF('MedicoCarneDialog').show()" disabled="#{empty medicoController.selected}"/>
 
                     </f:facet>
                 </p:dataTable>
@@ -102,6 +102,7 @@
         <ui:include src="Create.xhtml"/>
         <ui:include src="Edit.xhtml"/>
         <ui:include src="View.xhtml"/>
+        <ui:include src="Carne.xhtml"/>
         <ui:include src="TelefonosProfesionalDlg.xhtml"/>
         <ui:include src="MailProfesionalDlg.xhtml"/>
         <ui:include src="DomicilioDlgProfesional.xhtml"/>
