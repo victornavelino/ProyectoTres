@@ -93,7 +93,25 @@
 
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicoController.destroy}" update=":growl,datalist" disabled="#{empty medicoController.selected}"/>
                         <p:commandButton id="printButton" icon="ui-icon-image"  value="Imprimir Carné"  update=":MedicoCarneForm" oncomplete="PF('MedicoCarneDialog').show()" disabled="#{empty medicoController.selected}"/>
+  <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                            <p:dataExporter type="xls" target="datalist" fileName="#{bundle.ListMedicoTitle}"/>
+                        </h:commandLink>
 
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                            <p:dataExporter type="csv" target="datalist" fileName="#{bundle.ListMedicoTitle}"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                            <p:dataExporter type="xls" 
+                                            target="datalist" fileName="#{bundle.ListMedicoTitle}pagina"   pageOnly="true"/>
+                        </h:commandLink>
+                        <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                            <p:printer target="datalist" />
+                        </p:commandButton>
                     </f:facet>
                 </p:dataTable>
             </p:panel>

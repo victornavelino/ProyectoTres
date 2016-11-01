@@ -132,7 +132,25 @@
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePago.View}" update=":PagoViewForm" oncomplete="PF('PagoViewDialog').show()" disabled="#{empty pagoController.selected}"/>
                         <p:commandButton id="editButton"   rendered="#{cajaController.isCajaAbierta}" icon="ui-icon-pencil" value="#{bundlePago.Edit}" update=":PagoEditForm" oncomplete="PF('PagoEditDialog').show()" disabled="#{empty pagoController.selected}"/>
                         <p:commandButton id="deleteButton" rendered="#{cajaController.isCajaAbierta}" icon="ui-icon-trash"  value="#{bundlePago.Delete}" actionListener="#{pagoController.destroy}" update=":growl,datalist" disabled="#{empty pagoController.selected}"/>
-                    </f:facet>
+                   <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                            <p:dataExporter type="xls" target="datalist" fileName="#{bundlePago.ListPagoTitle}"/>
+                        </h:commandLink>
+
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                            <p:dataExporter type="csv" target="datalist" fileName="#{bundlePago.ListPagoTitle}"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                            <p:dataExporter type="xls" 
+                                            target="datalist" fileName="#{bundlePago.ListPagoTitle}pagina"   pageOnly="true"/>
+                        </h:commandLink>
+                        <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                            <p:printer target="datalist" />
+                        </p:commandButton> </f:facet>
                 </p:dataTable>
             </p:panel>
         </h:form>

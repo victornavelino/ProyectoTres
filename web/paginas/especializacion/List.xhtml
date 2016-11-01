@@ -141,7 +141,7 @@
 
                         <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
-                            <p:dataExporter type="xls" postProcessor="#{pagosDocenteBean.postProcessXLS}" 
+                            <p:dataExporter type="xls" 
                                             target="datalist" fileName="#{bundle.ListEspecializacionTitle}pagina"   pageOnly="true"/>
                         </h:commandLink>
                         <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">

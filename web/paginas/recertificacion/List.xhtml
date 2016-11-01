@@ -99,7 +99,25 @@
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RecertificacionViewForm" oncomplete="PF('RecertificacionViewDialog').show()" disabled="#{empty recertificacionController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RecertificacionEditForm" oncomplete="PF('RecertificacionEditDialog').show()" disabled="#{empty recertificacionController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{recertificacionController.destroy}" update=":growl,datalist" disabled="#{empty recertificacionController.selected}"/>
-                    </f:facet>
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                            <p:dataExporter type="xls" target="datalist" fileName="recertificaciones"/>
+                        </h:commandLink>
+
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                            <p:dataExporter type="csv" target="datalist" fileName="recertificaciones"/>
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                            <p:dataExporter type="xls" 
+                                            target="datalist" fileName="recertificacionespagina"   pageOnly="true"/>
+                        </h:commandLink>
+                        <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                            <p:printer target="datalist" />
+                        </p:commandButton>  </f:facet>
                 </p:dataTable>
             </p:panel>
         </h:form>
