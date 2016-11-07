@@ -99,6 +99,8 @@ public class UsuarioBean implements Serializable {
 
         switch (this.getiActionBtnSelect()) {
             case 0:
+                System.out.println("ususario"+usuario);
+                System.out.println("ENTRO CREATE USUARIO");
                 create();
                 break;
             case 1:
@@ -150,11 +152,6 @@ public class UsuarioBean implements Serializable {
 
 //validar si ingreso contrasenas y si son iguales
             this.validarContrasena(this.getUsuario().getPassword());
-            /*Creo un usuario de forma manual
-             usuario.setApellido("Aguirre");
-             usuario.setNombre("Franco");
-             usuario.setUsuario("vouilloz");
-             usuario.setPassword("123");*/
             usuarioFacade.create(this.getUsuario());
             sMensaje = "El Usuario fue guardado";
             severity = FacesMessage.SEVERITY_INFO;

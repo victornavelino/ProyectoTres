@@ -5,6 +5,7 @@
  */
 package Entidades.Caja;
 
+import Entidades.Base.Base;
 import Entidades.Usuario.Usuario;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -29,13 +30,12 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "caja_movimientocaja")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NamedQueries({
     @NamedQuery(name = "MovimientoCaja.getAbiertos",
             query = "SELECT e FROM MovimientoCaja e WHERE  e.cerrado = False "
             + " ORDER BY e.id DESC")
 })
-public class MovimientoCaja implements Serializable {
+public class MovimientoCaja extends Base implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

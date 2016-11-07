@@ -94,9 +94,9 @@ public class PagoController implements Serializable {
         }
     }
 
-    public Mes[] getMeses() {
-        return Mes.values();
-    }
+//    public Mes[] getMeses() {
+//        return Mes.values();
+//    }
 
     public List<Pago> getItems() {
         if (items == null) {

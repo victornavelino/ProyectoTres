@@ -1,23 +1,22 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-     <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-     <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
-                     xmlns:ui="http://java.sun.com/jsf/facelets"
-                      template="../../Templates/paginasTemplate.xhtml"
-                      xmlns:p="http://primefaces.org/ui"
-                      xmlns:h="http://java.sun.com/jsf/html"
-                      xmlns:f="http://java.sun.com/jsf/core"
-                      xmlns:b="http://bootsfaces.net/ui"
-                      >
-     <ui:define name="content">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
 
-
+    <ui:define name="content">
         <h3>
-            <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
+            <h:outputText value="#{bundleUsuario.ListUsuarioTitle}"></h:outputText>
         </h3>
 
-        
+
             <h:form id="UsuarioListForm">
-                <p:panel header="#{bundle.ListUsuarioTitle}">
+                <p:panel header="#{bundleUsuario.ListUsuarioTitle}">
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}"
                                  paginator="true"
@@ -31,39 +30,33 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_apellido}"/>
+                                <h:outputText value="#{bundleUsuario.ListUsuarioTitle_apellido}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellido}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
+                                <h:outputText value="#{bundleUsuario.ListUsuarioTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_usuario}"/>
+                                <h:outputText value="#{bundleUsuario.ListUsuarioTitle_usuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.usuario}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_password}"/>
+                                <h:outputText value="#{bundleUsuario.ListUsuarioTitle_password}"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleUsuario.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleUsuario.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleUsuario.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleUsuario.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -72,5 +65,5 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+    </ui:define>
+</ui:composition>

@@ -19,9 +19,18 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
                         <p:selectOneMenu id="mes" value="#{pagoController.selected.mes}" >
-                            <f:selectItems value="#{pagoController.meses}"
-                                           var="cuentaItem"
-                                           itemValue="#{cuentaItem}"/>
+                            <f:selectItem itemLabel="ENERO" itemValue="1" />
+                            <f:selectItem itemLabel="FEBRERO" itemValue="2" />
+                            <f:selectItem itemLabel="MARZO" itemValue="3" />
+                            <f:selectItem itemLabel="ABRIL" itemValue="4" />
+                            <f:selectItem itemLabel="MAYO" itemValue="5" />
+                            <f:selectItem itemLabel="JUNIO" itemValue="6" />
+                            <f:selectItem itemLabel="JULIO" itemValue="7" />
+                            <f:selectItem itemLabel="AGOSTO" itemValue="8" />
+                            <f:selectItem itemLabel="SEPTIEMBRE" itemValue="9" />
+                            <f:selectItem itemLabel="OCTUBRE" itemValue="10" />
+                            <f:selectItem itemLabel="NOVIEMBRE" itemValue="11" />
+                            <f:selectItem itemLabel="DICIEMBRE" itemValue="12" />
                         </p:selectOneMenu>   
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.CreatePagoTitle_anio}" />

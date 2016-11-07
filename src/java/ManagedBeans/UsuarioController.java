@@ -13,14 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@ManagedBean(name = "usuarioController")
+@Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
 
@@ -28,6 +28,15 @@ public class UsuarioController implements Serializable {
     private Facades.UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
+    private String repiteContrasena;
+
+    public String getRepiteContrasena() {
+        return repiteContrasena;
+    }
+
+    public void setRepiteContrasena(String repiteContrasena) {
+        this.repiteContrasena = repiteContrasena;
+    }
 
     public UsuarioController() {
     }
@@ -58,23 +67,37 @@ public class UsuarioController implements Serializable {
 
     public void create() {
         try {
-            String password =Encrypter.encriptar(selected.getPassword());
+            String password = Encrypter.encriptar(selected.getPassword());
             selected.setPassword(password);
+
         } catch (Exception ex) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/bundleusuario").getString("UsuarioCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        if (this.validarContrasena(selected.getPassword())) {
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleUsuario").getString("UsuarioCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
         }
+
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/bundleusuario").getString("UsuarioUpdated"));
+        try {
+            String password = Encrypter.encriptar(selected.getPassword());
+            selected.setPassword(password);
+
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (this.validarContrasena(selected.getPassword())) {
+            persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleUsuario").getString("UsuarioUpdated"));
+        }
+
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/bundleusuario").getString("UsuarioDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundleUsuario").getString("UsuarioDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
@@ -107,13 +130,17 @@ public class UsuarioController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/bundleusuario").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleUsuario").getString("PersistenceErrorOccured"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/bundleusuario").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/BundleUsuario").getString("PersistenceErrorOccured"));
             }
         }
+    }
+
+    public Usuario getUsuario(java.lang.Long id) {
+        return getFacade().find(id);
     }
 
     public List<Usuario> getItemsAvailableSelectMany() {
@@ -134,7 +161,7 @@ public class UsuarioController implements Serializable {
             }
             UsuarioController controller = (UsuarioController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "usuarioController");
-            return controller.getFacade().find(getKey(value));
+            return controller.getUsuario(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -165,4 +192,24 @@ public class UsuarioController implements Serializable {
 
     }
 
+    private boolean validarContrasena(String contrasena) {
+
+        if (contrasena.isEmpty()) {
+            JsfUtil.addErrorMessage("No ingreso la contraseña");
+            return false;
+        } else {
+            try {
+                if (!contrasena.equals(Encrypter.encriptar(this.getRepiteContrasena()))) {
+                    JsfUtil.addErrorMessage("La contraseña y la confirmacion no son iguales");
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+
+    }//fin validarContrasena
 }

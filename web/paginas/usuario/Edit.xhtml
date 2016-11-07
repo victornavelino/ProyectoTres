@@ -8,23 +8,41 @@
 
     <ui:composition>
 
-        <p:dialog id="UsuarioEditDlg" widgetVar="UsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsuarioTitle}">
+        <p:dialog id="UsuarioEditDlg" widgetVar="UsuarioEditDialog" modal="true" position="top" width="600" resizable="false" appendTo="@(body)" header="#{bundleUsuario.EditUsuarioTitle}">
             <h:form id="UsuarioEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{usuarioController.selected.id}" title="#{bundle.EditUsuarioTitle_id}" />
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_apellido}" for="apellido" />
-                        <p:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{bundle.EditUsuarioTitle_apellido}" />
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_usuario}" for="usuario" />
-                        <p:inputText id="usuario" value="#{usuarioController.selected.usuario}" title="#{bundle.EditUsuarioTitle_usuario}" />
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" />
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioEditDialog.hide()"/>
+                    <p:panel id="pPri" header="Datos del Usuario" style="width:500px" styleClass="noBorders"> 
+                        <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                            <p:outputLabel value="#{bundleUsuario.EditUsuarioLabel_apellido}" for="apellido" />
+                            <p:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{bundleUsuario.EditUsuarioTitle_apellido}" />
+                            <p:outputLabel value="#{bundleUsuario.EditUsuarioLabel_nombre}" for="nombre" />
+                            <p:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundleUsuario.EditUsuarioTitle_nombre}" />
+                            <p:outputLabel value="#{bundleUsuario.EditUsuarioLabel_usuario}" for="usuario" />
+                            <p:inputText id="usuario" value="#{usuarioController.selected.usuario}" title="#{bundleUsuario.EditUsuarioTitle_usuario}" />
+                            <p:outputLabel value="#{bundleUsuario.EditUsuarioLabel_password}" for="password" />
+                            <p:password id="password" value="#{usuarioController.selected.password}" 
+                                        title="#{bundleUsuario.CreateUsuarioTitle_password}" 
+                                        weakLabel="Mala"
+                                        goodLabel="Buena"
+                                        strongLabel="Muy buena"
+                                        feedback="true"
+                                        size="30"
+                                        maxlength="30"
+                                        promptLabel="Por favor ingrese la contraseña"/>
+                            <p:outputLabel value="Repetir Contraseña" for="repitePassword" />
+                            <p:password id="repitePassword" value="#{usuarioController.repiteContrasena}" 
+                                        title="#{bundleUsuario.CreateUsuarioTitle_password}" 
+                                        weakLabel="Mala"
+                                        goodLabel="Buena"
+                                        strongLabel="Muy buena"
+                                        feedback="true"
+                                        size="30"
+                                        maxlength="30"
+                                        promptLabel="Por favor repita la contraseña"/>
+                        </p:panelGrid>
+                    </p:panel> 
+                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundleUsuario.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton value="#{bundleUsuario.Cancel}" onclick="UsuarioEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

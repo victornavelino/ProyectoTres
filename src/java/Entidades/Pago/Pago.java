@@ -35,8 +35,7 @@ public class Pago implements Serializable {
     private Long id;
     @ManyToOne
     private Medico medico;
-    @Enumerated(EnumType.STRING)
-    private Mes mes;
+    private Integer mes;
     private Integer anio;
     private String nroRecibo;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -75,11 +74,11 @@ public class Pago implements Serializable {
         this.medico = medico;
     }
 
-    public Mes getMes() {
+    public Integer getMes() {
         return mes;
     }
 
-    public void setMes(Mes mes) {
+    public void setMes(Integer mes) {
         this.mes = mes;
     }
 

@@ -68,6 +68,10 @@
             <base-name>/BundleMovimientoCaja</base-name>
             <var>bundleMovimientoCaja</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleUsuario</base-name>
+            <var>bundleUsuario</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
