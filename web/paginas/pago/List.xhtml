@@ -53,13 +53,13 @@
                         </f:facet>
                         <h:outputText value="#{item.medico.persona.nombre}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.mes}" sortBy="#{item.mes}"> 
                         <f:facet name="header">
                             <h:outputText value="#{bundlePago.ListPagoTitle_mes}"/>
                         </f:facet>
                         <h:outputText value="#{item.mes}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.anio}" sortBy="#{item.anio}">
                         <f:facet name="header">
                             <h:outputText value="#{bundlePago.ListPagoTitle_anio}"/>
                         </f:facet>
@@ -132,7 +132,7 @@
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePago.View}" update=":PagoViewForm" oncomplete="PF('PagoViewDialog').show()" disabled="#{empty pagoController.selected}"/>
                         <p:commandButton id="editButton"   rendered="#{cajaController.isCajaAbierta}" icon="ui-icon-pencil" value="#{bundlePago.Edit}" update=":PagoEditForm" oncomplete="PF('PagoEditDialog').show()" disabled="#{empty pagoController.selected}"/>
                         <p:commandButton id="deleteButton" rendered="#{cajaController.isCajaAbierta}" icon="ui-icon-trash"  value="#{bundlePago.Delete}" actionListener="#{pagoController.destroy}" update=":growl,datalist" disabled="#{empty pagoController.selected}"/>
-                   <h:commandLink>
+                        <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
                             <p:dataExporter type="xls" target="datalist" fileName="#{bundlePago.ListPagoTitle}"/>
                         </h:commandLink>

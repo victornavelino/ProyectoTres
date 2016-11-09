@@ -46,7 +46,7 @@ public class Medico implements Serializable {
     private Persona persona;
     private int matriculaProfesional;
     @OneToOne
-    private TipoSocio tipoSocio;
+    private TipoMedico tipoSocio;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaInscripcion;
     private String titulo;
@@ -120,11 +120,11 @@ public class Medico implements Serializable {
         this.matriculaProfesional = matriculaProfesional;
     }
 
-    public TipoSocio getTipoSocio() {
+    public TipoMedico getTipoSocio() {
         return tipoSocio;
     }
 
-    public void setTipoSocio(TipoSocio tipoSocio) {
+    public void setTipoSocio(TipoMedico tipoSocio) {
         this.tipoSocio = tipoSocio;
     }
 
