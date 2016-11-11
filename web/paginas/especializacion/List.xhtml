@@ -17,7 +17,7 @@
 
 
         <h:form id="EspecializacionListForm">
-                       
+
             <p:panel>
 
                 <p:dataTable id="datalist" value="#{especializacionController.items}" var="item"
@@ -63,6 +63,12 @@
                             <h:outputText value="#{bundle.ListEspecializacionTitle_especialidad}"/>
                         </f:facet>
                         <h:outputText value="#{item.especialidad.descripcion}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Matricula"/>
+                        </f:facet>
+                        <h:outputText value="#{item.medico.matriculaProfesional}"/>
                     </p:column>
                     <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -151,14 +157,14 @@
                 </p:dataTable>
 
             </p:panel>
-        
-        
+
+
         </h:form>
 
         <ui:include src="Create.xhtml"/>
         <ui:include src="Edit.xhtml"/>
         <ui:include src="View.xhtml"/>
         <ui:include src="Reporte.xhtml"/>
-        
+
     </ui:define>
 </ui:composition>
