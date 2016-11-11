@@ -34,11 +34,11 @@
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                     <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                    <p:column>
+                    <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains">
                         <f:facet name="header">
-                            <h:outputText value="#{bundlePago.ListPagoTitle_id}"/>
+                            <h:outputText value="Matrícula"/>
                         </f:facet>
-                        <h:outputText value="#{item.id}"/>
+                        <h:outputText value="#{item.medico.matriculaProfesional}"/>
                     </p:column>
                     <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -103,30 +103,7 @@
                         </f:facet>
                         <h:outputText value="#{item.importe}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundlePago.ListPagoTitle_concepto}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.concepto}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundlePago.ListPagoTitle_anulado}"/>
-                        </f:facet>
-                        <p:selectBooleanCheckbox value="#{item.anulado}" disabled="true"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundlePago.ListPagoTitle_observaciones}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.observaciones}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Cuenta"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cuenta.descripcion}"/>
-                    </p:column>
+                  
                     <f:facet name="footer">
                         <p:commandButton id="createButton" disabled="#{!cajaController.isCajaAbierta}" icon="ui-icon-plus"   value="#{bundlePago.Create}" actionListener="#{pagoController.prepareCreate}" update=":PagoCreateForm" oncomplete="PF('PagoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePago.View}" update=":PagoViewForm" oncomplete="PF('PagoViewDialog').show()" disabled="#{empty pagoController.selected}"/>

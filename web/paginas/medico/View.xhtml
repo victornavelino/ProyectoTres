@@ -42,7 +42,7 @@
 
 
                                     <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
-                                    <p:outputLabel id="tipoDocumento" value="#{medicoController.selected.persona.documentoIdentidad.tipoDocumento}" 
+                                    <p:outputLabel id="tipoDocumento" value="#{medicoController.selected.persona.documentoIdentidad.tipoDocumento.descripcion}" 
                                                    />
 
 
@@ -50,20 +50,20 @@
                                     <p:outputLabel id="numero" value="#{medicoController.selected.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
 
                                     <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
-                                    <p:outputLabel id="sexo" value="#{medicoController.selected.persona.sexo}" />
+                                    <p:outputLabel id="sexo" value="#{medicoController.selected.persona.sexo.descripcion}" />
 
 
                                     <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
-                                    <p:outputLabel id="estadoCivil" value="#{medicoController.selected.persona.estadoCivil}" />
+                                    <p:outputLabel id="estadoCivil" value="#{medicoController.selected.persona.estadoCivil.descripcion}" />
                                 </p:panelGrid>
                                 <p:panel header="Telefonos"                                   >
                                     <p:panelGrid columns="2">
                                         <ui:repeat var="telmed" 
-                                                   value="#{listadoTelefonosBean.lstTelefonos}" 
+                                                   value="#{medicoController.selected.persona.telefonos}" 
                                                    id="dtTelefonosProf"
                                                    >                                                        
-                                            <p:outputLabel value="#{telmed.tipoTelefono.descripcion}" />  
-                                            <p:outputLabel value="#{telmed.numero}" />  
+                                            <p> <p:outputLabel value="#{telmed.tipoTelefono.descripcion} : " />   
+                                                <p:outputLabel value="#{telmed.numero}" />  </p>
                                         </ui:repeat> 
                                     </p:panelGrid>
 
@@ -72,9 +72,9 @@
                                          >
                                     <ui:repeat var="mailProf"
                                                id="dtEmailProfesional"
-                                               value="#{listadoEmailBean.lstCorreoElectronico}"
+                                               value="#{medicoController.selected.persona.correosElectronicos}"
                                                > 
-                                        <p:outputLabel value="#{mailProf.direccion}" />  
+                                        <p>   <p:outputLabel value="#{mailProf.direccion}" />  </p> 
                                     </ui:repeat>
 
 
@@ -84,13 +84,13 @@
                                          >
                                     <h:panelGrid columns="2">
                                         <p:outputLabel  value="Localidad:  "/>
-                                        <p:outputLabel  value="#{domicilioBean.domicilio.localidad.descripcion}"/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.domicilio.localidad.descripcion}"/>
                                         <p:outputLabel  value="Barrio:  "/>
-                                        <p:outputLabel  value="#{domicilioBean.domicilio.barrio}"/> 
+                                        <p:outputLabel  value="#{medicoController.selected.persona.domicilio.barrio}"/> 
                                         <p:outputLabel  value="Calle:  "/>
-                                        <p:outputLabel  value="#{domicilioBean.domicilio.calle}"/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.domicilio.calle}"/>
                                         <p:outputLabel  value="Numero:  "/>
-                                        <p:outputLabel  value="#{domicilioBean.domicilio.numero}"/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.domicilio.numero}"/>
                                     </h:panelGrid>
                                 </p:panel></p:panelGrid>
                             <p:outputPanel id="panelFoto">
@@ -114,7 +114,7 @@
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_matriculaProfesional}" for="matriculaProfesional" />
                                 <p:outputLabel id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.CreateMedicoTitle_matriculaProfesional}" />
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_tipoSocio}" for="tipoSocio" />
-                                <p:outputLabel id="tipoSocio" value="#{medicoController.selected.tipoSocio}" />
+                                <p:outputLabel id="tipoSocio" value="#{medicoController.selected.tipoSocio.descripcion}" />
 
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaInscripcion}" for="fechaInscripcion" />
                                 <p:outputLabel id="fechaInscripcion"  value="#{medicoController.selected.fechaInscripcion}" title="#{bundle.EditMedicoTitle_fechaInscripcion}"
@@ -129,7 +129,7 @@
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaTitulo}" for="fechaTitulo" />
                                 <p:outputLabel id="fechaTitulo"  value="#{medicoController.selected.fechaTitulo}" title="#{bundle.EditMedicoTitle_fechaTitulo}"  />
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_unidadFormadora}" for="unidadFormadora" />
-                                <p:outputLabel id="unidadFormadora" value="#{medicoController.selected.unidadFormadora}" />
+                                <p:outputLabel id="unidadFormadora" value="#{medicoController.selected.unidadFormadora.descripcion}" />
 
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaBaja}" for="fechaBaja" />
                                 <p:outputLabel id="fechaBaja"  value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"
@@ -138,7 +138,7 @@
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_motivoBaja}" for="motivoBaja" />
                                 <p:outputLabel id="motivoBaja" value="#{medicoController.selected.motivoBaja}" title="#{bundle.CreateMedicoTitle_motivoBaja}" />
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_organismo}" for="organismo" />
-                                <p:outputLabel id="organismo" value="#{medicoController.selected.organismo}" />
+                                <p:outputLabel id="organismo" value="#{medicoController.selected.organismo.descripcion}" />
 
                                 <p:outputLabel value="#{bundle.CreateMedicoLabel_libro}" for="libro" />
                                 <p:outputLabel id="libro" value="#{medicoController.selected.libro}" title="#{bundle.CreateMedicoTitle_libro}" />

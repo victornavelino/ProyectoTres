@@ -97,6 +97,10 @@ public class CuotaPlanPagoController implements Serializable {
         caja.setTipo(ingresoFacade.find(2L));
         caja.setImporte(selected.getImporte());
         caja.setUsuario(usuarioLogerBean.getUsuario());
+        try {
+            caja.setNroComprobante(Integer.parseInt(selected.getNroRecibo()));
+        } catch (NumberFormatException numberFormatException) {
+        }
         cajaFacade.create(caja);
     }
 

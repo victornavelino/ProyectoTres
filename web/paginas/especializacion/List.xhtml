@@ -98,11 +98,11 @@
                         </f:facet>
                         <h:outputText value="#{item.folio}"/>
                     </p:column>
-                    <p:column>
+                    <p:column filterBy="#{item.unidadFormadora.descripcion}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEspecializacionTitle_unidadFormadora}"/>
                         </f:facet>
-                        <h:outputText value="#{item.unidadFormadora}"/>
+                        <h:outputText value="#{item.unidadFormadora.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">

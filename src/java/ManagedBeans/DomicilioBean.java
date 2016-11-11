@@ -10,7 +10,6 @@ import Entidades.Localidad.Pais;
 import Entidades.Localidad.Provincia;
 import Entidades.Persona.Domicilio;
 import RN.DepartamentoRNLocal;
-import RN.DomicilioRNLocal;
 import RN.LocalidadRNLocal;
 import RN.PaisRNLocal;
 import RN.ProvinciaRNLocal;
@@ -40,8 +39,6 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class DomicilioBean implements Serializable {
 
-    @EJB
-    private DomicilioRNLocal domicilioRNLocal;
     @EJB
     private PaisRNLocal paisRNLocal;
     @EJB
@@ -241,15 +238,8 @@ public class DomicilioBean implements Serializable {
         //   if (this.getPersona().getLugarNacimiento() != null) {
         //this.setsDireccion(this.getPersona().getLugarNacimiento().getDepartamento().getDescripcion() + ", " + this.getPersona().getLugarNacimiento().getDescripcion());
         //System.out.println(actualizarPanel);
-        if (btnSelect.getId().equals("btnDomicilioMedico")) {
-            RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
-            RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
-        }
-        if (btnSelect.getId().equals("btnDomicilioMedicoUpdate")) {
-            RequestContext.getCurrentInstance().update("MedicoEditForm:pnDomicilio");
-            RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
-        }
-
+        RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
+        RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
     }
 
     public void afterPhase(PhaseEvent PhaseEvent) {

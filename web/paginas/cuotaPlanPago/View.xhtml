@@ -26,6 +26,8 @@
                         </h:outputText>
                         <h:outputText value="#{bundleCuotaPlan.ViewCuotaPlanPagoLabel_cuota}"/>
                         <h:outputText value="#{cuotaPlanPagoController.selected.cuota}" title="#{bundleCuotaPlan.ViewCuotaPlanPagoTitle_cuota}"/>
+                        <p:outputLabel value="Numero de Recibo" for="nroRecibo" />
+                        <p:outputLabel id="nroRecibo" value="#{cuotaPlanPagoController.selected.nroRecibo}" title="Numero de Recibo" />
                     </p:panelGrid>
                     <p:commandButton value="#{bundleCuotaPlan.Close}" onclick="CuotaPlanPagoViewDialog.hide()"/>
                 </h:panelGroup>

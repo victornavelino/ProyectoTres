@@ -8,6 +8,7 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.PagoFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,6 +18,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -37,8 +39,17 @@ public class PagoController implements Serializable {
     private UsuarioLogerBean usuarioLogerBean;
     private List<Pago> items = null;
     private Pago selected;
+    private int cantidadCuotas;
 
     public PagoController() {
+    }
+
+    public int getCantidadCuotas() {
+        return cantidadCuotas;
+    }
+
+    public void setCantidadCuotas(int cantidadCuotas) {
+        this.cantidadCuotas = cantidadCuotas;
     }
 
     public Pago getSelected() {
@@ -61,24 +72,45 @@ public class PagoController implements Serializable {
 
     public Pago prepareCreate() {
         selected = new Pago();
+        cantidadCuotas = 1;
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
-        Ingreso caja = new Ingreso();
-        caja.setFecha(new Date());
-        caja.setFechaOperacion(selected.getFechaPago());
-        caja.setDescripcion("Pago, "
-                + selected.getMedico().getPersona()
-                + ", Cuota " + selected.getMes() + " " + selected.getAnio());
-        caja.setTipo(ingresoFacade.find(5L));
-        caja.setImporte(selected.getImporte());
-        caja.setUsuario(usuarioLogerBean.getUsuario());
-        cajaFacade.create(caja);
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        int mes = selected.getMes();
+        int anio = selected.getAnio();
+        try {
+            for (int i = 0; i < cantidadCuotas; i++) {
+                selected.setMes(mes);
+                selected.setAnio(anio);
+                persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
+                Ingreso caja = new Ingreso();
+                caja.setFecha(new Date());
+                caja.setFechaOperacion(selected.getFechaPago());
+                caja.setDescripcion("Pago, "
+                        + selected.getMedico().getPersona()
+                        + ", Cuota " + selected.getMes() + " " + selected.getAnio());
+                caja.setTipo(ingresoFacade.find(5L));
+                caja.setImporte(selected.getImporte());
+                try {
+                    caja.setNroComprobante(Integer.parseInt(selected.getNroRecibo()));
+                } catch (NumberFormatException numberFormatException) {
+                }
+                caja.setUsuario(usuarioLogerBean.getUsuario());
+                cajaFacade.create(caja);
+                if (!JsfUtil.isValidationFailed()) {
+                    items = null;    // Invalidate list of items to trigger re-query.
+                }
+                if (mes == 12) {
+                    mes = 1;
+                    anio++;
+                } else {
+                    mes++;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error creando Pago: " + e);
         }
     }
 
@@ -97,7 +129,6 @@ public class PagoController implements Serializable {
 //    public Mes[] getMeses() {
 //        return Mes.values();
 //    }
-
     public List<Pago> getItems() {
         if (items == null) {
             items = getFacade().findAll();

@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -38,7 +36,7 @@ public class Persona implements Serializable {
     private String apellido;
     @Basic(optional = false)
     private String nombre;
-    @OneToOne(cascade = CascadeType.ALL)
+    @Embedded
     private DocumentoIdentidad documentoIdentidad;
     private String cuil;
     @Temporal(javax.persistence.TemporalType.DATE)

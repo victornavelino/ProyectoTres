@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" >
+                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
                             <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
                             <f:selectItems value="#{medicoController.items}"/>
                         </p:selectOneMenu>
@@ -34,12 +34,28 @@
                         </p:selectOneMenu>   
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.CreatePagoTitle_anio}" />
+                        <p:outputLabel value="Cantidad de Cuotas" for="cantCuota" />
+                        <p:selectOneMenu id="cantCuota" value="#{pagoController.cantidadCuotas}" >
+                            <f:selectItem itemLabel="1" itemValue="1" />
+                            <f:selectItem itemLabel="2" itemValue="2" />
+                            <f:selectItem itemLabel="3" itemValue="3" />
+                            <f:selectItem itemLabel="4" itemValue="4" />
+                            <f:selectItem itemLabel="5" itemValue="5" />
+                            <f:selectItem itemLabel="6" itemValue="6" />
+                            <f:selectItem itemLabel="7" itemValue="7" />
+                            <f:selectItem itemLabel="8" itemValue="8" />
+                            <f:selectItem itemLabel="9" itemValue="9" />
+                            <f:selectItem itemLabel="10" itemValue="10" />
+                            <f:selectItem itemLabel="11" itemValue="11" />
+                            <f:selectItem itemLabel="12" itemValue="12" />
+                        </p:selectOneMenu>
+
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_nroRecibo}" for="nroRecibo" />
-                        <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.CreatePagoTitle_nroRecibo}" />
+                        <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.CreatePagoTitle_nroRecibo}" required="true"  />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_fechaPago}" for="fechaPago" />
-                        <p:calendar id="fechaPago" pattern="dd/MM/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
+                        <p:calendar id="fechaPago" pattern="dd/MM/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}" required="true"   showOn="button"/>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_importe}" for="importe" />
-                        <p:inputText id="importe" value="#{pagoController.selected.importe}" title="#{bundlePago.CreatePagoTitle_importe}" />
+                        <p:inputText id="importe" value="#{pagoController.selected.importe}" title="#{bundlePago.CreatePagoTitle_importe}" required="true"  />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_concepto}" for="concepto" />
                         <p:selectOneMenu id="concepto" value="#{pagoController.selected.concepto}" >
                             <f:selectItems value="#{conceptoController.itemsAvailableSelectOne}"

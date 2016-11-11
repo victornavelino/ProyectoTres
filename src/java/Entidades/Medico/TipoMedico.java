@@ -102,7 +102,7 @@ public class TipoMedico implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Medico.TipoMedico[ id=" + id + " ]";
+        return descripcion;
     }
 
 }

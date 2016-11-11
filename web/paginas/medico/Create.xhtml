@@ -181,7 +181,8 @@
                                     <p:inputText id="matriculaProfesional" value="#{medicoController.selected.matriculaProfesional}" title="#{bundle.CreateMedicoTitle_matriculaProfesional}" />
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_tipoSocio}" for="tipoSocio" />
                                     <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" >
-                                        <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{tipoMedicoController.itemsAvailableSelectOne}"
                                                        var="tipoSocioItem"
                                                        itemValue="#{tipoSocioItem}"/>
                                     </p:selectOneMenu>

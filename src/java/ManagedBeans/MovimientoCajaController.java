@@ -252,8 +252,10 @@ public class MovimientoCajaController implements Serializable {
 
     public BigDecimal getTotalGeneral() {
         calculo = BigDecimal.ZERO;
-        calculo = cajaRNLocal.getCajaAbierta().getCajaInicial();
-
+        try {
+            calculo = cajaRNLocal.getCajaAbierta().getCajaInicial();
+        } catch (Exception e) {
+        }
         for (MovimientoCaja i : items) {
             switch (i.getClase()) {
                 case "Ingreso":

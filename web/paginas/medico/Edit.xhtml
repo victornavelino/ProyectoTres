@@ -87,7 +87,7 @@
                                             </p:commandButton>
                                         </p:column>
                                         <p:column headerText="Tipo">  
-                                            <h:outputText value="#{telmed.tipoTelefono}" />  
+                                            <h:outputText value="#{telmed.tipoTelefono.descripcion}" />  
                                         </p:column>  
 
                                         <p:column headerText="Numero">  
@@ -181,7 +181,7 @@
                                     <p:outputLabel value="#{bundle.EditMedicoLabel_tipoSocio}" for="tipoSocio" />
                                     <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" >
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                                        <f:selectItems value="#{tipoSocioController.itemsAvailableSelectOne}"
+                                        <f:selectItems value="#{tipoMedicoController.itemsAvailableSelectOne}"
                                                        var="tipoSocioItem"
                                                        itemValue="#{tipoSocioItem}"/>
                                     </p:selectOneMenu>

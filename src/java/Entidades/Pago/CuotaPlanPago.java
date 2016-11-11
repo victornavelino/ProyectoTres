@@ -38,6 +38,15 @@ public class CuotaPlanPago implements Serializable, Comparable<CuotaPlanPago> {
     private int cuota;
     @ManyToOne
     private PlanPago planPago;
+    private String nroRecibo;
+
+    public String getNroRecibo() {
+        return nroRecibo;
+    }
+
+    public void setNroRecibo(String nroRecibo) {
+        this.nroRecibo = nroRecibo;
+    }
 
     public Long getId() {
         return id;

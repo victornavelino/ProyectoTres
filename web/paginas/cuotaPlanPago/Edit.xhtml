@@ -22,6 +22,8 @@
                         </p:outputLabel>
                         <p:outputLabel value="#{bundleCuotaPlan.EditCuotaPlanPagoLabel_cuota}" for="cuota" />
                         <p:outputLabel id="cuota" value="#{cuotaPlanPagoController.selected.cuota}" title="#{bundleCuotaPlan.EditCuotaPlanPagoTitle_cuota}" />
+                        <p:outputLabel value="Numero de Recibo" for="nroRecibo" />
+                        <p:inputText id="nroRecibo" value="#{cuotaPlanPagoController.selected.nroRecibo}" title="Numero de Recibo" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cuotaPlanPagoController.update}" value="#{bundleCuotaPlan.Save}" update="display,:CuotaPlanPagoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CuotaPlanPagoEditDialog');"/>
                     <p:commandButton value="#{bundleCuotaPlan.Cancel}" onclick="CuotaPlanPagoEditDialog.hide()"/>
