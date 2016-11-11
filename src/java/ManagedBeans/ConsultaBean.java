@@ -7,23 +7,27 @@ package ManagedBeans;
 
 import Entidades.Medico.Especialidad;
 import Entidades.Medico.Medico;
+import java.io.Serializable;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 /**
  *
  * @author hugo
  */
-@Named(value = "consultaBean")
-@RequestScoped
-public class ConsultaBean {
+@Named("consultaBean")
+@SessionScoped
+public class ConsultaBean implements Serializable{
 
     /**
      * Creates a new instance of ConsultaBean
      */
     private Medico medico;
 //    private Especialidad especialidad;
+    private Integer mes;
+     private Integer anio;
     private String StringEspecialidad;
     private Especialidad especialidad;
     @Inject
@@ -31,47 +35,22 @@ public class ConsultaBean {
     @Inject
     private ListaEspecializacionBean listaEspecializacionBean;
 
-    public String getStringEspecialidad() {
-        return StringEspecialidad;
+    public Integer getMes() {
+        return mes;
     }
 
-    public void setStringEspecialidad(String StringEspecialidad) {
-        this.StringEspecialidad = StringEspecialidad;
+    public void setMes(Integer mes) {
+        this.mes = mes;
     }
 
-    public Especialidad getEspecialidad() {
-        return especialidad;
+    public Integer getAnio() {
+        return anio;
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
+    public void setAnio(Integer anio) {
+        this.anio = anio;
     }
-    
-    public ListaEspecializacionBean getListaEspecializacionBean() {
-        return listaEspecializacionBean;
-    }
-
-    public void setListaEspecializacionBean(ListaEspecializacionBean listaEspecializacionBean) {
-        this.listaEspecializacionBean = listaEspecializacionBean;
-    }
-    
-    public ListaEspecialidadBean getListaEspecialidadBean() {
-        return listaEspecialidadBean;
-    }
-
-    public void setListaEspecialidadBean(ListaEspecialidadBean listaEspecialidadBean) {
-        this.listaEspecialidadBean = listaEspecialidadBean;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-
+   
     public ConsultaBean() {
     }
 

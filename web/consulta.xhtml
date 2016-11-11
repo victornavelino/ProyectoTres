@@ -20,34 +20,35 @@
             <b:tabView id="tvConsulta">  
 
 
-                <b:tab id="tab2" title="Medicos por Especialidad">
-                    <br/>
+                <b:tab id="tab2" title="Medicos deudores">
+                    <p:panelGrid columns="2" styleClass="noBorders">
 
-                    <b:container fluid="true">
-                        <b:row >
-                            <b:column col-sm="1">
-                                <h:outputLabel value="Especialidad: " /> 
-                            </b:column>
-                            <b:column col-lg="3">
-                                <p:selectOneMenu id="comboEspecialidades"
-                                                 value="#{consultaBean.especialidad}"
-                                                 converter="ConversorGenerico"
-                                                 filter="true"
-                                                 style="width: 300px"
-                                                 >
-                                    <f:selectItems value="#{listaEspecialidadBean.especialidades}"/>
-                                </p:selectOneMenu>
-                            </b:column>
-                            <b:column col-sm="2">
-                                <p:commandButton id="cbBuscarEspecializaciones"
-                                                 icon="ui-icon-search"
-                                                 value="Buscar"
-                                                 actionListener="#{consultaBean.buscarEspecializaciones()}"
-                                                 update="dtConsultaEspecializacion"/>
-                                <br/>
-                            </b:column>
-                        </b:row>
-                    </b:container>
+                        <p:outputLabel value="MESES: " for="mes" /> 
+
+                        <p:selectOneMenu id="mes" value="#{consultaBean.mes}"  maxlength="40">
+                            <f:selectItem itemLabel="ENERO" itemValue="1" />
+                            <f:selectItem itemLabel="FEBRERO" itemValue="2" />
+                            <f:selectItem itemLabel="MARZO" itemValue="3" />
+                            <f:selectItem itemLabel="ABRIL" itemValue="4" />
+                            <f:selectItem itemLabel="MAYO" itemValue="5" />
+                            <f:selectItem itemLabel="JUNIO" itemValue="6" />
+                            <f:selectItem itemLabel="JULIO" itemValue="7" />
+                            <f:selectItem itemLabel="AGOSTO" itemValue="8" />
+                            <f:selectItem itemLabel="SEPTIEMBRE" itemValue="9" />
+                            <f:selectItem itemLabel="OCTUBRE" itemValue="10" />
+                            <f:selectItem itemLabel="NOVIEMBRE" itemValue="11" />
+                            <f:selectItem itemLabel="DICIEMBRE" itemValue="12" />
+                        </p:selectOneMenu>   
+                        <p:outputLabel value="AÑO " for="mes" /> 
+                        <p:spinner id="spinner" value="#{consultaBean.anio}" min="1950" max="2050" maxlength="4" placeholder="2016"/>
+
+
+                        <p:commandButton id="cbBuscarEspecializaciones"
+                                         icon="ui-icon-search"
+                                         value="Buscar"
+                                         actionListener="#{consultaBean.buscarEspecializaciones()}"
+                                         update="dtConsultaEspecializacion"/>
+                    </p:panelGrid>
 
                 </b:tab>
 
@@ -86,7 +87,7 @@
                 </f:facet>
                 <h:outputText value="#{item.medico.persona.apellido}"/>
             </p:column>
-             <p:column 
+            <p:column 
                 filterBy="#{item.matriculaEspecialidad}"
                 style="word-wrap:break-word;">
                 <f:facet name="header">
