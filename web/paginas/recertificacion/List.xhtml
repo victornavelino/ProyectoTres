@@ -41,6 +41,12 @@
                         </f:facet>
                         <h:outputText value="#{item.especializacion.medico.persona.apellido}, #{item.especializacion.medico.persona.nombre}"/>
                     </p:column>
+                    <p:column filterBy="#{item.especializacion.medico.matriculaProfesional}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="Matricula"/>
+                        </f:facet>
+                        <h:outputText value="#{item.especializacion.medico.matriculaProfesional}"/>
+                    </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Especializacion"/>

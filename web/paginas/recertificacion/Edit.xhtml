@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="RecertificacionEditDlg" widgetVar="RecertificacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRecertificacionTitle}">
+        <p:dialog id="RecertificacionEditDlg" widgetVar="RecertificacionEditDialog" position="top" modal="true" resizable="false" appendTo="@(body)" header="Editar Recertificación">
             <h:form id="RecertificacionEditForm">
                 <h:panelGroup id="display">
                     <h1>Editar Recertificacion</h1>
@@ -16,7 +16,7 @@
                      
                         <p:outputLabel value="Especializacion:"/>
 
-                        <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" >
+                        <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true">
                             <f:selectItems value="#{especializacionController.itemsAvailableSelectOne}"
                                            var="especializacionItem"
                                            itemValue="#{especializacionItem}"/>

@@ -190,9 +190,10 @@ public class Especializacion extends Base implements Serializable {
     @Override
     public String toString() {
         try {
-            return matriculaEspecialidad
+            return getMedico().getMatriculaProfesional() + " - "
                     + getMedico().getPersona().getApellido() + ", "
                     + getMedico().getPersona().getNombre() + " - "
+                    + matriculaEspecialidad + " - "
                     + especialidad.getDescripcion();
         } catch (Exception e) {
             return "";
