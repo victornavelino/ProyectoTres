@@ -7,9 +7,11 @@ package ManagedBeans;
 
 import Entidades.Medico.Especialidad;
 import Entidades.Medico.Medico;
+import RN.MedicoRNLocal;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -34,7 +36,19 @@ public class ConsultaBean implements Serializable{
     private ListaEspecialidadBean listaEspecialidadBean;
     @Inject
     private ListaEspecializacionBean listaEspecializacionBean;
+    @Inject
+    private ListaMedicoBean listaMedicoBean;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
 
+    public ListaMedicoBean getListaMedicoBean() {
+        return listaMedicoBean;
+    }
+
+    public void setListaMedicoBean(ListaMedicoBean listaMedicoBean) {
+        this.listaMedicoBean = listaMedicoBean;
+    }
+    
     public Integer getMes() {
         return mes;
     }
@@ -62,5 +76,9 @@ public class ConsultaBean implements Serializable{
     public void buscarEspecializaciones() {
         this.listaEspecializacionBean.buscarEspecializaciones(especialidad);
     }
-
+    public void buscarMedicosDeudores(){
+        System.out.println(" mes y año :"+mes+"  "+anio);
+        this.listaMedicoBean.setMedicos(medicoRNLocal.buscarMedicosDeudores(mes,anio));
+        System.out.println("lista reducida: "+listaMedicoBean.getMedicos());
+    }
 }

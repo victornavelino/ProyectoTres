@@ -25,4 +25,6 @@ public interface MedicoRNLocal {
 
     public List<Medico> buscarXMatricula(String matriculaProfesional);
 
+    public List<Medico> buscarMedicosDeudores(Integer mes, Integer anio);
+
 }

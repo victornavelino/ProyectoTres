@@ -31,7 +31,9 @@ import javax.persistence.Temporal;
 @NamedQueries({
     @NamedQuery(name = "Medico.buscarMedicosEspecialidad", query = "SELECT m FROM Medico m ,m.especialidades esp WHERE esp=:especialidad"),
     @NamedQuery(name = "Medico.buscarXApellido", query = "SELECT m FROM Medico m WHERE m.persona.apellido LIKE :apellido"),
-    @NamedQuery(name = "Medico.buscarXMatricula", query = "SELECT m FROM Medico m WHERE m.matriculaProfesional LIKE :matriculaProfesional")
+    @NamedQuery(name = "Medico.buscarXMatricula", query = "SELECT m FROM Medico m WHERE m.matriculaProfesional LIKE :matriculaProfesional"),
+    @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT m FROM Medico m, IN(m.pagos) mp where mp.anio<=:anio AND mp.mes<=:mes AND m.tipoSocio.id = 1")
+
 })
 
 @Entity
