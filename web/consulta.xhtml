@@ -10,66 +10,61 @@
                 >
 
     <ui:define name="content">
+        <f:event listener="#{consultaBean.iniciar()}" type="preRenderView"/>
         <h:form id="consultaForm">
-            <b:panel>
+            <h3> <h:outputText value="Consultas" styleClass="titulo"/></h3>
+
+            <p:tabView>  
+                <p:tab id="tab2" title="Medicos deudores ">
+                    <h3>Medicos que pagaron hasta:</h3>
+                    <p:panelGrid columns="2" styleClass="noBorders">
+
+                        <p:outputLabel value="HASTA MESE DE: " for="mes" /> 
+
+                        <p:selectOneMenu id="mes" value="#{consultaBean.mes}" >
+                            <f:selectItem itemLabel="ENERO" itemValue="1" />
+                            <f:selectItem itemLabel="FEBRERO" itemValue="2" />
+                            <f:selectItem itemLabel="MARZO" itemValue="3" />
+                            <f:selectItem itemLabel="ABRIL" itemValue="4" />
+                            <f:selectItem itemLabel="MAYO" itemValue="5" />
+                            <f:selectItem itemLabel="JUNIO" itemValue="6" />
+                            <f:selectItem itemLabel="JULIO" itemValue="7" />
+                            <f:selectItem itemLabel="AGOSTO" itemValue="8" />
+                            <f:selectItem itemLabel="SEPTIEMBRE" itemValue="9" />
+                            <f:selectItem itemLabel="OCTUBRE" itemValue="10" />
+                            <f:selectItem itemLabel="NOVIEMBRE" itemValue="11" />
+                            <f:selectItem itemLabel="DICIEMBRE" itemValue="12" />
+                        </p:selectOneMenu>   
+                        <p:outputLabel value="AÑO " for="spinner" /> 
 
 
-                <h3> <h:outputText value="Consultas" styleClass="titulo"/></h3>
+                        <p:spinner id="spinner" value="#{consultaBean.anio}" 
+                                   min="1900" 
+                                   max="2100" size="10" binding="#{consultaBean.spinnerAnio}"/>
 
 
+                        <p:commandButton id="cbBuscarEspecializaciones"
+                                         icon="ui-icon-search"
+                                         value="Buscar"
+                                         actionListener="#{consultaBean.buscarMedicosDeudores()}"
+                                         update=":consultaForm:dtConsultaMedico"
+                                         />
+                    </p:panelGrid>
 
-                <b:tabView id="tvConsulta">  
+                </p:tab>
 
-
-                    <b:tab id="tab2" title="Medicos deudores">
-                        <p:panelGrid columns="2" styleClass="noBorders">
-
-                            <p:outputLabel value="MESES: " for="mes" /> 
-
-                            <p:selectOneMenu id="mes" value="#{consultaBean.mes}"  maxlength="40">
-                                <f:selectItem itemLabel="ENERO" itemValue="1" />
-                                <f:selectItem itemLabel="FEBRERO" itemValue="2" />
-                                <f:selectItem itemLabel="MARZO" itemValue="3" />
-                                <f:selectItem itemLabel="ABRIL" itemValue="4" />
-                                <f:selectItem itemLabel="MAYO" itemValue="5" />
-                                <f:selectItem itemLabel="JUNIO" itemValue="6" />
-                                <f:selectItem itemLabel="JULIO" itemValue="7" />
-                                <f:selectItem itemLabel="AGOSTO" itemValue="8" />
-                                <f:selectItem itemLabel="SEPTIEMBRE" itemValue="9" />
-                                <f:selectItem itemLabel="OCTUBRE" itemValue="10" />
-                                <f:selectItem itemLabel="NOVIEMBRE" itemValue="11" />
-                                <f:selectItem itemLabel="DICIEMBRE" itemValue="12" />
-                            </p:selectOneMenu>   
-                            <p:outputLabel value="AÑO " for="mes" /> 
-
-
-                            <p:spinner id="spinner" value="#{consultaBean.anio}" 
-                                       min="1900" 
-                                       max="2020" 
-                                       style="" 
-
-                                       />
-
-
-                            <p:commandButton id="cbBuscarEspecializaciones"
-                                             icon="ui-icon-search"
-                                             value="Buscar"
-                                             actionListener="#{consultaBean.buscarMedicosDeudores()}"
-                                             update="dtConsultaMedico"/>
-                        </p:panelGrid>
-
-                    </b:tab>
-
-                </b:tabView>
-            </b:panel>
+            </p:tabView>
             <br/>
-            <h3> <h:outputText value="resultados" styleClass="titulo"/></h3>
+
             <p:dataTable id="dtConsultaMedico"
-                         value="#{listaMedicoBean.medicos}"
+                         value="#{listaMedicoBean.medicosDeudores}"
                          var="item"
+                         rowKey="#{item.id}"
                          style="overflow-x: auto;"
                          paginator="true"
                          rows="20"
+                         widgetVar="dtConsultaMedico"
+                         filterEvent="enter"
                          >
                 <p:column 
                     filterBy="#{item.persona.apellido}" sortBy="#{item.persona.apellido}"
@@ -95,7 +90,27 @@
                     </f:facet>
                     <h:outputText value="#{item.matriculaProfesional}"/>
                 </p:column>
+                <f:facet name="footer">
+                    <h:commandLink>
+                        <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                        <p:dataExporter type="xls" target="dtConsultaMedico" fileName="Lista Profesionales Deudores"/>
+                    </h:commandLink>
+
+
+                    <h:commandLink>
+                        <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                        <p:dataExporter type="csv" target="dtConsultaMedico" fileName="Lista Profesionales Deudores"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                        <p:dataExporter type="xls" 
+                                        target="dtConsultaMedico" fileName="Lista Profesionales Deudores pagina"   pageOnly="true"/>
+                    </h:commandLink>
+                </f:facet>
             </p:dataTable>
+
+
         </h:form>
     </ui:define>
 </ui:composition>

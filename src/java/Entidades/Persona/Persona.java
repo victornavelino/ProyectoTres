@@ -5,6 +5,7 @@
  */
 package Entidades.Persona;
 
+import Entidades.Localidad.Localidad;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,8 @@ public class Persona implements Serializable {
     private Date fechaNacimiento;
     @Embedded
     private Domicilio domicilio;
+    @OneToOne
+    private Localidad residencia;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Telefono> telefonos;
     @OneToMany(cascade = CascadeType.ALL)
@@ -149,7 +152,15 @@ public class Persona implements Serializable {
         this.estadoCivil = estadoCivil;
     }
 
-    @Override
+    public Localidad getResidencia() {
+        return residencia;
+    }
+
+    public void setResidencia(Localidad residencia) {
+        this.residencia = residencia;
+    }
+
+   @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

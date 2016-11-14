@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,8 +33,7 @@ import javax.persistence.Temporal;
     @NamedQuery(name = "Medico.buscarMedicosEspecialidad", query = "SELECT m FROM Medico m ,m.especialidades esp WHERE esp=:especialidad"),
     @NamedQuery(name = "Medico.buscarXApellido", query = "SELECT m FROM Medico m WHERE m.persona.apellido LIKE :apellido"),
     @NamedQuery(name = "Medico.buscarXMatricula", query = "SELECT m FROM Medico m WHERE m.matriculaProfesional LIKE :matriculaProfesional"),
-    @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT m FROM Medico m, IN(m.pagos) mp where mp.anio<=:anio AND mp.mes<=:mes AND m.tipoSocio.id = 1")
-
+    @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT med FROM Medico med WHERE med.tipoSocio.id = 1 EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio AND p.mes>=:mes)")
 })
 
 @Entity
@@ -63,17 +63,55 @@ public class Medico implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaBaja;
     private String motivoBaja;
+    private String resolucionBaja;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaResolucionBaja;
     @OneToOne
     private Organismo organismo;
     private Integer libro;
     private Integer folio;
+    private String nroRegistro;
     @OneToOne(cascade = CascadeType.ALL)
     private Archivo archivo;
     @OneToMany(mappedBy = "medico")
     private List<PlanPago> planPagos;
     @OneToMany(mappedBy = "medico")
     private List<Pago> pagos;
+    @Lob
+    private String observaciones;
 
+    public String getResolucionBaja() {
+        return resolucionBaja;
+    }
+
+    public void setResolucionBaja(String resolucionBaja) {
+        this.resolucionBaja = resolucionBaja;
+    }
+
+    public Date getFechaResolucionBaja() {
+        return fechaResolucionBaja;
+    }
+
+    public void setFechaResolucionBaja(Date fechaResolucionBaja) {
+        this.fechaResolucionBaja = fechaResolucionBaja;
+    }
+
+    public String getNroRegistro() {
+        return nroRegistro;
+    }
+
+    public void setNroRegistro(String nroRegistro) {
+        this.nroRegistro = nroRegistro;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+    
     public Archivo getArchivo() {
         return archivo;
     }

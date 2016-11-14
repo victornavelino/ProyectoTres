@@ -40,7 +40,7 @@
                                 <p:calendar id="caFechaNacimiento" 
                                             value="#{medicoController.selected.persona.fechaNacimiento}" 
                                             title="FechaNacimiento:" 
-                                             pattern="dd/MM/yyyy"
+                                            pattern="dd/MM/yyyy"
                                             />
 
                                 <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
@@ -146,7 +146,7 @@
                                          width="720"
                                          >
 
-                                <p:panel header="Domicilio"
+                                <p:panel header="Domicilio de Nacimiento"
                                          style="width: 700px">
                                     <h:panelGrid columns="2" width="550">
                                         <p:commandButton id="btnDomicilioMedico" 
@@ -168,6 +168,31 @@
                                             <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
                                             <h:outputText  value="Numero:  "/>
                                             <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                        </p:panel>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </h:panelGrid>
+                            <br></br> 
+                            <h:panelGrid columns="1" 
+                                         width="720"
+                                         >
+
+                                <p:panel header="Lugar de Residencia"
+                                         style="width: 700px">
+                                    <h:panelGrid columns="2" width="550">
+                                        <p:commandButton id="btnResidenciaMedico" 
+                                                         value="Cargar Datos"
+                                                         oncomplete="PF('dgResidenciaProf').show();"
+                                                         actionListener="#{domicilioBean.definirActionBoton}"
+                                                         icon="ui-icon-disk"
+                                                         >
+                                            <f:setPropertyActionListener value="#{domicilioBean.residencia}" target="#{domicilioBean.residencia}"/>
+                                        </p:commandButton> 
+
+                                        <p:panel id="pnResidencia" >
+                                            <h:outputText  value="Localidad:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.descripcion}"/> <br></br>
                                         </p:panel>
                                     </h:panelGrid>
                                 </p:panel>
@@ -214,7 +239,8 @@
                                     <p:inputText id="libro" value="#{medicoController.selected.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
                                     <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
-
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_nroRegistro}" for="nroRegistro" />
+                                    <p:inputText id="nroRegistro" value="#{medicoController.selected.nroRegistro}" title="#{bundle.CreateMedicoLabel_nroRegistro}" />
                                 </p:panelGrid>
                             </p:panel>
 

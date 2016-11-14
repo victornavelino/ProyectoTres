@@ -10,18 +10,18 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core">
 
     <!--Dialogo para cargar Domicilio -->
-    <h:form id="domicilioCreateForm">
-        <p:dialog id="dDomicilioProf"
-                  widgetVar="dgDomicilioProf"
+    <h:form id="residenciaCreateForm">
+        <p:dialog id="dgResidenciaProf"
+                  widgetVar="dgResidenciaProf"
                   modal="true"
                   width="650"
                   height="500"
                   closable="true" position="top" 
                   >
             <f:facet name="header">
-                <h:outputText value="Domicilio"/>
+                <h:outputText value="Residencia"/>
             </f:facet>
-            <p:panel header="Domicilio de Nacimiento">
+            <p:panel header="Lugar de Residencia">
                 <p:panelGrid columns="2" styleClass="noBorders">
 
                     <h:outputText value="Provincia"/>
@@ -35,7 +35,7 @@ and open the template in the editor.
                         <f:selectItems value="#{domicilioBean.listaProvincias}"/>
                         <p:ajax                                    
                             listener="#{domicilioBean.cargarDepartamentos()}"
-                            update=":domicilioCreateForm:somDepartamento,:domicilioCreateForm:somLocalidad"/> 
+                            update=":residenciaCreateForm:somDepartamento,:residenciaCreateForm:somLocalidad"/> 
                     </p:selectOneMenu>
 
                     <h:outputText value="Departamento"/>
@@ -50,7 +50,7 @@ and open the template in the editor.
                         <f:selectItems value="#{domicilioBean.listaDepartamentos}"/>
 
                         <p:ajax  
-                            update=":domicilioCreateForm:somLocalidad"
+                            update=":residenciaCreateForm:somLocalidad"
                             listener="#{domicilioBean.cargarLocalidades()}"/>
                     </p:selectOneMenu>
 
@@ -59,42 +59,19 @@ and open the template in the editor.
 
                     <p:selectOneMenu id="somLocalidad"
                                      converter="ConversorGenerico"
-                                     value="#{domicilioBean.domicilio.localidad}">
+                                     value="#{domicilioBean.localidad}">
                         <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
                         <f:selectItems value="#{domicilioBean.listaLocalidades}"/>
                     </p:selectOneMenu>
-
-
-
-                    <h:outputText value="Calle"/>
-
-                    <p:inputText id="itCalle"
-                                 value="#{domicilioBean.domicilio.calle}"
-                                 required="false"/>
-
-
-                    <h:outputText value="Barrio"/>
-
-                    <p:inputText id="itBarrio"
-                                 value="#{domicilioBean.domicilio.barrio}"
-                                 required="false"/>
-
-
-                    <h:outputText value="Nro"/>
-
-                    <p:inputText id="itNro"
-                                 value="#{domicilioBean.domicilio.numero}"
-                                 required="false"/>
-
-
+                   
                 </p:panelGrid>
             </p:panel>
 
-            <p:commandButton id="cbDomicilio"
+            <p:commandButton id="cbResidencia"
                              value="Aceptar"
-                             actionListener="#{domicilioBean.validarLocalidad}"
+                             actionListener="#{domicilioBean.validarLocalidadResidencia}"
                              ajax="true"
-                             update="MedicoCreateForm:pnDomicilio"                           
+                             update="MedicoCreateForm:pnResidencia"                           
                              >
 
             </p:commandButton>

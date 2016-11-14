@@ -61,6 +61,16 @@ public class DomicilioBean implements Serializable {
     private String actualizar;
     CommandButton btnSelect;
     int iTipoBoton;
+    //RESIDENCIA
+    private Localidad residencia;
+
+    public Localidad getResidencia() {
+        return residencia;
+    }
+
+    public void setResidencia(Localidad residencia) {
+        this.residencia = residencia;
+    }
 
     public Pais getPais() {
         return pais;
@@ -151,6 +161,7 @@ public class DomicilioBean implements Serializable {
     @PostConstruct
     private void inicializarComponentes() {
         domicilio = new Domicilio();
+        residencia = new Localidad();
         cargarPaises();
         cargarProvincias();
         cargarDepartamentos();
@@ -240,6 +251,16 @@ public class DomicilioBean implements Serializable {
         //System.out.println(actualizarPanel);
         RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
         RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
+    }
+        public void validarLocalidadResidencia(ActionEvent e) {
+        // Para validar que haya seleccionado la localidad en
+        // cualquiera de los dialogos (LugarNacimiento y DOmicilio)
+
+        //   if (this.getPersona().getLugarNacimiento() != null) {
+        //this.setsDireccion(this.getPersona().getLugarNacimiento().getDepartamento().getDescripcion() + ", " + this.getPersona().getLugarNacimiento().getDescripcion());
+        //System.out.println(actualizarPanel);
+        RequestContext.getCurrentInstance().update("MedicoCreateForm:pnResidencia");
+        RequestContext.getCurrentInstance().execute("PF('dgResidenciaProf').hide();");
     }
 
     public void afterPhase(PhaseEvent PhaseEvent) {
