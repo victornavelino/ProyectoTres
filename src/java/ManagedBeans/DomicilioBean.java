@@ -252,15 +252,15 @@ public class DomicilioBean implements Serializable {
         RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
         RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
     }
-        public void validarLocalidadResidencia(ActionEvent e) {
+        public void validarLocalidadNacimiento(ActionEvent e) {
         // Para validar que haya seleccionado la localidad en
         // cualquiera de los dialogos (LugarNacimiento y DOmicilio)
 
         //   if (this.getPersona().getLugarNacimiento() != null) {
         //this.setsDireccion(this.getPersona().getLugarNacimiento().getDepartamento().getDescripcion() + ", " + this.getPersona().getLugarNacimiento().getDescripcion());
         //System.out.println(actualizarPanel);
-        RequestContext.getCurrentInstance().update("MedicoCreateForm:pnResidencia");
-        RequestContext.getCurrentInstance().execute("PF('dgResidenciaProf').hide();");
+        RequestContext.getCurrentInstance().update("MedicoCreateForm:pnLugarNacimiento");
+        RequestContext.getCurrentInstance().execute("PF('dgNacimientoProf').hide();");
     }
 
     public void afterPhase(PhaseEvent PhaseEvent) {

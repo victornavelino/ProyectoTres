@@ -155,7 +155,7 @@ public class MedicoController implements Serializable {
 
     public void create() {
         selected.getPersona().setDomicilio(domicilioBean.getDomicilio());
-        selected.getPersona().setResidencia(domicilioBean.getLocalidad());
+        selected.getPersona().setLugarNacimiento(domicilioBean.getLocalidad());
         selected.getPersona().setTelefonos(listadoTelefonosBean.getLstTelefonos());
         selected.getPersona().setCorreosElectronicos(listadoEmailBean.getLstCorreoElectronico());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MedicoCreated"));

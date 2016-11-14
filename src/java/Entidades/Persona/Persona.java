@@ -45,7 +45,7 @@ public class Persona implements Serializable {
     @Embedded
     private Domicilio domicilio;
     @OneToOne
-    private Localidad residencia;
+    private Localidad lugarNacimiento;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Telefono> telefonos;
     @OneToMany(cascade = CascadeType.ALL)
@@ -152,15 +152,16 @@ public class Persona implements Serializable {
         this.estadoCivil = estadoCivil;
     }
 
-    public Localidad getResidencia() {
-        return residencia;
+    public Localidad getLugarNacimiento() {
+        return lugarNacimiento;
     }
 
-    public void setResidencia(Localidad residencia) {
-        this.residencia = residencia;
+    public void setLugarNacimiento(Localidad lugarNacimiento) {
+        this.lugarNacimiento = lugarNacimiento;
     }
 
-   @Override
+ 
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);

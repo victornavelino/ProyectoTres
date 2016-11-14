@@ -146,7 +146,7 @@
                                          width="720"
                                          >
 
-                                <p:panel header="Domicilio de Nacimiento"
+                                <p:panel header="Lugar de Residencia"
                                          style="width: 700px">
                                     <h:panelGrid columns="2" width="550">
                                         <p:commandButton id="btnDomicilioMedico" 
@@ -178,19 +178,25 @@
                                          width="720"
                                          >
 
-                                <p:panel header="Lugar de Residencia"
+                                <p:panel header="Lugar de Nacimiento"
                                          style="width: 700px">
                                     <h:panelGrid columns="2" width="550">
-                                        <p:commandButton id="btnResidenciaMedico" 
+                                        <p:commandButton id="btnNacimientoMedico" 
                                                          value="Cargar Datos"
-                                                         oncomplete="PF('dgResidenciaProf').show();"
+                                                         oncomplete="PF('dgNacimientoProf').show();"
                                                          actionListener="#{domicilioBean.definirActionBoton}"
                                                          icon="ui-icon-disk"
                                                          >
                                             <f:setPropertyActionListener value="#{domicilioBean.residencia}" target="#{domicilioBean.residencia}"/>
                                         </p:commandButton> 
 
-                                        <p:panel id="pnResidencia" >
+                                        <p:panel id="pnLugarNacimiento" >
+                                            <h:outputText  value="Pais:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.departamento.provincia.pais.descripcion}"/> <br></br>
+                                            <h:outputText  value="Provincia:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.departamento.provincia.descripcion}"/> <br></br>
+                                            <h:outputText  value="Departamento:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.departamento.descripcion}"/> <br></br>
                                             <h:outputText  value="Localidad:  "/>
                                             <h:outputText  value="#{domicilioBean.localidad.descripcion}"/> <br></br>
                                         </p:panel>
