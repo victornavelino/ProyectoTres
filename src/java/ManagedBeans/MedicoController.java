@@ -151,6 +151,7 @@ public class MedicoController implements Serializable {
         listadoTelefonosBean.setLstTelefonos(selected.getPersona().getTelefonos());
         listadoEmailBean.setLstCorreoElectronico(selected.getPersona().getCorreosElectronicos());
         domicilioBean.setDomicilio(selected.getPersona().getDomicilio());
+        domicilioBean.setLocalidad(selected.getPersona().getLugarNacimiento());
     }
 
     public void create() {

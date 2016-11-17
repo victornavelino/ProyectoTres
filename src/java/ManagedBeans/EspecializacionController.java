@@ -7,6 +7,7 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EspecializacionFacade;
 import RN.EspecializacionRNLocal;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -165,6 +166,10 @@ public class EspecializacionController implements Serializable {
 
     public List<Especializacion> getItemsAvailableSelectOne() {
         return getEspecializacionRNLocal().findAll();
+    }
+
+    public boolean esVencida() {
+return true;
     }
 
     @FacesConverter(forClass = Especializacion.class)

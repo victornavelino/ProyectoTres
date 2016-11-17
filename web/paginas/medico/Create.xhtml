@@ -235,6 +235,12 @@
                                     <p:calendar id="fechaBaja" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_motivoBaja}" for="motivoBaja" />
                                     <p:inputText id="motivoBaja" value="#{medicoController.selected.motivoBaja}" title="#{bundle.CreateMedicoTitle_motivoBaja}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_resolucionBaja}" for="resolucionBaja" />
+                                    <p:inputText id="resolucionBaja" value="#{medicoController.selected.resolucionBaja}" title="#{bundle.CreateMedicoLabel_resolucionBaja}" />
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaResolucionBaja}" for="fechaResolucionBaja" />
+                                    <p:calendar id="fechaResolucionBaja" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaResolucionBaja}" title="#{bundle.CreateMedicoLabel_fechaResolucionBaja}"  showOn="button"/>
+                                    
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_organismo}" for="organismo" />
                                     <p:selectOneMenu id="organismo" value="#{medicoController.selected.organismo}" >
                                         <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
@@ -247,9 +253,13 @@
                                     <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_nroRegistro}" for="nroRegistro" />
                                     <p:inputText id="nroRegistro" value="#{medicoController.selected.nroRegistro}" title="#{bundle.CreateMedicoLabel_nroRegistro}" />
+                                    <p:outputLabel value="Observaciones" for="observaciones" />
+                                    <p:inputTextarea id="observaciones" value="#{medicoController.selected.observaciones}" rows="4" cols="48"/>
+                                    
                                 </p:panelGrid>
                             </p:panel>
-
+                        <br/>
+                            <p:outputLabel value="CAPTURAR FOTO" />
                             <h:panelGrid columns="3" cellpadding="5">
                                 <p:photoCam widgetVar="fotoCam" listener="#{medicoController.oncapture}" 
                                             update=":MedicoCreateForm:panelFoto"

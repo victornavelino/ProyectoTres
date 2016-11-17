@@ -33,10 +33,9 @@
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimientoRevision}" for="fechaVencimientoRevision" />
                         <p:calendar id="fechaVencimientoRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.EditEspecializacionTitle_fechaVencimientoRevision}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{especializacionController.selected.medico}" >
-                            <f:selectItems value="#{medicoController.itemsAvailableSelectOne}"
-                                           var="medicoItem"
-                                           itemValue="#{medicoItem}"/>
+                        <p:selectOneMenu id="medico" value="#{especializacionController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
+                            <f:selectItem noSelectionOption="true" itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{medicoController.items}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_especialidad}" for="especialidad" />
                         <p:selectOneMenu id="especialidad" value="#{especializacionController.selected.especialidad}" >
