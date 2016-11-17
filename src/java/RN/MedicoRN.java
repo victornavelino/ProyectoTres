@@ -81,4 +81,16 @@ public class MedicoRN implements MedicoRNLocal {
         }
     }
 
+    @Override
+    public int buscarUltimaMatricula() {
+        Query q = null;
+        q = em.createNamedQuery("Medico.buscarUltimaMatricula");
+        try {
+            return (Integer) q.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
+
+    }
+
 }

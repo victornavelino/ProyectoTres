@@ -24,6 +24,7 @@
                              rowKey="#{item.id}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowStyleClass="#{recertificacionController.esVencida(item.fechaVencimiento) ? 'filaRoja' : null}"
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>

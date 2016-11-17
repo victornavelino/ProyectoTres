@@ -27,4 +27,6 @@ public interface MedicoRNLocal {
 
     public List<Medico> buscarMedicosDeudores(Integer mes, Integer anio);
 
+    public int buscarUltimaMatricula();
+
 }

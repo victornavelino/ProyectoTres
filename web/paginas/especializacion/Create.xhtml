@@ -15,9 +15,9 @@
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
                         <p:inputText id="matriculaEspecialidad" value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.CreateEspecializacionTitle_matriculaEspecialidad}" />
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaMatriculacion}" for="fechaMatriculacion" />
-                        <p:calendar id="fechaMatriculacion" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.EditEspecializacionTitle_fechaMatriculacion}"  showOn="button"/>
+                        <p:calendar id="fechaMatriculacion" pattern="dd/MM/yyyy" value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.EditEspecializacionTitle_fechaMatriculacion}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimiento}" for="fechaVencimiento" />
-                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.EditEspecializacionTitle_fechaVencimiento}"  showOn="button"/>
+                        <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.EditEspecializacionTitle_fechaVencimiento}"  showOn="button" disabled="true"/>
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_libro}" for="libro" />
                         <p:inputText id="libro" value="#{especializacionController.selected.libro}" title="#{bundle.CreateEspecializacionTitle_libro}" />
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_folio}" for="folio" />

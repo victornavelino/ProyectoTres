@@ -7,6 +7,8 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EspecializacionFacade;
 import RN.EspecializacionRNLocal;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -84,6 +86,7 @@ public class EspecializacionController implements Serializable {
     public Especializacion prepareCreate() {
         selected = new Especializacion();
         initializeEmbeddableKey();
+        calcularVencimiento();
         return selected;
     }
 
@@ -168,8 +171,16 @@ public class EspecializacionController implements Serializable {
         return getEspecializacionRNLocal().findAll();
     }
 
-    public boolean esVencida() {
-return true;
+    public boolean esVencida(Date fecha) {
+        return fecha.before(new Date());
+
+    }
+
+    private void calcularVencimiento() {
+         Calendar cal = Calendar.getInstance();
+         cal.add(Calendar.YEAR, 5);
+         selected.setFechaVencimiento(cal.getTime());
+
     }
 
     @FacesConverter(forClass = Especializacion.class)

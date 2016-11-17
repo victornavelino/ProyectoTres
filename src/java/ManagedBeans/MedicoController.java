@@ -14,6 +14,7 @@ import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MedicoFacade;
 import Facades.TelefonoFacade;
+import RN.MedicoRNLocal;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -59,6 +60,8 @@ public class MedicoController implements Serializable {
     private ListadoEmailBean listadoEmailBean;
     @Inject
     private DomicilioBean domicilioBean;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
 
     public MedicoController() {
     }
@@ -143,6 +146,7 @@ public class MedicoController implements Serializable {
         listadoEmailBean.setLstCorreoElectronico(new ArrayList<CorreoElectronico>());
         domicilioBean.setDomicilio(new Domicilio());
         domicilioBean.setResidencia(new Localidad());
+        calcularNroMatricula();
         initializeEmbeddableKey();
         return selected;
     }
@@ -225,6 +229,10 @@ public class MedicoController implements Serializable {
 
     public List<Medico> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    private void calcularNroMatricula() {
+        selected.setMatriculaProfesional(medicoRNLocal.buscarUltimaMatricula()+1);
     }
 
     @FacesConverter(forClass = Medico.class)

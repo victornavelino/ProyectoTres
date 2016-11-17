@@ -33,6 +33,7 @@ import javax.persistence.Temporal;
     @NamedQuery(name = "Medico.buscarMedicosEspecialidad", query = "SELECT m FROM Medico m ,m.especialidades esp WHERE esp=:especialidad"),
     @NamedQuery(name = "Medico.buscarXApellido", query = "SELECT m FROM Medico m WHERE m.persona.apellido LIKE :apellido"),
     @NamedQuery(name = "Medico.buscarXMatricula", query = "SELECT m FROM Medico m WHERE m.matriculaProfesional LIKE :matriculaProfesional"),
+    @NamedQuery(name = "Medico.buscarUltimaMatricula", query = "SELECT max(m.matriculaProfesional) FROM Medico m "),
     @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT med FROM Medico med WHERE med.tipoSocio.id = 1 EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio AND p.mes>=:mes)")
 })
 
