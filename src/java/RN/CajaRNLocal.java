@@ -34,4 +34,6 @@ public interface CajaRNLocal {
 
     public Caja getCajaAbierta();
     
+    public boolean hayCajaAbierta();
+    
 }
