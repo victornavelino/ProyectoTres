@@ -241,7 +241,7 @@ public class CajaController implements Serializable {
     }
 
     public void verificarEstadoCaja() {
-        if (cajaRNLocal.hayCajaAbierta()) {
+        if (!cajaRNLocal.hayCajaAbierta()) {
             JsfUtil.addSuccessMessage("La Caja esta Cerrada, no puede realizar movimientos");
         }
     }
@@ -268,6 +268,7 @@ public class CajaController implements Serializable {
             saldoFinalCaja = selected.getCajaInicial().add(totalIngresosCaja).subtract(totalEgresosCaja);
             selected.setCajaFinal(saldoFinalCaja);
             RequestContext.getCurrentInstance().update(":frmPri:CajaEditForm");
+            RequestContext.getCurrentInstance().update(":frmPri:MovimientoCajaListForm:menuContextual");
             RequestContext.getCurrentInstance().execute("PF('CajaEditDialog').show();");
         } else {
             JsfUtil.addSuccessMessage("La caja esta Cerrada");

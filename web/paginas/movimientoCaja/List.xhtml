@@ -102,11 +102,11 @@
                         <h:outputText value="Total General:" /><h:outputText value="#{movimientoCajaController.totalGeneral}">
                             <f:convertNumber type="currency" currencySymbol="$" />
                         </h:outputText><br />
-                        <p:commandButton id="createButtonI" icon="ui-icon-plus"   disabled="#{!cajaController.hayCajaAbierta}" value="#{bundleMovimientoCaja.CreateI}" actionListener="#{movimientoCajaController.prepareCreateI}" update=":IngresoCreateForm" oncomplete="PF('IngresoCreateDialog').show()"/>
-                        <p:commandButton id="createButtonE" icon="ui-icon-plus"    disabled="#{!cajaController.hayCajaAbierta}" value="#{bundleMovimientoCaja.CreateE}" actionListener="#{movimientoCajaController.prepareCreateE}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.hayCajaAbierta}" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.hayCajaAbierta}" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.hayCajaAbierta}" value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
+                        <p:commandButton id="createButtonI" icon="ui-icon-plus"   disabled="#{!cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.CreateI}" actionListener="#{movimientoCajaController.prepareCreateI}" update=":IngresoCreateForm" oncomplete="PF('IngresoCreateDialog').show()"/>
+                        <p:commandButton id="createButtonE" icon="ui-icon-plus"    disabled="#{!cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.CreateE}" actionListener="#{movimientoCajaController.prepareCreateE}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" rendered="#{cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" rendered="#{cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  rendered="#{cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
                         <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
                             <p:dataExporter type="xls" target="datalist" fileName="movimientos"/>
@@ -140,11 +140,11 @@
 
                 </p:dataTable>
                 <p:contextMenu id="menuContextual" for="datalist">
-                    <p:menuitem  icon="ui-icon-plus"   disabled="#{!cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.CreateI}" actionListener="#{movimientoCajaController.prepareCreateI}" update=":IngresoCreateForm" oncomplete="PF('IngresoCreateDialog').show()"/>
-                    <p:menuitem  icon="ui-icon-plus"    disabled="#{!cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.CreateE}" actionListener="#{movimientoCajaController.prepareCreateE}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
-                    <p:menuitem   icon="ui-icon-search" rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
-                    <p:menuitem   icon="ui-icon-pencil" rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
-                    <p:menuitem  icon="ui-icon-trash"  rendered="#{cajaController.isCajaAbierta}" value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
+                    <p:menuitem  icon="ui-icon-plus"   disabled="#{!cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.CreateI}" actionListener="#{movimientoCajaController.prepareCreateI}" update=":IngresoCreateForm" oncomplete="PF('IngresoCreateDialog').show()"/>
+                    <p:menuitem  icon="ui-icon-plus"    disabled="#{!cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.CreateE}" actionListener="#{movimientoCajaController.prepareCreateE}" update=":EgresoCreateForm" oncomplete="PF('EgresoCreateDialog').show()"/>
+                    <p:menuitem   icon="ui-icon-search" rendered="#{cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.View}" update=":MovimientoCajaViewForm" oncomplete="PF('MovimientoCajaViewDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                    <p:menuitem   icon="ui-icon-pencil" rendered="#{cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.Edit}" update=":MovimientoCajaEditForm" oncomplete="PF('MovimientoCajaEditDialog').show()" disabled="#{empty movimientoCajaController.selected}"/>
+                    <p:menuitem  icon="ui-icon-trash"  rendered="#{cajaController.hayCajaAbierta()}" value="#{bundleMovimientoCaja.Delete}" actionListener="#{movimientoCajaController.destroy}" update=":growl,datalist" disabled="#{empty movimientoCajaController.selected}"/>
                 </p:contextMenu>
             </p:panel>
         </h:form>
