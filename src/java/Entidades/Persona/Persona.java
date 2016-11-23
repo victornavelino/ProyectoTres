@@ -173,15 +173,6 @@ public class Persona implements Serializable {
         this.estadoCivil = estadoCivil;
     }
 
-    public Localidad getLugarNacimiento() {
-        return lugarNacimiento;
-    }
-
-    public void setLugarNacimiento(Localidad lugarNacimiento) {
-        this.lugarNacimiento = lugarNacimiento;
-    }
-
- 
     @Override
     public int hashCode() {
         int hash = 0;
