@@ -1,31 +1,27 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
-                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                 template="./Templates/adminTemplate.xhtml"
-                 xmlns:p="http://primefaces.org/ui"
-                 xmlns:h="http://java.sun.com/jsf/html"
-                 xmlns:f="http://java.sun.com/jsf/core"
-                 xmlns:b="http://bootsfaces.net/ui"
-                 >
-
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
 
     <ui:define name="content">
-        <b:panel>
-
-
+        <f:event listener="#{consultaBean.iniciar()}" type="preRenderView"/>
+        <h:form id="consultaForm">
             <h3> <h:outputText value="Consultas" styleClass="titulo"/></h3>
 
-            <b:tabView id="tvConsulta">  
-
-
-                <b:tab id="tab2" title="Medicos deudores">
+            <p:tabView>  
+                <p:tab id="tab2" title="Medicos deudores ">
+                    <h3>Medicos que pagaron hasta:</h3>
                     <p:panelGrid columns="2" styleClass="noBorders">
 
-                        <p:outputLabel value="MESES: " for="mes" /> 
+                        <p:outputLabel value="HASTA MESE DE: " for="mes" /> 
 
-                        <p:selectOneMenu id="mes" value="#{consultaBean.mes}"  maxlength="40">
+                        <p:selectOneMenu id="mes" value="#{consultaBean.mes}" >
                             <f:selectItem itemLabel="ENERO" itemValue="1" />
                             <f:selectItem itemLabel="FEBRERO" itemValue="2" />
                             <f:selectItem itemLabel="MARZO" itemValue="3" />
@@ -39,69 +35,82 @@
                             <f:selectItem itemLabel="NOVIEMBRE" itemValue="11" />
                             <f:selectItem itemLabel="DICIEMBRE" itemValue="12" />
                         </p:selectOneMenu>   
-                        <p:outputLabel value="AÑO " for="mes" /> 
-                        <p:spinner id="spinner" value="#{consultaBean.anio}" min="1950" max="2050" maxlength="4" placeholder="2016"/>
+                        <p:outputLabel value="AÑO " for="spinner" /> 
+
+
+                        <p:spinner id="spinner" value="#{consultaBean.anio}" 
+                                   min="1900" 
+                                   max="2100" size="10" binding="#{consultaBean.spinnerAnio}"/>
 
 
                         <p:commandButton id="cbBuscarEspecializaciones"
                                          icon="ui-icon-search"
                                          value="Buscar"
-                                         actionListener="#{consultaBean.buscarEspecializaciones()}"
-                                         update="dtConsultaEspecializacion"/>
+                                         actionListener="#{consultaBean.buscarMedicosDeudores()}"
+                                         update=":consultaForm:dtConsultaMedico"
+                                         />
                     </p:panelGrid>
 
-                </b:tab>
+                </p:tab>
 
-            </b:tabView>
-        </b:panel>
-        <br/>
-        <h3> <h:outputText value="resultados" styleClass="titulo"/></h3>
-        <p:dataTable id="dtConsultaEspecializacion"
-                     value="#{listaEspecializacionBean.especializaciones}"
-                     var="item"
-                     style="overflow-x: auto;"
-                     paginator="true"
-                     rows="20"
-                     >
-            <p:column 
-                filterBy="#{item.matriculaEspecialidad}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Matricula"/>
+            </p:tabView>
+            <br/>
+
+            <p:dataTable id="dtConsultaMedico"
+                         value="#{listaMedicoBean.medicosDeudores}"
+                         var="item"
+                         rowKey="#{item.id}"
+                         style="overflow-x: auto;"
+                         paginator="true"
+                         rows="20"
+                         widgetVar="dtConsultaMedico"
+                         filterEvent="enter"
+                         >
+                <p:column 
+                    filterBy="#{item.persona.apellido}" sortBy="#{item.persona.apellido}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Apellido"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.apellido}"/>
+                </p:column>
+                <p:column 
+                    filterBy="#{item.persona.nombre}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.apellido}"/>
+                </p:column>
+                <p:column 
+                    filterBy="#{item.matriculaProfesional}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Matricula"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matriculaProfesional}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <h:commandLink>
+                        <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                        <p:dataExporter type="xls" target="dtConsultaMedico" fileName="Lista Profesionales Deudores"/>
+                    </h:commandLink>
+
+
+                    <h:commandLink>
+                        <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                        <p:dataExporter type="csv" target="dtConsultaMedico" fileName="Lista Profesionales Deudores"/>
+                    </h:commandLink>
+
+                    <h:commandLink>
+                        <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                        <p:dataExporter type="xls" 
+                                        target="dtConsultaMedico" fileName="Lista Profesionales Deudores pagina"   pageOnly="true"/>
+                    </h:commandLink>
                 </f:facet>
-                <h:outputText value="#{item.matriculaEspecialidad}"/>
-            </p:column>
-            <p:column 
-                filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Apellido"/>
-                </f:facet>
-                <h:outputText value="#{item.medico.persona.apellido}"/>
-            </p:column>
-            <p:column 
-                filterBy="#{item.medico.persona.nombre}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Nombre"/>
-                </f:facet>
-                <h:outputText value="#{item.medico.persona.apellido}"/>
-            </p:column>
-            <p:column 
-                filterBy="#{item.matriculaEspecialidad}"
-                style="word-wrap:break-word;">
-                <f:facet name="header">
-                    <h:outputText value="Matricula"/>
-                </f:facet>
-                <h:outputText value="#{item.matriculaEspecialidad}"/>
-            </p:column>
-        </p:dataTable>
+            </p:dataTable>
 
 
-
-
-
-
-
+        </h:form>
     </ui:define>
 </ui:composition>

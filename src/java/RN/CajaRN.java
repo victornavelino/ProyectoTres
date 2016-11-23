@@ -34,7 +34,7 @@ public class CajaRN implements CajaRNLocal {
 
     @Override
     public void edit(Caja caja) {
-       cajaFacade.edit(caja);
+        cajaFacade.edit(caja);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class CajaRN implements CajaRNLocal {
 
     @Override
     public Caja getCajaAbierta() {
-        Caja caja=null;
+        Caja caja = null;
         Query q = null;
         q = em.createQuery("SELECT c FROM Caja c  WHERE c.fechaFin IS NULL");
         List listaCajasAbiertas = q.getResultList();
@@ -80,6 +80,19 @@ public class CajaRN implements CajaRNLocal {
             caja = (Caja) listaCajasAbiertas.get(listaCajasAbiertas.size() - 1);
         }
         return caja;
+    }
+
+    @Override
+    public boolean hayCajaAbierta() {
+        Caja caja = null;
+        Query q = null;
+        boolean respuesta = false;
+        q = em.createQuery("SELECT c FROM Caja c  WHERE c.fechaFin IS NULL");
+        List listaCajasAbiertas = q.getResultList();
+        if (listaCajasAbiertas.size() > 0) {
+            respuesta = true;
+        }
+        return respuesta;
     }
 
 }

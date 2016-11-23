@@ -6,6 +6,8 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.RecertificacionFacade;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.SelectEvent;
 
 @ManagedBean(name = "recertificacionController")
 @SessionScoped
@@ -54,6 +57,15 @@ public class RecertificacionController implements Serializable {
         selected = new Recertificacion();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public boolean esVencida(Date fecha) {
+        try {
+            return fecha.before(new Date());
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     public void create() {
@@ -108,6 +120,14 @@ public class RecertificacionController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
+    }
+
+    public void calcularVencimiento(SelectEvent event) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(selected.getFechaRecertificacion());
+        cal.add(Calendar.YEAR, 5);
+        selected.setFechaVencimiento(cal.getTime());
+        System.out.println("FECHA VENCIMIENTO: " + selected.getFechaVencimiento());
     }
 
     public List<Recertificacion> getItemsAvailableSelectMany() {

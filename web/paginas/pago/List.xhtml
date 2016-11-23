@@ -103,7 +103,7 @@
                         </f:facet>
                         <h:outputText value="#{item.importe}"/>
                     </p:column>
-                  
+
                     <f:facet name="footer">
                         <p:commandButton id="createButton" disabled="#{!cajaController.isCajaAbierta}" icon="ui-icon-plus"   value="#{bundlePago.Create}" actionListener="#{pagoController.prepareCreate}" update=":PagoCreateForm" oncomplete="PF('PagoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePago.View}" update=":PagoViewForm" oncomplete="PF('PagoViewDialog').show()" disabled="#{empty pagoController.selected}"/>
@@ -129,6 +129,9 @@
                             <p:printer target="datalist" />
                         </p:commandButton> </f:facet>
                 </p:dataTable>
+                    <p:contextMenu for="datalist">
+                    <p:menuitem icon="ui-icon-search" value="#{bundlePago.View}" update=":PagoViewForm" oncomplete="PF('PagoViewDialog').show()"/>
+                </p:contextMenu>
             </p:panel>
         </h:form>
 

@@ -30,9 +30,18 @@ public class ListaMedicoBean {
     private Especialidad especialidad;
     @EJB
     private MedicoRNLocal medicoFacade;
+    private List<Medico> medicosDeudores;
 
     public List<Medico> getMedicos() {
         return medicos;
+    }
+
+    public List<Medico> getMedicosDeudores() {
+        return medicosDeudores;
+    }
+
+    public void setMedicosDeudores(List<Medico> medicosDeudores) {
+        this.medicosDeudores = medicosDeudores;
     }
 
     public void setMedicos(List<Medico> medicos) {

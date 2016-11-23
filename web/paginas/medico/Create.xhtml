@@ -40,7 +40,7 @@
                                 <p:calendar id="caFechaNacimiento" 
                                             value="#{medicoController.selected.persona.fechaNacimiento}" 
                                             title="FechaNacimiento:" 
-                                             pattern="dd/MM/yyyy"
+                                            pattern="dd/MM/yyyy"
                                             />
 
                                 <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
@@ -146,7 +146,7 @@
                                          width="720"
                                          >
 
-                                <p:panel header="Domicilio"
+                                <p:panel header="Lugar de Residencia"
                                          style="width: 700px">
                                     <h:panelGrid columns="2" width="550">
                                         <p:commandButton id="btnDomicilioMedico" 
@@ -168,6 +168,37 @@
                                             <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
                                             <h:outputText  value="Numero:  "/>
                                             <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                        </p:panel>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </h:panelGrid>
+                            <br></br> 
+                            <h:panelGrid columns="1" 
+                                         width="720"
+                                         >
+
+                                <p:panel header="Lugar de Nacimiento"
+                                         style="width: 700px">
+                                    <h:panelGrid columns="2" width="550">
+                                        <p:commandButton id="btnNacimientoMedico" 
+                                                         value="Cargar Datos"
+                                                         oncomplete="PF('dgNacimientoProf').show();"
+                                                         actionListener="#{domicilioBean.definirActionBoton}"
+                                                         icon="ui-icon-disk"
+                                                         >
+                                            <f:setPropertyActionListener value="#{domicilioBean.residencia}" target="#{domicilioBean.residencia}"/>
+                                        </p:commandButton> 
+
+                                        <p:panel id="pnLugarNacimiento" >
+                                            <h:outputText  value="Pais:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.departamento.provincia.pais.descripcion}"/> <br></br>
+                                            <h:outputText  value="Provincia:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.departamento.provincia.descripcion}"/> <br></br>
+                                            <h:outputText  value="Departamento:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.departamento.descripcion}"/> <br></br>
+                                            <h:outputText  value="Localidad:  "/>
+                                            <h:outputText  value="#{domicilioBean.localidad.descripcion}"/> <br></br>
                                         </p:panel>
                                     </h:panelGrid>
                                 </p:panel>
@@ -204,6 +235,12 @@
                                     <p:calendar id="fechaBaja" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaBaja}" title="#{bundle.EditMedicoTitle_fechaBaja}"  showOn="button"/>
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_motivoBaja}" for="motivoBaja" />
                                     <p:inputText id="motivoBaja" value="#{medicoController.selected.motivoBaja}" title="#{bundle.CreateMedicoTitle_motivoBaja}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_resolucionBaja}" for="resolucionBaja" />
+                                    <p:inputText id="resolucionBaja" value="#{medicoController.selected.resolucionBaja}" title="#{bundle.CreateMedicoLabel_resolucionBaja}" />
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaResolucionBaja}" for="fechaResolucionBaja" />
+                                    <p:calendar id="fechaResolucionBaja" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaResolucionBaja}" title="#{bundle.CreateMedicoLabel_fechaResolucionBaja}"  showOn="button"/>
+                                    
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_organismo}" for="organismo" />
                                     <p:selectOneMenu id="organismo" value="#{medicoController.selected.organismo}" >
                                         <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
@@ -214,10 +251,15 @@
                                     <p:inputText id="libro" value="#{medicoController.selected.libro}" title="#{bundle.CreateMedicoTitle_libro}" />
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_folio}" for="folio" />
                                     <p:inputText id="folio" value="#{medicoController.selected.folio}" title="#{bundle.CreateMedicoTitle_folio}" />
-
+                                    <p:outputLabel value="#{bundle.CreateMedicoLabel_nroRegistro}" for="nroRegistro" />
+                                    <p:inputText id="nroRegistro" value="#{medicoController.selected.nroRegistro}" title="#{bundle.CreateMedicoLabel_nroRegistro}" />
+                                    <p:outputLabel value="Observaciones" for="observaciones" />
+                                    <p:inputTextarea id="observaciones" value="#{medicoController.selected.observaciones}" rows="4" cols="48"/>
+                                    
                                 </p:panelGrid>
                             </p:panel>
-
+                        <br/>
+                            <p:outputLabel value="CAPTURAR FOTO" />
                             <h:panelGrid columns="3" cellpadding="5">
                                 <p:photoCam widgetVar="fotoCam" listener="#{medicoController.oncapture}" 
                                             update=":MedicoCreateForm:panelFoto"

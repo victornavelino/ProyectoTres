@@ -63,7 +63,7 @@ public class TipoEspecialidad implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Medico.TipoEspecialidad[ id=" + id + " ]";
+        return descripcion;
     }
     
 }

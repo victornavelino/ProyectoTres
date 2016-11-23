@@ -43,7 +43,6 @@ public class CajaController implements Serializable {
     private MovimientoCajaRNLocal movimientoCajaRNLocal;
     private List<Caja> items = null;
     private Caja selected;
-    private boolean isCajaAbierta;
     private String sMensaje = "";
     private BigDecimal cajaInicial;
     BigDecimal saldoFinalCaja = new BigDecimal("0.00");
@@ -102,14 +101,6 @@ public class CajaController implements Serializable {
         this.cajaInicial = cajaInicial;
     }
 
-    public boolean isIsCajaAbierta() {
-        return isCajaAbierta;
-    }
-
-    public void setIsCajaAbierta(boolean isCajaAbierta) {
-        this.isCajaAbierta = isCajaAbierta;
-    }
-
     public String getsMensaje() {
         return sMensaje;
     }
@@ -151,7 +142,6 @@ public class CajaController implements Serializable {
     }
 
     public void create() {
-        isCajaAbierta = true;
         sMensaje = "";
         selected.setFechaInicio(new Date());
         System.out.println("ManagedBeans.CajaController.create()");
@@ -171,7 +161,6 @@ public class CajaController implements Serializable {
         selected.setFechaFin(new Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundleCaja").getString("CajaUpdated"));
         selected = null;
-        isCajaAbierta = false;
     }
 
     public void destroy() {
@@ -231,11 +220,11 @@ public class CajaController implements Serializable {
 
     public Caja abrirCaja() {
         //selected = new Caja();
-        if (hayCajaAbierta()) {
+        if (cajaRNLocal.hayCajaAbierta()) {
             System.out.println("ya se encuentra caja abierta");
             selected = cajaRNLocal.getCajaAbierta();
             sMensaje = "Ya se encuentra abierta una Caja del usuario: " + selected.getUsuario();
-            isCajaAbierta = true;
+
             RequestContext.getCurrentInstance().update(":frmPri:EgresoListForm,:frmPri:IngresoListForm");
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ya se encuentra una caja Abierta", null);
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -252,13 +241,13 @@ public class CajaController implements Serializable {
     }
 
     public void verificarEstadoCaja() {
-        if (!isCajaAbierta) {
+        if (!cajaRNLocal.hayCajaAbierta()) {
             JsfUtil.addSuccessMessage("La Caja esta Cerrada, no puede realizar movimientos");
         }
     }
 
     public void calcularSaldo() {
-        if (isCajaAbierta) {
+        if (cajaRNLocal.hayCajaAbierta()) {
 
             selected = cajaRNLocal.getCajaAbierta();
             //selected.setMovimientosCaja(movimientoCajaRNLocal.getMovimientosdesdeFecha(selected.getFechaInicio()));
@@ -279,6 +268,7 @@ public class CajaController implements Serializable {
             saldoFinalCaja = selected.getCajaInicial().add(totalIngresosCaja).subtract(totalEgresosCaja);
             selected.setCajaFinal(saldoFinalCaja);
             RequestContext.getCurrentInstance().update(":frmPri:CajaEditForm");
+            RequestContext.getCurrentInstance().update(":frmPri:MovimientoCajaListForm:menuContextual");
             RequestContext.getCurrentInstance().execute("PF('CajaEditDialog').show();");
         } else {
             JsfUtil.addSuccessMessage("La caja esta Cerrada");
@@ -292,7 +282,6 @@ public class CajaController implements Serializable {
             selected.setFechaFin(new Date());
             //selected.setCajaFinal(cajaArqueo);
             cerrar();
-            isCajaAbierta = false;
             selected = null;
             System.out.println("pasoooo cerrar caja");
             RequestContext.getCurrentInstance().execute("PF('CajaCierreDlg').hide();");
@@ -354,12 +343,11 @@ public class CajaController implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        isCajaAbierta = false;
+
         if (hayCajaAbierta()) {
             System.out.println("ya se encuentra caja abierta");
             selected = cajaRNLocal.getCajaAbierta();
             sMensaje = "Ya se encuentra abierta una Caja del usuario: " + selected.getUsuario();
-            isCajaAbierta = true;
             RequestContext.getCurrentInstance().update(":frmPri:EgresoListForm,:frmPri:IngresoListForm");
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ya se encuentra una caja Abierta", null);
             FacesContext fc = FacesContext.getCurrentInstance();

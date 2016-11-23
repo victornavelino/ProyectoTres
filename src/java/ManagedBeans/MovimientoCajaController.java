@@ -170,17 +170,21 @@ public class MovimientoCajaController implements Serializable {
     }
 
     public void create() {
-        selected.setUsuario(usuarioLogerBean.getUsuario());
-        selected.setFecha(new Date());
-        getFacade().create(selected);
-        //persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
-        Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
-        cajaAbierta.getMovimientosCaja().add(selected);
-        cajaRNLocal.edit(cajaAbierta);
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        if (cajaController.hayCajaAbierta()) {
+            selected.setUsuario(usuarioLogerBean.getUsuario());
+            selected.setFecha(new Date());
+            getFacade().create(selected);
+            //persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
+            Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
+            cajaAbierta.getMovimientosCaja().add(selected);
+            cajaRNLocal.edit(cajaAbierta);
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
+            JsfUtil.addSuccessMessage("movimiento de Caja Creado!");
+        } else {
+            JsfUtil.addErrorMessage("La caja se encuentra cerrada no puede realizar movimientos!");
         }
-        JsfUtil.addSuccessMessage("movimiento de Caja Creado!");
     }
 
     public void update() {

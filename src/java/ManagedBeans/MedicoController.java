@@ -1,6 +1,7 @@
 package ManagedBeans;
 
 import Entidades.Base.Archivo;
+import Entidades.Localidad.Localidad;
 import Entidades.Medico.Medico;
 import Entidades.Persona.CorreoElectronico;
 import Entidades.Persona.DocumentoIdentidad;
@@ -13,6 +14,7 @@ import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MedicoFacade;
 import Facades.TelefonoFacade;
+import RN.MedicoRNLocal;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -58,6 +60,8 @@ public class MedicoController implements Serializable {
     private ListadoEmailBean listadoEmailBean;
     @Inject
     private DomicilioBean domicilioBean;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
 
     public MedicoController() {
     }
@@ -141,6 +145,8 @@ public class MedicoController implements Serializable {
         listadoTelefonosBean.setLstTelefonos(new ArrayList<Telefono>());
         listadoEmailBean.setLstCorreoElectronico(new ArrayList<CorreoElectronico>());
         domicilioBean.setDomicilio(new Domicilio());
+        domicilioBean.setResidencia(new Localidad());
+        calcularNroMatricula();
         initializeEmbeddableKey();
         return selected;
     }
@@ -149,10 +155,12 @@ public class MedicoController implements Serializable {
         listadoTelefonosBean.setLstTelefonos(selected.getPersona().getTelefonos());
         listadoEmailBean.setLstCorreoElectronico(selected.getPersona().getCorreosElectronicos());
         domicilioBean.setDomicilio(selected.getPersona().getDomicilio());
+        domicilioBean.setLocalidad(selected.getPersona().getLugarNacimiento());
     }
 
     public void create() {
         selected.getPersona().setDomicilio(domicilioBean.getDomicilio());
+        selected.getPersona().setLugarNacimiento(domicilioBean.getLocalidad());
         selected.getPersona().setTelefonos(listadoTelefonosBean.getLstTelefonos());
         selected.getPersona().setCorreosElectronicos(listadoEmailBean.getLstCorreoElectronico());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MedicoCreated"));
@@ -221,6 +229,10 @@ public class MedicoController implements Serializable {
 
     public List<Medico> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    private void calcularNroMatricula() {
+        selected.setMatriculaProfesional(medicoRNLocal.buscarUltimaMatricula()+1);
     }
 
     @FacesConverter(forClass = Medico.class)

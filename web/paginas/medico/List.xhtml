@@ -32,6 +32,8 @@
                              filterEvent="enter"
                              sortField="#{item.matriculaProfesional}"
                              sortOrder="DESCENDING"
+                             rowStyleClass="#{item.tipoSocio.id == 2 ? 'filaRoja' : null}"
+                             
                              >
 
                     <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton printButton"/>
@@ -129,5 +131,6 @@
         <ui:include src="TelefonosProfesionalDlg.xhtml"/>
         <ui:include src="MailProfesionalDlg.xhtml"/>
         <ui:include src="DomicilioDlgProfesional.xhtml"/>
+        <ui:include src="LugarNacimientoDlgProfesional.xhtml"/>
     </ui:define>
 </ui:composition>

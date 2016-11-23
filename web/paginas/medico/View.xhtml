@@ -92,6 +92,19 @@
                                         <p:outputLabel  value="Numero:  "/>
                                         <p:outputLabel  value="#{medicoController.selected.persona.domicilio.numero}"/>
                                     </h:panelGrid>
+                                </p:panel>
+                            <p:panel header="Lugar de Nacimiento"
+                                         >
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel  value="Pais:  "/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.lugarNacimiento.departamento.provincia.pais.descripcion}"/>
+                                        <p:outputLabel  value="Provincia:  "/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.lugarNacimiento.departamento.provincia.descripcion}"/> 
+                                        <p:outputLabel  value="Departamento:  "/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.lugarNacimiento.departamento.descripcion}"/>
+                                        <p:outputLabel  value="Numero:  "/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.lugarNacimiento.descripcion}"/>
+                                    </h:panelGrid>
                                 </p:panel></p:panelGrid>
                             <p:outputPanel id="panelFoto">
                                 <p:graphicImage id="giFoto" value="#{medicoController.image}"
