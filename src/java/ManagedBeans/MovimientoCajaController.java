@@ -256,15 +256,18 @@ public class MovimientoCajaController implements Serializable {
             calculo = cajaRNLocal.getCajaAbierta().getCajaInicial();
         } catch (Exception e) {
         }
-        for (MovimientoCaja i : items) {
-            switch (i.getClase()) {
-                case "Ingreso":
-                    calculo = calculo.add(i.getImporte());
-                    break;
-                case "Egreso":
-                    calculo = calculo.subtract(i.getImporte());
-                    break;
+        try {
+            for (MovimientoCaja i : items) {
+                switch (i.getClase()) {
+                    case "Ingreso":
+                        calculo = calculo.add(i.getImporte());
+                        break;
+                    case "Egreso":
+                        calculo = calculo.subtract(i.getImporte());
+                        break;
+                }
             }
+        } catch (Exception e) {
         }
         return calculo;
     }

@@ -5,6 +5,8 @@
  */
 package Entidades.Persona;
 
+import Entidades.Localidad.Localidad;
+import Entidades.Localidad.Pais;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -43,6 +46,11 @@ public class Persona implements Serializable {
     private Date fechaNacimiento;
     @Embedded
     private Domicilio domicilio;
+    @OneToOne
+    @JoinColumn(name = "LUGARNACIMIENTO_ID")
+    private Localidad lugarNacimiento;
+    @OneToOne
+    private Pais nacionalidad;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Telefono> telefonos;
     @OneToMany(cascade = CascadeType.ALL)
@@ -52,6 +60,22 @@ public class Persona implements Serializable {
     private Sexo sexo;
     @OneToOne
     private EstadoCivil estadoCivil;
+
+    public Pais getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(Pais nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public Localidad getLugarNacimiento() {
+        return lugarNacimiento;
+    }
+
+    public void setLugarNacimiento(Localidad lugarNacimiento) {
+        this.lugarNacimiento = lugarNacimiento;
+    }
 
     public Long getId() {
         return id;
