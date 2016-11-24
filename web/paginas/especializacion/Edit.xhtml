@@ -10,10 +10,9 @@
 
         <p:dialog id="EspecializacionEditDlg" widgetVar="EspecializacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEspecializacionTitle}">
             <h:form id="EspecializacionEditForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditEspecializacionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{especializacionController.selected.id}" title="#{bundle.EditEspecializacionTitle_id}" />
+                <h:panelGroup id="display" >
+                    <p:panel id="pPri" header="Datos Especializacion" >
+                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}" styleClass="noBorders">
                         <p:outputLabel value="#{bundle.EditEspecializacionLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
                         <p:inputText id="matriculaEspecialidad" value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.EditEspecializacionTitle_matriculaEspecialidad}" />
                         <p:outputLabel value="#{bundle.EditEspecializacionLabel_fechaMatriculacion}" for="fechaMatriculacion" />
@@ -50,6 +49,7 @@
                                            itemValue="#{especialidadItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
+                        </p:panel>
                     <p:commandButton actionListener="#{especializacionController.update}" value="#{bundle.Save}" update="display,:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EspecializacionEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EspecializacionEditDialog.hide()"/>
                 </h:panelGroup>

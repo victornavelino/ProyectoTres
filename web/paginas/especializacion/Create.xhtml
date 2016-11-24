@@ -11,7 +11,8 @@
         <p:dialog id="EspecializacionCreateDlg" widgetVar="EspecializacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEspecializacionTitle}">
             <h:form id="EspecializacionCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
+                    <p:panel id="pPri" header="Datos Especializacion" >
+                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}" styleClass="noBorders">
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
                         <p:inputText id="matriculaEspecialidad" value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.CreateEspecializacionTitle_matriculaEspecialidad}" />
                         <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaMatriculacion}" for="fechaMatriculacion" />
@@ -44,6 +45,7 @@
                                            itemValue="#{especialidadItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
+                        </p:panel> 
                     <p:commandButton actionListener="#{especializacionController.create}" value="#{bundle.Save}" update="display,:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecializacionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EspecializacionCreateDialog.hide()"/>
                 </h:panelGroup>
