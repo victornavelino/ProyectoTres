@@ -204,6 +204,16 @@
 
                             </h:panelGrid>
                             <br></br>
+                            <br></br> 
+                            <p:panelGrid columns="2" styleClass="noBorders">
+                                <p:outputLabel value="Nacionalidad: " for="nacionalidad" />
+                                <p:selectOneMenu id="nacionalidad" value="#{medicoController.selected.persona.nacionalidad}" 
+                                                 style="width: 150px" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
+                                    <f:selectItem noSelectionOption="true" itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{paisController.items}"/>
+                                </p:selectOneMenu>
+                                <br></br> 
+                            </p:panelGrid>
                             <p:panel header="Datos Profesionales"
                                      style="width: 700px">
                                 <p:panelGrid columns="2" rendered="#{medicoController.selected != null}" styleClass="noBorders">

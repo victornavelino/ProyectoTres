@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PaisFacade extends AbstractFacade<Pais> {
+
     @PersistenceContext(unitName = "ProyectoColegioPU")
     private EntityManager em;
 

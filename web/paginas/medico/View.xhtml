@@ -93,7 +93,7 @@
                                         <p:outputLabel  value="#{medicoController.selected.persona.domicilio.numero}"/>
                                     </h:panelGrid>
                                 </p:panel>
-                            <p:panel header="Lugar de Nacimiento"
+                                <p:panel header="Lugar de Nacimiento"
                                          >
                                     <h:panelGrid columns="2">
                                         <p:outputLabel  value="Pais:  "/>
@@ -104,6 +104,8 @@
                                         <p:outputLabel  value="#{medicoController.selected.persona.lugarNacimiento.departamento.descripcion}"/>
                                         <p:outputLabel  value="Numero:  "/>
                                         <p:outputLabel  value="#{medicoController.selected.persona.lugarNacimiento.descripcion}"/>
+                                        <p:outputLabel  value="Pais Extranjero:  "/>
+                                        <p:outputLabel  value="#{medicoController.selected.persona.nacionalidad}"/>
                                     </h:panelGrid>
                                 </p:panel></p:panelGrid>
                             <p:outputPanel id="panelFoto">

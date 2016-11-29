@@ -6,6 +6,7 @@ import Entidades.Pago.Pago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.PagoFacade;
+import RN.PagoRNLocal;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -40,6 +41,8 @@ public class PagoController implements Serializable {
     private List<Pago> items = null;
     private Pago selected;
     private int cantidadCuotas;
+    @EJB
+    private PagoRNLocal pagoRNLocal;
 
     public PagoController() {
     }
@@ -80,38 +83,48 @@ public class PagoController implements Serializable {
     public void create() {
         int mes = selected.getMes();
         int anio = selected.getAnio();
-        try {
+        StringBuilder mensaje = new StringBuilder("");
+//        try {
             for (int i = 0; i < cantidadCuotas; i++) {
-                selected.setMes(mes);
-                selected.setAnio(anio);
-                persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
-                Ingreso caja = new Ingreso();
-                caja.setFecha(new Date());
-                caja.setFechaOperacion(selected.getFechaPago());
-                caja.setDescripcion("Pago, "
-                        + selected.getMedico().getPersona()
-                        + ", Cuota " + selected.getMes() + " " + selected.getAnio());
-                caja.setTipo(ingresoFacade.find(5L));
-                caja.setImporte(selected.getImporte());
-                try {
-                    caja.setNroComprobante(Integer.parseInt(selected.getNroRecibo()));
-                } catch (NumberFormatException numberFormatException) {
-                }
-                caja.setUsuario(usuarioLogerBean.getUsuario());
-                cajaFacade.create(caja);
-                if (!JsfUtil.isValidationFailed()) {
-                    items = null;    // Invalidate list of items to trigger re-query.
-                }
-                if (mes == 12) {
-                    mes = 1;
-                    anio++;
+                if (!pagoRNLocal.existePago(selected.getMedico(), anio, mes)) {
+
+                    selected.setMes(mes);
+                    selected.setAnio(anio);
+                    persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
+                    Ingreso caja = new Ingreso();
+                    caja.setFecha(new Date());
+                    caja.setFechaOperacion(selected.getFechaPago());
+                    caja.setDescripcion("Pago, "
+                            + selected.getMedico().getPersona()
+                            + ", Cuota " + selected.getMes() + " " + selected.getAnio());
+                    caja.setTipo(ingresoFacade.find(5L));
+                    caja.setImporte(selected.getImporte());
+                    try {
+                        caja.setNroComprobante(Integer.parseInt(selected.getNroRecibo()));
+                    } catch (NumberFormatException numberFormatException) {
+                    }
+                    caja.setUsuario(usuarioLogerBean.getUsuario());
+                    cajaFacade.create(caja);
+                    if (!JsfUtil.isValidationFailed()) {
+                        items = null;    // Invalidate list of items to trigger re-query.
+                    }
+                    if (mes == 12) {
+                        mes = 1;
+                        anio++;
+                    } else {
+                        mes++;
+                    }
                 } else {
-                    mes++;
+                    mensaje = mensaje.append(mes).append("/").append(anio).append("; ");
                 }
+
             }
-        } catch (Exception e) {
-            System.out.println("Error creando Pago: " + e);
-        }
+            if (mensaje != null) {
+                JsfUtil.addErrorMessage("Las Cuotas: " + mensaje + " YA se encuentran abonadas");
+            }
+//        } catch (Exception e) {
+//            System.out.println("Error creando Pago: " + e);
+//        }
     }
 
     public void update() {

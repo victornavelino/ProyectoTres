@@ -105,10 +105,10 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" disabled="#{!cajaController.isCajaAbierta}" icon="ui-icon-plus"   value="#{bundlePago.Create}" actionListener="#{pagoController.prepareCreate}" update=":PagoCreateForm" oncomplete="PF('PagoCreateDialog').show()"/>
+                        <p:commandButton id="createButton" disabled="#{!cajaController.hayCajaAbierta()}" icon="ui-icon-plus"   value="#{bundlePago.Create}" actionListener="#{pagoController.prepareCreate}" update=":PagoCreateForm" oncomplete="PF('PagoCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlePago.View}" update=":PagoViewForm" oncomplete="PF('PagoViewDialog').show()" disabled="#{empty pagoController.selected}"/>
-                        <p:commandButton id="editButton"   rendered="#{cajaController.isCajaAbierta}" icon="ui-icon-pencil" value="#{bundlePago.Edit}" update=":PagoEditForm" oncomplete="PF('PagoEditDialog').show()" disabled="#{empty pagoController.selected}"/>
-                        <p:commandButton id="deleteButton" rendered="#{cajaController.isCajaAbierta}" icon="ui-icon-trash"  value="#{bundlePago.Delete}" actionListener="#{pagoController.destroy}" update=":growl,datalist" disabled="#{empty pagoController.selected}"/>
+                        <p:commandButton id="editButton"   rendered="#{cajaController.hayCajaAbierta()}" icon="ui-icon-pencil" value="#{bundlePago.Edit}" update=":PagoEditForm" oncomplete="PF('PagoEditDialog').show()" disabled="#{empty pagoController.selected}"/>
+                        <p:commandButton id="deleteButton" rendered="#{cajaController.hayCajaAbierta()}" icon="ui-icon-trash"  value="#{bundlePago.Delete}" actionListener="#{pagoController.destroy}" update=":growl,datalist" disabled="#{empty pagoController.selected}"/>
                         <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
                             <p:dataExporter type="xls" target="datalist" fileName="#{bundlePago.ListPagoTitle}"/>
