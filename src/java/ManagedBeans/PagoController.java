@@ -43,6 +43,8 @@ public class PagoController implements Serializable {
     private int cantidadCuotas;
     @EJB
     private PagoRNLocal pagoRNLocal;
+    @Inject
+    private CajaController cajaController;
 
     public PagoController() {
     }
@@ -81,9 +83,10 @@ public class PagoController implements Serializable {
     }
 
     public void create() {
-        int mes = selected.getMes();
-        int anio = selected.getAnio();
-        StringBuilder mensaje = new StringBuilder("");
+        if (cajaController.hayCajaAbierta()) {
+            int mes = selected.getMes();
+            int anio = selected.getAnio();
+            StringBuilder mensaje = new StringBuilder("");
 //        try {
             for (int i = 0; i < cantidadCuotas; i++) {
                 if (!pagoRNLocal.existePago(selected.getMedico(), anio, mes)) {
@@ -125,6 +128,10 @@ public class PagoController implements Serializable {
 //        } catch (Exception e) {
 //            System.out.println("Error creando Pago: " + e);
 //        }
+        } else {
+            JsfUtil.addErrorMessage("La caja se encuentra cerrada no puede realizar Pagos!");
+        }
+
     }
 
     public void update() {
