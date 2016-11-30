@@ -172,7 +172,12 @@ public class EspecializacionController implements Serializable {
     }
 
     public boolean esVencida(Date fecha) {
-        return fecha.before(new Date());
+        try {
+          return fecha.before(new Date());  
+        } catch (Exception e) {
+          return false;  
+        }
+        
 
     }
 
