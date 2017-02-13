@@ -12,8 +12,8 @@
             <h:form id="RecertificacionEditForm">
                 <h:panelGroup id="display">
                     <h1>Editar Recertificacion</h1>
-                    <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
-                     
+                    <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}" styleClass="noBorders">
+
                         <p:outputLabel value="Especializacion:"/>
 
                         <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true">
@@ -23,7 +23,10 @@
                         </p:selectOneMenu>    
 
                         <p:outputLabel value="FechaRecertificacion (dd/MM/yyyy):"/>
-                        <p:calendar id="fechaRecertificacion" pattern="dd/MM/yyyy" value="#{recertificacionController.selected.fechaRecertificacion}" title="FechaRecertificacion"  showOn="button"/>
+                        <p:calendar id="fechaRecertificacion" pattern="dd/MM/yyyy" value="#{recertificacionController.selected.fechaRecertificacion}" 
+                                    title="FechaRecertificacion"  showOn="button">
+                            <p:ajax event="dateSelect" listener="#{recertificacionController.calcularVencimiento}" update=":RecertificacionEditForm:fechaVencimiento" />
+                        </p:calendar>
 
                         <p:outputLabel value="NroActa:"/>
                         <h:inputText id="nroActa" value="#{recertificacionController.selected.nroActa}" title="NroActa" />

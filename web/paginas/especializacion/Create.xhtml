@@ -12,40 +12,45 @@
             <h:form id="EspecializacionCreateForm">
                 <h:panelGroup id="display">
                     <p:panel id="pPri" header="Datos Especializacion" >
-                    <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}" styleClass="noBorders">
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
-                        <p:inputText id="matriculaEspecialidad" value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.CreateEspecializacionTitle_matriculaEspecialidad}" />
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaMatriculacion}" for="fechaMatriculacion" />
-                        <p:calendar id="fechaMatriculacion" pattern="dd/MM/yyyy" value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.EditEspecializacionTitle_fechaMatriculacion}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimiento}" for="fechaVencimiento" />
-                        <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.EditEspecializacionTitle_fechaVencimiento}"  showOn="button" disabled="true"/>
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_libro}" for="libro" />
-                        <p:inputText id="libro" value="#{especializacionController.selected.libro}" title="#{bundle.CreateEspecializacionTitle_libro}" />
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_folio}" for="folio" />
-                        <p:inputText id="folio" value="#{especializacionController.selected.folio}" title="#{bundle.CreateEspecializacionTitle_folio}" />
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_unidadFormadora}" for="unidadFormadora" />
-                        <p:selectOneMenu id="unidadFormadora" value="#{especializacionController.selected.unidadFormadora}" >
-                            <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
-                                           var="unidadFormadoraItem"
-                                           itemValue="#{unidadFormadoraItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaRevision}" for="fechaRevision" />
-                        <p:calendar id="fechaRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaRevision}" title="#{bundle.EditEspecializacionTitle_fechaRevision}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimientoRevision}" for="fechaVencimientoRevision" />
-                        <p:calendar id="fechaVencimientoRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.EditEspecializacionTitle_fechaVencimientoRevision}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{especializacionController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
-                            <f:selectItem noSelectionOption="true" itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{medicoController.items}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateEspecializacionLabel_especialidad}" for="especialidad" />
-                        <p:selectOneMenu id="especialidad" value="#{especializacionController.selected.especialidad}" >
-                            <f:selectItems value="#{especialidadController.itemsAvailableSelectOne}"
-                                           var="especialidadItem"
-                                           itemValue="#{especialidadItem}"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                        </p:panel> 
+                        <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}" styleClass="noBorders">
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_matriculaEspecialidad}" for="matriculaEspecialidad" />
+                            <p:inputText id="matriculaEspecialidad" value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.CreateEspecializacionTitle_matriculaEspecialidad}" />
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaMatriculacion}" for="fechaMatriculacion" />
+                            <p:calendar id="fechaMatriculacion" pattern="dd/MM/yyyy" value="#{especializacionController.selected.fechaMatriculacion}" 
+                                        title="#{bundle.EditEspecializacionTitle_fechaMatriculacion}"  showOn="button">
+                                <p:ajax event="dateSelect" listener="#{especializacionController.calcularVencimiento}" update=":EspecializacionCreateForm:fechaVencimiento" />
+                            </p:calendar>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimiento}" for="fechaVencimiento" />
+                            <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" 
+                                        value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.EditEspecializacionTitle_fechaVencimiento}"  
+                                        showOn="button" disabled="true"/>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_libro}" for="libro" />
+                            <p:inputText id="libro" value="#{especializacionController.selected.libro}" title="#{bundle.CreateEspecializacionTitle_libro}" />
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_folio}" for="folio" />
+                            <p:inputText id="folio" value="#{especializacionController.selected.folio}" title="#{bundle.CreateEspecializacionTitle_folio}" />
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_unidadFormadora}" for="unidadFormadora" />
+                            <p:selectOneMenu id="unidadFormadora" value="#{especializacionController.selected.unidadFormadora}" >
+                                <f:selectItems value="#{unidadFormadoraController.itemsAvailableSelectOne}"
+                                               var="unidadFormadoraItem"
+                                               itemValue="#{unidadFormadoraItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaRevision}" for="fechaRevision" />
+                            <p:calendar id="fechaRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaRevision}" title="#{bundle.EditEspecializacionTitle_fechaRevision}"  showOn="button"/>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimientoRevision}" for="fechaVencimientoRevision" />
+                            <p:calendar id="fechaVencimientoRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.EditEspecializacionTitle_fechaVencimientoRevision}"  showOn="button"/>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_medico}" for="medico" />
+                            <p:selectOneMenu id="medico" value="#{especializacionController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
+                                <f:selectItem noSelectionOption="true" itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{medicoController.items}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_especialidad}" for="especialidad" />
+                            <p:selectOneMenu id="especialidad" value="#{especializacionController.selected.especialidad}" >
+                                <f:selectItems value="#{especialidadController.itemsAvailableSelectOne}"
+                                               var="especialidadItem"
+                                               itemValue="#{especialidadItem}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                    </p:panel> 
                     <p:commandButton actionListener="#{especializacionController.create}" value="#{bundle.Save}" update="display,:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecializacionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EspecializacionCreateDialog.hide()"/>
                 </h:panelGroup>

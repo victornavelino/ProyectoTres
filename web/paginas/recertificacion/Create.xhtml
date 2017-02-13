@@ -11,7 +11,7 @@
         <p:dialog id="RecertificacionCreateDlg" widgetVar="RecertificacionCreateDialog" position="top" modal="true" resizable="false" appendTo="@(body)" header="Crear Recertificación">
             <h:form id="RecertificacionCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}" styleClass="noBorders">
                         <p:outputLabel value="Especializacion:"/>
                         <p:selectOneMenu id="especializacion" value="#{recertificacionController.selected.especializacion}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true">
                             <f:selectItems value="#{especializacionController.itemsAvailableSelectOne}"
