@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.servlet.http.HttpSession;
+import org.primefaces.event.SelectEvent;
 
 @Named("especializacionController")
 @SessionScoped
@@ -86,7 +87,6 @@ public class EspecializacionController implements Serializable {
     public Especializacion prepareCreate() {
         selected = new Especializacion();
         initializeEmbeddableKey();
-        calcularVencimiento();
         return selected;
     }
 
@@ -181,12 +181,6 @@ public class EspecializacionController implements Serializable {
 
     }
 
-    private void calcularVencimiento() {
-         Calendar cal = Calendar.getInstance();
-         cal.add(Calendar.YEAR, 5);
-         selected.setFechaVencimiento(cal.getTime());
-
-    }
 
     @FacesConverter(forClass = Especializacion.class)
     public static class EspecializacionControllerConverter implements Converter {
@@ -231,5 +225,13 @@ public class EspecializacionController implements Serializable {
 
     public Date getDate() {
         return new Date();
+    }
+    
+        public void calcularVencimiento(SelectEvent event) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(selected.getFechaMatriculacion());
+        cal.add(Calendar.YEAR, 5);
+        selected.setFechaVencimiento(cal.getTime());
+        System.out.println("FECHA VENCIMIENTO: " + selected.getFechaVencimiento());
     }
 }
