@@ -110,22 +110,6 @@
                         </f:facet>
                         <h:outputText value="#{item.unidadFormadora.descripcion}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_fechaRevision}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaRevision}">
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:outputText>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_fechaVencimientoRevision}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.fechaVencimientoRevision}">
-                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                        </h:outputText>
-                    </p:column>
 
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{especializacionController.prepareCreate}" update=":EspecializacionCreateForm" oncomplete="PF('EspecializacionCreateDialog').show()"/>
