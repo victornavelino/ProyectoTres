@@ -93,4 +93,16 @@ public class MedicoRN implements MedicoRNLocal {
 
     }
 
+    @Override
+    public List<Medico> buscarTodosActivos() {
+        Query q = null;
+        q = em.createNamedQuery("Medico.buscarTodosActivos");
+        if (q.getResultList() != null) {
+            return q.getResultList();
+        } else {
+            return new ArrayList<>();
+        }
+
+    }
+
 }

@@ -96,7 +96,6 @@ public class EspecializacionController implements Serializable {
         selected.setCreadoPor(user);
         selected.setFechaCreado(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionCreated"));
-
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
