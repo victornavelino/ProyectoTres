@@ -1,5 +1,6 @@
 package ManagedBeans;
 
+import Entidades.Medico.Especialidad;
 import Entidades.Medico.Especializacion;
 import Entidades.Medico.Medico;
 import ManagedBeans.util.JsfUtil;
@@ -9,6 +10,7 @@ import RN.EspecializacionRNLocal;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -96,7 +98,6 @@ public class EspecializacionController implements Serializable {
         selected.setCreadoPor(user);
         selected.setFechaCreado(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionCreated"));
-
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
@@ -173,14 +174,20 @@ public class EspecializacionController implements Serializable {
 
     public boolean esVencida(Date fecha) {
         try {
-          return fecha.before(new Date());  
+            return fecha.before(new Date());
         } catch (Exception e) {
-          return false;  
+            return false;
         }
-        
 
     }
 
+    public List<Especializacion> buscarListaEspecializaciones(Especialidad especialidad) {
+        try {
+            return especializacionRNLocal.buscarPorEspecialidad(especialidad);
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
 
     @FacesConverter(forClass = Especializacion.class)
     public static class EspecializacionControllerConverter implements Converter {
@@ -226,8 +233,8 @@ public class EspecializacionController implements Serializable {
     public Date getDate() {
         return new Date();
     }
-    
-        public void calcularVencimiento(SelectEvent event) {
+
+    public void calcularVencimiento(SelectEvent event) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(selected.getFechaMatriculacion());
         cal.add(Calendar.YEAR, 5);

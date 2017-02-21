@@ -40,7 +40,8 @@
                         <h:inputTextarea id="observaciones" value="#{recertificacionController.selected.observaciones}" />
                         <p:outputLabel value="FechaVencimiento (dd/MM/yyyy):"/>
                         <p:calendar id="fechaVencimiento" pattern="dd/MM/yyyy" value="#{recertificacionController.selected.fechaVencimiento}" title="FechaVencimiento"  showOn="button" disabled="true"/>
-
+                        <p:outputLabel value="Puntaje: "/>
+                        <h:inputText id="puntaje" value="#{recertificacionController.selected.puntaje}"/>
 
 
                     </p:panelGrid>

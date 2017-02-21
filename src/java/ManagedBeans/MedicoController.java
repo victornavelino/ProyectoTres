@@ -53,6 +53,7 @@ public class MedicoController implements Serializable {
     @EJB
     private Facades.CorreoElectronicoFacade correoElectronicoFacade;
     private List<Medico> items = null;
+    private List<Medico> medicosActivos= null;
     private Medico selected;
     @Inject
     private ListadoTelefonosBean listadoTelefonosBean;
@@ -66,6 +67,14 @@ public class MedicoController implements Serializable {
     public MedicoController() {
     }
 
+    public List<Medico> getMedicosActivos() {
+        return medicosActivos;
+    }
+
+    public void setMedicosActivos(List<Medico> medicosActivos) {
+        this.medicosActivos = medicosActivos;
+    }
+    
     public MedicoFacade getEjbFacade() {
         return ejbFacade;
     }
@@ -189,6 +198,9 @@ public class MedicoController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+    public List<Medico> getActivos(){
+        return medicoRNLocal.buscarTodosActivos();
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

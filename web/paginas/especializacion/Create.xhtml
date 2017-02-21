@@ -34,10 +34,8 @@
                                                var="unidadFormadoraItem"
                                                itemValue="#{unidadFormadoraItem}"/>
                             </p:selectOneMenu>
-                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaRevision}" for="fechaRevision" />
-                            <p:calendar id="fechaRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaRevision}" title="#{bundle.EditEspecializacionTitle_fechaRevision}"  showOn="button"/>
-                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_fechaVencimientoRevision}" for="fechaVencimientoRevision" />
-                            <p:calendar id="fechaVencimientoRevision" pattern="MM/dd/yyyy" value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.EditEspecializacionTitle_fechaVencimientoRevision}"  showOn="button"/>
+                            <p:outputLabel value="Otra Unidad Formadora: " for="otraUnidadFormadora" />
+                            <p:inputText id="otraUnidadFormadora" value="#{especializacionController.selected.otraUnidadFormadora}" title="Otra Unidad Formadora" />
                             <p:outputLabel value="#{bundle.CreateEspecializacionLabel_medico}" for="medico" />
                             <p:selectOneMenu id="medico" value="#{especializacionController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
                                 <f:selectItem noSelectionOption="true" itemLabel="#{bundle.SelectOneMessage}"/>
@@ -49,9 +47,17 @@
                                                var="especialidadItem"
                                                itemValue="#{especialidadItem}"/>
                             </p:selectOneMenu>
+                            <p:outputLabel value="Residencia Fecha Inicio: " for="fechaInicioResidencia" />
+                            <p:calendar id="fechaInicioResidencia" pattern="dd/MM/yyyy" value="#{especializacionController.selected.residenciaFechaInicio}" title="Residencia Fecha Inicio"  showOn="button"/>
+                            <p:outputLabel value="Residencia Fecha Fin: " for="fechaFinResidencia" />
+                            <p:calendar id="fechaFinResidencia" pattern="dd/MM/yyyy" value="#{especializacionController.selected.residenciaFechaFin}" title="Residencia Fecha Fin"  showOn="button"/>
+                            <p:outputLabel value="Fecha Examen Final: " for="fechaExamenFinal" />
+                            <p:calendar id="fechaExamenFinal" pattern="dd/MM/yyyy" value="#{especializacionController.selected.fechaExamenFinal}" title="Fecha Examen Final"  showOn="button"/>
+
                         </p:panelGrid>
                     </p:panel> 
-                    <p:commandButton actionListener="#{especializacionController.create}" value="#{bundle.Save}" update="display,:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecializacionCreateDialog');"/>
+                    <p:commandButton actionListener="#{especializacionController.create}" value="#{bundle.Save}" 
+                                     update="display,:EspecializacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EspecializacionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EspecializacionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

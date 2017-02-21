@@ -29,4 +29,6 @@ public interface MedicoRNLocal {
 
     public int buscarUltimaMatricula();
 
+    public List<Medico> buscarTodosActivos();
+
 }

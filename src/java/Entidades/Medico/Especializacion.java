@@ -28,8 +28,11 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name = "medico_especializacion")
 @NamedQueries({
-    @NamedQuery(name = "Especializacion.buscarEspecialidad",
+    @NamedQuery(name = "Especializacion.buscarEspecialidadTodas",
             query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad "
+            + " ORDER BY e.id DESC"),
+        @NamedQuery(name = "Especializacion.buscarEspecialidad",
+            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad AND e.medico.tipoSocio.descripcion ='ACTIVO' "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarPorProfesional",
             query = "SELECT e FROM Especializacion e WHERE e.medico.persona.apellido=:medico "
@@ -70,6 +73,46 @@ public class Especializacion extends Base implements Serializable {
     private Date fechaVencimientoRevision;
     @OneToMany(mappedBy = "especializacion")
     private List<Recertificacion> recertificaciones;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date residenciaFechaInicio;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date residenciaFechaFin;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaExamenFinal;
+    private String otraUnidadFormadora;
+
+    public String getOtraUnidadFormadora() {
+        return otraUnidadFormadora;
+    }
+
+    public void setOtraUnidadFormadora(String otraUnidadFormadora) {
+        this.otraUnidadFormadora = otraUnidadFormadora;
+    }
+    
+    public Date getFechaExamenFinal() {
+        return fechaExamenFinal;
+    }
+
+    public void setFechaExamenFinal(Date fechaExamenFinal) {
+        this.fechaExamenFinal = fechaExamenFinal;
+    }
+    
+    public Date getResidenciaFechaInicio() {
+        return residenciaFechaInicio;
+    }
+
+    public void setResidenciaFechaInicio(Date residenciaFechaInicio) {
+        this.residenciaFechaInicio = residenciaFechaInicio;
+    }
+
+    public Date getResidenciaFechaFin() {
+        return residenciaFechaFin;
+    }
+
+    public void setResidenciaFechaFin(Date residenciaFechaFin) {
+        this.residenciaFechaFin = residenciaFechaFin;
+    }
+    
 
     public List<Recertificacion> getRecertificaciones() {
         return recertificaciones;

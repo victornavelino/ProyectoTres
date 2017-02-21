@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog position="top" id="EspecializacionViewDlg" widgetVar="EspecializacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEspecializacionTitle}">
+        <p:dialog position="top" id="EspecializacionViewDlg" widgetVar="EspecializacionViewDialog" position="top" modal="true" height="500" resizable="true" appendTo="@(body)" header="#{bundle.ViewEspecializacionTitle}">
             <h:form id="EspecializacionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
@@ -43,6 +43,13 @@
                                       #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
                         <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                        <h:outputText value="Residencia Fecha Inicio: "/>
+                        <h:outputText id="fechaInicioResidencia"  value="#{especializacionController.selected.residenciaFechaInicio}"/>
+                        <h:outputText value="Residencia Fecha Fin: "/>
+                        <h:outputText id="fechaFinResidencia" value="#{especializacionController.selected.residenciaFechaFin}"/>
+                        <h:outputText value="Fecha Examen Final: "/>
+                        <h:outputText id="fechaExamenFinal" value="#{especializacionController.selected.fechaExamenFinal}"/>
+
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="EspecializacionViewDialog.hide()"/>
                 </h:panelGroup>

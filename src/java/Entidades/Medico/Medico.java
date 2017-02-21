@@ -6,6 +6,7 @@
 package Entidades.Medico;
 
 import Entidades.Base.Archivo;
+import Entidades.Caja.MovimientoCaja;
 import Entidades.Pago.Pago;
 import Entidades.Pago.PlanPago;
 import Entidades.Persona.Persona;
@@ -34,12 +35,16 @@ import javax.persistence.Temporal;
     @NamedQuery(name = "Medico.buscarXApellido", query = "SELECT m FROM Medico m WHERE m.persona.apellido LIKE :apellido"),
     @NamedQuery(name = "Medico.buscarXMatricula", query = "SELECT m FROM Medico m WHERE m.matriculaProfesional LIKE :matriculaProfesional"),
     @NamedQuery(name = "Medico.buscarUltimaMatricula", query = "SELECT max(m.matriculaProfesional) FROM Medico m "),
+    @NamedQuery(name = "Medico.buscarTodosActivos", query = "SELECT m FROM Medico m WHERE m.tipoSocio.descripcion ='ACTIVO'"),
     @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT med FROM Medico med WHERE med.tipoSocio.id = 1 EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio AND p.mes>=:mes)")
 })
 
 @Entity
 @Table(name = "medico")
 public class Medico implements Serializable {
+
+    @OneToOne
+    private MovimientoCaja movimientoCaja;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -81,6 +86,14 @@ public class Medico implements Serializable {
     @Lob
     private String observaciones;
 
+    public MovimientoCaja getMovimientoCaja() {
+        return movimientoCaja;
+    }
+
+    public void setMovimientoCaja(MovimientoCaja movimientoCaja) {
+        this.movimientoCaja = movimientoCaja;
+    }
+    
     public String getResolucionBaja() {
         return resolucionBaja;
     }
