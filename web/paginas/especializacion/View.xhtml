@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog position="top" id="EspecializacionViewDlg" widgetVar="EspecializacionViewDialog" position="top" modal="true" height="500" resizable="true" appendTo="@(body)" header="#{bundle.ViewEspecializacionTitle}">
+        <p:dialog id="EspecializacionViewDlg" widgetVar="EspecializacionViewDialog" position="top" modal="true" height="500" resizable="true" appendTo="@(body)" header="#{bundle.ViewEspecializacionTitle}">
             <h:form id="EspecializacionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">

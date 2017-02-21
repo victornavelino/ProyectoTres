@@ -5,6 +5,7 @@
  */
 package RN;
 
+import Entidades.Medico.Recertificacion;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,17 @@ public class RecertificacionRN implements RecertificacionRNLocal {
             return q.getResultList();
         } catch (Exception e) {
             return new ArrayList<Object[]>();
+        }
+    }
+
+    @Override
+    public List<Recertificacion> getRecertificacionesActivos() {
+        Query q = null;
+        q = em.createNamedQuery("Recertificacion.getRecertificacionesActivos");
+        try {
+            return q.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 

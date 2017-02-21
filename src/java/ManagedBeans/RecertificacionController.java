@@ -4,6 +4,7 @@ import Entidades.Medico.Recertificacion;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.RecertificacionFacade;
+import RN.RecertificacionRNLocal;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -31,6 +32,8 @@ public class RecertificacionController implements Serializable {
     private Facades.RecertificacionFacade ejbFacade;
     private List<Recertificacion> items = null;
     private Recertificacion selected;
+    @EJB
+    private RecertificacionRNLocal recertificacionRNLocal;
 
     public RecertificacionController() {
     }
@@ -90,6 +93,13 @@ public class RecertificacionController implements Serializable {
     public List<Recertificacion> getItems() {
         if (items == null) {
             items = getFacade().findAll();
+        }
+        return items;
+    }
+
+    public List<Recertificacion> getRecertificacionesActivos() {
+        if (items == null) {
+            items = recertificacionRNLocal.getRecertificacionesActivos();
         }
         return items;
     }

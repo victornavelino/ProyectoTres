@@ -59,6 +59,14 @@ public class MovimientoCaja extends Base implements Serializable {
     @OneToOne(mappedBy = "movimientoCaja")
     private Medico medico;
 
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+   
     public int getNroComprobante() {
         return nroComprobante;
     }

@@ -5,6 +5,7 @@
  */
 package RN;
 
+import Entidades.Medico.Recertificacion;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -17,5 +18,7 @@ public interface RecertificacionRNLocal {
 
 
     public List<Object[]> cantidadVigente();
+
+    public List<Recertificacion> getRecertificacionesActivos();
 
 }
