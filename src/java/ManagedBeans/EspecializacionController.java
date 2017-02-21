@@ -126,15 +126,12 @@ public class EspecializacionController implements Serializable {
     }
 
     public List<Especializacion> getItems() {
-        if (items == null) {
-            items = getEspecializacionRNLocal().findAll();
-        }
+        items = getEspecializacionRNLocal().findAll();
         return items;
     }
 
     public List<Especializacion> getEspecializacionesActivos() {
-
-            items = getEspecializacionRNLocal().buscarEspecializacionesActivos();
+        items = getEspecializacionRNLocal().buscarEspecializacionesActivos();
         return items;
     }
 

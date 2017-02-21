@@ -20,7 +20,7 @@
 
             <p:panel>
 
-                <p:dataTable id="datalist" value="#{especializacionController.items}" var="item"
+                <p:dataTable id="datalist" value="#{especializacionController.especializacionesActivos}" var="item"
                              selectionMode="single" selection="#{especializacionController.selected}"
                              paginator="true"
                              rowKey="#{item.id}"
@@ -37,13 +37,7 @@
                         <p:commandButton id="toggler" type="button" value="Columnas" style="float:right" icon="ui-icon-calculator" />
                         <p:columnToggler datasource="datalist" trigger="toggler" />                        </f:facet>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_id}"/>
 
-                        </f:facet>
-                        <h:outputText value="#{item.id}"/>
-                    </p:column>         
                     <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="Apellido"/>
@@ -57,59 +51,83 @@
                         </f:facet>
                         <h:outputText value="#{item.medico.persona.nombre}"/>
                     </p:column>
-
+                    <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains" width="80">
+                        <f:facet name="header">
+                            <h:outputText value="M.P."/>
+                        </f:facet>
+                        <h:outputText value="#{item.medico.matriculaProfesional}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains" width="80">
+                        <f:facet name="header">
+                            <h:outputText value="M.E."/>
+                        </f:facet>
+                        <h:outputText value="#{item.matriculaEspecialidad}"/>
+                    </p:column>
                     <p:column filterBy="#{item.especialidad.descripcion}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEspecializacionTitle_especialidad}"/>
                         </f:facet>
                         <h:outputText value="#{item.especialidad.descripcion}"/>
                     </p:column>
-                    <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains">
+                    <p:column filterBy="#{item.medico.unidadFormadora.descripcion}">
                         <f:facet name="header">
-                            <h:outputText value="Matricula"/>
+                            <h:outputText value="Universidad de Egreso"/>
                         </f:facet>
-                        <h:outputText value="#{item.medico.matriculaProfesional}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_matriculaEspecialidad}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.matriculaEspecialidad}"/>
+                        <h:outputText value="#{item.medico.unidadFormadora.descripcion}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_fechaMatriculacion}"/>
+                            <h:outputText value="Fecha de Egreso"/>
                         </f:facet>
-                        <h:outputText value="#{item.fechaMatriculacion}">
+                        <h:outputText value="#{item.medico.fechaRecibido}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column filterBy="#{item.unidadFormadora.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="Centro Formador Esp."/>
+                        </f:facet>
+                        <h:outputText value="#{item.unidadFormadora.descripcion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Formador Esp."/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaExamenFinal}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_fechaVencimiento}"/>
+                            <h:outputText value="Domicilio"/>
+                        </f:facet>
+                        <h:outputText value="#{item.medico.persona.domicilio.toString()}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Matriculacion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.medico.fechaInscripcion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column visible="false">
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Esp."/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaCreado}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column visible="false">
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Vencimiento Esp."/>
                         </f:facet>
                         <h:outputText value="#{item.fechaVencimiento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_libro}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.libro}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_folio}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.folio}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.unidadFormadora.descripcion}">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListEspecializacionTitle_unidadFormadora}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.unidadFormadora.descripcion}"/>
-                    </p:column>
+
 
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{especializacionController.prepareCreate}" update=":EspecializacionCreateForm" oncomplete="PF('EspecializacionCreateDialog').show()"/>
