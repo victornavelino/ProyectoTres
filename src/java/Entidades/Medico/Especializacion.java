@@ -28,8 +28,11 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name = "medico_especializacion")
 @NamedQueries({
-    @NamedQuery(name = "Especializacion.buscarEspecialidad",
+    @NamedQuery(name = "Especializacion.buscarEspecialidadTodas",
             query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad "
+            + " ORDER BY e.id DESC"),
+        @NamedQuery(name = "Especializacion.buscarEspecialidad",
+            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad WHERE e.medico.tipoSocio.descripcion ='ACTIVO' "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarPorProfesional",
             query = "SELECT e FROM Especializacion e WHERE e.medico.persona.apellido=:medico "

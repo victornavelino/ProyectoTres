@@ -19,6 +19,7 @@
                         <h:outputText value="#{bundle.ViewEspecialidadLabel_tipoEspecialidad}"/>
                         <h:outputText value="#{especialidadController.selected.tipoEspecialidad}" title="#{bundle.ViewEspecialidadTitle_tipoEspecialidad}"/>
                     </p:panelGrid>
+                    <div style="clear:both"></div>
                     <p:dataTable id="datalist" value="#{especializacionController.buscarListaEspecializaciones(especialidadController.selected)}" var="item"
                                  paginator="true"
                                  rowKey="#{item.id}"
@@ -29,7 +30,6 @@
                                  >
                         <f:facet name="header">
                             <h:outputText value="Profesionales"/>
-
                         </f:facet>
 
 
