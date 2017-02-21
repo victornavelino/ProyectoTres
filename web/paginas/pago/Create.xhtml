@@ -35,7 +35,7 @@
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{pagoController.selected.anio}" title="#{bundlePago.CreatePagoTitle_anio}" />
                         <p:outputLabel value="Cantidad de Cuotas" for="cantCuota" />
-                        <p:spinner id="cantCuota" value="#{pagoController.cantidadCuotas}" />
+                        <p:spinner min="1" max="60"  id="cantCuota" value="#{pagoController.cantidadCuotas}" />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_nroRecibo}" for="nroRecibo" />
                         <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.CreatePagoTitle_nroRecibo}" required="true"  />
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_fechaPago}" for="fechaPago" />
