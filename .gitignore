@@ -1,3 +1,9 @@
 /dist/
 /nbproject/private/
 /build/
+
+build.xml
+nbproject/*.xml
+nbproject/*.properties
+src/conf/persistence.xml
+web/WEB-INF/glassfish-web.xml
