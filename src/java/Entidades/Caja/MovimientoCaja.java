@@ -6,6 +6,7 @@
 package Entidades.Caja;
 
 import Entidades.Base.Base;
+import Entidades.Medico.Medico;
 import Entidades.Usuario.Usuario;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -54,6 +55,9 @@ public class MovimientoCaja extends Base implements Serializable {
     private boolean cerrado;
 
     private int nroComprobante;
+
+    @OneToOne(mappedBy = "movimientoCaja")
+    private Medico medico;
 
     public int getNroComprobante() {
         return nroComprobante;

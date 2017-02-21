@@ -100,6 +100,13 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Puntaje"/>
+                        </f:facet>
+                        <h:outputText value="#{item.puntaje}">
+                        </h:outputText>
+                    </p:column>
 
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{recertificacionController.prepareCreate}" update=":RecertificacionCreateForm" oncomplete="PF('RecertificacionCreateDialog').show()"/>

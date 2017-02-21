@@ -43,6 +43,13 @@
                                       #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
                         <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                        <h:outputText value="Residencia Fecha Inicio: "/>
+                        <h:outputText id="fechaInicioResidencia"  value="#{especializacionController.selected.residenciaFechaInicio}"/>
+                        <h:outputText value="Residencia Fecha Fin: "/>
+                        <h:outputText id="fechaFinResidencia" value="#{especializacionController.selected.residenciaFechaFin}"/>
+                        <h:outputText value="Fecha Examen Final: "/>
+                        <h:outputText id="fechaExamenFinal" value="#{especializacionController.selected.fechaExamenFinal}"/>
+
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="EspecializacionViewDialog.hide()"/>
                 </h:panelGroup>
