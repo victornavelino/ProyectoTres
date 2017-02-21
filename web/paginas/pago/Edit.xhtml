@@ -37,7 +37,7 @@
                         <p:outputLabel value="#{bundlePago.EditPagoLabel_nroRecibo}" for="nroRecibo" />
                         <p:inputText id="nroRecibo" value="#{pagoController.selected.nroRecibo}" title="#{bundlePago.EditPagoTitle_nroRecibo}" />
                         <p:outputLabel value="#{bundlePago.EditPagoLabel_fechaPago}" for="fechaPago" />
-                        <p:calendar id="fechaPago" pattern="MM/dd/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
+                        <p:calendar id="fechaPago" pattern="dd/MM/yyyy" value="#{pagoController.selected.fechaPago}" title="#{bundlePago.EditPagoTitle_fechaPago}"  showOn="button"/>
                         <p:outputLabel value="#{bundlePago.EditPagoLabel_importe}" for="importe" />
                         <p:inputText id="importe" value="#{pagoController.selected.importe}" title="#{bundlePago.EditPagoTitle_importe}" />
                         <p:outputLabel value="#{bundlePago.EditPagoLabel_concepto}" for="concepto" />

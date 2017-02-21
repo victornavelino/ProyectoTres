@@ -12,10 +12,8 @@
             <h:form id="PagoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
-                        <h:outputText value="#{bundlePago.ViewPagoLabel_id}"/>
-                        <h:outputText value="#{pagoController.selected.id}" title="#{bundlePago.ViewPagoTitle_id}"/>
                         <h:outputText value="#{bundlePago.ViewPagoLabel_medico}"/>
-                        <h:outputText value="#{pagoController.selected.medico}" title="#{bundlePago.ViewPagoTitle_medico}"/>
+                        <h:outputText value="#{pagoController.selected.medico.matriculaProfesional} - #{pagoController.selected.medico.persona.apellido}, #{pagoController.selected.medico.persona.nombre}" title="#{bundlePago.ViewPagoTitle_medico}"/>
                         <h:outputText value="#{bundlePago.ViewPagoLabel_mes}"/>
                         <h:outputText value="#{pagoController.selected.mes}" title="#{bundlePago.ViewPagoTitle_mes}"/>
                         <h:outputText value="#{bundlePago.ViewPagoLabel_anio}"/>
@@ -35,7 +33,7 @@
                         <h:outputText value="#{bundlePago.ViewPagoLabel_observaciones}"/>
                         <h:outputText value="#{pagoController.selected.observaciones}" title="#{bundlePago.ViewPagoTitle_observaciones}"/>
                         <p:outputLabel value="Cuenta:"/>
-                        <p:outputLabel id="cuenta" value="#{pagoController.selected.cuenta}" />
+                        <p:outputLabel id="cuenta" value="#{pagoController.selected.cuenta.descripcion}" />
                     </p:panelGrid>
                     <p:commandButton value="#{bundlePago.Close}" onclick="PagoViewDialog.hide()"/>
                 </h:panelGroup>
