@@ -16,9 +16,9 @@
         </h3>
 
 
-        <h:form id="RecertificacionListForm">
+        <h:form id="RecertificacionListTodosForm">
             <p:panel header="Recertificaciones">
-                <p:dataTable id="datalist" value="#{recertificacionController.recertificacionesActivos}" var="item"
+                <p:dataTable id="datalist" value="#{recertificacionController.items}" var="item"
                              selectionMode="single" selection="#{recertificacionController.selected}"
                              paginator="true"
                              rowKey="#{item.id}"
@@ -27,8 +27,8 @@
                              rowStyleClass="#{recertificacionController.esVencida(item.fechaVencimiento) ? 'filaRoja' : null}"
                              >
 
-                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="deleteButton"/>
+                    <p:ajax event="rowUnselect" update="deleteButton"/>
 
                     <p:column>
                         <f:facet name="header">
@@ -109,9 +109,6 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{recertificacionController.prepareCreate}" update=":RecertificacionCreateForm" oncomplete="PF('RecertificacionCreateDialog').show()"/>
-                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RecertificacionViewForm" oncomplete="PF('RecertificacionViewDialog').show()" disabled="#{empty recertificacionController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RecertificacionEditForm" oncomplete="PF('RecertificacionEditDialog').show()" disabled="#{empty recertificacionController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{recertificacionController.destroy}" update=":growl,datalist" disabled="#{empty recertificacionController.selected}"/>
                         <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
@@ -137,9 +134,6 @@
         </h:form>
 
 
-        <ui:include src="Create.xhtml"/>
-        <ui:include src="Edit.xhtml"/>
-        <ui:include src="View.xhtml"/>
     </ui:define>
 </ui:composition>
 

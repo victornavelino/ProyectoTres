@@ -54,9 +54,9 @@ public class EspecializacionRN implements EspecializacionRNLocal {
         return q.getResultList();
     }
 
-   @Override
+    @Override
     public List<Object[]> cantidadEspecializacion() {
-              Query q = null;
+        Query q = null;
         q = em.createNamedQuery("Especializacion.cantidadEspecializacion");
         try {
             return q.getResultList();
@@ -64,13 +64,19 @@ public class EspecializacionRN implements EspecializacionRNLocal {
             return new ArrayList<Object[]>();
         }
     }
-    
-     @Override
+
+    @Override
     public List<Especializacion> findAll() {
         Query q = null;
         q = em.createNamedQuery("Especializacion.findAll");
         return q.getResultList();
     }
-    
+
+    @Override
+    public List<Especializacion> buscarEspecializacionesActivos() {
+        Query q = null;
+        q = em.createNamedQuery("Especializacion.buscarEspecializacionesActivos");
+        return q.getResultList();
+    }
 
 }

@@ -91,16 +91,12 @@ public class RecertificacionController implements Serializable {
     }
 
     public List<Recertificacion> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 
     public List<Recertificacion> getRecertificacionesActivos() {
-        if (items == null) {
-            items = recertificacionRNLocal.getRecertificacionesActivos();
-        }
+             items = recertificacionRNLocal.getRecertificacionesActivos();
         return items;
     }
 

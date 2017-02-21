@@ -132,6 +132,12 @@ public class EspecializacionController implements Serializable {
         return items;
     }
 
+    public List<Especializacion> getEspecializacionesActivos() {
+
+            items = getEspecializacionRNLocal().buscarEspecializacionesActivos();
+        return items;
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

@@ -29,4 +29,6 @@ public interface EspecializacionRNLocal {
 
     public List<Object[]> cantidadEspecializacion();
 
+    public List<Especializacion> buscarEspecializacionesActivos();
+
 }
