@@ -12,8 +12,6 @@
             <h:form id="EspecialidadViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{especialidadController.selected != null}">
-                        <h:outputText value="#{bundle.ViewEspecialidadLabel_id}"/>
-                        <h:outputText value="#{especialidadController.selected.id}" title="#{bundle.ViewEspecialidadTitle_id}"/>
                         <h:outputText value="#{bundle.ViewEspecialidadLabel_descripcion}"/>
                         <h:outputText value="#{especialidadController.selected.descripcion}" title="#{bundle.ViewEspecialidadTitle_descripcion}"/>
                         <h:outputText value="#{bundle.ViewEspecialidadLabel_nombreEspecialidad}"/>
@@ -21,6 +19,110 @@
                         <h:outputText value="#{bundle.ViewEspecialidadLabel_tipoEspecialidad}"/>
                         <h:outputText value="#{especialidadController.selected.tipoEspecialidad}" title="#{bundle.ViewEspecialidadTitle_tipoEspecialidad}"/>
                     </p:panelGrid>
+                    <p:dataTable id="datalist" value="#{especializacionController.buscarListaEspecializaciones(especialidadController.selected)}" var="item"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50,100,300"
+                                 filterEvent="enter"
+                                 rowStyleClass="#{especializacionController.esVencida(item.fechaVencimiento) ? 'filaRoja' : null}"
+                                 >
+                        <f:facet name="header">
+                            <h:outputText value="Profesionales"/>
+
+                        </f:facet>
+
+
+                        <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Apellido"/>
+                            </f:facet>
+                            <h:outputText value="#{item.medico.persona.apellido}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.medico.persona.nombre}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText value="#{item.medico.persona.nombre}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.especialidad.descripcion}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_especialidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.especialidad.descripcion}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Matricula"/>
+                            </f:facet>
+                            <h:outputText value="#{item.medico.matriculaProfesional}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_matriculaEspecialidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matriculaEspecialidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_fechaMatriculacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaMatriculacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_fechaVencimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaVencimiento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_libro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.libro}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_folio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.folio}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.unidadFormadora.descripcion}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEspecializacionTitle_unidadFormadora}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.unidadFormadora.descripcion}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+
+                            <h:commandLink>
+                                <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
+                                <p:dataExporter type="xls" target="datalist" fileName="#{bundle.ListEspecializacionTitle}"/>
+                            </h:commandLink>
+
+
+                            <h:commandLink>
+                                <p:graphicImage value="./Imagenes/csv.png" title="Exportar a CSV todos" />
+                                <p:dataExporter type="csv" target="datalist" fileName="#{bundle.ListEspecializacionTitle}"/>
+                            </h:commandLink>
+
+                            <h:commandLink>
+                                <p:graphicImage value="./Imagenes/excel.png" title="Exportar Página"/>
+                                <p:dataExporter type="xls" 
+                                                target="datalist" fileName="#{bundle.ListEspecializacionTitle}pagina"   pageOnly="true"/>
+                            </h:commandLink>
+                            <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                                <p:printer target="datalist" />
+                            </p:commandButton>
+                        </f:facet>
+                    </p:dataTable>
                     <p:commandButton value="#{bundle.Close}" onclick="EspecialidadViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
