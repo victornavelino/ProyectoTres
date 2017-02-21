@@ -25,7 +25,7 @@ import javax.persistence.Temporal;
 @Table(name = "recertificacion")
 @NamedQueries({
     @NamedQuery(name = "Recertificacion.getRecertificacionesActivos",
-            query = "SELECT r FROM Recertificacion r where r. > :today group by r.especializacion.especialidad ORDER by count(r.especializacion.especialidad) desc"),
+            query = "SELECT r FROM Recertificacion r where r.especializacion.medico.tipoSocio.descripcion ='ACTIVO'"),
     @NamedQuery(name = "Recertificacion.cantidadVigente",
             query = "SELECT count(r.especializacion.especialidad),r.especializacion.especialidad.descripcion FROM Recertificacion r where r.fechaVencimiento > :today group by r.especializacion.especialidad ORDER by count(r.especializacion.especialidad) desc")
 })
