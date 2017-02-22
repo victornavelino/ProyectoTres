@@ -72,6 +72,10 @@
             <base-name>/BundleUsuario</base-name>
             <var>bundleUsuario</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundlePais</base-name>
+            <var>bundlePais</var>
+        </resource-bundle>
     </application>
     <application>
         <el-resolver>ManagedBeans.util.JsfCrudELResolver</el-resolver>
