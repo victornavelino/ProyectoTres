@@ -16,11 +16,11 @@
         </h3>
 
 
-        <h:form id="EspecializacionListForm">
+        <h:form id="EspecializacionListTodosForm">
 
             <p:panel>
 
-                <p:dataTable id="datalist" value="#{especializacionController.especializacionesActivos}" var="item"
+                <p:dataTable id="datalist" value="#{especializacionController.items}" var="item"
                              selectionMode="single" selection="#{especializacionController.selected}"
                              paginator="true"
                              rowKey="#{item.id}"
@@ -32,8 +32,8 @@
                     <f:facet name="header">
                         <h:outputText value="#{bundle.ListEspecializacionTitle}"/>
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton reporteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton reporteButton"/>
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
                         <p:commandButton id="toggler" type="button" value="Columnas" style="float:right" icon="ui-icon-calculator" />
                         <p:columnToggler datasource="datalist" trigger="toggler" >
                            <p:ajax event="toggle" listener="#{especializacionController.onToggle}"/>
@@ -133,13 +133,10 @@
 
 
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{especializacionController.prepareCreate}" update=":EspecializacionCreateForm" oncomplete="PF('EspecializacionCreateDialog').show()"/>
+                        
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EspecializacionViewForm" oncomplete="PF('EspecializacionViewDialog').show()" disabled="#{empty especializacionController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EspecializacionEditForm" oncomplete="PF('EspecializacionEditDialog').show()" disabled="#{empty especializacionController.selected}"/>
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{especializacionController.destroy}" update=":growl,datalist" disabled="#{empty especializacionController.selected}"/>
-                        <p:commandButton id="reporteButton"   icon="ui-icon-document" value="Reporte" update=":dReporteForm" oncomplete="PF('dlgReporte').show()" disabled="#{empty especializacionController.selected}"/>
-
-                        <h:commandLink>
+                        
+                       <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
                             <p:dataExporter type="xls" target="datalist" fileName="#{bundle.ListEspecializacionTitle}"/>
                         </h:commandLink>
@@ -166,10 +163,7 @@
 
         </h:form>
 
-        <ui:include src="Create.xhtml"/>
-        <ui:include src="Edit.xhtml"/>
         <ui:include src="View.xhtml"/>
-        <ui:include src="Reporte.xhtml"/>
 
     </ui:define>
 </ui:composition>

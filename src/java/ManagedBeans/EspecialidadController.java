@@ -6,10 +6,12 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EspecialidadFacade;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -18,6 +20,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.Visibility;
 
 @Named("especialidadController")
 @SessionScoped
@@ -27,6 +31,15 @@ public class EspecialidadController implements Serializable {
     private Facades.EspecialidadFacade ejbFacade;
     private List<Especialidad> items = null;
     private Especialidad selected;
+    private List<Boolean> lista;
+
+    public List<Boolean> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Boolean> lista) {
+        this.lista = lista;
+    }
 
     public EspecialidadController() {
     }
@@ -53,6 +66,11 @@ public class EspecialidadController implements Serializable {
         selected = new Especialidad();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    @PostConstruct
+    public void init() {
+        lista = Arrays.asList(true, true, true, true, true, true, true, true, true, true, true);
     }
 
     public void create() {
@@ -162,4 +180,7 @@ public class EspecialidadController implements Serializable {
 
     }
 
+    public void onToggle(ToggleEvent e) {
+        lista.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
+    }
 }

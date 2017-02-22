@@ -31,42 +31,46 @@
                                      >
                             <f:facet name="header">
                                 <h:outputText value="Profesionales"/>
+                                <p:commandButton id="toggler" type="button" value="Columnas" style="float:right" icon="ui-icon-calculator" />
+                                <p:columnToggler datasource="datalist" trigger="toggler" >
+                                    <p:ajax event="toggle" listener="#{especialidadController.onToggle}"/>
+                                </p:columnToggler> 
                             </f:facet>
 
 
-                            <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
+                            <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains" exportable="#{especialidadController.lista[0]}">
                                 <f:facet name="header">
                                     <h:outputText value="Apellido"/>
                                 </f:facet>
                                 <h:outputText value="#{item.medico.persona.apellido}"/>
                             </p:column>
 
-                            <p:column filterBy="#{item.medico.persona.nombre}" filterMatchMode="contains">
+                            <p:column filterBy="#{item.medico.persona.nombre}" filterMatchMode="contains" exportable="#{especialidadController.lista[1]}">
                                 <f:facet name="header">
                                     <h:outputText value="Nombre"/>
                                 </f:facet>
                                 <h:outputText value="#{item.medico.persona.nombre}"/>
                             </p:column>
 
-                            <p:column filterBy="#{item.especialidad.descripcion}" filterMatchMode="contains">
+                            <p:column filterBy="#{item.especialidad.descripcion}" filterMatchMode="contains" exportable="#{especialidadController.lista[2]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_especialidad}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.especialidad.descripcion}"/>
                             </p:column>
-                            <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains">
+                            <p:column filterBy="#{item.medico.matriculaProfesional}" filterMatchMode="contains" exportable="#{especialidadController.lista[3]}">
                                 <f:facet name="header">
                                     <h:outputText value="Matricula"/>
                                 </f:facet>
                                 <h:outputText value="#{item.medico.matriculaProfesional}"/>
                             </p:column>
-                            <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains">
+                            <p:column filterBy="#{item.matriculaEspecialidad}" filterMatchMode="contains" exportable="#{especialidadController.lista[4]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_matriculaEspecialidad}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.matriculaEspecialidad}"/>
                             </p:column>
-                            <p:column>
+                            <p:column exportable="#{especialidadController.lista[5]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_fechaMatriculacion}"/>
                                 </f:facet>
@@ -74,7 +78,7 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </p:column>
-                            <p:column>
+                            <p:column exportable="#{especialidadController.lista[6]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_fechaVencimiento}"/>
                                 </f:facet>
@@ -82,23 +86,29 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                             </p:column>
-                            <p:column>
+                            <p:column exportable="#{especialidadController.lista[7]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_libro}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.libro}"/>
                             </p:column>
-                            <p:column>
+                            <p:column exportable="#{especialidadController.lista[8]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_folio}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.folio}"/>
                             </p:column>
-                            <p:column filterBy="#{item.unidadFormadora.descripcion}">
+                            <p:column filterBy="#{item.unidadFormadora.descripcion}" exportable="#{especialidadController.lista[9]}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListEspecializacionTitle_unidadFormadora}"/>
                                 </f:facet>
                                 <h:outputText value="#{item.unidadFormadora.descripcion}"/>
+                            </p:column>
+                            <p:column exportable="#{especialidadController.lista[10]}">
+                                <f:facet name="header">
+                                    <h:outputText value="Domicilio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.medico.persona.domicilio}"/>
                             </p:column>
 
                             <f:facet name="footer">
