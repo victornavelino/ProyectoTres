@@ -12,11 +12,6 @@
             <h:form id="PagoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pagoController.selected != null}">
-                        <p:outputLabel value="#{bundlePago.CreatePagoLabel_medico}" for="medico" />
-                        <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" >
-                            <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
-                            <f:selectItems value="#{medicoController.items}" />
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
                         <p:selectOneMenu id="mes" value="#{pagoController.selected.mes}" >
                             <f:selectItem itemLabel="ENERO" itemValue="1" />

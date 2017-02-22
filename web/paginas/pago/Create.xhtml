@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_medico}" for="medico" />
                         <p:selectOneMenu id="medico" value="#{pagoController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
                             <f:selectItem noSelectionOption="true" itemLabel="#{bundlePlanPagos.SelectOneMessage}"/>
-                            <f:selectItems value="#{medicoController.items}"/>
+                            <f:selectItems value="#{medicoController.activos}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlePago.CreatePagoLabel_mes}" for="mes" />
                         <p:selectOneMenu id="mes" value="#{pagoController.selected.mes}" >

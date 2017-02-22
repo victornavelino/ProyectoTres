@@ -29,25 +29,25 @@ import javax.persistence.Temporal;
 @Table(name = "medico_especializacion")
 @NamedQueries({
     @NamedQuery(name = "Especializacion.buscarEspecialidadTodas",
-            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad "
+            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad AND  e.eliminado = false "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarEspecialidad",
-            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad AND e.medico.tipoSocio.descripcion ='ACTIVO' "
+            query = "SELECT e FROM Especializacion e WHERE e.especialidad=:especialidad AND e.medico.tipoSocio.descripcion ='ACTIVO' AND  e.eliminado = false"
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarPorProfesional",
-            query = "SELECT e FROM Especializacion e WHERE e.medico.persona.apellido=:medico "
+            query = "SELECT e FROM Especializacion e WHERE e.medico.persona.apellido=:medico AND  e.eliminado = false "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.buscarPorMedico",
-            query = "SELECT e FROM Especializacion e WHERE e.medico=:medico "
+            query = "SELECT e FROM Especializacion e WHERE e.medico=:medico AND  e.eliminado = false "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.findAll",
             query = "SELECT e FROM Especializacion e WHERE e.eliminado = false "
             + " ORDER BY e.id DESC"),
     @NamedQuery(name = "Especializacion.cantidadEspecializacion",
             query = "SELECT count(e.especialidad),e.especialidad.descripcion "
-            + " FROM Especializacion e group by e.especialidad ORDER by count(e.especialidad) desc"),
+            + " FROM Especializacion e WHERE  e.eliminado = false group by e.especialidad  ORDER by count(e.especialidad) desc"),
         @NamedQuery(name = "Especializacion.buscarEspecializacionesActivos",
-            query = "SELECT e FROM Especializacion e WHERE e.medico.tipoSocio.descripcion ='ACTIVO'")
+            query = "SELECT e FROM Especializacion e WHERE e.medico.tipoSocio.descripcion ='ACTIVO' AND e.eliminado = false")
 
 })
 public class Especializacion extends Base implements Serializable {

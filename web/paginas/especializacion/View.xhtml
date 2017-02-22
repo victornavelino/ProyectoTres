@@ -12,37 +12,29 @@
             <h:form id="EspecializacionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{especializacionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewEspecializacionLabel_id}"/>
-                        <h:outputText value="#{especializacionController.selected.id}" title="#{bundle.ViewEspecializacionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_medico}"/>
+                        <h:outputText value="#{especializacionController.selected.medico.matriculaProfesional} - #{especializacionController.selected.medico.persona.apellido}, 
+                                      #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
+                        <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_matriculaEspecialidad}"/>
                         <h:outputText value="#{especializacionController.selected.matriculaEspecialidad}" title="#{bundle.ViewEspecializacionTitle_matriculaEspecialidad}"/>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaMatriculacion}"/>
                         <h:outputText value="#{especializacionController.selected.fechaMatriculacion}" title="#{bundle.ViewEspecializacionTitle_fechaMatriculacion}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaVencimiento}"/>
                         <h:outputText value="#{especializacionController.selected.fechaVencimiento}" title="#{bundle.ViewEspecializacionTitle_fechaVencimiento}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_libro}"/>
                         <h:outputText value="#{especializacionController.selected.libro}" title="#{bundle.ViewEspecializacionTitle_libro}"/>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_folio}"/>
                         <h:outputText value="#{especializacionController.selected.folio}" title="#{bundle.ViewEspecializacionTitle_folio}"/>
                         <h:outputText value="#{bundle.ViewEspecializacionLabel_unidadFormadora}"/>
-                        <h:outputText value="#{especializacionController.selected.unidadFormadora}" title="#{bundle.ViewEspecializacionTitle_unidadFormadora}"/>
-                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaRevision}"/>
-                        <h:outputText value="#{especializacionController.selected.fechaRevision}" title="#{bundle.ViewEspecializacionTitle_fechaRevision}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewEspecializacionLabel_fechaVencimientoRevision}"/>
-                        <h:outputText value="#{especializacionController.selected.fechaVencimientoRevision}" title="#{bundle.ViewEspecializacionTitle_fechaVencimientoRevision}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewEspecializacionLabel_medico}"/>
-                        <h:outputText value="#{especializacionController.selected.medico.persona.apellido}, 
-                                      #{especializacionController.selected.medico.persona.nombre}" title="#{bundle.ViewEspecializacionTitle_medico}"/>
-                        <h:outputText value="#{bundle.ViewEspecializacionLabel_especialidad}"/>
-                        <h:outputText value="#{especializacionController.selected.especialidad.descripcion}" title="#{bundle.ViewEspecializacionTitle_especialidad}"/>
+                        <h:outputText value="#{especializacionController.selected.unidadFormadora.descripcion}" title="#{bundle.ViewEspecializacionTitle_unidadFormadora}"/>
+
                         <h:outputText value="Residencia Fecha Inicio: "/>
                         <h:outputText id="fechaInicioResidencia"  value="#{especializacionController.selected.residenciaFechaInicio}"/>
                         <h:outputText value="Residencia Fecha Fin: "/>
