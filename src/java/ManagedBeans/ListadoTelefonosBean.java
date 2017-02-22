@@ -156,8 +156,8 @@ public class ListadoTelefonosBean implements Serializable {
     }
 
     public void prepararDialogTelefonos(ActionEvent e) {
-
-        //System.out.println("Entro al evento definirActionBoton");
+ 
+        System.out.println("Entro al evento definirActionBoton");
         //System.out.println("boton : " + e);
         //System.out.println("boton 2 : " + e.getSource());
         btnSelect = (CommandButton) e.getSource();

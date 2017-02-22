@@ -100,7 +100,8 @@
                                                      oncomplete="PF('dlgTel').show();"
                                                      icon="ui-icon-disk"
                                                      actionListener="#{listadoTelefonosBean.prepararDialogTelefonos}"
-                                                     update=":telefonoCreateForm:dTelefonos"/>
+                                                     update=":telefonoCreateForm:dTelefonos"
+                                                     process="@this"/>
                                 </h:panelGrid>
 
                             </p:panel><br/>
@@ -135,7 +136,8 @@
                                                          actionListener="#{listadoEmailBean.definirActionBotonEmail}"
                                                          oncomplete="PF('dlgEmail').show();"
                                                          icon="ui-icon-disk"
-                                                         update=":mailCreateForm:dEmail"/>
+                                                         update=":mailCreateForm:dEmail"
+                                                         process="@this"/>
 
                                     </h:panelGrid>
                                 </div>
@@ -251,7 +253,7 @@
                                     <p:outputLabel value="#{bundle.CreateMedicoLabel_fechaResolucionBaja}" for="fechaResolucionBaja" />
                                     <p:calendar id="fechaResolucionBaja" pattern="dd/MM/yyyy" value="#{medicoController.selected.fechaResolucionBaja}" title="#{bundle.CreateMedicoLabel_fechaResolucionBaja}"  showOn="button"/>
 
-                                    <p:outputLabel value="#{bundle.EditMedicoLabel_organismo}" for="organismo" />
+                                    <p:outputLabel value="Paga por: " for="organismo" />
                                     <p:selectOneMenu id="organismo" value="#{medicoController.selected.organismo}" >
                                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                                         <f:selectItems value="#{organismoController.itemsAvailableSelectOne}"
