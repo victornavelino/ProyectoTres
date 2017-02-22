@@ -53,7 +53,7 @@ public class MedicoController implements Serializable {
     @EJB
     private Facades.CorreoElectronicoFacade correoElectronicoFacade;
     private List<Medico> items = null;
-    private List<Medico> medicosActivos= null;
+    private List<Medico> medicosActivos = null;
     private Medico selected;
     @Inject
     private ListadoTelefonosBean listadoTelefonosBean;
@@ -74,7 +74,7 @@ public class MedicoController implements Serializable {
     public void setMedicosActivos(List<Medico> medicosActivos) {
         this.medicosActivos = medicosActivos;
     }
-    
+
     public MedicoFacade getEjbFacade() {
         return ejbFacade;
     }
@@ -199,7 +199,8 @@ public class MedicoController implements Serializable {
         }
         return items;
     }
-    public List<Medico> getActivos(){
+
+    public List<Medico> getActivos() {
         return medicoRNLocal.buscarTodosActivos();
     }
 
@@ -244,7 +245,7 @@ public class MedicoController implements Serializable {
     }
 
     private void calcularNroMatricula() {
-        selected.setMatriculaProfesional(medicoRNLocal.buscarUltimaMatricula()+1);
+        selected.setMatriculaProfesional(medicoRNLocal.buscarUltimaMatricula() + 1);
     }
 
     @FacesConverter(forClass = Medico.class)

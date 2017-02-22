@@ -273,7 +273,7 @@ public class Medico implements Serializable {
     @Override
     public String toString() {
         try {
-            return persona.toString();
+            return matriculaProfesional + " - " +persona.toString();
         } catch (Exception e) {
             return "";
         }
