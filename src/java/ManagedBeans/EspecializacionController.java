@@ -11,12 +11,14 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -27,6 +29,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.servlet.http.HttpSession;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.Visibility;
 
 @Named("especializacionController")
 @SessionScoped
@@ -40,6 +44,15 @@ public class EspecializacionController implements Serializable {
     private Especializacion selected;
     private Medico medico;
     private String apellido;
+    private List<Boolean> lista;
+
+    public List<Boolean> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Boolean> lista) {
+        this.lista = lista;
+    }
 
     public String getApellido() {
         return apellido;
@@ -89,7 +102,12 @@ public class EspecializacionController implements Serializable {
     public Especializacion prepareCreate() {
         selected = new Especializacion();
         initializeEmbeddableKey();
+        
         return selected;
+    }
+    @PostConstruct
+    public void init(){
+     lista = Arrays.asList(true, true, true, true, true, true, true, true, true, true, true, true, true);   
     }
 
     public void create() {
@@ -243,5 +261,9 @@ public class EspecializacionController implements Serializable {
         cal.add(Calendar.YEAR, 5);
         selected.setFechaVencimiento(cal.getTime());
         System.out.println("FECHA VENCIMIENTO: " + selected.getFechaVencimiento());
+    }
+
+    public void onToggle(ToggleEvent e) {
+        lista.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
     }
 }

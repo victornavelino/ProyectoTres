@@ -35,7 +35,10 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton reporteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton reporteButton"/>
                         <p:commandButton id="toggler" type="button" value="Columnas" style="float:right" icon="ui-icon-calculator" />
-                        <p:columnToggler datasource="datalist" trigger="toggler" />                        </f:facet>
+                        <p:columnToggler datasource="datalist" trigger="toggler" >
+                           <p:ajax event="toggle" listener="#{especializacionController.onToggle}"/>
+                        </p:columnToggler> 
+                    </f:facet>
 
 
                     <p:column filterBy="#{item.medico.persona.apellido}" sortBy="#{item.medico.persona.apellido}" filterMatchMode="contains">
@@ -111,7 +114,7 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column visible="false">
+                    <p:column  exportable="#{especializacionController.lista[11]}">
                         <f:facet name="header">
                             <h:outputText value="Fecha Esp."/>
                         </f:facet>
@@ -119,7 +122,7 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
-                    <p:column visible="false">
+                    <p:column exportable="#{especializacionController.lista[12]}">
                         <f:facet name="header">
                             <h:outputText value="Fecha Vencimiento Esp."/>
                         </f:facet>
