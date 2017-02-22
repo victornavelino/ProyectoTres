@@ -29,7 +29,6 @@ public class Domicilio implements Serializable {
     private String dpto;
     private String entreCalles;
     private String referencia;
-    @OneToOne(cascade = CascadeType.ALL)
     private Localidad localidad;
     private String barrio;
     private String codigoPostal;

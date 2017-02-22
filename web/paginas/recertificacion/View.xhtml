@@ -14,15 +14,13 @@
 
                     <p:panelGrid columns="2" rendered="#{recertificacionController.selected != null}">
                         <p:outputLabel value="Medico:"/>
-                        <p:outputLabel id="medico" value="#{recertificacionController.selected.especializacion.medico.matriculaProfesional} - #{recertificacionController.selected.especializacion.medico.persona.apellido}, #{recertificacionController.selected.especializacion.medico.persona.apellido}" />
-
-               
-
+                        <p:outputLabel id="medico" value="#{recertificacionController.selected.especializacion.medico.matriculaProfesional} - #{recertificacionController.selected.especializacion.medico.persona.apellido}, #{recertificacionController.selected.especializacion.medico.persona.nombre}" />
+                        <p:outputLabel value="M.P. :"/>
+                        <p:outputLabel id="mp" value="#{recertificacionController.selected.especializacion.medico.matriculaProfesional}" />
+                        <p:outputLabel value="M.E. :"/>
+                        <p:outputLabel id="me" value="#{recertificacionController.selected.especializacion.matriculaEspecialidad}" />
                         <p:outputLabel value="Especializacion:"/>
-
-                        <p:outputLabel id="especializacion" value="#{recertificacionController.selected.especializacion}" />
-
-
+                        <p:outputLabel id="especializacion" value="#{recertificacionController.selected.especializacion.especialidad.toString()}" />
                         <p:outputLabel value="FechaRecertificacion (dd/MM/yyyy):"/>
                         <p:outputLabel id="fechaRecertificacion" value="#{recertificacionController.selected.fechaRecertificacion}" title="FechaRecertificacion"  >
                             <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -48,8 +46,8 @@
 
                     </p:panelGrid>
                 </h:panelGroup>
-                
-                    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+
+                <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
                     <p:printer target="display" />
                 </p:commandButton>
             </h:form>

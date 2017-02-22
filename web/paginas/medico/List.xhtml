@@ -98,7 +98,7 @@
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MedicoViewForm" oncomplete="PF('MedicoViewDialog').show()" disabled="#{empty medicoController.selected}"/>
                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{medicoController.prepareUpdate}" update=":MedicoEditForm" oncomplete="PF('MedicoEditDialog').show()" disabled="#{empty medicoController.selected}"/>
 
-                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicoController.destroy}" update=":growl,datalist" disabled="#{empty medicoController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{medicoController.destroy}" update=":growl,:MedicoListForm:datalist" disabled="#{empty medicoController.selected}"/>
                         <p:commandButton id="printButton" icon="ui-icon-image"  value="Imprimir Carné"  update=":MedicoCarneForm" oncomplete="PF('MedicoCarneDialog').show()" disabled="#{empty medicoController.selected}"/>
                         <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />

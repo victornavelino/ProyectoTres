@@ -56,6 +56,12 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="Especializacion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.especializacion.matriculaEspecialidad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="FechaRecertificacion"/>
                         </f:facet>
                         <h:outputText value="#{item.fechaRecertificacion}">
