@@ -31,4 +31,6 @@ public interface MedicoRNLocal {
 
     public List<Medico> buscarTodosActivos();
 
+    public void edit(Medico medico);
+
 }

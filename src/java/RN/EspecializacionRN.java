@@ -73,6 +73,11 @@ public class EspecializacionRN implements EspecializacionRNLocal {
     }
 
     @Override
+    public void edit(Especializacion especializacion) {        
+        facade.edit(especializacion);
+    }
+
+    @Override
     public List<Especializacion> buscarEspecializacionesActivos() {
         Query q = null;
         q = em.createNamedQuery("Especializacion.buscarEspecializacionesActivos");

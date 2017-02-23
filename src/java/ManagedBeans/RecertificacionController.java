@@ -1,9 +1,12 @@
 package ManagedBeans;
 
+import Entidades.Medico.Especializacion;
+import Entidades.Medico.Medico;
 import Entidades.Medico.Recertificacion;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.RecertificacionFacade;
+import RN.EspecializacionRNLocal;
 import RN.RecertificacionRNLocal;
 
 import java.io.Serializable;
@@ -13,7 +16,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -34,6 +36,8 @@ public class RecertificacionController implements Serializable {
     private Recertificacion selected;
     @EJB
     private RecertificacionRNLocal recertificacionRNLocal;
+    @EJB
+    private EspecializacionRNLocal especializacionRNLocal;
 
     public RecertificacionController() {
     }
@@ -72,6 +76,11 @@ public class RecertificacionController implements Serializable {
     }
 
     public void create() {
+        Especializacion especializacion = selected.getEspecializacion();
+        if (especializacion != null) {
+            especializacion.getRecertificaciones().add(selected);
+            especializacionRNLocal.edit(especializacion);
+        }
         persist(PersistAction.CREATE, "Se ha creado la Recertificación");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -91,12 +100,12 @@ public class RecertificacionController implements Serializable {
     }
 
     public List<Recertificacion> getItems() {
-            items = getFacade().findAll();
+        items = getFacade().findAll();
         return items;
     }
 
     public List<Recertificacion> getRecertificacionesActivos() {
-             items = recertificacionRNLocal.getRecertificacionesActivos();
+        items = recertificacionRNLocal.getRecertificacionesActivos();
         return items;
     }
 

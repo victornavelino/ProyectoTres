@@ -1,12 +1,16 @@
 package ManagedBeans;
 
+import Entidades.Caja.Caja;
 import Entidades.Caja.Ingreso;
 import Entidades.Caja.MovimientoCaja;
+import Entidades.Medico.Medico;
 import Entidades.Pago.CuotaPlanPago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.CuotaPlanPagoFacade;
 import Facades.MovimientoCajaFacade;
+import RN.CajaRNLocal;
+import RN.MedicoRNLocal;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -35,6 +39,10 @@ public class CuotaPlanPagoController implements Serializable {
     private Facades.IngresoFacade cajaFacade;
     @EJB
     private Facades.TipoDeIngresoFacade ingresoFacade;
+    @EJB
+    private CajaRNLocal cajaRNLocal;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
     @Inject
     private UsuarioLogerBean usuarioLogerBean;
     private List<CuotaPlanPago> items = null;
@@ -102,6 +110,14 @@ public class CuotaPlanPagoController implements Serializable {
         } catch (NumberFormatException numberFormatException) {
         }
         cajaFacade.create(caja);
+        Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
+        cajaAbierta.getMovimientosCaja().add(caja);
+        Medico medico = selected.getPlanPago().getMedico();
+        if (medico != null) {
+            medico.getMovimientoCajas().add(caja);
+            medicoRNLocal.edit(medico);
+        }
+        cajaRNLocal.edit(cajaAbierta);
     }
 
     public void destroy() {

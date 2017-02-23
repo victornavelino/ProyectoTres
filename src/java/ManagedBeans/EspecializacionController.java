@@ -7,6 +7,7 @@ import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.EspecializacionFacade;
 import RN.EspecializacionRNLocal;
+import RN.MedicoRNLocal;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +41,8 @@ public class EspecializacionController implements Serializable {
     private Facades.EspecializacionFacade ejbFacade;
     @EJB
     private EspecializacionRNLocal especializacionRNLocal;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
     private List<Especializacion> items = null;
     private Especializacion selected;
     private Medico medico;
@@ -102,12 +105,13 @@ public class EspecializacionController implements Serializable {
     public Especializacion prepareCreate() {
         selected = new Especializacion();
         initializeEmbeddableKey();
-        
+
         return selected;
     }
+
     @PostConstruct
-    public void init(){
-     lista = Arrays.asList(true, true, true, true, true, true, true, true, true, true, true, true, true);   
+    public void init() {
+        lista = Arrays.asList(true, true, true, true, true, true, true, true, true, true, true, true, true);
     }
 
     public void create() {
@@ -115,6 +119,11 @@ public class EspecializacionController implements Serializable {
         String user = (String) session.getAttribute("userName");
         selected.setCreadoPor(user);
         selected.setFechaCreado(new Date());
+        medico = selected.getMedico();
+        if (medico != null) {
+            medico.getEspecializaciones().add(selected);
+            medicoRNLocal.edit(medico);
+        }
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

@@ -31,4 +31,6 @@ public interface EspecializacionRNLocal {
 
     public List<Especializacion> buscarEspecializacionesActivos();
 
+    public void edit(Especializacion especializacion);
+
 }

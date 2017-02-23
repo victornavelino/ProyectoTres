@@ -1,11 +1,15 @@
 package ManagedBeans;
 
+import Entidades.Caja.Caja;
 import Entidades.Caja.Ingreso;
+import Entidades.Medico.Medico;
 import Entidades.Pago.Mes;
 import Entidades.Pago.Pago;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.PagoFacade;
+import RN.CajaRNLocal;
+import RN.MedicoRNLocal;
 import RN.PagoRNLocal;
 
 import java.io.Serializable;
@@ -29,13 +33,17 @@ import javax.inject.Inject;
 @Named("pagoController")
 @SessionScoped
 public class PagoController implements Serializable {
-    
+
     @EJB
     private Facades.PagoFacade ejbFacade;
     @EJB
     private Facades.IngresoFacade cajaFacade;
     @EJB
     private Facades.TipoDeIngresoFacade ingresoFacade;
+    @EJB
+    private CajaRNLocal cajaRNLocal;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
     @Inject
     private UsuarioLogerBean usuarioLogerBean;
     private List<Pago> items = null;
@@ -45,43 +53,43 @@ public class PagoController implements Serializable {
     private PagoRNLocal pagoRNLocal;
     @Inject
     private CajaController cajaController;
-    
+
     public PagoController() {
     }
-    
+
     public int getCantidadCuotas() {
         return cantidadCuotas;
     }
-    
+
     public void setCantidadCuotas(int cantidadCuotas) {
         this.cantidadCuotas = cantidadCuotas;
     }
-    
+
     public Pago getSelected() {
         return selected;
     }
-    
+
     public void setSelected(Pago selected) {
         this.selected = selected;
     }
-    
+
     protected void setEmbeddableKeys() {
     }
-    
+
     protected void initializeEmbeddableKey() {
     }
-    
+
     private PagoFacade getFacade() {
         return ejbFacade;
     }
-    
+
     public Pago prepareCreate() {
         selected = new Pago();
         cantidadCuotas = 1;
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public void create() {
         if (cajaController.hayCajaAbierta()) {
             int mes = selected.getMes();
@@ -90,7 +98,7 @@ public class PagoController implements Serializable {
 //        try {
             for (int i = 0; i < cantidadCuotas; i++) {
                 if (!pagoRNLocal.existePago(selected.getMedico(), anio, mes)) {
-                    
+
                     selected.setMes(mes);
                     selected.setAnio(anio);
                     persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
@@ -110,6 +118,16 @@ public class PagoController implements Serializable {
                         }
                         caja.setUsuario(usuarioLogerBean.getUsuario());
                         cajaFacade.create(caja);
+                        Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
+                        cajaAbierta.getMovimientosCaja().add(caja);
+                        cajaRNLocal.edit(cajaAbierta);
+                        Medico medico = selected.getMedico();
+                        if (medico != null) {
+                            medico.getMovimientoCajas().add(caja);
+                            medico.getPagos().add(selected);
+                            medicoRNLocal.edit(medico);
+                        }
+                        cajaRNLocal.edit(cajaAbierta);
                     }
                     if (!JsfUtil.isValidationFailed()) {
                         items = null;    // Invalidate list of items to trigger re-query.
@@ -123,7 +141,7 @@ public class PagoController implements Serializable {
                 } else {
                     mensaje = mensaje.append(mes).append("/").append(anio).append("; ");
                 }
-                
+
             }
             if (mensaje != null) {
                 JsfUtil.addErrorMessage("Las Cuotas: " + mensaje + " YA se encuentran abonadas");
@@ -134,13 +152,13 @@ public class PagoController implements Serializable {
         } else {
             JsfUtil.addErrorMessage("La caja se encuentra cerrada no puede realizar Pagos!");
         }
-        
+
     }
-    
+
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePago").getString("PagoUpdated"));
     }
-    
+
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePago").getString("PagoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -158,7 +176,7 @@ public class PagoController implements Serializable {
         }
         return items;
     }
-    
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -186,22 +204,22 @@ public class PagoController implements Serializable {
             }
         }
     }
-    
+
     public Pago getPago(java.lang.Long id) {
         return getFacade().find(id);
     }
-    
+
     public List<Pago> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-    
+
     public List<Pago> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     @FacesConverter(forClass = Pago.class)
     public static class PagoControllerConverter implements Converter {
-        
+
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -211,19 +229,19 @@ public class PagoController implements Serializable {
                     getValue(facesContext.getELContext(), null, "pagoController");
             return controller.getPago(getKey(value));
         }
-        
+
         java.lang.Long getKey(String value) {
             java.lang.Long key;
             key = Long.valueOf(value);
             return key;
         }
-        
+
         String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-        
+
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -237,7 +255,7 @@ public class PagoController implements Serializable {
                 return null;
             }
         }
-        
+
     }
-    
+
 }

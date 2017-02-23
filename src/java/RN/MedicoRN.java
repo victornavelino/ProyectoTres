@@ -43,6 +43,11 @@ public class MedicoRN implements MedicoRNLocal {
     }
 
     @Override
+    public void edit(Medico medico) {
+        facade.edit(medico);
+    }
+
+    @Override
     public List<Medico> buscarXApellido(String apellido) {
         Query q = null;
         q = em.createNamedQuery("Medico.buscarXApellido");

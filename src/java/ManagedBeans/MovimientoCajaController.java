@@ -4,12 +4,14 @@ import Entidades.Caja.Caja;
 import Entidades.Caja.Egreso;
 import Entidades.Caja.Ingreso;
 import Entidades.Caja.MovimientoCaja;
+import Entidades.Medico.Medico;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.MovimientoCajaFacade;
 import Facades.TipoDeEgresoFacade;
 import Facades.TipoDeIngresoFacade;
 import RN.CajaRNLocal;
+import RN.MedicoRNLocal;
 import RN.MovimientoCajaRNLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -41,6 +43,8 @@ public class MovimientoCajaController implements Serializable {
     private Facades.MovimientoCajaFacade ejbFacade;
     @EJB
     private CajaRNLocal cajaRNLocal;
+    @EJB
+    private MedicoRNLocal medicoRNLocal;
     private List<MovimientoCaja> items = null;
     private MovimientoCaja selected;
     @EJB
@@ -177,8 +181,10 @@ public class MovimientoCajaController implements Serializable {
             //persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
             Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
             cajaAbierta.getMovimientosCaja().add(selected);
-            if (selected.getMedico() != null) {
-                selected.getMedico().getMovimientoCajas().add(selected);
+            Medico medico = selected.getMedico();
+            if (medico != null) {
+                medico.getMovimientoCajas().add(selected);
+                medicoRNLocal.edit(medico);
             }
             cajaRNLocal.edit(cajaAbierta);
             if (!JsfUtil.isValidationFailed()) {
