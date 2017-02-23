@@ -157,12 +157,12 @@ public class ListadoTelefonosBean implements Serializable {
 
     public void prepararDialogTelefonos(ActionEvent e) {
  
-        System.out.println("Entro al evento definirActionBoton");
+        //System.out.println("Entro al evento definirActionBoton");
         //System.out.println("boton : " + e);
         //System.out.println("boton 2 : " + e.getSource());
         btnSelect = (CommandButton) e.getSource();
 
-        System.out.println("boton id: " + btnSelect.getId());
+        //System.out.println("boton id: " + btnSelect.getId());
         //this.getCbAction().setDisabled(false);
         if (btnSelect.getId().equals("btnEdit")) {
             this.getCbActionTelefonos().setValue("Editar");
@@ -183,13 +183,13 @@ public class ListadoTelefonosBean implements Serializable {
             this.setTelefono(new Telefono());
             this.getCbActionTelefonos().setValue("Guardar");
             this.setiTipoBoton(0);
-            System.out.println("OKOKOK");
+            //System.out.println("OKOKOK");
         }//fin if
                 if (btnSelect.getId().equals("btnCreateTelefonosProfesionalUpdate")) {
             this.setTelefono(new Telefono());
             this.getCbActionTelefonos().setValue("Guardar");
             this.setiTipoBoton(0);
-            System.out.println("OKOKOK");
+            //System.out.println("OKOKOK");
         }//fin if
 
         //System.out.println("termino el definir: " + this.getPersona());
@@ -206,7 +206,7 @@ public class ListadoTelefonosBean implements Serializable {
         //2 eliminar
         switch (this.iTipoBoton) {
             case 0:
-                System.out.println("Case cargar Tabla Telefonos");
+                
                 cargarTablaTelefonos(this.iTipoBoton);
                 break;
             case 1:
@@ -230,21 +230,21 @@ public class ListadoTelefonosBean implements Serializable {
         }
 
         telefono.setTipoTelefono(tipotelefono);
-        System.out.println("Telegonods_ " + telefono);
+        //System.out.println("Telegonods_ " + telefono);
         lstTelefonos.add(telefono);
         //this.setTelefonios(new Telefono());
-        System.out.println("Ejecuta new telefono");
+        //System.out.println("Ejecuta new telefono");
         //telefono.setNumero("");
-        System.out.println(btnSelect.getId());
+        //System.out.println(btnSelect.getId());
         if (btnSelect.getId().equals("btnCreateTelefonosProfesional")) {
-            System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
+           // System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
             //Entra al if si es llamado por Docente.xhtml
             RequestContext.getCurrentInstance().update("MedicoCreateForm:dtTelefonosProf");
             RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
 
         }
         if (btnSelect.getId().equals("btnCreateTelefonosProfesionalUpdate")) {
-            System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
+          //  System.out.println("guardar btnCreateTelefonosMedicos" + this.getLstTelefonos());
             //Entra al if si es llamado por Docente.xhtml
             RequestContext.getCurrentInstance().update("MedicoEditForm:dtTelefonosProf");
             RequestContext.getCurrentInstance().execute("PF('dlgTel').hide();");
