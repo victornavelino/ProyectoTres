@@ -177,6 +177,9 @@ public class MovimientoCajaController implements Serializable {
             //persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundleMovimientoCaja").getString("MovimientoCajaCreated"));
             Caja cajaAbierta = cajaRNLocal.getCajaAbierta();
             cajaAbierta.getMovimientosCaja().add(selected);
+            if (selected.getMedico() != null) {
+                selected.getMedico().getMovimientoCajas().add(selected);
+            }
             cajaRNLocal.edit(cajaAbierta);
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
