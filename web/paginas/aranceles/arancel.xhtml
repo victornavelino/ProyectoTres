@@ -53,7 +53,7 @@
                     <f:facet name="header">
                         <h:outputText value="Paga Por"/>
                     </f:facet>
-                    <h:outputText value="#{item.organismo}"/>
+                    <h:outputText value="#{item.organismo.descripcion}"/>
                 </p:column>
 
                 <f:facet name="footer">
@@ -125,7 +125,7 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_tipoDeEgreso}"/>
+                                <h:outputText value="Arancel"/>
                             </f:facet>
                             <h:outputText value="#{item.tipo.descripcion}"/>
                         </p:column>
@@ -149,7 +149,12 @@
                             </f:facet>
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
-
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Comprobante"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nroComprobante}"/>
+                        </p:column>
                     </p:dataTable>
 
                 </p:tab>
