@@ -27,8 +27,8 @@
 
                          >
 
-                <p:ajax event="rowSelect"   update="createButton   :consultaForm:tbAranceles "/>
-                <p:ajax event="rowUnselect" update="createButton   :consultaForm:tbAranceles "/>
+                <p:ajax event="rowSelect"   update="   :consultaForm:tbAranceles "/>
+                <p:ajax event="rowUnselect" update="   :consultaForm:tbAranceles "/>
                 <p:column sortBy="#{item.persona.apellido}" filterBy="#{item.persona.apellido}" width="200">
                     <f:facet name="header">
                         <h:outputText value="Apellido"/>
@@ -49,64 +49,108 @@
                     <h:outputText value="#{item.matriculaProfesional}"/>
                 </p:column>
 
-            
+                <p:column filterBy="#{item.organismo}" width="200">
+                    <f:facet name="header">
+                        <h:outputText value="Paga Por"/>
+                    </f:facet>
+                    <h:outputText value="#{item.organismo}"/>
+                </p:column>
+
                 <f:facet name="footer">
-                              </f:facet>
+                </f:facet>
             </p:dataTable>
-                <h3>Pagos Realizados</h3>
+            <h3>Pagos Realizados</h3>
 
             <p:tabView id="tbAranceles">  
                 <p:tab id="tab1" title="Matricula">
-<p:panel header="Pagos">
-                            <p:dataTable id="pagos" value="#{medicoController.selected.pagos}" var="item"
-                                         paginator="true"
-                                         rowKey="#{item.id}"
-                                         rows="10"
-                                         filterEvent="enter"
-                                         sortBy="#{item.id}"
-                                         sortOrder="DESCENDING"
-                                         >
+                    <p:panel header="Pagos">
+                        <p:dataTable id="pagos" value="#{medicoController.selected.pagos}" var="item"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     filterEvent="enter"
+                                     sortBy="#{item.id}"
+                                     sortOrder="DESCENDING"
+                                     >
 
 
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundlePago.ListPagoTitle_mes}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.mes}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundlePago.ListPagoTitle_anio}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.anio}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundlePago.ListPagoTitle_nroRecibo}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.nroRecibo}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Fecha Pago" />                  
-                                    </f:facet>
-                                    <h:outputText value="#{item.fechaPago}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                    </h:outputText>    
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundlePago.ListPagoTitle_importe}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.importe}"/>
-                                </p:column>                               
-                                
-                            </p:dataTable>
-                        </p:panel>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundlePago.ListPagoTitle_mes}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.mes}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundlePago.ListPagoTitle_anio}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.anio}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundlePago.ListPagoTitle_nroRecibo}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nroRecibo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Pago" />                  
+                                </f:facet>
+                                <h:outputText value="#{item.fechaPago}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>    
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundlePago.ListPagoTitle_importe}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.importe}"/>
+                            </p:column>                               
+
+                        </p:dataTable>
+                    </p:panel>
 
                 </p:tab>
                 <p:tab id="tab2" title="Aranceles Varios">
+                    <p:dataTable id="datalist" value="#{medicoController.selected.movimientoCajas}" var="item"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 filterEvent="enter"
+                                 sortBy="#{item.id}"
+                                 sortOrder="DESCENDING"
+                                 >
 
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_tipoDeEgreso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipo.descripcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_importe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.importe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleEgreso.ListEgresoTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+
+                    </p:dataTable>
 
                 </p:tab>
             </p:tabView>

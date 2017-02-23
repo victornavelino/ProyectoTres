@@ -29,7 +29,7 @@ import javax.inject.Inject;
 @Named("pagoController")
 @SessionScoped
 public class PagoController implements Serializable {
-
+    
     @EJB
     private Facades.PagoFacade ejbFacade;
     @EJB
@@ -45,43 +45,43 @@ public class PagoController implements Serializable {
     private PagoRNLocal pagoRNLocal;
     @Inject
     private CajaController cajaController;
-
+    
     public PagoController() {
     }
-
+    
     public int getCantidadCuotas() {
         return cantidadCuotas;
     }
-
+    
     public void setCantidadCuotas(int cantidadCuotas) {
         this.cantidadCuotas = cantidadCuotas;
     }
-
+    
     public Pago getSelected() {
         return selected;
     }
-
+    
     public void setSelected(Pago selected) {
         this.selected = selected;
     }
-
+    
     protected void setEmbeddableKeys() {
     }
-
+    
     protected void initializeEmbeddableKey() {
     }
-
+    
     private PagoFacade getFacade() {
         return ejbFacade;
     }
-
+    
     public Pago prepareCreate() {
         selected = new Pago();
         cantidadCuotas = 1;
         initializeEmbeddableKey();
         return selected;
     }
-
+    
     public void create() {
         if (cajaController.hayCajaAbierta()) {
             int mes = selected.getMes();
@@ -90,24 +90,27 @@ public class PagoController implements Serializable {
 //        try {
             for (int i = 0; i < cantidadCuotas; i++) {
                 if (!pagoRNLocal.existePago(selected.getMedico(), anio, mes)) {
-
+                    
                     selected.setMes(mes);
                     selected.setAnio(anio);
                     persist(PersistAction.CREATE, ResourceBundle.getBundle("/BundlePago").getString("PagoCreated"));
-                    Ingreso caja = new Ingreso();
-                    caja.setFecha(new Date());
-                    caja.setFechaOperacion(selected.getFechaPago());
-                    caja.setDescripcion("Pago, "
-                            + selected.getMedico().getPersona()
-                            + ", Cuota " + selected.getMes() + " " + selected.getAnio());
-                    caja.setTipo(ingresoFacade.find(5L));
-                    caja.setImporte(selected.getImporte());
-                    try {
-                        caja.setNroComprobante(Integer.parseInt(selected.getNroRecibo()));
-                    } catch (NumberFormatException numberFormatException) {
+                    if (selected.getMedico().getTipoSocio().getId() == 1L) {
+                        Ingreso caja = new Ingreso();
+                        caja.setFecha(new Date());
+                        caja.setFechaOperacion(selected.getFechaPago());
+                        caja.setDescripcion("Pago, "
+                                + selected.getMedico().getPersona()
+                                + ", Cuota " + selected.getMes() + " " + selected.getAnio());
+                        caja.setTipo(ingresoFacade.find(5L));
+                        caja.setImporte(selected.getImporte());
+                        caja.setMedico(selected.getMedico());
+                        try {
+                            caja.setNroComprobante(Integer.parseInt(selected.getNroRecibo()));
+                        } catch (NumberFormatException numberFormatException) {
+                        }
+                        caja.setUsuario(usuarioLogerBean.getUsuario());
+                        cajaFacade.create(caja);
                     }
-                    caja.setUsuario(usuarioLogerBean.getUsuario());
-                    cajaFacade.create(caja);
                     if (!JsfUtil.isValidationFailed()) {
                         items = null;    // Invalidate list of items to trigger re-query.
                     }
@@ -120,7 +123,7 @@ public class PagoController implements Serializable {
                 } else {
                     mensaje = mensaje.append(mes).append("/").append(anio).append("; ");
                 }
-
+                
             }
             if (mensaje != null) {
                 JsfUtil.addErrorMessage("Las Cuotas: " + mensaje + " YA se encuentran abonadas");
@@ -131,13 +134,13 @@ public class PagoController implements Serializable {
         } else {
             JsfUtil.addErrorMessage("La caja se encuentra cerrada no puede realizar Pagos!");
         }
-
+        
     }
-
+    
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/BundlePago").getString("PagoUpdated"));
     }
-
+    
     public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/BundlePago").getString("PagoDeleted"));
         if (!JsfUtil.isValidationFailed()) {
@@ -155,7 +158,7 @@ public class PagoController implements Serializable {
         }
         return items;
     }
-
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -183,22 +186,22 @@ public class PagoController implements Serializable {
             }
         }
     }
-
+    
     public Pago getPago(java.lang.Long id) {
         return getFacade().find(id);
     }
-
+    
     public List<Pago> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
-
+    
     public List<Pago> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-
+    
     @FacesConverter(forClass = Pago.class)
     public static class PagoControllerConverter implements Converter {
-
+        
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -208,19 +211,19 @@ public class PagoController implements Serializable {
                     getValue(facesContext.getELContext(), null, "pagoController");
             return controller.getPago(getKey(value));
         }
-
+        
         java.lang.Long getKey(String value) {
             java.lang.Long key;
             key = Long.valueOf(value);
             return key;
         }
-
+        
         String getStringKey(java.lang.Long value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-
+        
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -234,7 +237,7 @@ public class PagoController implements Serializable {
                 return null;
             }
         }
-
+        
     }
-
+    
 }

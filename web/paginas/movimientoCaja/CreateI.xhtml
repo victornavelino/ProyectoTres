@@ -21,6 +21,11 @@
                                                var="tipoDeIngresoItem"
                                                itemValue="#{tipoDeIngresoItem}"/>
                             </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateEspecializacionLabel_medico}" for="medico" />
+                            <p:selectOneMenu id="medico" value="#{movimientoCajaController.selected.medico}" filterMatchMode="contains" filter="true" converter="ConversorGenerico" required="true" >
+                                <f:selectItem noSelectionOption="true" itemLabel="#{bundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{medicoController.items}"/>
+                            </p:selectOneMenu>
                             <p:outputLabel value="#{bundleIngrso.EditIngresoLabel_fecha}" for="fecha" />
                             <p:calendar id="fecha"  pattern="dd/MM/yyyy HH:mm" value="#{movimientoCajaController.selected.fechaOperacion}" title="#{bundleIngrso.EditIngresoTitle_fecha}" showOn="button" required="true" />
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_nroComprobante}" for="nroComprobante" />
