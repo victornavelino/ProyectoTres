@@ -43,8 +43,8 @@ import javax.persistence.Temporal;
 @Table(name = "medico")
 public class Medico implements Serializable {
 
-    @OneToOne
-    private MovimientoCaja movimientoCaja;
+    @OneToMany(mappedBy = "medico")
+    private List<MovimientoCaja> movimientoCajas;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -86,14 +86,14 @@ public class Medico implements Serializable {
     @Lob
     private String observaciones;
 
-    public MovimientoCaja getMovimientoCaja() {
-        return movimientoCaja;
+    public List<MovimientoCaja> getMovimientoCajas() {
+        return movimientoCajas;
     }
 
-    public void setMovimientoCaja(MovimientoCaja movimientoCaja) {
-        this.movimientoCaja = movimientoCaja;
+    public void setMovimientoCajas(List<MovimientoCaja> movimientoCajas) {
+        this.movimientoCajas = movimientoCajas;
     }
-    
+
     public String getResolucionBaja() {
         return resolucionBaja;
     }
@@ -125,7 +125,7 @@ public class Medico implements Serializable {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
+
     public Archivo getArchivo() {
         return archivo;
     }
@@ -273,7 +273,7 @@ public class Medico implements Serializable {
     @Override
     public String toString() {
         try {
-            return matriculaProfesional + " - " +persona.toString();
+            return matriculaProfesional + " - " + persona.toString();
         } catch (Exception e) {
             return "";
         }

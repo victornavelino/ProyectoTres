@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 template="../../Templates/paginasTemplate.xhtml"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:b="http://bootsfaces.net/ui"
+                 >
+
+    <ui:define name="content">
+        <h:form id="consultaForm">
+            <h3> <h:outputText value="Aranceles" styleClass="titulo"/></h3>
+
+
+            <br/>
+
+            <p:dataTable id="datalist" value="#{medicoController.activos}" var="item"
+                         selectionMode="single" selection="#{medicoController.selected}"
+                         paginator="true"
+                         rowKey="#{item.id}"
+                         rows="5"
+                         filterEvent="enter"
+                         sortField="#{item.matriculaProfesional}"
+                         sortOrder="DESCENDING"
+
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton   :consultaForm:tbAranceles "/>
+                <p:ajax event="rowUnselect" update="createButton   :consultaForm:tbAranceles "/>
+                <p:column sortBy="#{item.persona.apellido}" filterBy="#{item.persona.apellido}" width="200">
+                    <f:facet name="header">
+                        <h:outputText value="Apellido"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.apellido}"/>
+                </p:column>
+                <p:column width="200" filterBy="#{item.persona.nombre}" >
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{item.persona.nombre}"/>
+                </p:column>
+
+                <p:column filterBy="#{item.matriculaProfesional}" width="200">
+                    <f:facet name="header">
+                        <h:outputText value="Matricula"/>
+                    </f:facet>
+                    <h:outputText value="#{item.matriculaProfesional}"/>
+                </p:column>
+
+            
+                <f:facet name="footer">
+                              </f:facet>
+            </p:dataTable>
+                <h3>Pagos Realizados</h3>
+
+            <p:tabView id="tbAranceles">  
+                <p:tab id="tab1" title="Matricula">
+<p:panel header="Pagos">
+                            <p:dataTable id="pagos" value="#{medicoController.selected.pagos}" var="item"
+                                         paginator="true"
+                                         rowKey="#{item.id}"
+                                         rows="10"
+                                         filterEvent="enter"
+                                         sortBy="#{item.id}"
+                                         sortOrder="DESCENDING"
+                                         >
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_mes}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mes}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_anio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.anio}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_nroRecibo}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nroRecibo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha Pago" />                  
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaPago}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>    
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundlePago.ListPagoTitle_importe}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.importe}"/>
+                                </p:column>                               
+                                
+                            </p:dataTable>
+                        </p:panel>
+
+                </p:tab>
+                <p:tab id="tab2" title="Aranceles Varios">
+
+
+                </p:tab>
+            </p:tabView>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -56,7 +57,7 @@ public class MovimientoCaja extends Base implements Serializable {
 
     private int nroComprobante;
 
-    @OneToOne(mappedBy = "movimientoCaja")
+    @ManyToOne
     private Medico medico;
 
     public Medico getMedico() {
