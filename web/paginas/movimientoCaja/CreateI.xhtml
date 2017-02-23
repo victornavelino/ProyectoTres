@@ -18,7 +18,7 @@
                         </p>
                         <p:panelGrid columns="2" rendered="#{movimientoCajaController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="#{bundleIngrso.CreateIngresoLabel_tipoDeIngreso}" for="tipoDeIngreso" />
-                            <p:selectOneMenu id="tipoDeIngreso" value="#{movimientoCajaController.selected.tipo}" required="true" >
+                            <p:selectOneMenu id="tipoDeIngreso" value="#{movimientoCajaController.selected.tipo}" >
                                 <f:selectItem itemLabel="#{bundleIngrso.SelectOneMessage}" noSelectionOption="true"/>
                                 <f:selectItems value="#{tipoDeIngresoController.itemsAvailableSelectOne}"
                                                var="tipoDeIngresoItem"
