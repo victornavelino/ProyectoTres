@@ -10,41 +10,30 @@
                 >
 
     <ui:define name="content">
-        <f:event listener="#{consultaBean.iniciar()}" type="preRenderView"/>
+        <f:event listener="#{consultaBean.iniciar(param['tipo'])}" type="preRenderView"/>
         <h:form id="consultaForm">
-            <p:tabView>  
-                <p:tab id="tab2" title="Nomina de Deudores">
-                    <p:panelGrid columns="10" styleClass="noBorders">
+            <h3>    <h:outputText id="cb0a6meses"
+                                  value="Deudores Hasta 6 Meses "
+                                  rendered="#{param['tipo']=='1'}"
+                                  />
 
-                        <p:commandButton id="cb6meses"
-                                         icon="ui-icon-search"
-                                         value="De 6 Meses"
-                                         actionListener="#{consultaBean.buscarMedicosDeudores(6)}"
-                                         update=":consultaForm:dtConsultaMedico"
-                                         />
+                <h:outputText id="cb6a12meses"
+                              value="Deudores de 6 a 12 Meses "
+                              rendered="#{param['tipo']=='2'}"
 
-                        <p:commandButton id="cb12meses"
-                                         icon="ui-icon-search"
-                                         value="De 12 Meses"
-                                         actionListener="#{consultaBean.buscarMedicosDeudores(12)}"
-                                         update=":consultaForm:dtConsultaMedico"
-                                         />
+                              />
 
-                        <p:commandButton id="cb24meses"
-                                         icon="ui-icon-search"
-                                         value="De 24 Meses"
-                                         actionListener="#{consultaBean.buscarMedicosDeudores(24)}"
-                                         update=":consultaForm:dtConsultaMedico"
-                                         />
-                        
-                        
-                    </p:panelGrid>
+                <h:outputText id="cb12a24meses"
+                              value="Deudores de 12 a 24 Meses"
+                              rendered="#{param['tipo']=='3'}"
 
-                </p:tab>
+                              />
 
-            </p:tabView>
-            <br/>
+                <h:outputText id="cb24meses"
+                              value="Deudores de Más 24 Meses"
+                              rendered="#{param['tipo']=='4'}"
 
+                              /></h3>
             <p:dataTable id="dtConsultaMedico"
                          value="#{consultaBean.medicosDeudores}"
                          selectionMode="single" selection="#{medicoController.selected}"

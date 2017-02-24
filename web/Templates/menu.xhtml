@@ -10,44 +10,16 @@
     <ui:composition>
 
 
-        <b:navBar brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
+        <b:navBar static="true" brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
 
             <br/><br/><br/><br/>
             <b:navbarLinks>
 
-                <b:dropMenu value="Gestiones"> 
 
-                    <b:navLink value="Usuarios" iconAwesome="user" href="/paginas/usuario/List.xhtml"></b:navLink>
-                    <b:navLink  />
-                    <b:navLink value="Departamento" href="/paginas/departamento/List.xhtml" />
-                    <b:navLink value="Localidad" href="/paginas/localidad/List.xhtml" />
-                    <b:navLink value="Provincia" href="/paginas/provincia/List.xhtml" />
-                    <b:navLink value="Pais" href="/paginas/pais/List.xhtml" />
-                    <b:navLink  />
-                    <b:navLink value="Facultad" href="/paginas/facultad/List.xhtml" />
-                    <b:navLink value="Organismo" href="/paginas/organismo/List.xhtml" />
-                    <b:navLink value="Unidad Formadora" href="/paginas/unidadFormadora/List.xhtml" />
-                    <b:navLink  />
-                    <b:navLink value="Tipo de Especialidad" href="/paginas/tipoEspecialidad/List.xhtml" />
-                    <b:navLink value="Tipo de Socio" href="/paginas/tipoMedico/List.xhtml" />
-                    <b:navLink value="Tipo de Documento" href="/paginas/tipoDocumento/List.xhtml" />
-                    <b:navLink value="Tipo de Telefono" href="/paginas/tipoTelefono/List.xhtml" />
+                <b:navLink value="Medicos" iconAwesome="fa fa-user-md" href="/paginas/medico/List.xhtml"></b:navLink>
+                <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/paginas/especializacion/List.xhtml"></b:navLink>
+                <b:navLink value="Recertificaciones" iconAwesome="fa fa-plus-square" href="/paginas/recertificacion/List.xhtml"></b:navLink>
 
-                </b:dropMenu>
-                <b:dropMenu value="Profesionales">
-                    <b:navLink value="Medicos Activos" iconAwesome="fa fa-user-md" href="/paginas/medico/List.xhtml"></b:navLink>
-                    <b:navLink value="Medicos Todos" iconAwesome="fa fa-user-md" href="/paginas/medico/ListTodos.xhtml"></b:navLink>
-                </b:dropMenu> 
-                <b:dropMenu value="Especializaciones">
-                    <b:navLink value="Especializaciones Activos" iconAwesome="mortar-board" href="/paginas/especializacion/List.xhtml"></b:navLink>
-                    <b:navLink value="Especializaciones Todos" iconAwesome="mortar-board" href="/paginas/especializacion/ListTodos.xhtml"></b:navLink>
-                    <b:navLink value="Especialidad" iconAwesome="fa fa-medkit" href="/paginas/especialidad/List.xhtml"></b:navLink>
-                </b:dropMenu>
-                <b:dropMenu value="Recertificaciones">
-                    <b:navLink value="Recertificaciones Medicos Activos" iconAwesome="fa fa-plus-square" href="/paginas/recertificacion/List.xhtml"></b:navLink>
-
-                    <b:navLink value="Recertificaciones Medicos Todos" iconAwesome="fa fa-plus-square" href="/paginas/recertificacion/ListTodos.xhtml"></b:navLink>
-                </b:dropMenu>
                 <b:dropMenu value="Pagos">
                     <b:navLink value="Pagos" iconAwesome="fa fa-money" href="/paginas/pago/List.xhtml"></b:navLink>
                     <b:navLink value="Plan de Pagos" iconAwesome="fa fa-credit-card" href="/paginas/planPago/List.xhtml"></b:navLink>
@@ -76,15 +48,41 @@
                     <b:navLink  />
                     <p:commandButton value="Cerrar Caja" update=":frmPri:CajaEditForm,growl" icon="ui-icon-circle-close" actionListener="#{cajaController.calcularSaldo()}"></p:commandButton>
                 </b:dropMenu>
-                <b:navLink value="Estado de Deuda" iconAwesome="search" href="/consulta.xhtml"></b:navLink>
-
+                <b:dropMenu value="Estado de Deuda">
+                    <b:navLink value="Dentro de los 6 Meses"  href="/consulta.xhtml?tipo=1"></b:navLink>
+                    <b:navLink value="De 6 a 12 Meses"  href="/consulta.xhtml?tipo=2"></b:navLink>
+                    <b:navLink value="De 12 a 24 Meses"  href="/consulta.xhtml?tipo=3"></b:navLink>
+                    <b:navLink value="Más de 24 Meses"  href="/consulta.xhtml?tipo=4"></b:navLink>
+                </b:dropMenu>
                 <b:dropMenu value="Reportes">
                     <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/paginas/especializacion/Grafico.xhtml"></b:navLink>
                     <b:navLink value="Recertificaciones Vigentes" iconAwesome="mortar-board" href="/paginas/recertificacion/Grafico.xhtml"></b:navLink>
                     <b:navLink value="Nuevo" iconAwesome="search" href="/paginas/reportes/reporteGenerico.xhtml?faces-redirect=true"></b:navLink>
                     <b:navLink value="Generar" iconAwesome="search" href="/paginas/reportes/reporteGenericoGenerar.xhtml?faces-redirect=true"></b:navLink>
                 </b:dropMenu>
-
+                <b:dropMenu value="Gestiones"> 
+                    <b:navLink value="Especialidad" iconAwesome="fa fa-medkit" href="/paginas/especialidad/List.xhtml"></b:navLink>
+                    <b:navLink  />
+                    <b:navLink value="Usuarios" iconAwesome="user" href="/paginas/usuario/List.xhtml"></b:navLink>
+                    <b:navLink  />
+                    <b:navLink value="Departamento" href="/paginas/departamento/List.xhtml" />
+                    <b:navLink value="Localidad" href="/paginas/localidad/List.xhtml" />
+                    <b:navLink value="Provincia" href="/paginas/provincia/List.xhtml" />
+                    <b:navLink value="Pais" href="/paginas/pais/List.xhtml" />
+                    <b:navLink  />
+                    <b:navLink value="Facultad" href="/paginas/facultad/List.xhtml" />
+                    <b:navLink value="Organismo" href="/paginas/organismo/List.xhtml" />
+                    <b:navLink value="Unidad Formadora" href="/paginas/unidadFormadora/List.xhtml" />
+                    <b:navLink  />
+                    <b:navLink value="Tipo de Especialidad" href="/paginas/tipoEspecialidad/List.xhtml" />
+                    <b:navLink value="Tipo de Socio" href="/paginas/tipoMedico/List.xhtml" />
+                    <b:navLink value="Tipo de Documento" href="/paginas/tipoDocumento/List.xhtml" />
+                    <b:navLink value="Tipo de Telefono" href="/paginas/tipoTelefono/List.xhtml" />    
+                    <b:navLink  />
+                    <b:navLink value="Medicos Todos" iconAwesome="fa fa-user-md" href="/paginas/medico/ListTodos.xhtml"></b:navLink>
+                    <b:navLink value="Especializaciones Todos" iconAwesome="mortar-board" href="/paginas/especializacion/ListTodos.xhtml"></b:navLink>
+                    <b:navLink value="Recertificaciones Medicos Todos" iconAwesome="fa fa-plus-square" href="/paginas/recertificacion/ListTodos.xhtml"></b:navLink>
+                </b:dropMenu>
             </b:navbarLinks>
             <b:navbarLinks pull="right"> 
                 <b:iconAwesome name="user" size="3x"></b:iconAwesome>
