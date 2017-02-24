@@ -121,7 +121,7 @@ public class EspecializacionController implements Serializable {
         selected.setFechaCreado(new Date());
         medico = selected.getMedico();
         if (medico != null) {
-            medico.getEspecializaciones().add(selected);
+            medico.getEspecializaciones();
             medicoRNLocal.edit(medico);
         }
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EspecializacionCreated"));
