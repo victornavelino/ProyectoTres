@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panel id="pPri" header="#{medicoController.selected.persona.apellido}, #{medicoController.selected.persona.nombre}" > 
                         <p:outputLabel value="#{bundle.EditMedicoLabel_tipoSocio}" for="tipoSocio" />
-                        <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" >
+                        <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" rendered="#{medicoController.selected.tipoSocio != null}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{tipoMedicoController.itemsAvailableSelectOne}"
                                            var="tipoSocioItem"

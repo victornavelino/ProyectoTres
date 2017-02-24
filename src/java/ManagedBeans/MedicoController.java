@@ -4,6 +4,7 @@ import Entidades.Base.Archivo;
 import Entidades.Caja.MovimientoCaja;
 import Entidades.Localidad.Localidad;
 import Entidades.Medico.Medico;
+import Entidades.Medico.TipoMedico;
 import Entidades.Persona.CorreoElectronico;
 import Entidades.Persona.DocumentoIdentidad;
 import Entidades.Persona.Domicilio;
