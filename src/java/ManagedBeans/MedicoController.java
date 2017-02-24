@@ -1,6 +1,7 @@
 package ManagedBeans;
 
 import Entidades.Base.Archivo;
+import Entidades.Caja.MovimientoCaja;
 import Entidades.Localidad.Localidad;
 import Entidades.Medico.Medico;
 import Entidades.Persona.CorreoElectronico;

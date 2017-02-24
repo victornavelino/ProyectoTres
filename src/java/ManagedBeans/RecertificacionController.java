@@ -78,7 +78,7 @@ public class RecertificacionController implements Serializable {
     public void create() {
         Especializacion especializacion = selected.getEspecializacion();
         if (especializacion != null) {
-            especializacion.getRecertificaciones().add(selected);
+            especializacion.getRecertificaciones();
             especializacionRNLocal.edit(especializacion);
         }
         persist(PersistAction.CREATE, "Se ha creado la Recertificación");

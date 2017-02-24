@@ -33,4 +33,6 @@ public interface MedicoRNLocal {
 
     public void edit(Medico medico);
 
+    public List<Medico> buscarMedicosDeudores(Integer mes, Integer mes2, Integer anio, Integer anio2);
+
 }
