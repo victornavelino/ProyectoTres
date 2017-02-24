@@ -14,7 +14,7 @@
         <h:form id="consultaForm">
             <p:tabView>  
                 <p:tab id="tab2" title="Nomina de Deudores">
-                    <p:panelGrid columns="3" styleClass="noBorders">
+                    <p:panelGrid columns="10" styleClass="noBorders">
 
                         <p:commandButton id="cb6meses"
                                          icon="ui-icon-search"
@@ -23,19 +23,21 @@
                                          update=":consultaForm:dtConsultaMedico"
                                          />
 
-                        <p:commandButton id="cb6y12meses"
+                        <p:commandButton id="cb12meses"
                                          icon="ui-icon-search"
                                          value="De 12 Meses"
                                          actionListener="#{consultaBean.buscarMedicosDeudores(12)}"
                                          update=":consultaForm:dtConsultaMedico"
                                          />
 
-                        <p:commandButton id="cb12y24meses"
+                        <p:commandButton id="cb24meses"
                                          icon="ui-icon-search"
                                          value="De 24 Meses"
                                          actionListener="#{consultaBean.buscarMedicosDeudores(24)}"
                                          update=":consultaForm:dtConsultaMedico"
                                          />
+                        
+                        
                     </p:panelGrid>
 
                 </p:tab>
@@ -44,7 +46,7 @@
             <br/>
 
             <p:dataTable id="dtConsultaMedico"
-                         value="#{listaMedicoBean.medicosDeudores}"
+                         value="#{consultaBean.medicosDeudores}"
                          selectionMode="single" selection="#{medicoController.selected}"
                          var="item"
                          rowKey="#{item.id}"

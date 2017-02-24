@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -39,8 +40,8 @@ public class ConsultaBean implements Serializable {
     private ListaEspecialidadBean listaEspecialidadBean;
     @Inject
     private ListaEspecializacionBean listaEspecializacionBean;
-    @Inject
-    private ListaMedicoBean listaMedicoBean;
+    private List<Medico> medicosDeudores;
+
     @EJB
     private MedicoRNLocal medicoRNLocal;
     private Spinner spinnerAnio;
@@ -49,17 +50,67 @@ public class ConsultaBean implements Serializable {
         return spinnerAnio;
     }
 
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+    public String getStringEspecialidad() {
+        return StringEspecialidad;
+    }
+
+    public void setStringEspecialidad(String StringEspecialidad) {
+        this.StringEspecialidad = StringEspecialidad;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public ListaEspecialidadBean getListaEspecialidadBean() {
+        return listaEspecialidadBean;
+    }
+
+    public void setListaEspecialidadBean(ListaEspecialidadBean listaEspecialidadBean) {
+        this.listaEspecialidadBean = listaEspecialidadBean;
+    }
+
+    public ListaEspecializacionBean getListaEspecializacionBean() {
+        return listaEspecializacionBean;
+    }
+
+    public void setListaEspecializacionBean(ListaEspecializacionBean listaEspecializacionBean) {
+        this.listaEspecializacionBean = listaEspecializacionBean;
+    }
+
+    public List<Medico> getMedicosDeudores() {
+        return medicosDeudores;
+    }
+
+    public void setMedicosDeudores(List<Medico> medicosDeudores) {
+        this.medicosDeudores = medicosDeudores;
+    }
+
+    public MedicoRNLocal getMedicoRNLocal() {
+        return medicoRNLocal;
+    }
+
+    public void setMedicoRNLocal(MedicoRNLocal medicoRNLocal) {
+        this.medicoRNLocal = medicoRNLocal;
+    }
+
     public void setSpinnerAnio(Spinner spinnerAnio) {
         this.spinnerAnio = spinnerAnio;
     }
 
-    public ListaMedicoBean getListaMedicoBean() {
-        return listaMedicoBean;
-    }
-
-    public void setListaMedicoBean(ListaMedicoBean listaMedicoBean) {
-        this.listaMedicoBean = listaMedicoBean;
-    }
+   
 
     public ConsultaBean() {
 
@@ -79,12 +130,12 @@ public class ConsultaBean implements Serializable {
     }
 
     public void buscarMedicosDeudores(int mes) {
-        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes), obtenerAniRestado(mes)));
+        this.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes), obtenerAniRestado(mes)));
 
     }
 
     public void buscarMedicosDeudores(int mes, int mes2) {
-        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes2), obtenerAniRestado(mes2), obtenerMesRestado(mes), obtenerAniRestado(mes)));
+        this.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes), obtenerAniRestado(mes), obtenerMesRestado(mes2), obtenerAniRestado(mes2)));
 
     }
 
