@@ -8,10 +8,12 @@ package ManagedBeans;
 import Entidades.Medico.Especialidad;
 import Entidades.Medico.Medico;
 import RN.MedicoRNLocal;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 
@@ -20,8 +22,8 @@ import javax.inject.Named;
  * @author hugo
  */
 @Named(value = "listaMedicoBean")
-@RequestScoped
-public class ListaMedicoBean {
+@SessionScoped
+public class ListaMedicoBean implements Serializable {
 
     /**
      * Creates a new instance of ConsultaBean
