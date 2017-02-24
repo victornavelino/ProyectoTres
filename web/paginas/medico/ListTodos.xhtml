@@ -32,8 +32,10 @@
                              sortField="#{item.matriculaProfesional}"
                              sortOrder="DESCENDING"
                              rowStyleClass="#{item.tipoSocio.id == 2 ? 'filaRoja' : null}"
-                             
+
                              >
+                    <p:ajax event="rowSelect"   update="editButton"/>
+                    <p:ajax event="rowUnselect" update="editButton"/>
 
                     <p:column sortBy="#{item.persona.apellido}" filterBy="#{item.persona.apellido}" width="200">
                         <f:facet name="header">
@@ -91,6 +93,8 @@
                         <h:outputText value="#{item.tipoSocio.descripcion}"/>
                     </p:column>
                     <f:facet name="footer">
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{medicoController.prepareUpdate}" update=":MedicoEdit2Form" oncomplete="PF('MedicoEdit2Dialog').show()" disabled="#{empty medicoController.selected}"/>
+
                         <h:commandLink>
                             <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
                             <p:dataExporter type="xls" target="datalist" fileName="#{bundle.ListMedicoTitle}"/>
@@ -114,6 +118,6 @@
                 </p:dataTable>
             </p:panel>
         </h:form>
-
+        <ui:include src="Edit2.xhtml"/>
     </ui:define>
 </ui:composition>

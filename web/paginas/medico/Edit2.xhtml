@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MedicoEdit2Dlg" widgetVar="MedicoEdit2Dialog" modal="true"  height="500" resizable="true" position="top" appendTo="@(body)" header="#{bundle.EditMedicoTitle}">
+            <h:form id="MedicoEdit2Form">
+                <h:panelGroup id="display">
+                    <p:panel id="pPri" header="#{medicoController.selected.persona.apellido}, #{medicoController.selected.persona.nombre}" > 
+                        <p:outputLabel value="#{bundle.EditMedicoLabel_tipoSocio}" for="tipoSocio" />
+                        <p:selectOneMenu id="tipoSocio" value="#{medicoController.selected.tipoSocio}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoMedicoController.itemsAvailableSelectOne}"
+                                           var="tipoSocioItem"
+                                           itemValue="#{tipoSocioItem}"/>
+                        </p:selectOneMenu></p:panel>
+
+                    <p:commandButton actionListener="#{medicoController.update}" value="#{bundle.Save}" update="display,:MedicoListTodosForm:datalist,:growl" oncomplete="handleSubmit(args, 'MedicoEdit2Dialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MedicoEdit2Dialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
