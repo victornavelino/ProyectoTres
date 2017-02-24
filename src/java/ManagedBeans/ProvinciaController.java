@@ -1,11 +1,14 @@
 package ManagedBeans;
 
+import Entidades.Localidad.Departamento;
 import Entidades.Localidad.Provincia;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.ProvinciaFacade;
+import RN.DepartamentoRNLocal;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.SelectItem;
 
 @ManagedBean(name = "provinciaController")
 @SessionScoped
@@ -28,6 +32,9 @@ public class ProvinciaController implements Serializable {
     private Facades.ProvinciaFacade ejbFacade;
     private List<Provincia> items = null;
     private Provincia selected;
+    private ArrayList<Departamento> listaDepartamentos;
+    @EJB
+    private DepartamentoRNLocal departamentoRNLocal;
 
     public ProvinciaController() {
     }

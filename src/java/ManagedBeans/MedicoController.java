@@ -165,7 +165,7 @@ public class MedicoController implements Serializable {
         listadoEmailBean.setLstCorreoElectronico(selected.getPersona().getCorreosElectronicos());
         domicilioBean.setDomicilio(selected.getPersona().getDomicilio());
         domicilioBean.setLocalidad(selected.getPersona().getLugarNacimiento());
-        if(selected.getArchivo()==null){
+        if (selected.getArchivo() == null) {
             selected.setArchivo(new Archivo());
         }
     }
@@ -173,6 +173,7 @@ public class MedicoController implements Serializable {
     public void create() {
         selected.getPersona().setNombre(selected.getPersona().getNombre().toUpperCase());
         selected.getPersona().setApellido(selected.getPersona().getApellido().toUpperCase());
+        selected.setTitulo(selected.getTitulo().toUpperCase());
         selected.getPersona().setDomicilio(domicilioBean.getDomicilio());
         selected.getPersona().setLugarNacimiento(domicilioBean.getLocalidad());
         selected.getPersona().setTelefonos(listadoTelefonosBean.getLstTelefonos());
@@ -184,6 +185,9 @@ public class MedicoController implements Serializable {
     }
 
     public void update() {
+        selected.getPersona().setNombre(selected.getPersona().getNombre().toUpperCase());
+        selected.getPersona().setApellido(selected.getPersona().getApellido().toUpperCase());
+        selected.setTitulo(selected.getTitulo().toUpperCase());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("MedicoUpdated"));
     }
 

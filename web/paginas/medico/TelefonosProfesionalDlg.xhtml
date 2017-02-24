@@ -37,12 +37,13 @@ and open the template in the editor.
                                 <h:outputText value="Numero "/>
                             </td>
                             <td>
-                                <p:inputMask id="iNumero"
+                                <p:inputText id="iNumero"
                                              label="Numero" 
                                              value="#{listadoTelefonosBean.telefono.numero}"
                                              size="70"
-                                             maxlength="100"
-                                             mask="999-9999999"/>
+                                             required="true">
+                                    <f:convertNumber type="number"/>
+                                </p:inputText>
                             </td>
                         </tr>
                     </table>

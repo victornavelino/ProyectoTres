@@ -9,6 +9,8 @@ import Entidades.Localidad.Localidad;
 import Entidades.Localidad.Pais;
 import Entidades.Localidad.Provincia;
 import Entidades.Persona.Domicilio;
+import Facades.LocalidadFacade;
+import ManagedBeans.util.JsfUtil;
 import RN.DepartamentoRNLocal;
 import RN.LocalidadRNLocal;
 import RN.PaisRNLocal;
@@ -27,6 +29,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.PhaseEvent;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.context.RequestContext;
@@ -63,6 +66,20 @@ public class DomicilioBean implements Serializable {
     int iTipoBoton;
     //RESIDENCIA
     private Localidad residencia;
+    
+    private LocalidadController localidadController;
+    private String localidadString;
+    @EJB
+    private LocalidadFacade localidadFacade;
+
+    public String getLocalidadString() {
+        return localidadString;
+    }
+
+    public void setLocalidadString(String localidadString) {
+        this.localidadString = localidadString;
+    }
+    
 
     public Localidad getResidencia() {
         return residencia;
@@ -252,7 +269,8 @@ public class DomicilioBean implements Serializable {
         RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
         RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
     }
-        public void validarLocalidadNacimiento(ActionEvent e) {
+
+    public void validarLocalidadNacimiento(ActionEvent e) {
         // Para validar que haya seleccionado la localidad en
         // cualquiera de los dialogos (LugarNacimiento y DOmicilio)
 
@@ -304,4 +322,13 @@ public class DomicilioBean implements Serializable {
         return result;
     }
 
+    public void crearLocalidad() {
+        localidad =new Localidad();
+        localidad.setDescripcion(localidadString.toUpperCase());
+        localidad.setDepartamento(departamento);
+        localidadFacade.create(localidad);
+        JsfUtil.addSuccessMessage("Localidad Creada");
+        RequestContext.getCurrentInstance().update("LocalidadListForm:datalist");
+
+    }
 }

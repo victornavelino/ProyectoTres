@@ -8,22 +8,43 @@
 
     <ui:composition>
 
-        <p:dialog id="LocalidadCreateDlg" widgetVar="LocalidadCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLocalidadTitle}">
+        <p:dialog id="LocalidadCreateDlg" widgetVar="LocalidadCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Nueva Localidad">
             <h:form id="LocalidadCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{localidadController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateLocalidadLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{localidadController.selected.descripcion}" title="#{bundle.CreateLocalidadTitle_descripcion}" />
-                        <p:outputLabel value="#{bundle.CreateLocalidadLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{localidadController.selected.id}" title="#{bundle.CreateLocalidadTitle_id}" />
-                        <p:outputLabel value="#{bundle.CreateLocalidadLabel_departamento}" for="departamento" />
-                        <p:selectOneMenu id="departamento" value="#{localidadController.selected.departamento}" >
-                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
-                                           var="departamentoItem"
-                                           itemValue="#{departamentoItem}"/>
+                    <p:panelGrid columns="2" rendered="#{localidadController.selected != null}" styleClass="noBorders">
+
+                        <h:outputText value="Provincia"/>
+
+
+                        <p:selectOneMenu id="somProvincia"
+                                         converter="ConversorGenerico"
+                                         value="#{domicilioBean.provincia}"
+                                         >
+                            <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+                            <f:selectItems value="#{domicilioBean.listaProvincias}"/>
+                            <p:ajax                                    
+                                listener="#{domicilioBean.cargarDepartamentos()}"
+                                update=":LocalidadCreateForm:somDepartamento"/> 
                         </p:selectOneMenu>
+
+                        <h:outputText value="Departamento"/>
+
+
+                        <p:selectOneMenu id="somDepartamento"
+                                         converter="ConversorGenerico"
+                                         value="#{domicilioBean.departamento}"
+                                         >
+                            <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+
+                            <f:selectItems value="#{domicilioBean.listaDepartamentos}"/>
+
+                      </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreateLocalidadLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{domicilioBean.localidadString}" title="#{bundle.CreateLocalidadTitle_descripcion}" />
+
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{localidadController.create}" value="#{bundle.Save}" update="display,:LocalidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'LocalidadCreateDialog');"/>
+                    <p:commandButton actionListener="#{domicilioBean.crearLocalidad()}" value="#{bundle.Save}" update="display,:LocalidadListForm:datalist,:growl" oncomplete="handleSubmit(args,'LocalidadCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="LocalidadCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

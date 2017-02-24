@@ -24,12 +24,13 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 filterEvent="enter"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.descripcion}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListLocalidadTitle_descripcion}"/>
                             </f:facet>

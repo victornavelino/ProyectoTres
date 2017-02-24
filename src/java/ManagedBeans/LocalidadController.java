@@ -1,5 +1,6 @@
 package ManagedBeans;
 
+import Entidades.Localidad.Departamento;
 import Entidades.Localidad.Localidad;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -51,6 +53,7 @@ public class LocalidadController implements Serializable {
 
     public Localidad prepareCreate() {
         selected = new Localidad();
+        selected.setDepartamento(new Departamento());
         initializeEmbeddableKey();
         return selected;
     }
@@ -75,9 +78,9 @@ public class LocalidadController implements Serializable {
     }
 
     public List<Localidad> getItems() {
-        if (items == null) {
+        
             items = getFacade().findAll();
-        }
+
         return items;
     }
 
