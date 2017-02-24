@@ -45,6 +45,7 @@
 
             <p:dataTable id="dtConsultaMedico"
                          value="#{listaMedicoBean.medicosDeudores}"
+                         selectionMode="single" selection="#{medicoController.selected}"
                          var="item"
                          rowKey="#{item.id}"
                          style="overflow-x: auto;"
@@ -85,7 +86,7 @@
                     <f:facet name="header">
                         <h:outputText value="Paga Por"/>
                     </f:facet>
-                    <h:outputText value="#{item.organismo}"/>
+                    <h:outputText value="#{item.organismo.descripcion}"/>
                 </p:column>
 
 

@@ -79,14 +79,15 @@ public class ConsultaBean implements Serializable {
     }
 
     public void buscarMedicosDeudores(int mes) {
-        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes),obtenerAniRestado(mes)));
+        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes), obtenerAniRestado(mes)));
 
     }
 
     public void buscarMedicosDeudores(int mes, int mes2) {
-        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes),obtenerAniRestado(mes),obtenerMesRestado(mes2),obtenerAniRestado(mes2)));
+        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes2), obtenerAniRestado(mes2), obtenerMesRestado(mes), obtenerAniRestado(mes)));
 
     }
+
     public void iniciar() {
         //en el calendario java mes va de 0 a 11 por eso le sumo
         //para que se muestre bien en a vista
