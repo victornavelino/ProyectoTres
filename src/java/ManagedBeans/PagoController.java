@@ -123,8 +123,7 @@ public class PagoController implements Serializable {
                         cajaRNLocal.edit(cajaAbierta);
                         Medico medico = selected.getMedico();
                         if (medico != null) {
-                            medico.getMovimientoCajas().add(caja);
-                            medico.getPagos().add(selected);
+                            medico.getPagos();
                             medicoRNLocal.edit(medico);
                         }
                         cajaRNLocal.edit(cajaAbierta);

@@ -11,6 +11,7 @@ import RN.MedicoRNLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -32,8 +33,6 @@ public class ConsultaBean implements Serializable {
      */
     private Medico medico;
 //    private Especialidad especialidad;
-    private Integer mes;
-    private Integer anio;
     private String StringEspecialidad;
     private Especialidad especialidad;
     @Inject
@@ -62,29 +61,12 @@ public class ConsultaBean implements Serializable {
         this.listaMedicoBean = listaMedicoBean;
     }
 
-    public Integer getMes() {
-        return mes;
-    }
-
-    public void setMes(Integer mes) {
-        this.mes = mes;
-    }
-
-    public Integer getAnio() {
-        return anio;
-    }
-
-    public void setAnio(Integer anio) {
-        this.anio = anio;
-    }
-
     public ConsultaBean() {
 
     }
 
     @PostConstruct
     public void init() {
-        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(Calendar.getInstance().get(Calendar.MONTH)+1, Calendar.getInstance().get(Calendar.YEAR)));
     }
 
     public void buscarEspecialidad() {
@@ -96,18 +78,36 @@ public class ConsultaBean implements Serializable {
         this.listaEspecializacionBean.buscarEspecializaciones(especialidad);
     }
 
-    public void buscarMedicosDeudores() {
-        System.out.println("añooo: " + anio);
-        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(mes, anio));
+    public void buscarMedicosDeudores(int mes) {
+        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes),obtenerAniRestado(mes)));
 
     }
 
+    public void buscarMedicosDeudores(int mes, int mes2) {
+        this.listaMedicoBean.setMedicosDeudores(medicoRNLocal.buscarMedicosDeudores(obtenerMesRestado(mes),obtenerAniRestado(mes),obtenerMesRestado(mes2),obtenerAniRestado(mes2)));
+
+    }
     public void iniciar() {
         //en el calendario java mes va de 0 a 11 por eso le sumo
         //para que se muestre bien en a vista
-        mes = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        anio = Calendar.getInstance().get(Calendar.YEAR);
-        System.out.println("mes y año: " + mes + "  " + anio);
-        spinnerAnio.setValue(anio);
     }
+
+    public int obtenerMesRestado(int mes) {
+        Date referenceDate = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(referenceDate);
+        c.add(Calendar.MONTH, -mes);
+        int month = c.get(Calendar.MONTH);
+        return month;
+    }
+
+    public int obtenerAniRestado(int mes) {
+        Date referenceDate = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(referenceDate);
+        c.add(Calendar.MONTH, -mes);
+        int year = c.get(Calendar.YEAR);
+        return year;
+    }
+
 }

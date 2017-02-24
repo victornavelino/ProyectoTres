@@ -12,41 +12,28 @@
     <ui:define name="content">
         <f:event listener="#{consultaBean.iniciar()}" type="preRenderView"/>
         <h:form id="consultaForm">
-            <h3> <h:outputText value="Consultas" styleClass="titulo"/></h3>
-
             <p:tabView>  
-                <p:tab id="tab2" title="Medicos deudores ">
-                    <h3>Medicos que pagaron hasta:</h3>
-                    <p:panelGrid columns="2" styleClass="noBorders">
+                <p:tab id="tab2" title="Nomina de Deudores">
+                    <p:panelGrid columns="3" styleClass="noBorders">
 
-                        <p:outputLabel value="HASTA MESE DE: " for="mes" /> 
-
-                        <p:selectOneMenu id="mes" value="#{consultaBean.mes}" >
-                            <f:selectItem itemLabel="ENERO" itemValue="1" />
-                            <f:selectItem itemLabel="FEBRERO" itemValue="2" />
-                            <f:selectItem itemLabel="MARZO" itemValue="3" />
-                            <f:selectItem itemLabel="ABRIL" itemValue="4" />
-                            <f:selectItem itemLabel="MAYO" itemValue="5" />
-                            <f:selectItem itemLabel="JUNIO" itemValue="6" />
-                            <f:selectItem itemLabel="JULIO" itemValue="7" />
-                            <f:selectItem itemLabel="AGOSTO" itemValue="8" />
-                            <f:selectItem itemLabel="SEPTIEMBRE" itemValue="9" />
-                            <f:selectItem itemLabel="OCTUBRE" itemValue="10" />
-                            <f:selectItem itemLabel="NOVIEMBRE" itemValue="11" />
-                            <f:selectItem itemLabel="DICIEMBRE" itemValue="12" />
-                        </p:selectOneMenu>   
-                        <p:outputLabel value="AÑO " for="spinner" /> 
-
-
-                        <p:spinner id="spinner" value="#{consultaBean.anio}" 
-                                   min="1900" 
-                                   max="2100" size="10" binding="#{consultaBean.spinnerAnio}"/>
-
-
-                        <p:commandButton id="cbBuscarEspecializaciones"
+                        <p:commandButton id="cb6meses"
                                          icon="ui-icon-search"
-                                         value="Buscar"
-                                         actionListener="#{consultaBean.buscarMedicosDeudores()}"
+                                         value="De 6 Meses"
+                                         actionListener="#{consultaBean.buscarMedicosDeudores(6)}"
+                                         update=":consultaForm:dtConsultaMedico"
+                                         />
+
+                        <p:commandButton id="cb6y12meses"
+                                         icon="ui-icon-search"
+                                         value="Entre 6 y 12 Meses"
+                                         actionListener="#{consultaBean.buscarMedicosDeudores(6,12)}"
+                                         update=":consultaForm:dtConsultaMedico"
+                                         />
+
+                        <p:commandButton id="cb12y24meses"
+                                         icon="ui-icon-search"
+                                         value="Entre 12 y 24 Meses"
+                                         actionListener="#{consultaBean.buscarMedicosDeudores(12,24)}"
                                          update=":consultaForm:dtConsultaMedico"
                                          />
                     </p:panelGrid>
@@ -66,6 +53,8 @@
                          widgetVar="dtConsultaMedico"
                          filterEvent="enter"
                          >
+                <p:ajax event="rowSelect"   update="   :consultaForm:pagos"/>
+                <p:ajax event="rowUnselect" update="   :consultaForm:pagos"/>
                 <p:column 
                     filterBy="#{item.persona.apellido}" sortBy="#{item.persona.apellido}"
                     style="word-wrap:break-word;">
@@ -90,6 +79,17 @@
                     </f:facet>
                     <h:outputText value="#{item.matriculaProfesional}"/>
                 </p:column>
+                <p:column 
+                    filterBy="#{item.organismo}"
+                    style="word-wrap:break-word;">
+                    <f:facet name="header">
+                        <h:outputText value="Paga Por"/>
+                    </f:facet>
+                    <h:outputText value="#{item.organismo}"/>
+                </p:column>
+
+
+
                 <f:facet name="footer">
                     <h:commandLink>
                         <p:graphicImage value="./Imagenes/excel.png" title="Exportar a Excel todos" />
@@ -110,7 +110,50 @@
                 </f:facet>
             </p:dataTable>
 
+            <p:dataTable id="pagos" value="#{medicoController.selected.pagos}" var="item"
+                         paginator="true"
+                         rowKey="#{item.id}"
+                         rows="10"
+                         filterEvent="enter"
+                         sortBy="#{item.id}"
+                         sortOrder="DESCENDING"
+                         >
 
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundlePago.ListPagoTitle_mes}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.mes}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundlePago.ListPagoTitle_anio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.anio}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundlePago.ListPagoTitle_nroRecibo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nroRecibo}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Pago" />                  
+                    </f:facet>
+                    <h:outputText value="#{item.fechaPago}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>    
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{bundlePago.ListPagoTitle_importe}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.importe}"/>
+                </p:column>                               
+
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -37,7 +37,8 @@ import javax.persistence.Temporal;
     @NamedQuery(name = "Medico.buscarXMatricula", query = "SELECT m FROM Medico m WHERE m.matriculaProfesional LIKE :matriculaProfesional"),
     @NamedQuery(name = "Medico.buscarUltimaMatricula", query = "SELECT max(m.matriculaProfesional) FROM Medico m "),
     @NamedQuery(name = "Medico.buscarTodosActivos", query = "SELECT m FROM Medico m WHERE m.tipoSocio.descripcion ='ACTIVO'"),
-    @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT med FROM Medico med WHERE med.tipoSocio.id = 1 EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio AND p.mes>=:mes)")
+    @NamedQuery(name = "Medico.buscarMedicosDeudores", query = "SELECT med FROM Medico med WHERE med.tipoSocio.id = 1 EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio AND p.mes>=:mes)"),
+    @NamedQuery(name = "Medico.buscarMedicosDeudoresEntre", query = "SELECT med FROM Medico med WHERE med.tipoSocio.id = 1 EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio AND p.mes>=:mes) EXCEPT SELECT m FROM Medico m where m.id NOT IN (SELECT p.medico.id FROM Pago p where p.anio>=:anio2 AND p.mes>=:mes2) ")
 })
 
 @Entity
@@ -269,6 +270,19 @@ public class Medico implements Serializable {
 
     public void setFolio(Integer folio) {
         this.folio = folio;
+    }
+
+    public List<MovimientoCaja> getAranceles() {
+        List<MovimientoCaja> cajas = getMovimientoCajas();
+        try {
+            for (MovimientoCaja m : cajas) {
+                if (m.getTipoMovimiento().equalsIgnoreCase("MANTENIMIENTO")) {
+                    cajas.remove(m);
+                }
+            }
+        } catch (Exception e) {
+        }
+        return cajas;
     }
 
     @Override

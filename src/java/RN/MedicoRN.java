@@ -87,6 +87,21 @@ public class MedicoRN implements MedicoRNLocal {
     }
 
     @Override
+    public List<Medico> buscarMedicosDeudores(Integer mes, Integer mes2, Integer anio, Integer anio2) {
+        Query q = null;
+        q = em.createNamedQuery("Medico.buscarMedicosDeudoresEntre");
+        q.setParameter("mes", mes);
+        q.setParameter("anio", anio);
+        q.setParameter("mes2", mes2);
+        q.setParameter("anio2", anio2);
+        if (q.getResultList() != null) {
+            return q.getResultList();
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public int buscarUltimaMatricula() {
         Query q = null;
         q = em.createNamedQuery("Medico.buscarUltimaMatricula");

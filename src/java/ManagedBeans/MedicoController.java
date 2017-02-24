@@ -1,6 +1,7 @@
 package ManagedBeans;
 
 import Entidades.Base.Archivo;
+import Entidades.Caja.MovimientoCaja;
 import Entidades.Localidad.Localidad;
 import Entidades.Medico.Medico;
 import Entidades.Persona.CorreoElectronico;
@@ -165,7 +166,7 @@ public class MedicoController implements Serializable {
         listadoEmailBean.setLstCorreoElectronico(selected.getPersona().getCorreosElectronicos());
         domicilioBean.setDomicilio(selected.getPersona().getDomicilio());
         domicilioBean.setLocalidad(selected.getPersona().getLugarNacimiento());
-        if(selected.getArchivo()==null){
+        if (selected.getArchivo() == null) {
             selected.setArchivo(new Archivo());
         }
     }
