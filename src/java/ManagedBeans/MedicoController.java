@@ -212,7 +212,10 @@ public class MedicoController implements Serializable {
     }
 
     public List<Medico> getActivos() {
-        return medicoRNLocal.buscarTodosActivos();
+        if (medicosActivos == null) {
+            medicosActivos = medicoRNLocal.buscarTodosActivos();
+        }
+        return medicosActivos;
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

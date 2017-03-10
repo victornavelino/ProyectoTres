@@ -25,16 +25,14 @@ and open the template in the editor.
                         <h:outputText value="Email"/>
                     </div>
                     <div class="contenidopanel">
-                        <p:inputText id="itEmail"
+                        <p:inputText id="itEmail" validatorMessage="Correo Electrónico no válido"
                                      value="#{listadoEmailBean.correoElectronico.direccion}"
 
                                      required="false"
                                      >
-
-                            <!--<f:validator validatorId="EmailValidator"/-->
-
-                        </p:inputText>
-
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                            </p:inputText>
+                            <p:message for="itEmail" />
                     </div>
                 </div>
             </p:panel>
